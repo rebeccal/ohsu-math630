@@ -1,2 +1,2 @@
-# ohsu-basic-stats
-Introduction to Biostatistics for the Basic Sciences (Data Wrangling, Analysis, &amp; Communication)
+# ohsu-Math630
+ Probability & Statistical Inference for Scientists and Engineers

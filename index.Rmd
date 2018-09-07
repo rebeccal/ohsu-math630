@@ -7,7 +7,7 @@ This is the class site for MATH 530/630 at Oregon Health & Science University.
 # Logistics
 
 - First date of class: September 25, 2018
-- Last date of class: 
+- Last date of class: December 13, 2018
 - Class Meetings: Tu/Th; 2:00 – 3:30 PM
 - Location: [BICC 124](http://www.ohsu.edu/xd/health/ohsu-near-you/portland/marquam-hill/upload/OHSU-facilities-map.pdf)
 
