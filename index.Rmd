@@ -19,5 +19,5 @@ This is the class site for MATH 530/630 at Oregon Health & Science University.
 
 # Overview of our 12 weeks together
 
-![](http://moderndive.netlify.com/images/flowcharts/flowchart/flowchart.002.png)
+![](https://moderndive.netlify.com/images/flowcharts/flowchart/flowchart.002.png)
 
