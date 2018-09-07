@@ -4,9 +4,11 @@ author: "Alison Hill"
 subtitle: Integrative Lab
 output:
   html_document:
-    toc: TRUE
-    toc_float: TRUE
-    number_sections: true
+    number_sections: yes
+    toc: yes
+    toc_float: yes
+  pdf_document:
+    toc: yes
 ---
 
 ```{r setup, include=FALSE}
