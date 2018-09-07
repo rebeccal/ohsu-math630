@@ -180,7 +180,8 @@ ggplot(data.frame(x = c(-4, 4)), aes(x)) + stat_function(fun = dnorm)
 
 > "Another form of normalization occurs when we need to use the sample standard deviations as estimates for the unknown population standard deviations.  This normalization is often called the $t$-score."  
 
-For the two independent samples case like what we have for comparing fishermen to non-fishermen, the formula is $${\displaystyle T={\frac {({\bar {x}}_{1}-{\bar {x}}_{2})- (\mu_1-\mu_2)}{s_{p}\times {\sqrt {{\frac {1}{n_{1}}}+{\frac {1}{n_{2}}}}}}}}$$
+For the two independent samples case like what we have for comparing fishermen to non-fishermen, the formula is:
+$${\displaystyle T={\frac {({\bar {x}}_{1}-{\bar {x}}_{2})- (\mu_1-\mu_2)}{s_{p}\times {\sqrt {{\frac {1}{n_{1}}}+{\frac {1}{n_{2}}}}}}}}$$
   
 where...
 
