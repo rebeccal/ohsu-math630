@@ -9,7 +9,7 @@ output:
 ---
 ```{r setup, include = FALSE}
 library(knitr)
-knitr::opts_chunk$set(include = FALSE, eval = FALSE)
+knitr::opts_chunk$set(include = TRUE, eval = FALSE)
 ```
 
 To turn in, please submit 2 files: one is the raw .Rmd file and the other is a single knitted PDF file. For the multiple choice, please clearly indicate the problem number and your answer on separate lines as in:
@@ -138,9 +138,11 @@ This is C&H Chapter 4, problem 12.  p.93
     
 ```{r}
 Problem 2 from Alisons Psy310 Final Exam Practice Set
-a) In recent years the height of women has been changing. Therefore the sample with \bar{X_{obt}} = 64.25 is a random sample from a population where \mu \neq 63
+a) In recent years the height of women has been changing. Therefore the sample with \bar{X_{obt}} = 64.25 
+is a random sample from a population where \mu \neq 63
 
-b) It is reasonable to consider the sample with \bar{X_{obt}} = 64.25 is a random sample from a population where \mu = 63
+b) It is reasonable to consider the sample with \bar{X_{obt}} = 64.25 is a random sample from a population 
+where \mu = 63
 
 c) single sample t-test on means
 
