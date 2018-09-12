@@ -1,7 +1,7 @@
 name: MATH630
 output_dir: '.'
 navbar:
-  title: MATH 630
+  title: MATH 530/630
   type: inverse
   left:
   - text: Class Meetings
