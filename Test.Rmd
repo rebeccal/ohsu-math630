@@ -2,7 +2,9 @@
 title: "Testing"
 author: "Rebel"
 date: "September 9, 2018"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}

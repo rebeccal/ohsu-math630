@@ -1,13 +1,13 @@
 ---
-title: DRAFT - Syllabus for Probability & Statistical Inference for Scientists and
-  Engineers
+title: "Syllabus - Probability & Statistical Inference for Scientists and Engineers"
 author: 'Instructor: Rebecca Lunsford'
-date: "`r Sys.Date()`"
+date: "September 25, 2018"
 output:
-  pdf_document: default
   html_document:
     df_print: paged
-subtitle: MATH 530/630
+  pdf_document: default
+subtitle: MATH 530/630; Fall 2018
+always_allow_html: yes
 ---
 
 
@@ -84,7 +84,7 @@ Homework grades will be based on:
 
 ## Grading rubric for the homework is 5 points per question, scored as follows:
 
-* 2 points for each initial solution being “in-good-faith”
+* 2 points for each initial solution being "in good faith""
 
     - 2: answer reflects strong independent problem solving, with clearly thought out attempts to approach the problem and a diligent and honest effort to find the solution
     - 1: answer reflects some attempt to approach the problem, but approach appears to be superficial and lacks depth of analysis
@@ -104,7 +104,7 @@ and/or interpretation
 
 ### What is a "good faith effort"?
 
-Simply submitting nonsense or saying “I can’t do this” for each problem will not meet our criteria for a good faith effort, because there is no attempt on your part to show us why you are struggling, what you tried but didn’t work, what specific part of the problem you got stuck on, which other examples in the text/lecture you tried to work through to get a grasp on the problem, etc. This is especially true if you don’t attend any office hours, post on Sakai, or otherwise seek out help *before* the due date. The good faith effort is just that- we are interested in seeing evidence of a diligent and honest effort on your part, made with deliberate intention, to understand the problem and attempt an answer.
+Simply submitting nonsense or saying "I can't do this" for each problem will not meet our criteria for a good faith effort, because there is no attempt on your part to show us why you are struggling, what you tried but didn’t work, what specific part of the problem you got stuck on, which other examples in the text/lecture you tried to work through to get a grasp on the problem, etc. This is especially true if you don’t attend any office hours, post on Sakai, or otherwise seek out help *before* the due date. The good faith effort is just that- we are interested in seeing evidence of a diligent and honest effort on your part, made with deliberate intention, to understand the problem and attempt an answer.
 
 ##Labs
 There will be 5 labs in this course. The first is an ungraded pre-lab which will help you become familiar with R, RStudio, and R Markdown. This pre-lab is due before classes start and will ensure you are prepared to complete the required coursework. The remaining 4 labs will be graded. Your completed labs will be submitted as a raw R Markdown file and a knitted PDF file. You may submit (and re-submit) labs to Sakai until the following Friday at 5pm.

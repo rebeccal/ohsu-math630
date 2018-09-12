@@ -1,14 +1,16 @@
 ---
 title: "MATH 530/630"
-subtitle: "Integrative Lab 3"
+subtitle: Integrative Lab 3
 output:
   html_document:
-    keep_md: TRUE
     highlight: pygments
+    keep_md: yes
+    smart: no
     theme: flatly
-    smart: false
-    toc: TRUE
-    toc_float: TRUE
+    toc: yes
+    toc_float: yes
+  pdf_document:
+    toc: yes
 ---
 
 
@@ -62,6 +64,13 @@ We are going to work with a dataset called [`fishermen_mercury.csv`](https://raw
 
 
 
+```
+Error in .f(.x[[i]], ...): object 'TotHg' not found
+```
+
+```
+Error in is.data.frame(x): object 'mercury' not found
+```
 
 
 ```r

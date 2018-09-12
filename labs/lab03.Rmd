@@ -1,14 +1,14 @@
 ---
 title: "MATH 530/630"
-subtitle: "Integrative Lab 3"
+subtitle: Integrative Lab 3
 output:
   html_document:
-    keep_md: TRUE
     highlight: pygments
+    keep_md: yes
+    smart: no
     theme: flatly
-    smart: false
-    toc: TRUE
-    toc_float: TRUE
+    toc: yes
+    toc_float: yes
 ---
 ```{r include = FALSE}
 knitr::opts_chunk$set(error = TRUE, comment = NA, warning = FALSE, message = FALSE, tidy = FALSE)
