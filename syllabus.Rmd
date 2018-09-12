@@ -1,8 +1,10 @@
 ---
-title: "Syllabus for Probability & Statistical Inference for Scientists and Engineers"
+title: DRAFT - Syllabus for Probability & Statistical Inference for Scientists and
+  Engineers
 author: 'Instructor: Rebecca Lunsford'
 date: "`r Sys.Date()`"
 output:
+  pdf_document: default
   html_document:
     df_print: paged
 subtitle: MATH 530/630
@@ -40,23 +42,23 @@ Reading assignments will be documents that are freely available online or will b
 Work in this class consists of the following four activities:
 
 
-|Activity| Submissions     | Points per submission | Total points |
-|--------| ----------------|-----------------------|--------------|
-|Homework| 4 (drop lowest) |15                     | 45           |
-|Lab     | 3               |15                     | 45           |
-|Midterm | 1               |45                     | 45           |
-|Project | 5               |5 / 10 / 15 / 20 / 25 / 25 | 100    |
+|Activity| Submissions        | Points per submission | Total points |
+|--------| -------------------|-----------------------|--------------|
+|Homework| 4 (drop lowest)    |15                     | 45           |
+|Lab     | 4 (plus a 0 point pre-lab) |15                     | 60           |
+|Midterm | 1                  |45                     | 45           |
+|Project | 5                  |5 / 10 / 15 / 20 / 25 / 25 | 100      |
 
-The total points possible in this course is 235.
+The total points possible in this course is 250.
 
 The following minimum grades will be guaranteed:
 
 |Points   | Minimum grade |
 |----| -------------------------|
-|211  | A- |
-|188  | B- |
-|164  | C- |
-|141  | D- |
+|225  | A- |
+|200  | B- |
+|175  | C- |
+|150  | D- |
 
 
 ## Homework
@@ -104,7 +106,8 @@ and/or interpretation
 
 Simply submitting nonsense or saying “I can’t do this” for each problem will not meet our criteria for a good faith effort, because there is no attempt on your part to show us why you are struggling, what you tried but didn’t work, what specific part of the problem you got stuck on, which other examples in the text/lecture you tried to work through to get a grasp on the problem, etc. This is especially true if you don’t attend any office hours, post on Sakai, or otherwise seek out help *before* the due date. The good faith effort is just that- we are interested in seeing evidence of a diligent and honest effort on your part, made with deliberate intention, to understand the problem and attempt an answer.
 
-
+##Labs
+There will be 5 labs in this course. The first is an ungraded pre-lab which will help you become familiar with R, RStudio, and R Markdown. This pre-lab is due before classes start and will ensure you are prepared to complete the required coursework. The remaining 4 labs will be graded. Your completed labs will be submitted as a raw R Markdown file and a knitted PDF file. You may submit (and re-submit) labs to Sakai until the following Friday at 5pm.
 
 
 ## Midterm
