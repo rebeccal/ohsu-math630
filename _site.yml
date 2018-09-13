@@ -18,7 +18,7 @@ navbar:
     icon: fa-user-ninja
   - text: Sakai
     icon: fa-university
-    href: https://sakai.ohsu.edu/portal/site/MATH-630-1-12045-F18
+    href: https://sakai.ohsu.edu/portal/site/MATH-530-1-AD-F18
   - text: Handouts
     icon: fa-glasses
     href: cm.html
