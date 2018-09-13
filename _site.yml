@@ -14,7 +14,7 @@ navbar:
     href: syllabus.html
     icon: fa-key
   - text: DataCamp  
-    href: cm.html
+    href: https://www.datacamp.com/enterprise/math-530-630-probability-statistical-inference-for-scientists-and-engineers
     icon: fa-user-ninja
   - text: Sakai
     icon: fa-university
