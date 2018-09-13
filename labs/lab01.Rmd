@@ -10,8 +10,7 @@ output:
 ```{r setup, include=FALSE}
 # leave this chunk alone
 options(knitr.table.format = "html") 
-knitr::opts_chunk$set(warning = FALSE, message = FALSE, 
-  comment = NA, dpi = 300)
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, comment = NA, dpi = 300)
 library(reprohealth)
 library(tidyverse)
 wb_stats <- wb_reprohealth %>%
@@ -52,7 +51,7 @@ The `tidyverse` meta-package includes `dplyr`, `ggplot2`, and `tidyr`.
 
 ## Data
 
-You will start with the `reprohealth` dataset, which is distributed as an R package from [my personal GitHub](https://cran.r-project.org/web/packages/gapminder/index.html). 
+You will start with the `reprohealth` dataset, which is distributed as an R package from [Alison Presmanes Hill's github ](https://github.com/apreshill/reprohealth). 
 
 Install it, and remember to use this code only in your R console, not in a script or .Rmd file:
 
