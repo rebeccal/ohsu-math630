@@ -1,5 +1,5 @@
 Weekday,Month,Day,CM / Block,Topics,Lab,Lab Topic,lab_link
-Tues,September,25,Summarizing data,Welcome & Introductions<br>(<a href='syllabus.html'>syllabus</a>)<br><a href='slides/day01.html'>slides</a>,0,,labs/lab00.html
+Tues,September,25,Summarizing data,Welcome & Introductions<br>(<a href='syllabus.html'>syllabus</a>)<br><a href='slides/01-sample-data.html'>slides</a>,0,,labs/lab00.html
 Thurs,September,27,Visualizing distributions,cm013 slide deck (hans rosling video/datasaurus in class exercise) / <a href = '02-distributions.html'>reference this link</a>,1,,labs/lab01.html
 Tues,October,2,Simple linear regression,cm021 (in class lab),3,,
 Thurs,October,4,Simple linear regression,cm022 (in class lab),4,,

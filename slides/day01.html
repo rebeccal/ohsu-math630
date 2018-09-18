@@ -1,15 +1,22 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title></title>
+    <title>Summarizing &amp; Visualizing Data</title>
     <meta charset="utf-8">
-    <meta name="author" content="Alison Hill" />
+    <meta name="author" content="Rebecca Lunsford" />
     <link href="libs/remark-css/default.css" rel="stylesheet" />
-    <link rel="stylesheet" href="css/ohsu.css" type="text/css" />
-    <link rel="stylesheet" href="css/ohsu-fonts.css" type="text/css" />
+    <link rel="stylesheet" href="css\ohsu.css" type="text/css" />
+    <link rel="stylesheet" href="css\ohsu-fonts.css" type="text/css" />
   </head>
   <body>
     <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Summarizing &amp; Visualizing Data
+## Class ?
+### Rebecca Lunsford
+
+---
 
 
 
@@ -87,44 +94,40 @@ sessionInfo()
 ```
 
 ```
-R version 3.4.1 (2017-06-30)
-Platform: x86_64-apple-darwin15.6.0 (64-bit)
-Running under: OS X El Capitan 10.11.6
+R version 3.5.1 (2018-07-02)
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+Running under: Windows 8.1 x64 (build 9600)
 
 Matrix products: default
-BLAS: /Library/Frameworks/R.framework/Versions/3.4/Resources/lib/libRblas.0.dylib
-LAPACK: /Library/Frameworks/R.framework/Versions/3.4/Resources/lib/libRlapack.dylib
 
 locale:
-[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+[1] LC_COLLATE=English_United States.1252 
+[2] LC_CTYPE=English_United States.1252   
+[3] LC_MONETARY=English_United States.1252
+[4] LC_NUMERIC=C                          
+[5] LC_TIME=English_United States.1252    
 
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] forcats_0.3.0.9000 stringr_1.3.1      dplyr_0.7.6       
-[4] purrr_0.2.5        readr_1.2.0        tidyr_0.8.1       
-[7] tibble_1.4.2       ggplot2_3.0.0.9000 tidyverse_1.2.1   
+[1] forcats_0.3.0   stringr_1.3.1   dplyr_0.7.6     purrr_0.2.5    
+[5] readr_1.1.1     tidyr_0.8.1     tibble_1.4.2    ggplot2_3.0.0  
+[9] tidyverse_1.2.1
 
 loaded via a namespace (and not attached):
- [1] tidyselect_0.2.4.9000 xfun_0.3              reshape2_1.4.3       
- [4] haven_1.1.0           lattice_0.20-35       colorspace_1.4-0     
- [7] htmltools_0.3.6       yaml_2.2.0            rlang_0.2.2          
-[10] pillar_1.3.0.9000     withr_2.1.2           foreign_0.8-69       
-[13] glue_1.3.0            modelr_0.1.1          readxl_1.1.0.9000    
-[16] bindrcpp_0.2.2.9000   bindr_0.1.1.9000      plyr_1.8.4           
-[19] munsell_0.5.0         gtable_0.2.0          cellranger_1.1.0     
-[22] rvest_0.3.2           psych_1.7.5           evaluate_0.11        
-[25] knitr_1.20            parallel_3.4.1        broom_0.4.5          
-[28] Rcpp_0.12.18          backports_1.1.2       scales_1.0.0         
-[31] jsonlite_1.5          mnormt_1.5-5          hms_0.4.2.9001       
-[34] digest_0.6.16         stringi_1.2.4         xaringan_0.6.4       
-[37] grid_3.4.1            rprojroot_1.3-2       cli_1.0.0            
-[40] tools_3.4.1           magrittr_1.5          lazyeval_0.2.1       
-[43] crayon_1.3.4          pkgconfig_2.0.2       xml2_1.2.0           
-[46] lubridate_1.7.4       assertthat_0.2.0      rmarkdown_1.10       
-[49] httr_1.3.1            rstudioapi_0.7        R6_2.2.2             
-[52] nlme_3.1-131          compiler_3.4.1       
+ [1] Rcpp_0.12.18     cellranger_1.1.0 plyr_1.8.4       compiler_3.5.1  
+ [5] pillar_1.3.0     bindr_0.1.1      tools_3.5.1      digest_0.6.16   
+ [9] lubridate_1.7.4  jsonlite_1.5     evaluate_0.11    nlme_3.1-137    
+[13] gtable_0.2.0     lattice_0.20-35  pkgconfig_2.0.2  rlang_0.2.2     
+[17] cli_1.0.0        rstudioapi_0.7   yaml_2.2.0       haven_1.1.2     
+[21] xfun_0.3         bindrcpp_0.2.2   withr_2.1.2      xml2_1.2.0      
+[25] httr_1.3.1       knitr_1.20       hms_0.4.2        rprojroot_1.3-2 
+[29] grid_3.5.1       tidyselect_0.2.4 glue_1.3.0       R6_2.2.2        
+[33] readxl_1.1.0     rmarkdown_1.10   xaringan_0.7     modelr_0.1.2    
+[37] magrittr_1.5     backports_1.1.2  scales_1.0.0     htmltools_0.3.6 
+[41] rvest_0.3.2      assertthat_0.2.0 colorspace_1.3-2 stringi_1.1.7   
+[45] lazyeval_0.2.1   munsell_0.5.0    broom_0.5.0      crayon_1.3.4    
 ```
 
 
@@ -558,12 +561,23 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   d.head.appendChild(s);
 })();</script>
 
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
   }
-});
+})();
 </script>
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

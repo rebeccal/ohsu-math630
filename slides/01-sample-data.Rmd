@@ -1,7 +1,8 @@
 ---
 title: "Sample Data"
-subtitle: "Class?"
-author: "Alison Hill"
+subtitle: "Math 530/630: Class 1"
+#author: "Alison Hill"
+
 output:
   xaringan::moon_reader:
     css: ["default", "css/ohsu.css", "css/ohsu-fonts.css"]
