@@ -41,7 +41,7 @@ heart_bp <- heart_bp %>%
   mutate(bp_ratio = BPXDI1 / BPXDI2)
 ```
 
-[From CM 1.2, slide #39](https://apreshill.github.io/ohsu-basic-stats/slides/cm012.html#39)
+<!-- [From CM 1.2, slide #39](https://apreshill.github.io/ohsu-basic-stats/slides/cm012.html#39) -->
 
 ---
 class:middle, inverse, center
@@ -64,13 +64,13 @@ Lower left pane: in console tab, click on the broom too
 ## RStudio Preferences
 
 ![](images/rstudio-preferences.png)
----
-class: inverse, middle, center
-## Reminder
+<!-- --- -->
+<!-- class: inverse, middle, center -->
+<!-- ## Reminder -->
 
-You guys are new learners...
+<!-- You guys are new learners... -->
 
-![](https://media.giphy.com/media/x9XRkwlj9gmju/giphy.gif)
+<!-- ![](https://media.giphy.com/media/x9XRkwlj9gmju/giphy.gif) -->
 
 ---
 ## It's (probably) you, not R 
@@ -94,14 +94,14 @@ sessionInfo()
 ```
 
 
----
-class: inverse, middle, center
-## New `gitter` chat
+<!-- --- -->
+<!-- class: inverse, middle, center -->
+<!-- ## New `gitter` chat -->
 
 
-![](https://media.giphy.com/media/uRb2p09vY8lEs/giphy.gif)
+<!-- ![](https://media.giphy.com/media/uRb2p09vY8lEs/giphy.gif) -->
 
-Now on our class site: link to [gitter](https://gitter.im/conj620/Lobby?utm_source=share-link&utm_medium=link&utm_campaign=share-link)
+<!-- Now on our class site: link to [gitter](https://gitter.im/conj620/Lobby?utm_source=share-link&utm_medium=link&utm_campaign=share-link) -->
 
 ---
 ## How to ask for help
@@ -191,14 +191,14 @@ You have:
 
 - a working version of RStudio,
 
-- completed DataCamp's "Introduction to the Tidyverse" (all 4 chapters)
-
 - read chapters 1.1, 2, and 3 in ModernDive
 
 - read chapter 4 in R4DS
 
+- ?? completed DataCamp's "Introduction to the Tidyverse" (all 4 chapters)
+
 ---
-## DC Chapter 1: Data Wrangling
+## Data Wrangling
 
 
 .pull-left[
@@ -232,7 +232,7 @@ You have:
 ]
 
 ---
-## DC Chapter 2: Data Visualization
+## Data Visualization
 
 all `ggplot2`
 
@@ -242,7 +242,7 @@ all `ggplot2`
 - `+ facet_wrap(~ )` (facetting)
 
 ---
-## DC Chapter 3: Grouping & Summarizing
+## Grouping & Summarizing
 
 - `dplyr::group_by`
 
@@ -290,24 +290,24 @@ knitr::kable(summary_table, format = "html")
 https://github.com/rstudio/cheatsheets/blob/master/base-r.pdf
 
 
----
-class:center, middle, inverse
+<!-- --- -->
+<!-- class:center, middle, inverse -->
 
 
 
-## Muddiest points
+<!-- ## Muddiest points -->
 
 
-![](https://media.giphy.com/media/l44Q7lmy0QVQVbIm4/giphy.gif)
+<!-- ![](https://media.giphy.com/media/l44Q7lmy0QVQVbIm4/giphy.gif) -->
 
-Go here:
+<!-- Go here: -->
 
-https://bit.ly/conj620-cm013
+<!-- https://bit.ly/conj620-cm013 -->
 
 ---
 class:middle, inverse, center
 
-## Watch Hans Rosling video
+## Visualizing Data - Hans Rosling
 
 ```{r echo = FALSE, out.width='100%'}
 knitr::include_url("https://embed.ted.com/talks/hans_rosling_shows_the_best_stats_you_ve_ever_seen")

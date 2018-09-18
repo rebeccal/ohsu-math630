@@ -1,5 +1,6 @@
 ---
-title: "Day 02: Distributions & Summary Statistics"
+title: "Distributions & Summary Statistics"
+subtitle: "Math 530/630"
 output:
   html_document:
     toc: TRUE
