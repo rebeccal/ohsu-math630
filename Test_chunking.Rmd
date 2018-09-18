@@ -1,0 +1,65 @@
+---
+author: "Rebel"
+date: "September 17, 2018"
+output:
+  html_document: default
+  pdf_document: default
+#Example params - using key
+params:
+  key: False
+  hw_title: "Test Chunking"
+  key_title: "Test Chunking Key"
+title: "`r ifelse (params$key, params$key_title, params$hw_title)`"
+
+#knit: (function(inputFile, encoding) {rmarkdown::render(inputFile, encoding = encoding, output_file = paste0(sub('\\.Rmd$', '', inputFile),'_key.html')) })
+
+---
+
+<!-- To make the keys -->
+<!-- rmarkdown::render("Test_chunking.Rmd", output_file = "Test_chunking_key.pdf", params = list(key=TRUE), output_format = "pdf_document") -->
+<!-- rmarkdown::render("Test_chunking.Rmd", output_file ="Test_chunking_key.html", params = list(key=TRUE), output_format = "html_document") -->
+
+
+```{r setup}
+knitr::opts_chunk$set(error = TRUE, comment = NA, warnings = FALSE, errors = FALSE, messages = FALSE, tidy = FALSE, echo = FALSE)
+library(knitr)
+eval_chunks <- c('chunk2', 'chunk3')
+```
+
+
+```{r key1, eval=params$key}
+print(opts_current$get("label"))
+```
+
+
+```{r chunk2, eval=opts_current$get("label") %in% eval_chunks}
+print(opts_current$get("label"))
+```
+
+
+```{r chunk3, eval=opts_current$get("label") %in% eval_chunks}
+print(opts_current$get("label"))
+```
+
+```{r R-Lang, echo=TRUE, eval=TRUE}
+    # Choose the language at the beginning of your script or knit from external file
+    lang <- c("EN", "FR")[1]
+```
+
+<!-- english -->
+```{asis, eval=(lang == "EN"), echo=TRUE}
+  ### For titles and subtitles when at the beginning
+  This above chunk allow for markdown syntax  
+  
+  ### And for titles in the middle if there is space line above
+  And you can use it for normal text or _italic_ or **other**
+```
+<!-- french -->
+```{asis, eval=(lang == "FR"), echo=TRUE}
+  ### Pour les titres et sous-titres au début du "chunk"
+  Le "chunk" ci-dessus permet d'utiliser la syntaxe markdown
+  
+  ### Et les titres en milieu de "chunk" s'il y a une ligne vide avant
+  Et vous pouvez utiliser le texte normal, _italic_ ou **autre**
+```
+    
