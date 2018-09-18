@@ -1,7 +1,7 @@
 ---
 title: "Summarizing & Visualizing Data"
-subtitle: "Class ?"
-author: "Alison Hill"
+subtitle: "Class 2"
+author: "Rebecca Lunsford"
 output:
   xaringan::moon_reader:
     css: ["default", "css/ohsu.css", "css/ohsu-fonts.css"]

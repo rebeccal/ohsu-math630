@@ -3,18 +3,18 @@
   <head>
     <title>Sample Data</title>
     <meta charset="utf-8">
-    <meta name="author" content="Alison Hill" />
+    <meta name="date" content="2018-09-25" />
     <link href="libs/remark-css/default.css" rel="stylesheet" />
-    <link rel="stylesheet" href="css/ohsu.css" type="text/css" />
-    <link rel="stylesheet" href="css/ohsu-fonts.css" type="text/css" />
+    <link rel="stylesheet" href="css\ohsu.css" type="text/css" />
+    <link rel="stylesheet" href="css\ohsu-fonts.css" type="text/css" />
   </head>
   <body>
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
 # Sample Data
-## Class?
-### Alison Hill
+## Math 530/630: Class 1
+### September 25, 2018
 
 ---
 
@@ -757,7 +757,7 @@ head(z.x) #show the first six numbers in z.x
 ```
 
 ```
-## [1]  0.1165610 -0.6779591 -0.8842872  0.4920215  0.5608900  1.6998432
+## [1]  0.3355249 -0.4657415  0.5228656 -1.9884476 -0.2833562  0.2613611
 ```
 
 ```r
@@ -766,7 +766,7 @@ head(z.y) #show the first six numbers in z.y
 ```
 
 ```
-## [1]  0.1165610 -0.6779591 -0.8842872  0.4920215  0.5608900  1.6998432
+## [1]  0.3355249 -0.4657415  0.5228656 -1.9884476 -0.2833562  0.2613611
 ```
 
 ```r
@@ -827,7 +827,7 @@ skewness(x)
 ```
 
 ```
-## [1] 0.2077494
+## [1] -0.1609215
 ```
 
 
@@ -867,7 +867,7 @@ n*s4.x/s2.x^2
 ```
 
 ```
-## [1] 3.179622
+## [1] 2.695132
 ```
 
 ```r
@@ -878,7 +878,7 @@ n*s4.z/s2.z^2
 ```
 
 ```
-## [1] 3.179622
+## [1] 2.695132
 ```
 
 ```r
@@ -1073,12 +1073,23 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   d.head.appendChild(s);
 })();</script>
 
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
   }
-});
+})();
 </script>
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
