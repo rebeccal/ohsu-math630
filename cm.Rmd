@@ -1,6 +1,6 @@
 ---
 title: "Class Meetings"
-author: "Rebecca Lunsford"
+#author: "Rebecca Lunsford"
 subtitle: Fall 2018
 ---
 

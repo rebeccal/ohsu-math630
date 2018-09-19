@@ -28,7 +28,7 @@ library(knitr)
 library(DT)
 due <- read_csv("due.csv") %>%
   mutate(Date = paste(Month, Day)) %>%
-  mutate(`DataCamp Due` = ifelse(material == "-" | grepl("Quiz", material) | is.na(material_link),
+  mutate(`DataCamp` = ifelse(material == "-" | grepl("Quiz", material) | is.na(material_link),
     material,
     paste0("<a href='", material_link, "'>", material, "</a>"))) %>% 
   mutate(`Lab Due` = ifelse(ps == "-" | is.na(ps) | is.na(ps_link),
@@ -37,8 +37,10 @@ due <- read_csv("due.csv") %>%
   mutate(big_lab_due = ifelse(big_lab == "-" | is.na(big_lab) | is.na(big_lab_link),
     big_lab,
     paste0("<a href='", big_lab_link, "'>", big_lab, "</a>"))) %>% 
-  select(Weekday, Date, `CM / Block`, `Readings Due` = Reading, 
-         `DataCamp Due`, `Lab Due`, `Integrative Lab Due` = big_lab_due)
+  # select(Weekday, Date, `CM / Block`, `Readings Due` = Reading, 
+  #        `DataCamp Due`, `Lab Due`, `Integrative Lab Due` = big_lab_due)
+  select(Weekday, Date, `CM / Block`, `Readings Due` = Reading,
+         DataCamp, `Integrative Lab Due` = big_lab_due)
 ```
 
 ```{r echo=FALSE, warning=FALSE, message=FALSE}
@@ -49,6 +51,8 @@ if(knitr:::is_html_output()){
               filter = list(position = 'top'),
               options = list(pageLength = nrow(due), 
                              autoWidth = TRUE,
+                             columnDefs = list(list(width = '280px', targets = c(3)),
+                                               list(width = '30px',  targets = c(0)) ),
                              bInfo = FALSE,
                              paging = FALSE),
               escape = FALSE)
