@@ -1,6 +1,6 @@
 Weekday,Month,Day,CM / Block,Topics,Lab,Lab Topic,lab_link
 Tues,September,25,Summarizing data,Welcome & Introductions<br>(<a href='syllabus.html'>syllabus</a>)<br><a href='slides/01-sample-data.html'>Slides</a>,0,,labs/lab00.html
-Thurs,September,27,Visualizing distributions,<br><a href='slides/02-visualizing_distributions.html'>Slides</a> <br> <a href = 'SummariesAndDistributions.html'>R Distribution Plots</a>,1,,labs/lab01.html
+Thurs,September,27,Visualizing distributions,<a href='slides/02-visualizing_distributions.html'>Slides</a> <br> <a href = 'SummariesAndDistributions.html'>R Distribution Plots</a>,1,,labs/lab01.html
 Tues,October,2,Simple linear regression,cm021 (in class lab),3,,
 Thurs,October,4,Simple linear regression,cm022 (in class lab),4,,
 Tues,October,9,Linear models (general),cm023 (slide deck),,,
@@ -8,7 +8,7 @@ Thurs,October,11,Multiple regression,cm024 (in class lab),5,,
 Tues,October,16,LM diagnostics/outliers,Slide deck 09 from fall 2017,2,,labs/lab02.html
 Thurs,October ,18,Probability,Slide deck 02 from fall 2017,,,
 Tues,October,23,Discrete Probability Functions,Slide deck 03 from fall 2017,,,
-Thurs,October,25,Continuous Probability Functions,Slide deck 04 from fall 2017 (https://github.com/apreshill/conj620labs),,,
+Thurs,October,25,Continuous Probability Functions,<a href='slides/04-continuous.pdf'>Slides</a> <br> (https://github.com/apreshill/conj620labs),,,
 Tues,October,30,Bootstrapping (confidence intervals),cm032 (slide deck),,,
 Thurs,November,1,Sampling distributions,Slide deck 05 from fall 2017 (md sampling reading),,,
 Tues,November,6,Hypothesis testing (resampling),cm034 (in class lab),,,
