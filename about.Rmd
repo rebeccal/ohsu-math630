@@ -15,12 +15,15 @@ The source can be found [on GitHub <i class="fa fa-github"></i>](https://github.
 
 The rendered site link is:
 
-<https://rebeccal.github.io/ohsu-math630/>
+<https://ohsu-math630-fall-2018.netlify.com/>
 
 More about the course developer, Alison Hill:
 
 - <i class="fa fa-github"></i> [GitHub](https://github.com/apreshill/)
 - <i class="fa fa-twitter"></i> [Twitter](https://twitter.com/apreshill)
 - <i class="fa fa-home"></i> [Personal Website](https://alison.rbind.io)
+
+More about the 2018 instructor, Rebecca Lunsford:
+- <i class="fa fa-home"></i> [Google Scholar](https://scholar.google.com/citations?hl=en&user=TAsk94wAAAAJ&view_op=list_works&sortby=pubdate)
 
 
