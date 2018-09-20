@@ -26,6 +26,8 @@ if(knitr:::is_html_output()){
                          filter = list(position = 'top'),
                          options = list(pageLength = nrow(cm), 
                                         autoWidth = TRUE,
+                                        columnDefs = list(list(width = '300px', targets = c(3)),
+                                                          list(width = '20px',  targets = c(0)) ),
                                         bInfo = FALSE,
                                         paging = FALSE),
                          escape = FALSE)

@@ -1,10 +1,10 @@
 ---
 title: "What is Due & When?"
-author: "Rebecca Lunsford"
+#author: "Rebecca Lunsford"
 subtitle: Fall 2018
 ---
 
-You are expected to come to each class meeting prepared, which means that you will have done the readings and the DataCamp assignments that are due for that date *before* coming to class. 
+You are expected to come to each class meeting prepared, which means that you will have done the readings that are due for that date *before* coming to class. 
 
 ## Readings
 
@@ -18,9 +18,10 @@ These books will be supplemented by blog posts, YouTube videos, and several open
 - A special PEERJ issue called ["Practical Data Science for Stats"](https://peerj.com/collections/50-practicaldatascistats/), and
 - [Nature: Points of Significance](https://www.nature.com/collections/qghhqm/pointsofsignificance)
 
-## DataCamp
+### DataCamp
+DataCamp assignments are *optional*, but strongly recommended . Practice is a good thing!
 
-Be sure to check the **DataCamp** link above for more details on the DataCamp (DC) assignments.  
+<!-- Be sure to check the **DataCamp** link above for more details on the DataCamp (DC) assignments.   -->
 
 ```{r echo = FALSE, message = FALSE, warning = FALSE}
 library(tidyverse)
@@ -31,16 +32,16 @@ due <- read_csv("due.csv") %>%
   mutate(`DataCamp` = ifelse(material == "-" | grepl("Quiz", material) | is.na(material_link),
     material,
     paste0("<a href='", material_link, "'>", material, "</a>"))) %>% 
-  mutate(`Lab Due` = ifelse(ps == "-" | is.na(ps) | is.na(ps_link),
-    ps,
-    paste0("<a href='", ps_link, "'>", ps, "</a>"))) %>% 
+  mutate(hw_due = ifelse(hw == "-" | is.na(hw) | is.na(hw_link),
+    hw,
+    paste0("<a href='", hw_link, "'>", hw, "</a>"))) %>% 
   mutate(big_lab_due = ifelse(big_lab == "-" | is.na(big_lab) | is.na(big_lab_link),
     big_lab,
     paste0("<a href='", big_lab_link, "'>", big_lab, "</a>"))) %>% 
   # select(Weekday, Date, `CM / Block`, `Readings Due` = Reading, 
   #        `DataCamp Due`, `Lab Due`, `Integrative Lab Due` = big_lab_due)
   select(Weekday, Date, `CM / Block`, `Readings Due` = Reading,
-         DataCamp, `Integrative Lab Due` = big_lab_due)
+         DataCamp, `Homework Due` = hw_due, `Integrative Lab Due` = big_lab_due)
 ```
 
 ```{r echo=FALSE, warning=FALSE, message=FALSE}
