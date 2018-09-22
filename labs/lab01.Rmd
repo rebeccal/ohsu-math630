@@ -137,7 +137,7 @@ alc_tidy
 ```
 
 - Join this new data using `dplyr` with the `reprohealth` data you have been working with, and make some observations about the process and result. You may need:
-    - [ModernDive section you read on joins](http://moderndive.netlify.com/5-wrangling.html#joins)
+    - This [ModernDive section on joins](http://moderndive.netlify.com/5-wrangling.html#joins)
     - This [tutorial by Jenny Bryan](http://stat545.com/bit001_dplyr-cheatsheet.html)
     - This [chapter in R4DS](http://r4ds.had.co.nz/relational-data.html)
     - **Hint!:** you'll probably need to use `tidyr::gather` on your new dataset first, before the join. Tread carefully here! 

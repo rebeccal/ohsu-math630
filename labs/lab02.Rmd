@@ -1,13 +1,10 @@
 ---
 title: "MATH 530/630"
-subtitle: "Integrative Lab 2"
-output:
+subtitle: "Integrative Lab 2 - Linear Regression"
+output: 
   html_document:
-    number_sections: yes
-    toc: yes
-    toc_float: yes
-  pdf_document:
-    toc: yes
+    toc: TRUE
+    toc_float: TRUE
 ---
 
 ```{r setup, include=FALSE}
@@ -19,10 +16,10 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE,
 
 # Overview
 
-The goal of this lab is to carefully, thoroughly, and thoughtfully conduct an linear regression analysis. You are also asked to communicate clearly about the steps in your analysis process with others, by sharing your R code, output, and narrative. As such, your code cannot "stand alone"- it is meant to complement / enhance / support your narrative. As with our previous [integrative lab](cm016.html), this lab will be due in two stages:
+The goal of this lab is to carefully, thoroughly, and thoughtfully conduct an linear regression analysis. You are also asked to communicate clearly about the steps in your analysis process with others, by sharing your R code, output, and narrative. As such, your code cannot "stand alone"- it is meant to complement / enhance / support your narrative. This lab will be due in two stages:
 
-1. A complete knitted `html` file is due on Sakai by Thursday August 9th at 2:30pm. 
-2. After class on August 9th, you'll be provided with a code key. You are asked to review your initial submission, and reflect on your own code/narrative after reviewing the key thoroughly. Your self-assessment is due on Sakai by beginning of class Thursday August 16th (2:30pm). 
+1. A complete knitted `html` file submitted on Sakai. 
+2. A follow-up self assessment. 
 
 Using the key, your self-assessment should include even **more** narrative; where you made mistakes, you must discuss and analyze where you went wrong, and correct them without copying/pasting directly from the key (this typically means that you need to include more narrative than we provide in the key). A good self-assessment will include:
 
@@ -293,7 +290,7 @@ glance(dmod)
 
 # The NULL Model
 
-In class, I asserted that `lm` is by default comparing the model you specify in your `lm` call to a null model defined by using a line with an intercept but slope = 0, which estimates the mean of $y$. Let's build an intercept-only linear regression model to prove this.
+In class, I asserted that `lm` is by default comparing the model you specify in your `lm` call to a null model defined by using a line with an intercept, but slope = 0, which estimates the mean of $y$. Let's build an intercept-only linear regression model to prove this.
 
 ```{r}
 vitd_complete <- vitd %>% 
@@ -360,24 +357,24 @@ You’re encouraged to reflect on what was hard/easy, problems you solved, helpf
 
 # Grading
 
-This lab is worth 5 points total, scored as follows:
+This lab is worth 20 points total, scored as follows:
 
-2 points for your initial submission being “in-good-faith”:
+8 points for your initial submission being “in-good-faith”:
 
-- 2 (Strong attempt): narrative and code reflects strong independent problem solving, with clearly thought out attempts to approach the problems and a diligent and honest effort to find solutions.
+- 8 (Strong attempt): narrative and code reflects strong independent problem solving, with clearly thought out attempts to approach the problems and a diligent and honest effort to find solutions.
 
-- 1 (Adequate attempt): narrative and code reflects some attempt to approach the problems, but approach appears to be superficial and lacks depth of analysis.
+- 4 (Adequate attempt): narrative and code reflects some attempt to approach the problems, but approach appears to be superficial and lacks depth of analysis.
 
 - 0 (No attempt or incomplete): No submission, or didn't interpret anything but left it all to the "reader". Or more than one technical problem that is relatively easy to fix.
 
 
-3 points for the quality of the final self-assessment:
+12 points for the quality of the final self-assessment:
 
-- 3 (Exceptional): narrative is thorough, concise, and clearly demonstrates ability to analyze and interpret statistics as well as theoretical understanding of statistical concepts.
+- 12 (Exceptional): narrative is thorough, concise, and clearly demonstrates ability to analyze and interpret statistics as well as theoretical understanding of statistical concepts.
 
-- 2 (Adequate): narrative addresses the questions with moderate inaccuracies in analysis and/or interpretation, or offers correct but incomplete solutions.
+- 8 (Adequate): narrative addresses the questions with moderate inaccuracies in analysis and/or interpretation, or offers correct but incomplete solutions.
 
-- 1 (Inadequate): narrative attempts to address questions with substantial inaccuracies in analysis and/or interpretation.
+- 4 (Inadequate): narrative attempts to address questions with substantial inaccuracies in analysis and/or interpretation.
 
 - 0 (Insufficient): narrative does not attempt to address questions or self-assessment is insufficient to grade
     
