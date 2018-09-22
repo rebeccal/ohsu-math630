@@ -24,9 +24,11 @@ The goal is to carefully, thoroughly, and thoughtfully conduct an exploratory da
 
 ## Tools
 
-You will use R Markdown to construct your EDA. You'll submit your work as an html file knit from your `.Rmd` file (please leave the default code chunk options for `eval = TRUE` and `echo = TRUE`). In that document, you'll use `dplyr`, `tidyr`, and `ggplot2` to do description and visualization. You may also wish to use the `janitor` package to make `tabyl`s, and some of the accompanying `adorn` functions.
+You will use R Markdown to construct your EDA (For additional guidance on EDAs, see: [R4DS: Exploratory Data Analysis](http://r4ds.had.co.nz/exploratory-data-analysis.html)). You'll submit your work as an html file knit from your `.Rmd` file (please leave the default code chunk options for `eval = TRUE` and `echo = TRUE`). In that document, you'll use `dplyr`, `tidyr`, and `ggplot2` to do description and visualization. You may also wish to use the `janitor` package to make `tabyl`s, and some of the accompanying `adorn` functions.
+
 
 Your lab should serve as your own personal cheatsheet in the future for things to do with a new dataset. Give yourself the cheatsheet you deserve! Remember:
+
 
 - `rmarkdown` should be your EDA *documentation* tool
 - your own words with `markdown` formatting are your ONLY *narrative* tool
