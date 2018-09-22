@@ -1,8 +1,6 @@
 ---
 title: "Homework 3"
-subtitle: "Math 530/630"
-author: "Alison Presmanes Hill"
-date: "Due: 11/21/2017"
+subtitle: "Math 530/630 - Fall 2018"
 output: pdf_document
 ---
 
