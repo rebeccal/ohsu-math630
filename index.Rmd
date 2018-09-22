@@ -1,5 +1,5 @@
 ---
-title: "Probability & Statistics for Scientists and Engineers"
+title: "Probability & Statistical Inference for Scientists and Engineers"
 ---
 
 This is the class site for MATH 530/630 at Oregon Health & Science University. 
