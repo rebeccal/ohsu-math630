@@ -1,0 +1,46 @@
+Issue
+Values are missing
+Zeros replace missing values
+Data are missing you know should be there
+Rows or values are duplicated
+Spelling is inconsistent
+Name order is inconsistent
+Date formats are inconsistent
+Units are not specified
+Categories are badly chosen
+Field names are ambiguous
+Provenance is not documented
+Suspicious values are present
+Data are too coarse
+Totals differ from published aggregates
+Spreadsheet has 65536 rows
+Spreadsheet has 255 columns
+"Spreadsheet has dates in 1900, 1904, 1969, or 1970"
+Text has been converted to numbers
+Numbers have been stored as text
+Text is garbled
+Line endings are garbled
+Data are in a PDF
+Data are too granular
+Data were entered by humans
+Data are intermingled with formatting and annotations
+Aggregations were computed on missing values
+Sample is not random
+Margin-of-error is too large
+Margin-of-error is unknown
+Sample is biased
+Data have been manually edited
+Inflation skews the data
+Natural/seasonal variation skews the data
+Timeframe has been manipulated
+Frame of reference has been manipulated
+Author is untrustworthy
+Collection process is opaque
+Data assert unrealistic precision
+There are inexplicable outliers
+An index masks underlying variation
+Results have been p-hacked
+Benford's Law fails
+Too good to be true
+Data are aggregated to the wrong categories or geographies
+Data are in scanned documents

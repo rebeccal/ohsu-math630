@@ -1,66 +1,49 @@
-REVIEWED,Weekday,Month,Day,CM / Block,Reading,material,material_link,hw,hw_link,big_lab,big_lab_link
-x,Tues,September,25,1.1: Summarizing data,"<a href='http://moderndive.com/2-getting-started.html'>- MD Ch 2: Getting Started</a>
-<br><a href='https://ismayc.github.io/rbasics-book/3-rstudiobasics.html'>- Ch3: Getting used to R, RStudio, and R Markdown</a>
-<br><a href='https://ismayc.github.io/rbasics-book/4-rmarkdown.html'>- Ch4: Getting used to R, RStudio, and R Markdown</a>
-<br><a href='https://ismayc.github.io/rbasics-book/5-rmdanal.html'>- Ch5: Getting used to R, RStudio, and R Markdown</a>",,,,,Lab 00 (make a name plot),labs/lab00.html
-x,Thurs,September,27,1.2: Visualizing distributions,"<a href='http://moderndive.com/3-viz.html'>- MD Ch 3: Data Visualization</a>
+Weekday,Month,Day,CM / Block,Reading,material,material_link,px,px_link,hw,hw_link,class_lab,cl_link,i_lab,i_lab_link,
+Tues,September,25,1.1: Summarizing data,"<a href='http://moderndive.com/2-getting-started.html'>- MD Ch 2: Getting Started</a>
+<br><a href='https://www.markdowntutorial.com'>- MD: Markdown Tutorial</a>
+<br><a href='http://r4ds.had.co.nz/r-markdown.html'>- R4DS: R Markdown</a>
+<br><a href='http://r4ds.had.co.nz/workflow-projects.html'>- R4DS: Workflow Projects</a>",,,,,,,,,Lab 00 (make a name plot),labs/lab00.html,
+Thurs,September,27,1.2: Visualizing distributions,"<a href='http://moderndive.com/3-viz.html'>- MD Ch 3: Data Visualization</a>
 <br><a href='http://moderndive.com/4-tidy.html'>- MD Ch 4: Tidy Data</a>
 <br> <a href='http://moderndive.com/5-wrangling.html'>- MDCh 5: Data Wrangling</a>
 <br>Optional: 
-<br><a href='http://r4ds.had.co.nz/data-visualisation.html'>- R for Data Science: Data Visualisation</a>
-<br><a href='http://r4ds.had.co.nz/tidy-data.html'>- R for Data Science: Tidy Data</a>
-<br><a href='http://r4ds.had.co.nz/transform.html'>- R for Data Science: Data Transformation</a>",DC1: Intro to the Tidyverse(All),https://www.datacamp.com/courses/introduction-to-the-tidyverse,,,,
-,Tues,October,2,2.1: Simple linear regression,"<a href='http://moderndive.com/6-regression.html'>- MD Ch 6: Basic Regression</a>
-<br><a href = 'https://www.nature.com/articles/nmeth.3627'>- Nature POS: SLR</a>",DC4: Working with Data in the Tidyverse (All),https://www.datacamp.com/courses/working-with-data-in-the-tidyverse,,,Lab 01,labs/lab01.html
-,Thurs,October,4,2.2: Simple linear regression,,DC5: Intro to Modeling in the Tidyverse (Ch 1 + 2),https://www.datacamp.com/courses/modeling-with-data-in-the-tidyverse,,,,
-,Tues,October,9,2.3: Linear models (general),"<a href='https://www.nature.com/articles/nmeth.2613'>- Nature POS: Uncertainty</a>
+<br><a href='http://r4ds.had.co.nz/data-visualisation.html'>- R4DS: Data Visualisation</a>
+<br><a href='http://r4ds.had.co.nz/tidy-data.html'>- R4DS: Tidy Data</a>
+<br><a href='http://r4ds.had.co.nz/transform.html'>- R4DS: Data Transformation</a>", Intro to the Tidyverse(All),https://www.datacamp.com/courses/introduction-to-the-tidyverse,,,,,,,,,
+Tues,October,2,2.1: Simple linear regression,"<a href='https://moderndive.com/6-regression.html#model1'>- MD Ch 6.1: Basic Regression</a>
+<br><a href = 'https://www.nature.com/articles/nmeth.3627'>- Nature POS: SLR</a>", Working with Data in the Tidyverse (All),https://www.datacamp.com/courses/working-with-data-in-the-tidyverse,P0,final_project.html,,,,,Lab 01,labs/lab01.html,
+Thurs,October,4,2.2: Simple linear regression,"<a href='http://moderndive.com/6-regression#model2.html'>- MD Ch 6.2: Basic Regression</a>
+<br><a href='https://peerj.com/preprints/3139/'>- PEERJ: Data for Collaboration</a>", Intro to Modeling in the Tidyverse (Ch 1 + 2),https://www.datacamp.com/courses/modeling-with-data-in-the-tidyverse,,,,,<a href='slides/cm021_lab.html'>Lab 2.1</a>,,,,
+Tues,October,9,2.3: Linear models (general),"<a href='https://www.nature.com/articles/nmeth.2613'>- Nature POS: Uncertainty</a>
 <br><a href='https://www.nature.com/articles/nmeth.2659'>- Nature POS: Error bars</a>
-<br><a href='https://statsbylopez.com/2015/08/31/regression-or-reversion/'>- Blog: Regression to the mean</a>
-<br><a href='https://www.youtube.com/watch?time_continue=1&v=ebEkn-BiW5k'>- YouTube: Simpson's Paradox, Part 1</a>
-<br><a href='https://www.youtube.com/watch?v=E_ME4P9fQbo'>- YouTube: Simpson's Paradox, Part 2</a>",DC5: Intro to Modeling in the Tidyverse (Ch 3 + 4),https://www.datacamp.com/courses/modeling-with-data-in-the-tidyverse,,,,
-,Thurs,October,11,2.4: Multiple regression,"<a href='http://moderndive.com/7-multiple-regression.html'>- MD Ch: Multiple Regression</a>
-<br><a href = 'https://www.nature.com/articles/nmeth.3665'>- Nature POS: MLR</a>",DC6: Exploratory Data Analysis Case Study (Ch 1 + 2),https://www.datacamp.com/courses/exploratory-data-analysis-in-r-case-study,HW2,hw/HW2/HW2.pdf,,
-,Tues,October,16,2.5: LM diagnostics/outliers,"<a href = 'https://www.nature.com/articles/nmeth.3812'>- Nature POS: Outliers</a>
-<br><a href = 'https://www.nature.com/articles/nmeth.3854'>- Nature POS: Diagnostics</a>",DC6: Exploratory Data Analysis Case Study (Ch 3 + 4),https://www.datacamp.com/courses/exploratory-data-analysis-in-r-case-study,,,Lab 02,labs/lab02.html
-,Thurs,October ,18,3.1: Probability,,,,,,,
-,Tues,October,23,3.2: Discrete Probability Functions,,,,,,,
-,Thurs,October,25,3.3: Continuous Probability Functions,,,,HW1,hw/HW1/HW1.pdf,,
-,Tues,October,30,4.1: Bootstrapping (confidence intervals),"<a href='http://moderndive.com/9-confidence-intervals'>- MD  Ch 9: Confidence Intervals</a>
-<br><a href='https://www.nature.com/articles/nmeth.3414"">- Nature POS: Bootstrapping</a>",DC7: Inference for Numerical Data (Ch 1 + 2),https://www.datacamp.com/courses/inference-for-numerical-data,,,,
-,Thurs,November,1,4.2: Sampling distributions,<a href='http://moderndive.com/8-sampling.html'>- MD Ch 8: Sampling</a>,DC7: Inference for Numerical Data (Ch 3 + 4),https://www.datacamp.com/courses/inference-for-numerical-data,,,,
-,Tues,November,6,4.3: Hypothesis testing (resampling),"<a href='http://moderndive.com/10-hypothesis-testing.html'>- MD Ch 10: Hypothesis Testing </a>
-<br><a href='http://moderndive.com/b-appendixb'>- MD Appendix B: Inference Examples</a>",DC8: Inference for Categorical Data (Ch 1 + 2),https://www.datacamp.com/courses/inference-for-categorical-data,,,,
-,Thurs,November,8,4.4: Hypothesis testing (classical),"<a href='https://www.nature.com/news/scientific-method-statistical-errors-1.14700'>- Nature: p-values</a>
+<br><a href = 'https://www.nature.com/articles/nmeth.3665'>- Nature POS: MLR</a>
+<br><a href='http://moderndive.com/7-multiple-regression#model3.html'>- MD Ch 7.1: Multiple Regression</a>
+<br><a href='https://www.discoveringstatistics.com/repository/linearmodels.pdf'>Discovering Statistics: Linear Models</a>", Intro to Modeling in the Tidyverse (Ch 3 + 4),https://www.datacamp.com/courses/modeling-with-data-in-the-tidyverse,,,,,<a href='slides/cm022_lab.html'>Lab 2.2</a>,,,,
+Thurs,October,11,2.4: Multiple regression,<a href='http://moderndive.com/7-multiple-regression#model4.html'>- MD Ch7.2: Multiple Regression</a>, Exploratory Data Analysis Case Study (Ch 1 + 2),https://www.datacamp.com/courses/exploratory-data-analysis-in-r-case-study,,,HW2,hw/HW2/HW2.pdf,,,,,
+Tues,October,16,2.5: LM diagnostics/outliers,"<a href = 'https://www.nature.com/articles/nmeth.3812'>- Nature POS: Outliers</a>
+<br><a href = 'https://www.nature.com/articles/nmeth.3854'>- Nature POS: Diagnostics</a>", Exploratory Data Analysis Case Study (Ch 3 + 4),https://www.datacamp.com/courses/exploratory-data-analysis-in-r-case-study,,,,,<a href='slides/cm024_lab.html'>Lab 2.4</a>,,Lab 02,labs/lab02.html,
+Thurs,October ,18,3.1: Probability,<a href=reference/Wasserman-all_of_stats.pdf> Ch 2: All of Statistics</a>, Foundations of Probability in R (Chap 1 + 2),https://www.datacamp.com/courses/foundations-of-probability-in-r,P1,final_project.html,,,,,,,
+Tues,October,23,3.2: Discrete Probability Functions,<a href=reference/Wasserman-all_of_stats.pdf> Ch 3: All of Statistics</a>, Foundations of Probability in R (Chap 3 + 4),https://www.datacamp.com/courses/foundations-of-probability-in-r,,,,,,,,,
+Thurs,October,25,3.3: Continuous Probability Functions,,,,,,HW1,hw/HW1/HW1.pdf,,,,,
+Tues,October,30,4.1: Bootstrapping (confidence intervals),"<a href='http://moderndive.com/9-confidence-intervals'>- MD  Ch 9: Confidence Intervals</a>
+<br><a href='https://www.nature.com/articles/nmeth.3414"">- Nature POS: Bootstrapping</a>", Inference for Numerical Data (Ch 1 + 2),https://www.datacamp.com/courses/inference-for-numerical-data,,,,,,,,,
+Thurs,November,1,4.2: Sampling distributions,<a href='http://moderndive.com/8-sampling.html'>- MD Ch 8: Sampling</a>, Inference for Numerical Data (Ch 3 + 4),https://www.datacamp.com/courses/inference-for-numerical-data,,,,,,,,,
+Tues,November,6,4.3: Hypothesis testing (resampling),"<a href='http://moderndive.com/10-hypothesis-testing.html'>- MD Ch 10: Hypothesis Testing </a>
+<br><a href='http://moderndive.com/b-appendixb'>- MD Appendix B: Inference Examples</a>", Inference for Categorical Data (Ch 1 + 2),https://www.datacamp.com/courses/inference-for-categorical-data,,,,,,,,,
+Thurs,November,8,4.4: Hypothesis testing (classical),"<a href='https://www.nature.com/articles/nmeth.2698'>- Nature POS: t-tests</a>
+<br><a href='https://www.nature.com/articles/nmeth.2858'>- Nature POS: comparing samples</a>", Inference for Categorical Data (Ch 3 + 4),https://www.datacamp.com/courses/inference-for-categorical-data,,,Midterm,,<a href='slides/cm034_lab.html'>Lab 3.4</a>,,,,midterm.pdf
+Tues,November,13,4.5: t-test as Linear Regression,, Inference for Linear Regression (Ch 1 + 2),https://www.datacamp.com/courses/inference-for-linear-regression,,,,,,,,,
+Thurs,November,15,5.1: Many means,"<a href='https://www.nature.com/articles/nmeth.3005'>- Nature POS: ANOVA</a>
+<br><a href = 'https://arxiv.org/pdf/1412.3416.pdf'>- ANOVA</a>
+<br><a href=https://www.discoveringstatistics.com/repository/onewayanova.pdf>Discovering Statistics: One-way Independent ANOVA</a>", Inference for Linear Regression (Ch 3 - 5),https://www.datacamp.com/courses/inference-for-linear-regression,P2,final_project.html,,,,,,,
+Tues,November,20,5.2: ANOVA by hand,<a href='https://www.discoveringstatistics.com/repository/anovabyhand.pdf'>Discovering Statistics: The Theory of ANOVA</a>,,,,,HW3,hw/HW3/HW3.pdf,,,Lab 03,labs/lab03.html,
+Thurs,November,22,NO CLASS,,,,,,,,,,,,
+Tues,November,27,5.2: Contrasts,<a href='https://www.nature.com/articles/nmeth.2900'>- Nature POS: multiple comparisons</a>,,,P3,final_project.html,,,<a href='slides/cm043_lab.html'>Lab 4.3</a>,,,,
+Thurs,November,29,5.3: Family-wise error rates,"<a href='https://www.nature.com/news/scientific-method-statistical-errors-1.14700'>- Nature: p-values</a>
 <br><a href = 'https://fivethirtyeight.com/features/science-isnt-broken/#part1'>- 538: Science Isn't Broken</a>
 <br><a href='https://simplystatistics.org/2012/01/06/p-values-and-hypothesis-testing-get-a-bad-rap-but-we/'>- Simply Statistics blog</a>
-<br><a href='http://daniellakens.blogspot.com/2017/12/understanding-common-misconceptions.html'>- Lakens blog</a>",DC8: Inference for Categorical Data (Ch 3 + 4),https://www.datacamp.com/courses/inference-for-categorical-data,,,,
-,Tues,November,13,4.5: t-test as Linear Regression,"<a href='https://www.nature.com/articles/nmeth.2698'>- Nature POS: t-tests</a>
-<br><a href='https://www.nature.com/articles/nmeth.2858'>- Nature POS: comparing samples</a>",DC9: Inference for Linear Regression (Ch 1 + 2),https://www.datacamp.com/courses/inference-for-linear-regression,,,,
-,Thurs,November,15,5.1: Many means,"<a href='https://www.nature.com/articles/nmeth.3005'>- Nature POS: ANOVA</a>
-<br><a href='https://www.nature.com/articles/nmeth.2900'>- Nature POS: multiple comparisons</a>
-<br><a href = 'https://arxiv.org/pdf/1412.3416.pdf'>- ANOVA</a>",DC9: Inference for Linear Regression (Ch 3 - 5),https://www.datacamp.com/courses/inference-for-linear-regression,,,,
-,Tues,November,20,5.2: ANOVA by hand,,,,HW3,hw/HW3/HW3.pdf,Lab 03,labs/lab03.html
-,Thurs,November,22,NO CLASS,,,,,,,
-,Tues,November,27,5.2: Contrasts,,,,,,,
-,Thurs,November,29,5.3: Family-wise error rates,,DC11: Communicating with Data in the Tidyverse,https://www.datacamp.com/courses/communicating-with-data-in-the-tidyverse,HW4,hw/HW4/HW4.pdf,,
-,Tues,December,4,5.4: Two-way ANOVA/3-way ANOVA,,DC11: Communicating with Data in the Tidyverse,https://www.datacamp.com/courses/communicating-with-data-in-the-tidyverse,,,,
-,Thurs,December,6,Final presentations,<a href='http://biostat.mc.vanderbilt.edu/wiki/Main/ManuscriptChecklist'>- Frank Harrell's Manuscript Checklist</a>,,,,,,
-,Tues,December,11,Final presentations,,,,,,,
-,Thurs,December,13,Final presentations,,,,,,Lab 04,labs/lab04.html
-,,,,,"<a href='http://r4ds.had.co.nz/workflow-basics.html'>- R4DS Ch 4: Workflow Basics</a>
-<br><a href='http://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1002128'>- Weissberger: Bar Plots</a>",DC10: Hierarchical & Mixed Effects Models (Ch 1 + 2),https://www.datacamp.com/courses/hierarchical-and-mixed-effects-models,,,,
-,,,,,<a href='http://r4ds.had.co.nz/workflow-scripts.html'>- R4DS Ch 6: Workflow Scripts</a>,DC10: Hierarchical & Mixed Effects Models (Ch 3 + 4),https://www.datacamp.com/courses/hierarchical-and-mixed-effects-models,,,,
-,,,,,"<a href='http://r4ds.had.co.nz/exploratory-data-analysis.html'>- R4DS Ch 7: Exploratory Data Analysis</a>
-<br><a href='http://r4ds.had.co.nz/workflow-projects.html'>- R4DS Ch 8: Workflow Projects</a>",,,,,,
-,,,,,"<br><a href='http://r4ds.had.co.nz/data-import.html'>- R4DS Ch 11: Data Import</a>
-<br><a href='http://r4ds.had.co.nz/relational-data.html'>- R4DS Ch 13: Relational Data</a>
-<br><a href='https://peerj.com/preprints/3139/'>- PEERJ: Data for Collaboration</a>
-<br><a href='https://peerj.com/preprints/3183/'>- PEERJ: Spreadsheets</a>",,,,,,
-,,,,,<a href='http://thestudyofthehousehold.com/2018/02/28/2018-02-28-formulae-are-a-lot-like-french-slang/'>- Mixed Modeling as a Foreign Language</a>,,,,,,
-,,,,,<a href='https://peerj.com/articles/4794/'>- PEERJ: Mixed Effects Modeling</a>,,,,,,
-,,,,,<a href='https://m-clark.github.io/mixed-models-with-R/'>- Mixed Models in R</a>,,,,,,
-,,,,,"<a href='https://www.markdowntutorial.com'>- MD: Markdown Tutorial</a>
-<br><a href='http://r4ds.had.co.nz/factors.html'>- R4DS Ch 15: Factors</a>
-<br><a href='http://r4ds.had.co.nz/r-markdown.html'>- R4DS Ch 27: R Markdown</a>",,,,,,
-,,,,,<a href='https://www.nature.com/articles/nmeth.2659'>Nature: Error Bars</a>,,,,,,
-,,,,,<a href='https://www.nature.com/articles/nmeth.2813'>Nature: Box Plots</a>,,,,,,
+<br><a href='http://daniellakens.blogspot.com/2017/12/understanding-common-misconceptions.html'>- Lakens blog</a>", Communicating with Data in the Tidyverse,https://www.datacamp.com/courses/communicating-with-data-in-the-tidyverse,,,HW4,hw/HW4/HW4.pdf,,,,,
+Tues,December,4,5.4: Two-way ANOVA/3-way ANOVA,<a href='http://biostat.mc.vanderbilt.edu/wiki/Main/ManuscriptChecklist'>- Frank Harrell's Manuscript Checklist</a>,,,,,,,,,,,
+Thurs,December,6,Final presentations,,,,P5,final_project.html,,,,,,,
+Tues,December,11,Final presentations,,,,,,,,,,,,
+Thurs,December,13,Final presentations,,,,P4,final_project.html,,,,,Lab 04,labs/lab04.html,

@@ -302,7 +302,7 @@ $(document).ready(function () {
 </div>
 <div id="grades" class="section level1">
 <h1>Grades</h1>
-<p>Work in this class consists of the following four activities:</p>
+<p>Work in this class consists of the following six activities:</p>
 <table>
 <thead>
 <tr class="header">
@@ -314,32 +314,44 @@ $(document).ready(function () {
 </thead>
 <tbody>
 <tr class="odd">
-<td>Homework</td>
-<td>4 (drop lowest)</td>
-<td>15</td>
-<td>45</td>
+<td>iLabs</td>
+<td>5</td>
+<td>20</td>
+<td>100</td>
 </tr>
 <tr class="even">
-<td>Lab</td>
-<td>4 (plus a 0 point pre-lab)</td>
-<td>15</td>
-<td>60</td>
-</tr>
-<tr class="odd">
 <td>Midterm</td>
 <td>1</td>
-<td>45</td>
-<td>45</td>
+<td>80</td>
+<td>80</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Project</td>
 <td>5</td>
 <td>5 / 10 / 15 / 20 / 25 / 25</td>
 <td>100</td>
 </tr>
+<tr class="even">
+<td>DataCamp</td>
+<td>Many</td>
+<td>80% completed</td>
+<td>40</td>
+</tr>
+<tr class="odd">
+<td>In-Class Labs</td>
+<td>5 (drop lowest)</td>
+<td>checks(minus,check,plus)</td>
+<td>40</td>
+</tr>
+<tr class="even">
+<td>Homework</td>
+<td>4</td>
+<td>10 (no partial grades)</td>
+<td>40</td>
+</tr>
 </tbody>
 </table>
-<p>The total points possible in this course is 250.</p>
+<p>The total points possible in this course is 400.</p>
 <p>The following minimum grades will be guaranteed:</p>
 <table>
 <thead>
@@ -350,84 +362,93 @@ $(document).ready(function () {
 </thead>
 <tbody>
 <tr class="odd">
-<td>225</td>
+<td>360</td>
 <td>A-</td>
 </tr>
 <tr class="even">
-<td>200</td>
+<td>320</td>
 <td>B-</td>
 </tr>
 <tr class="odd">
-<td>175</td>
+<td>280</td>
 <td>C-</td>
 </tr>
 <tr class="even">
-<td>150</td>
+<td>240</td>
 <td>D-</td>
 </tr>
 </tbody>
 </table>
-<div id="homework" class="section level2">
-<h2>Homework</h2>
-<p>A total of 4 homeworks will be assigned; your lowest score will be dropped at the end of the quarter. Some homeworks will require you to use R to analyze data. Although no prior R experience is required for this course, be prepared to do <em>a lot</em> of self-guided learning. Students are expected to run R on their own computer or a computer they have plenty of access to and control over. Please attempt to do all homeworks on your own, but you may work with other students. However, you may not submit homework assignments as a group. You should submit your own original work. Please bear in mind that when a homework involves R, you will lose points for any of the following:</p>
+<div id="integrative-labs-ilabs" class="section level2">
+<h2>Integrative Labs (iLabs)</h2>
+<p>A total of 5 Integrative labs will be assigned. Although no prior R experience is required for this course, be prepared to do <em>a lot</em> of self-guided learning. Students are expected to run R on their own computer or a computer they have plenty of access to and control over. The first iLab will help you become familiar with R, RStudio, and R Markdown. This pre-lab is due before classes start and will ensure you are prepared to complete the required coursework.</p>
+<p>Please attempt to do all iLabs on your own, but you may work with other students. However, you may not submit iLabs assignments as a group. You should submit your own original work. Please bear in mind that when an assignment involves R, you will lose points for any of the following:</p>
 <ul>
 <li>Printing entire dataframes in the R Markdown file</li>
 <li>Code with no comments</li>
 <li>Code which produces an error message</li>
 </ul>
-<p>You will have 1 week to complete each homework assignment, and your initial solutions are due by 2pm on the due date (at the start of class on Thursdays). Late homeworks will not be accepted. If you have not turned in a homework by the start of class on the due date, the solution key will be made public and you can do a self-assessment, but you will lose the ability to get 2 points per problem for your “good faith effort”.</p>
-<p>After you turn in your initial solutions and are provided with the answer key, you will hand in a self-assessment by the start of the next class (2pm on the following Tuesday). Your self-assessment must:</p>
+<p>You will have at 1 week to complete each iLab assignment, and your initial solutions are due by 2pm on the due date (at the start of class). Late submissions will not be accepted. If you have not turned in an iLab by the start of class on the due date, you can do a self-assessment, but you will lose the ability to get points for your “good faith effort”.</p>
+<p>After you turn in your initial iLab solutions and are provided with the solution key (if applicable), you will hand in a self-assessment by the start of the next class. Your self-assessment must:</p>
 <ul>
 <li>Include an assessment of the accuracy and completeness of your “initial solutions”</li>
 <li>Give attributions as appropriate to other students who helped you</li>
 </ul>
-<p>Homework grades will be based on:</p>
+<p>iLabs grades will be based on:</p>
 <ul>
 <li>Was your initial solution a good faith effort</li>
 <li>Did you catch all of your own errors in your self-assessment</li>
 <li>Is your updated solution correct</li>
 </ul>
 </div>
-<div id="grading-rubric-for-the-homework-is-5-points-per-question-scored-as-follows" class="section level2">
-<h2>Grading rubric for the homework is 5 points per question, scored as follows:</h2>
+<div id="grading-rubric-for-the-ilabs-is-20-points-scored-as-follows" class="section level2">
+<h2>Grading rubric for the iLabs is 20 points, scored as follows:</h2>
 <ul>
-<li><p>2 points for each initial solution being “in good faith”&quot;</p>
+<li><p>8 points for each initial solution being “in good faith”&quot;</p>
 <ul>
-<li>2: answer reflects strong independent problem solving, with clearly thought out attempts to approach the problem and a diligent and honest effort to find the solution</li>
-<li>1: answer reflects some attempt to approach the problem, but approach appears to be superficial and lacks depth of analysis</li>
+<li>8: answer reflects strong independent problem solving, with clearly thought out attempts to approach the problem and a diligent and honest effort to find the solution.</li>
+<li>6: answer reflects some attempt to approach the problem, but approach appears to be superficial and lacks depth of analysis.</li>
 </ul></li>
-<li><p>3 points for the quality of the final answer / discussion.</p>
+<li><p>12 points for the quality of the final solution / discussion.</p>
 <ul>
-<li>3 (Exceptional): answer is thorough, concise, and clearly demonstrates ability to analyze and interpret statistics as well as theoretical understanding of statistical concepts</li>
-<li>2 (Adequate): answer addresses the question with moderate inaccuracies in analysis and/or interpretation, or offers a correct but incomplete answer</li>
-<li>1 (Inadequate): answer attempts to address question with substantial inaccuracies in analysis and/or interpretation</li>
+<li>12 (Exceptional): answer is thorough, concise, and clearly demonstrates ability to analyze and interpret statistics as well as theoretical understanding of statistical concepts.</li>
+<li>8 (Adequate): answer addresses the question with moderate inaccuracies in analysis and/or interpretation, or offers a correct but incomplete answer.</li>
+<li>4 (Inadequate): answer attempts to address question with substantial inaccuracies in analysis and/or interpretation.</li>
 <li>0 (Insufficient): answer does not attempt to address question or answer is insufficient to grade</li>
 </ul></li>
 </ul>
 <div id="all-of-this-means-that" class="section level3">
 <h3>All of this means that:</h3>
 <ul>
-<li>If you (a) submit perfectly accurate initial solutions OR (b) submit a perfectly accurate self-assessment, you get 100% of the points either way.</li>
-<li>If you simply cannot submit any homework solutions on time, after the homework due date, you will receive the solutions key and can submit a perfect self-assessment for a max score of 60% (3 out of 5 points per problem). We feel this is fair given that you did not attempt a good faith effort, and given that we also will drop your lowest homework grade.</li>
+<li>If you (a) submit a perfectly accurate initial solution OR (b) submit a good-faith effort and a perfectly accurate self-assessment, you get 100% of the points.</li>
+<li>If you simply cannot submit an iLab on time, after the due date you can submit perfect self-assessment for a max score of 60% (12 out of 20 points). We feel this is fair given that you did not attempt a good faith effort.</li>
 </ul>
 </div>
 <div id="what-is-a-good-faith-effort" class="section level3">
 <h3>What is a “good faith effort”?</h3>
-<p>Simply submitting nonsense or saying “I can’t do this” for each problem will not meet our criteria for a good faith effort, because there is no attempt on your part to show us why you are struggling, what you tried but didn’t work, what specific part of the problem you got stuck on, which other examples in the text/lecture you tried to work through to get a grasp on the problem, etc. This is especially true if you don’t attend any office hours, post on Sakai, or otherwise seek out help <em>before</em> the due date. The good faith effort is just that- we are interested in seeing evidence of a diligent and honest effort on your part, made with deliberate intention, to understand the problem and attempt an answer.</p>
+<p>Simply submitting nonsense or saying “I can’t do this” will not meet our criteria for a good faith effort, because there is no attempt on your part to show us why you are struggling, what you tried but didn’t work, what specific part of the problem you got stuck on, which other examples in the text/lecture you tried to work through to get a grasp on the problem, etc. This is especially true if you don’t attend any office hours, post your problem online, or otherwise seek out help <em>before</em> the due date. The good faith effort is just that- we are interested in seeing evidence of a diligent and honest effort on your part, made with deliberate intention, to understand the problem and attempt an answer.</p>
 </div>
 </div>
-<div id="labs" class="section level2">
-<h2>Labs</h2>
-<p>There will be 5 labs in this course. The first is an ungraded pre-lab which will help you become familiar with R, RStudio, and R Markdown. This pre-lab is due before classes start and will ensure you are prepared to complete the required coursework. The remaining 4 labs will be graded. Your completed labs will be submitted as a raw R Markdown file and a knitted PDF file. You may submit (and re-submit) labs to Sakai until the following Friday at 5pm.</p>
+<div id="in-class-labs" class="section level2">
+<h2>In-class Labs</h2>
+<p>There will be 5 in-class labs in this course. Your completed labs will be submitted as a raw R Markdown file and a knitted HTML file. You may submit (and re-submit) labs to Sakai until the following class date at 5PM. Labs will receive a grade of check-minus, check, or check-plus. The lowest will be dropped. Full points will be awarded for 4 checks. A check-plus balances out a check-minus.</p>
 </div>
 <div id="midterm" class="section level2">
 <h2>Midterm</h2>
-<p>For the midterm, you will work individually on a take-home exam that will cumulatively cover topics in class. You may use the following resources: your class notes, your textbook, your previous homeworks, the Internet. You may not use the following resources: anything that is alive or communicates back to you (including but not limited to other students, professors, professional statisticians, tutors, parents, email or phone contacts, online forums or chat rooms, etc.). You should submit your own original work.</p>
+<p>For the midterm, you will work individually on a take-home exam that will cumulatively cover topics in class. You may use the following resources: your class notes, online readings and assignments, your previous homeworks, the Internet. You may not use the following resources: anything that is alive or communicates back to you (including but not limited to other students, professors, professional statisticians, tutors, parents, email or phone contacts, online forums or chat rooms, etc.). You should submit your own original work.</p>
 </div>
 <div id="project" class="section level2">
 <h2>Project</h2>
 <p>For the final project, you will reproduce and extend a published research article. Projects will be done in teams of two or more depending on class size; the same grade will be given to all team members unless there is a clear discrepancy in labor that is brought to the instructor’s attention before the final report is due.</p>
 <p>Read more about the <a href="final_project.html">final project here</a></p>
+</div>
+<div id="datacamp" class="section level2">
+<h2>DataCamp</h2>
+<p>DataCamp provides an interactive environment for learning and practicing data science and statistics skills in R. Full points will be awarded for completing at least 80% of the assigned DataCamp chapters. Lesser quantities will receiving a commensurate reduction in points.</p>
+</div>
+<div id="homework" class="section level2">
+<h2>Homework</h2>
+<p>A total of 4 homeworks will be assigned. Some homeworks will require you to use R to analyze data. As such, your homeworks must be submitted as a knitted HTML file, created using RMarkdown. Full points will be assessed for a good-faith effort (see above). No points will be assessed otherwise. Individualized feedback will not be provided. However, after submitting your homework you will be provided with an answer key, which you should use to ensure you understand the solutions.</p>
 </div>
 </div>
 <div id="academic-dishonesty-and-student-behavior" class="section level1">

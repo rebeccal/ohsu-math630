@@ -4,7 +4,7 @@ title: "What is Due & When?"
 subtitle: Fall 2018
 ---
 
-You are expected to come to each class meeting prepared, which means that you will have done the readings that are due for that date *before* coming to class. 
+You are expected to come to each class meeting prepared, which means that you will have done the readings and DataCamp assignments that are due for that date *before* coming to class. 
 
 ## Readings
 
@@ -19,9 +19,9 @@ These books will be supplemented by blog posts, YouTube videos, and several open
 - [Nature: Points of Significance](https://www.nature.com/collections/qghhqm/pointsofsignificance)
 
 ### DataCamp
-DataCamp assignments are *optional*, but strongly recommended . Practice is a good thing!
+Be sure to check the **DataCamp** link above for more details on the DataCamp (DC) assignments.
+<!-- DataCamp assignments are *optional*, but strongly recommended . Practice is a good thing! -->
 
-<!-- Be sure to check the **DataCamp** link above for more details on the DataCamp (DC) assignments.   -->
 
 ```{r echo = FALSE, message = FALSE, warning = FALSE}
 library(tidyverse)
@@ -29,19 +29,25 @@ library(knitr)
 library(DT)
 due <- read_csv("due.csv") %>%
   mutate(Date = paste(Month, Day)) %>%
-  mutate(`DataCamp` = ifelse(material == "-" | grepl("Quiz", material) | is.na(material_link),
+  mutate(`DataCamp` = ifelse(material == "-" | is.na(material_link),
     material,
     paste0("<a href='", material_link, "'>", material, "</a>"))) %>% 
+  mutate(`class_Lab` = ifelse(class_lab == "-" | is.na(cl_link),
+    class_lab,
+    paste0("<a href='", cl_link, "'>", class_lab, "</a>"))) %>% 
   mutate(hw_due = ifelse(hw == "-" | is.na(hw) | is.na(hw_link),
     hw,
     paste0("<a href='", hw_link, "'>", hw, "</a>"))) %>% 
-  mutate(big_lab_due = ifelse(big_lab == "-" | is.na(big_lab) | is.na(big_lab_link),
-    big_lab,
-    paste0("<a href='", big_lab_link, "'>", big_lab, "</a>"))) %>% 
+  mutate(i_lab_due = ifelse(i_lab == "-" | is.na(i_lab) | is.na(i_lab_link),
+    i_lab,
+    paste0("<a href='", i_lab_link, "'>", i_lab, "</a>"))) %>% 
+  mutate(px_due = ifelse(px == "-" | is.na(px) | is.na(px_link),
+    px,
+    paste0("<a href='", px_link, "'>", px, "</a>"))) %>% 
   # select(Weekday, Date, `CM / Block`, `Readings Due` = Reading, 
   #        `DataCamp Due`, `Lab Due`, `Integrative Lab Due` = big_lab_due)
-  select(Weekday, Date, `CM / Block`, `Readings Due` = Reading,
-         DataCamp, `Homework Due` = hw_due, `Integrative Lab Due` = big_lab_due)
+  select(Weekday, Date, `CM / Block`, `Readings` = Reading,
+         DataCamp, `Homework Midterm` = hw_due, `In-class Lab` = class_lab,`I_Lab` = i_lab_due, `Project Part` = px_due)
 ```
 
 ```{r echo=FALSE, warning=FALSE, message=FALSE}
@@ -49,7 +55,7 @@ if(knitr:::is_html_output()){
   due %>% 
     datatable(rownames = FALSE,
               class = 'cell-border stripe',
-              filter = list(position = 'top'),
+              # filter = list(position = 'top'),
               options = list(pageLength = nrow(due), 
                              autoWidth = TRUE,
                              columnDefs = list(list(width = '280px', targets = c(3)),
