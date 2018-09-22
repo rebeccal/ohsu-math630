@@ -18,12 +18,12 @@ Tues,October,9,2.3: Linear models (general),"<a href='https://www.nature.com/art
 <br><a href='https://www.nature.com/articles/nmeth.2659'>- Nature POS: Error bars</a>
 <br><a href = 'https://www.nature.com/articles/nmeth.3665'>- Nature POS: MLR</a>
 <br><a href='http://moderndive.com/7-multiple-regression#model3.html'>- MD Ch 7.1: Multiple Regression</a>
-<br><a href='https://www.discoveringstatistics.com/repository/linearmodels.pdf'>Discovering Statistics: Linear Models</a>", Intro to Modeling in the Tidyverse (Ch 3 + 4),https://www.datacamp.com/courses/modeling-with-data-in-the-tidyverse,,,,,<a href='slides/cm022_lab.html'>Lab 2.2</a>,,,,
+<br><a href='https://www.discoveringstatistics.com/repository/linearmodels.pdf'>- Discovering Statistics: Linear Models</a>", Intro to Modeling in the Tidyverse (Ch 3 + 4),https://www.datacamp.com/courses/modeling-with-data-in-the-tidyverse,,,,,<a href='slides/cm022_lab.html'>Lab 2.2</a>,,,,
 Thurs,October,11,2.4: Multiple regression,<a href='http://moderndive.com/7-multiple-regression#model4.html'>- MD Ch7.2: Multiple Regression</a>, Exploratory Data Analysis Case Study (Ch 1 + 2),https://www.datacamp.com/courses/exploratory-data-analysis-in-r-case-study,,,HW2,hw/HW2/HW2.pdf,,,,,
 Tues,October,16,2.5: LM diagnostics/outliers,"<a href = 'https://www.nature.com/articles/nmeth.3812'>- Nature POS: Outliers</a>
 <br><a href = 'https://www.nature.com/articles/nmeth.3854'>- Nature POS: Diagnostics</a>", Exploratory Data Analysis Case Study (Ch 3 + 4),https://www.datacamp.com/courses/exploratory-data-analysis-in-r-case-study,,,,,<a href='slides/cm024_lab.html'>Lab 2.4</a>,,Lab 02,labs/lab02.html,
-Thurs,October ,18,3.1: Probability,<a href=reference/Wasserman-all_of_stats.pdf> Ch 2: All of Statistics</a>, Foundations of Probability in R (Chap 1 + 2),https://www.datacamp.com/courses/foundations-of-probability-in-r,P1,final_project.html,,,,,,,
-Tues,October,23,3.2: Discrete Probability Functions,<a href=reference/Wasserman-all_of_stats.pdf> Ch 3: All of Statistics</a>, Foundations of Probability in R (Chap 3 + 4),https://www.datacamp.com/courses/foundations-of-probability-in-r,,,,,,,,,
+Thurs,October ,18,3.1: Probability,<a href=reference/Wasserman-all_of_stats.pdf>- All of Statistics: Chapter 2</a>, Foundations of Probability in R (Chap 1 + 2),https://www.datacamp.com/courses/foundations-of-probability-in-r,P1,final_project.html,,,,,,,
+Tues,October,23,3.2: Discrete Probability Functions,<a href=reference/Wasserman-all_of_stats.pdf>- All of Statistics: Chapter 3</a>, Foundations of Probability in R (Chap 3 + 4),https://www.datacamp.com/courses/foundations-of-probability-in-r,,,,,,,,,
 Thurs,October,25,3.3: Continuous Probability Functions,,,,,,HW1,hw/HW1/HW1.pdf,,,,,
 Tues,October,30,4.1: Bootstrapping (confidence intervals),"<a href='http://moderndive.com/9-confidence-intervals'>- MD  Ch 9: Confidence Intervals</a>
 <br><a href='https://www.nature.com/articles/nmeth.3414"">- Nature POS: Bootstrapping</a>", Inference for Numerical Data (Ch 1 + 2),https://www.datacamp.com/courses/inference-for-numerical-data,,,,,,,,,
@@ -35,8 +35,8 @@ Thurs,November,8,4.4: Hypothesis testing (classical),"<a href='https://www.natur
 Tues,November,13,4.5: t-test as Linear Regression,, Inference for Linear Regression (Ch 1 + 2),https://www.datacamp.com/courses/inference-for-linear-regression,,,,,,,,,
 Thurs,November,15,5.1: Many means,"<a href='https://www.nature.com/articles/nmeth.3005'>- Nature POS: ANOVA</a>
 <br><a href = 'https://arxiv.org/pdf/1412.3416.pdf'>- ANOVA</a>
-<br><a href=https://www.discoveringstatistics.com/repository/onewayanova.pdf>Discovering Statistics: One-way Independent ANOVA</a>", Inference for Linear Regression (Ch 3 - 5),https://www.datacamp.com/courses/inference-for-linear-regression,P2,final_project.html,,,,,,,
-Tues,November,20,5.2: ANOVA by hand,<a href='https://www.discoveringstatistics.com/repository/anovabyhand.pdf'>Discovering Statistics: The Theory of ANOVA</a>,,,,,HW3,hw/HW3/HW3.pdf,,,Lab 03,labs/lab03.html,
+<br><a href=https://www.discoveringstatistics.com/repository/onewayanova.pdf>- Discovering Statistics: One-way Independent ANOVA</a>", Inference for Linear Regression (Ch 3 - 5),https://www.datacamp.com/courses/inference-for-linear-regression,P2,final_project.html,,,,,,,
+Tues,November,20,5.2: ANOVA by hand,<a href='https://www.discoveringstatistics.com/repository/anovabyhand.pdf'>- Discovering Statistics: The Theory of ANOVA</a>,,,,,HW3,hw/HW3/HW3.pdf,,,Lab 03,labs/lab03.html,
 Thurs,November,22,NO CLASS,,,,,,,,,,,,
 Tues,November,27,5.2: Contrasts,<a href='https://www.nature.com/articles/nmeth.2900'>- Nature POS: multiple comparisons</a>,,,P3,final_project.html,,,<a href='slides/cm043_lab.html'>Lab 4.3</a>,,,,
 Thurs,November,29,5.3: Family-wise error rates,"<a href='https://www.nature.com/news/scientific-method-statistical-errors-1.14700'>- Nature: p-values</a>

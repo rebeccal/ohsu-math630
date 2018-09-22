@@ -1,0 +1,50 @@
+---
+title: 'Final Project'
+author: "MATH 530/630"
+subtitle: 'Part 0: Pick Groups and a Paper'
+output:
+  html_document:
+    highlight: textmate
+    smart: no
+    theme: flatly
+---
+
+
+## Overview
+
+Due Tuesday October 2 by 2pm (submit on [Sakai](https://sakai.ohsu.edu)).
+
+The goal of this project piece is to choose your final project groups and to pick a paper you'll use for your final project. No overlap will be allowed - that is each paper can be used by only one group. Because of this, each group should submit their top 3 choices, and we'll do what we can to accomodate. 
+
+
+NOTE: If the link below does not have the full pdf, you can find the papers using the [OHSU Library](https://www.ohsu.edu/xd/education/library/) .
+
+```{r echo = FALSE, message = FALSE, warning = FALSE}
+library(tidyverse)
+library(knitr)
+library(DT)
+due <- read_csv("PaperList.csv") %>%
+    mutate(Paper = paste0("<a href='", Paper, "'>", Paper, "</a>")) %>% 
+    mutate(RepoLink = paste0("<a href='", RepoLink, "'>", RepoLink, "</a>")) %>% 
+  select(Study, Paper, RepoLink)
+```
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+if(knitr:::is_html_output()){
+  due %>% 
+    datatable(rownames = FALSE,
+              class = 'cell-border stripe',
+              # filter = list(position = 'top'),
+              options = list(pageLength = nrow(due), 
+                             autoWidth = TRUE,
+                             bInfo = FALSE,
+                             paging = FALSE),
+              escape = FALSE)
+} else {
+  knitr::kable(due, booktabs = TRUE, longtable = TRUE)
+}
+```
+
+
+
+<!-- The goal of this project piece is to look at and explore your dataset for your final project. You will use the [Quartz Bad Data Guide](https://github.com/Quartz/bad-data-guide/) to help guide your data quality review. Please use this  [`.csv`](quartz-bad-data-checklist.csv) file to indicate which, if any variable(s), in your dataset has any of the issues listed. If you indicate a variable with an issue, please include a brief paragraph (2-3 sentences tops) describing the issue further.  -->
