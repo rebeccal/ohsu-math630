@@ -17,4 +17,5 @@ output:
 
 Due Tuesday October 18 by 2pm (submit on [Sakai](https://sakai.ohsu.edu)).
 
-The goal of this project piece is to look at and explore your dataset for your final project. You will use the [Quartz Bad Data Guide](https://github.com/Quartz/bad-data-guide/) to help guide your data quality review. Please use this  [`.csv`](quartz-bad-data-checklist.csv) file to indicate which, if any variable(s), in your dataset has any of the issues listed. If you indicate a variable with an issue, please include a brief paragraph (2-3 sentences tops) describing the issue further. 
+
+The goal of this project piece is to look at and explore your dataset for your final project. You will use the [Quartz Bad Data Guide](https://github.com/Quartz/bad-data-guide/) to help guide your data quality review. Please use this  [`.csv`](quartz-bad-data-checklist.csv) file to indicate which, if any variable(s), in your dataset has any of the issues listed. If you indicate a variable with an issue, please include a brief paragraph (2-3 sentences tops) describing the issue further.

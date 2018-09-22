@@ -47,7 +47,7 @@ due <- read_csv("due.csv") %>%
   # select(Weekday, Date, `CM / Block`, `Readings Due` = Reading, 
   #        `DataCamp Due`, `Lab Due`, `Integrative Lab Due` = big_lab_due)
   select(Weekday, Date, `CM / Block`, `Readings` = Reading,
-         DataCamp, `Homework Midterm` = hw_due, `In-class Lab` = class_lab,`I_Lab` = i_lab_due, `Project Part` = px_due)
+         DataCamp, `Homework & Midterm` = hw_due, `In-class Lab` = class_lab,`I_Lab` = i_lab_due, `Final Project` = px_due)
 ```
 
 ```{r echo=FALSE, warning=FALSE, message=FALSE}

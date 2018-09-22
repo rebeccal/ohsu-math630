@@ -1,6 +1,6 @@
 ---
 title: "MATH 530/630"
-subtitle: "Integrative Lab 1"
+subtitle: "Integrative Lab 1 - Exploratory Data Analysis"
 output: 
   html_document:
     toc: TRUE
@@ -18,9 +18,7 @@ wb_stats <- wb_reprohealth %>%
 ```
 ## Overview
 
-A complete knitted `html` file is due on Sakai by beginning of class Tuesday July 17th (2:30pm). In class on that Tuesday, you'll pair up with another student and review each others' reports. Your final lab is due on Sakai by beginning of class Thursday July 19th (2:30pm). 
-
-The goal is to carefully, thoroughly, and thoughtfully conduct an exploratory data analysis (EDA). You are also asked to communicate clearly about the steps in your EDA process with others, by sharing your R code, output, and narrative. As such, your code cannot "stand alone"- it is meant to complement / enhance / support your narrative. 
+The goal of this lab is to carefully, thoroughly, and thoughtfully conduct an exploratory data analysis (EDA). You are also asked to communicate clearly about the steps in your EDA process with others, by sharing your R code, output, and narrative. As such, your code cannot "stand alone"- it is meant to complement / enhance / support your narrative. 
 
 ## Tools
 
@@ -76,8 +74,6 @@ You can name `wb_stats` anything else you want, this is just an example.
 
 
 ## Explore the `wb_reprohealth` data
-
-Yes, this was [Lab 04](cm014.html). You should already have the code and narrative to answer these questions. Use this opportunity to **clean that up**. This section should be clear, concise, and well-organized, since you already have the code and words in another .Rmd document that you can just copy/paste into this lab (right?). Can you make it better? Do a self-assessment here: what could be clearer about your code or your process that you can improve upon now?
 
 - How many variables/columns?
 - How many rows/observations?
@@ -200,24 +196,24 @@ You’re encouraged to reflect on what was hard/easy, problems you solved, helpf
 
 ## Grading
 
-This lab is worth 5 points total, scored as follows:
+This lab is worth 20 points total, scored as follows:
 
-2 points for your initial EDA:
+8 points for your initial EDA:
 
-- 2 (Strong attempt): EDA reflects strong independent problem solving, with clearly thought out attempts to approach questions and problems, and a diligent and honest effort to answer questions and find the solutions.
+- 8 (Strong attempt): EDA reflects strong independent problem solving, with clearly thought out attempts to approach questions and problems, and a diligent and honest effort to answer questions and find the solutions.
 
-- 1 (Adequate attempt): EDA reflects some attempt to approach the posed tasks, but approach appears to be superficial and lacks depth of analysis. No obvious mistakes. Pleasant to read. No head scratchers. Solid and complete.
+- 4 (Adequate attempt): EDA reflects some attempt to approach the posed tasks, but approach appears to be superficial and lacks depth of analysis. No obvious mistakes. Pleasant to read. No head scratchers. Solid and complete.
 
 - 0 (No attempt or incomplete): Didn't tackle all sections. Or didn't make companion graphs. Or didn't interpret anything but left it all to the "reader". Or more than one technical problem that is relatively easy to fix.
 
 
-3 points for the quality of the final EDA:
+12 points for the quality of the final EDA:
 
-- 3 (Exceptional): EDA is thorough, concise, and clearly demonstrates ability to competently and thoughtfully work with data as well as how to report on that process as a complement to code. Impeccable organization and presentation in the report.
+- 12 (Exceptional): EDA is thorough, concise, and clearly demonstrates ability to competently and thoughtfully work with data as well as how to report on that process as a complement to code. Impeccable organization and presentation in the report.
 
-- 2 (Adequate): Hits all the elements in all sections. No obvious mistakes. Pleasant to read. No head scratchers. Solid and complete.
+- 8 (Adequate): Hits all the elements in all sections. No obvious mistakes. Pleasant to read. No head scratchers. Solid and complete.
 
-- 1 (Inadequate): EDA attempts to address question with substantial inaccuracies in analysis and/or interpretation. Didn't tackle all sections. Or didn't make companion graphs. Or didn't interpret anything but left it all to the "reader". Or more than one technical problem that is relatively easy to fix.
+- 4 (Inadequate): EDA attempts to address question with substantial inaccuracies in analysis and/or interpretation. Didn't tackle all sections. Or didn't make companion graphs. Or didn't interpret anything but left it all to the "reader". Or more than one technical problem that is relatively easy to fix.
 
 - 0 (Insufficient): Nothing to grade, assignment was late.
     

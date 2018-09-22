@@ -1,5 +1,6 @@
 ---
-title: 'Introduce Yourself'
+title: "MATH 530/630"
+subtitle: "Integrative Lab 0 - Introduce Yourself!"
 output:
   html_document:
     toc: TRUE
@@ -17,7 +18,7 @@ library(tidyverse)
 library(babynames)
 ```
 
-> Read all the way through step 6, and note that there is a file that needs to be turned in to Sakai before Tuesday at noon!
+> Read all the way through step 6, and note that there is a file that needs to be turned in to Sakai! 
 
 # Overview
 
@@ -198,10 +199,13 @@ help(ggsave)
 ```
 
 ```{r eval = F}
-ggsave("rebecca_Lunsford.pdf", plot) # please make the filename unique!
+ggsave("rebecca_lunsford.pdf", plot) # please make the filename unique!
 ```
 
-Upload this exported plot to Sakai before Wednesday at noon.
+# Grading
+
+There is no self-assessment component to this iLab, because you'll need these tools to complete the future assignments. Hopefully, this should be an easy 20 points!
+
 
 # Other cool `babynames` projects
 
