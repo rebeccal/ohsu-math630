@@ -1,6 +1,6 @@
 ---
 title: "MATH 530/630"
-subtitle: "Integrative Lab 4"
+subtitle: "Integrative Lab 4 - ANOVA"
 output:
   html_document:
     highlight: pygments
@@ -21,10 +21,10 @@ library(DT)
 
 # Overview
 
-The goal of this lab is to carefully, thoroughly, and thoughtfully conduct an analysis of variance (ANOVA). You are also asked to communicate clearly about the steps in your analysis process with others, by sharing your R code, output, and narrative. As such, your code cannot "stand alone"- it is meant to complement / enhance / support your narrative. As with our previous [integrative lab](cm026.html), this lab will be due in two stages:
+The goal of this lab is to carefully, thoroughly, and thoughtfully conduct an analysis of variance (ANOVA). You are also asked to communicate clearly about the steps in your analysis process with others, by sharing your R code, output, and narrative. As such, your code cannot "stand alone"- it is meant to complement / enhance / support your narrative. As with our previous iLab, this lab will be due in two stages:
 
-1. A complete knitted `html` file is due on Sakai by Thursday September 13 at 2:30pm. 
-2. At that time, you'll be provided with a code key. You are asked to review your initial submission, and reflect on your own code/narrative after reviewing the key thoroughly. Your self-assessment is due on Sakai by Monday September 17th at 2:30pm.
+1. A complete knitted `html` file submitted on Sakai. 
+2. At that time, you'll be provided with a code key. You are asked to review your initial submission, and reflect on your own code/narrative after reviewing the key thoroughly. 
 
 Using the key, your self-assessment should include even **more** narrative; where you made mistakes, you must discuss and analyze where you went wrong, and correct them without copying/pasting directly from the key (this typically means that you need to include more narrative than we provide in the key). A good self-assessment will include:
 
