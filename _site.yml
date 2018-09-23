@@ -19,7 +19,7 @@ navbar:
   - text: Sakai
     icon: fa-university
     href: https://sakai.ohsu.edu/portal/site/MATH-530-1-AD-F18
-  - text: Reference
+  - text: Reference (pending)
     icon: fa-glasses
     href: cm.html
   right:
