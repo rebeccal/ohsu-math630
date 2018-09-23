@@ -1,7 +1,12 @@
 ---
-title: "Homework 3"
 subtitle: "Math 530/630 - Fall 2018"
 output: pdf_document
+params: 
+  key: FALSE
+  hw_title: "Homework 3"
+  key_title: "Homework 3 - Key"
+title: "`r ifelse (params$key, params$key_title, params$hw_title)`"
+
 ---
 
 1. The longitudinal study [“Bone mass is recovered from lactation to postweaning in adolescent mothers with low calcium intakes”](https://www.ncbi.nlm.nih.gov/pubmed/15531682) examined total-body bone mineral content of young mothers during breast feeding and then in the postweaning period. We want to test the hypothesis that mothers gained at least 25 grams of bone mineral content in the postwearning period. The data for 10 mothers is provided below; use a significance level of 0.05. The column `bf` stands for the first measurement (during breastfeeding). The column `pw` stands for the second measurement (during postweaning period). All values are in grams of bone density.
@@ -26,30 +31,42 @@ t.test(bones$pw, bones$bf, mu=25, paired = TRUE, alternative="greater")
 ```
 
 
-
-
-
-
 2. Your office mate ran an experiment with *N*=50 to test the hypothesis that her sample would have a mean different from the population mean, $\mu$=0, previously found by her advisor. She conducted a one-sample *t* test with $\alpha$=.05 (two-tailed), and reported the 95% confidence interval for $\mu$ of variable *X* is (8.979, 10.349). Circle which of the following must also be true:
 
-> a. She rejected her null hypothesis. TRUE
+> a. She rejected her null hypothesis. 
+```{asis, echo=(params$key)} 
+TRUE
+```
 
-> b. The *t*-statistic based on her sample was greater than 2.01. TRUE
-
-```{r include=FALSE}
+> b. The *t*-statistic based on her sample was greater than 2.01.
+```{asis, echo=(params$key)} 
+TRUE
+```
+```{r include=params$key}
 qt(.975, 49)
 ```
 
-> c. The *p* value for her *t*-statistic was less than her $\alpha$-level. TRUE
+> c. The *p* value for her *t*-statistic was less than her $\alpha$-level.
+```{asis, echo=(params$key)} 
+TRUE
+```
 
-> d. Her degrees of freedom were 51. FALSE
+> d. Her degrees of freedom were 51.
+```{asis, echo=(params$key)} 
+FALSE
+```
 
-> e. Her sample mean of *X* was 9.664. TRUE
+> e. Her sample mean of *X* was 9.664.
+```{asis, echo=(params$key)} 
+TRUE
+```
 
-> f. Her sample mean of *X* was 5.664. FALSE
-
+> f. Her sample mean of *X* was 5.664.
+```{asis, echo=(params$key)} 
+FALSE
+```
 3. Suppose that the readings of a laboratory scale are normally distributed with unknown mean $\mu$ and standard deviation $\sigma$ = 0.01 grams. To assess the accuracy of the laboratory scale, a standard weight that is known to weigh exactly 1 gram is repeatedly weighed a total of *N* = 50 times. Let $\bar{x}$ = 0.998 be the average of the 50 readings. What is the 95% confidence interval for $\mu$?
 
-```{r include= FALSE}
+```{r include= params$key}
 #(0.99523, 1.00077)
 ```
