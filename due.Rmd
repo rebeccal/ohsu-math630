@@ -32,7 +32,7 @@ due <- read_csv("due.csv") %>%
   mutate(`DataCamp` = ifelse(material == "-" | is.na(material_link),
     material,
     paste0("<a href='", material_link, "'>", material, "</a>"))) %>% 
-  mutate(`class_Lab` = ifelse(class_lab == "-" | is.na(cl_link),
+  mutate(`class_lab` = ifelse(class_lab == "-" | is.na(cl_link),
     class_lab,
     paste0("<a href='", cl_link, "'>", class_lab, "</a>"))) %>% 
   mutate(hw_due = ifelse(hw == "-" | is.na(hw) | is.na(hw_link),

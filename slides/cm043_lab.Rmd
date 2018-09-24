@@ -1,9 +1,10 @@
 ---
-title: "CONJ620: CM 4.3"
-subtitle: "One-way ANOVA"
-author: "Alison Presmanes Hill"
+title: "CM 4.3 Permutation Tests"
+subtitle: "Math 530/630"
+#author: "Alison Presmanes Hill"
 output:
   html_document:
+    keep_md: TRUE
     highlight: pygments
     theme: flatly
     smart: false
@@ -13,261 +14,251 @@ output:
 ```{r include = FALSE}
 knitr::opts_chunk$set(error = TRUE, comment = NA, warning = FALSE, message = FALSE, tidy = FALSE)
 options(scipen = 999)
-library(tidyverse)
-theme_set(theme_minimal())
-library(DT)
 ```
+
 
 
 # Logistics
 
-* A complete knitted `html` file is due on Sakai by Thursday September 6 (2:30pm). 
-* This lab is based on the assigned reading that includes [this article on ANOVA in Nature Points of Significance](https://www.nature.com/articles/nmeth.3005). 
-* Also, this [blog post](http://blog.minitab.com/blog/adventures-in-statistics-2/understanding-analysis-of-variance-anova-and-the-f-test) is very well-written and helpful.
-
-# Overview
-
-So far we have learned that when we want to compare means we can use a two-sample $t$-test or a two-sample permutation test. These tests have limitations though:
-
-* You can compare only 2 means: often we would like to compare means from 3 or more groups.
-* It can be used only with one Predictor/Independent Variable.
-
-Enter ANOVA:
-
-* Compares several means.
-* Can be used when you have manipulated more than one Independent Variables.
-* It is an extension of regression (the General Linear Model)
-
-From [Nature Points of Significance](https://www.nature.com/articles/nmeth.3005):
-
-> "The ANOVA null hypothesis is that all samples are from the same distribution and have equal means. Under this null, between-group variation of sample means and within-group variation of sample values are predictably related. Their ratio can be used as a test statistic, F, which will be larger than expected in the presence of treatment effects. Although it appears that we are testing equality of variances, we are actually testing whether all the treatment effects are zero."
-
-In fact, we are actually testing whether the variability *between the sample means* (i.e., based on groups) is "extreme" or "surprising", given the random variation present within the samples (i.e., the groups). This [blog post](http://blog.minitab.com/blog/adventures-in-statistics-2/understanding-analysis-of-variance-anova-and-the-f-test) explains this very well! 
+- A complete knitted `html` file is due on Sakai by the beginning of the next class.. 
+- This lab is based on the assigned reading that includes [ModernDive Chapter 10.7](http://moderndive.netlify.com/10-hypothesis-testing.html#example-comparing-two-means). Please open and follow closely!
+<!-- - Note that in class, several people were getting a mysterious `glue` error in their console. The solution that seemed to work was to explicitly install the `glue` package using: `install.packages("glue")`, then restarting RStudio. -->
 
 # Packages
 
-```{r load_packages}
+
+```{r}
 library(tidyverse)
-library(janitor)
-library(moderndive)
-library(broom)
+library(infer)
+library(skimr)
 ```
 
-# Get the data
+# Introduction
 
-> "A univariate [read: one response/outcome variable] ANOVA was conducted investigating the impact of the between-subjects factors [read: all levels of factors are measured from independent samples] of age (4: 3–4 years, 5–6 years, 7–8 years, 9–11 years), number of resources (2: 12 or 30 stickers), number of recipients (2: 1 or 2 anonymous recipients), and gender (2: female, male) on the proportion of resources shared."
+You have my permission to watch this video, stop it at 4 minutes 5 seconds:
+https://www.youtube.com/watch?v=PdLPe7XjdKc
+
+Let's play with some obviously fictitious data. Our outcome measure is the Sneetch Snootiness Index (SSI), which we measured for both plain-bellied sneetches (`plain`) and those with stars upon thars (`stars`). Here is our data for N = 20 sneetches, where I have SSI scores for m = 8 star-bellied sneetches and n = 12 plain-bellied sneetches.
+
 
 ```{r}
-# create variable to store url
-link <- "https://dataverse.harvard.edu/api/access/datafile/2712105"
-
-# read in column names only
-sticker_names <- link %>% 
-  read_tsv(n_max = 0) %>% # default: col_names = TRUE
-  rename(stickersgiven = 'absolutenumberofstickersgiven(Conditions1or3:Outof12;Conditions2or4:Outof30)') %>% 
-  names()
-
-# read in data, set column names
-stickers <- link %>% 
-  read_tsv(skip = 2, col_names = sticker_names) %>% 
-  clean_names()
-
-# clean it up a bit
-# in class we got errors, so we commented out two lines
-stickers_clean <- stickers %>% 
-  mutate(num_stickers = case_when(
-    number_stickers == 1 ~ 12,
-    number_stickers == 2 ~ 30)) %>% 
-  filter(!(subject_number == 263)) %>% 
-  #mutate(condition = if_else(subject_number == 263, 3L, condition)) %>% 
-  #mutate(num_stickers = if_else(subject_number == 263, 30L, num_stickers)) %>% 
-  mutate(prop_given = round(stickersgiven / num_stickers, 2)) %>% 
-  select(-percent_given_outof100percent, -number_stickers) %>% 
-  mutate(giveornot = case_when(
-    prop_given == 0 ~ 0,
-    prop_given > 0 ~ 1)) 
+stars <- c(84, 57, 63, 99, 72, 46, 76, 91, rep(NA, 4))
+plain <- c(81, 74, 56, 69, 66, 62, 69, 61, 87, 65, 44, 69)
+sneetches <- data.frame(stars, plain)
+sneetches_tidy <- sneetches %>%
+  gather(group, SSI, factor_key = TRUE) %>%
+  filter(!is.na(SSI))
+sneetches_tidy
 ```
 
+<img src="https://celebratingdrseuss.files.wordpress.com/2014/02/sneetches_on_beaches.jpg"/>
 
-# Do an ANOVA by hand
-
-You may use R as a calculator to get you through this section, but you may also choose to do this by hand or in Excel, or using whatever tool you feel comfortable with. We'll focus on doing a one-way univariate ANOVA by hand. 
-
-- One-way means there is only one independent or predictor variable. We'll use age group as the predictor. 
-- Univariate means we are predicting a single response or outcome variable: the proportion of stickers given (`prop_given`). 
-
-Use the following code to create a mini version of the `stickers_clean` data with only 5 observations in each age group to create a balanced design, and decrease the math!
+Let's look at our data for N = 20 sneetches, where I have SSI scores for m = 8 star-bellied sneetches and n = 12 plain-bellied sneetches.
 
 ```{r}
-set.seed(1990)
-givers <- stickers_clean %>% 
-  filter(giveornot == 1) %>% 
-  mutate(age_groups = as.factor(agegroups))
-mini_givers <- givers %>% 
-  group_by(age_groups) %>% 
-  sample_n(5) %>% 
-  select(subject_number, prop_given, age_groups) %>% 
-  ungroup()
+sneetch_plot <- ggplot(sneetches_tidy, aes(x = group, 
+                                           y = SSI)) + 
+  geom_boxplot(outlier.shape = NA) +
+  geom_jitter(position = position_jitter(height = 0, width = 0.2), 
+              fill = "lightseagreen", 
+              colour = "lightseagreen", 
+              alpha = 0.75, 
+              size = 4, 
+              na.rm=TRUE)
+suppressWarnings(print(sneetch_plot))
 ```
 
-I'll lay the data out in a table you can view with rows as observations and a column for each of the *k* age groups:
+# Model of $H_0$
 
-```{r echo = FALSE}
-mini_givers_table <- mini_givers %>% 
-  select(-subject_number) %>% 
-  mutate(obs = rep(1:5, 4)) %>% 
-  spread(age_groups, prop_given, sep = "") %>% 
-  select(-obs)
-datatable(mini_givers_table)
-```
+We'll use this data to compare two means using a randomization or permutation test. Our null/alternative hypotheses are:
 
-Note! Do not copy/paste this data from the table into Excel- folks who did this in class had very bizarre values imported into Excel in this way. If you want to access this table for excel, you can export a .csv using `write_csv(mini_givers, here::here("mygivers.csv"))`.
+$H_0: \mu_{stars} \leq \mu_{plain}$, which can also be written as $H_0: \mu_{stars} - \mu_{plain} \leq 0$.
 
-```{r echo = FALSE, include = FALSE}
-mini_lm <- lm(prop_given ~ age_groups, data = mini_givers)
-anova(mini_lm)
-```
+Our alternative hypothesis will be of the form $H_a: \mu_1 \star \mu_2$ (or $H_a:  \mu_1 - \mu_2 \, \star \, 0$) where $\star$ = $<$, $\ne$, or $>$. For this example, we'll use: $H_a: \mu_{stars} > \mu_{plain}$.
 
+So to sum up:
 
-Lay out an ANOVA source table on paper, fill it in, take a picture with your phone, and include the image in your knit file.
+- $H_0: \mu_{stars} - \mu_{plain} \leq 0$
+- $H_a: \mu_{stars} - \mu_{plain} > 0$
 
-```{r echo = FALSE}
-knitr::include_graphics(here::here("slides", "images", "anova-by-hand.JPG"))
-```
+Do we have reason to believe, based on the sample distributions of SSIs over the two groups of sneetches, that there is a significant difference between the mean SSI values for star-bellied compared to plain-bellied sneetches? It’s hard to say just based on the plots. 
 
+# Test statistic $\delta$  
+  
+We are, therefore, interested in seeing whether the difference in the sample means, $\bar{x}_{stars} - \bar{x}_{plain}$, is statistically greater than 0. We can now come back to our `infer` pipeline for computing our observed statistic. Note the `order` argument that shows the mean value for `"plain"` being subtracted from the mean value of `"stars"`.
 
+# Observed effect $\delta^*$
 
-Here are the main formulas you need:
+Our first step is to calculate the difference between sample means you got!
 
-
-|      |Source of Variation| Sums of Squares |df | Mean Square|F|
-| :---| :--- |:------------:| :------------:|:------------:|:------------:|
-| $SS_{total}$ |Total| $\sum_{j = 1}^k\sum_{i = 1}^n(y_{ij}-\bar{y_{\bullet\bullet}})^2$ | $kn-1$ | $\frac{SS_{total}}{kn-1}$ ||
-| $SS_{model}$ |Model| $n\sum_{j = 1}^k(\bar{y_{\bullet{j}}}-\bar{y_{\bullet\bullet}})^2$ | $k-1$ | $\frac{SS_{model}}{k-1}$ | $\frac{MS_{model}}{MS_{residual}}$ |
-| $SS_{residual}$ |Residual| $\sum_{j = 1}^k\sum_{i = 1}^n(y_{ij}-\bar{y_{\bullet{j}}})^2$ | $k(n-1)$ | $\frac{SS_{residual}}{k(n-1)}$ ||
-
-> where *k* is the number of groups and *n* is the sample size per group in a balanced design.
-
-Don't forget to calculate the F-statistic, and use R functions to find the p-value for that F-statistic (don't try to do that one by hand!).
-
-```{r echo = FALSE, include = FALSE}
-givers_ans <- augment(mini_lm)
-grand_mean <- mini_givers %>% 
-  summarize(grand_mean = mean(prop_given)) %>% 
-  pull()
-givers_ss_by_age <- givers_ans %>% 
-  group_by(age_groups) %>%
-  summarise(tot_ss = sum((prop_given - grand_mean)^2),
-            res_ss = sum((prop_given - .fitted)^2),
-            mod_ss = sum((.fitted - grand_mean)^2)) %>% 
-  ungroup() 
-
-n_group <- 5
-k_groups <- mini_givers %>% 
-  pull(age_groups) %>% 
-  nlevels()
-(givers_ss <- givers_ss_by_age %>% 
-    summarize(tot_ss = sum(tot_ss),
-             mod_ss = sum(mod_ss),
-             res_ss = sum(res_ss)) %>% 
-    mutate(df_mod = k_groups - 1,
-           df_res = k_groups * (n_group - 1)))
-```
-
-
-```{r echo = FALSE, include = FALSE}
-# in balanced design, msmodel is var of age means times n
-(age_means <- mini_givers %>% 
-  group_by(age_groups) %>% 
-  summarize(age_means = mean(prop_given)) %>% 
-  pull(age_means))
-(msmodel <- n_group * var(age_means))
-```
-
-```{r echo = FALSE, include = FALSE}
-#calculate f statistic
-givers_f <- givers_ss %>% 
-  mutate(f_stat = (mod_ss / df_mod) / (res_ss / df_res)) %>% 
-  pull(f_stat)
-
-# 2 sided p value
-pf(givers_f, 
-   df1 = givers_ss %>% pull(df_mod),
-   df2 = givers_ss %>% pull(df_res),
-   lower.tail = FALSE)
-
-# critical f stat would have been...
-qf(.05, 
-   df1 = givers_ss %>% pull(df_mod),
-   df2 = givers_ss %>% pull(df_res),
-   lower.tail = FALSE)
-```
-
-
-
-# Do a linear regression in R
-
-Use `givers` to do a linear regression predicting `prop_given` from `age_groups`.
-
-
-```{r echo = FALSE, include = FALSE}
-sticker_lm <- lm(prop_given ~ age_groups, data = givers)
-get_regression_table(sticker_lm)
-```
-
-Look at the output here, and interpret the results of the linear regression in light of these means/treatment effects:
+Note: in class I used a way harder way- this way is much easier :)
 
 ```{r}
-(means <- givers %>%
-  group_by(age_groups) %>%
-  summarise(cell_means = mean(prop_given)) %>%
-  mutate(tx_effects = cell_means - cell_means[1]))
+mean_diff <- sneetches_tidy %>% 
+  specify(SSI ~ group) %>% 
+  calculate(stat = "diff in means", 
+            order = c("stars", "plain")) 
+mean_diff
+```
+
+Our goal next is to figure out a random process with which to simulate the null hypothesis being true. Recall that $H_0: \mu_{stars} - \mu_{plain} \leq 0$ corresponds to us assuming that the population means are the same (or that stars are less than plain). We would like to assume the null is true and perform a random process to `generate()` data in the model of the null hypothesis.
+
+
+
+# Reshuffling
+
+The basic idea to a permutation test is that we reshuffle the deck. Here the deck is our observed sample data, and when we reshuffle, we are re-ordering the samples according to the null hypothesis as if the group that each observation came from (`stars` versus `plain`) does not matter. First, imagine that all of our observed SSI scores are stored in one vector (both groups stacked on top of each other), and numbered 1 through 20 (regardless of group).
+
+Next, we shuffle the non-missing observation numbers (rows 1:20), choosing a new `stars` group of size n = 8 from the n = 20 observed data points **without replacement**. Let's do this once:
+
+```{r}
+set.seed(2018)
+sn1 <- sneetches_tidy %>% 
+  specify(SSI ~ group) %>% 
+  hypothesize(null = "independence") %>% 
+  generate(reps = 1, type = "permute")
+sn1
+```
+
+Take a few minutes to confirm for yourself, using `skimr` for example, that:
+
+- The overall $N$ is the same in this resample as in our original sample (`r nrow(sneetches_tidy)`)
+- The per-group $n$'s are the same in this resample as in our original sample 
+- The overall mean of `SSI` is the same as in your original sample data
+- The group means of `SSI` in this resample *are* different from in your original sample data (this is what will change for each replicate!)
+
+```{r}
+# original mean
+skim(sneetches_tidy)
+
+# original means by group
+sneetches_tidy %>% 
+  group_by(group) %>% 
+  skim()
+
+# resample mean
+skim(sn1)
+
+# resampled means by group
+sn1 %>% 
+  group_by(group) %>% 
+  skim()
+```
+
+```{r include = FALSE}
+sn1_diff <- sn1 %>% 
+  calculate(stat = "diff in means", 
+            order = c("stars", "plain"))
 ```
 
 
-# Do an ANOVA in R
+Remember, our observed mean is `r round(mean_diff, 2)`. So, this new resampled mean difference is `r round(sn1_diff, 2)`, calculated as if it didn't matter if the real `stars` were `stars`, is much smaller. Now, this was just one possible resample. How many possible ways are there to choose 8 observations from 20? 
 
-Now instead, use the `anova` function on the model object you created with `lm`. Interpret the output compared to the linear regression output and cell means/treatment effects output from the above section.
+```{r}
+choose(20, 8)
+# choose(20, 12) same thing
+```
+
+That is, there are `r choose(20, 8)` possible permutations:
+$$\binom{m + n}{m} = \binom{8 + 12}{8} = 125970$$
+
+
+This number is not so crazy because we have pretty small sample sizes, but with real data, you'll often find the number of possible permutations is pretty unmanageable. So we make do with an approximation: we will take a large number of resamples, resampling **with replacement from the null distribution** of $\binom{m + n}{m}$ possible resamples. Sampling without replacement would be more accurate, but it would require too much time and memory to check the uniqueness of each resample. Long story short: we don't create **all possible resamples** in a permutation test, which is why this is referred to as a [Monte Carlo permutation test](https://en.wikipedia.org/wiki/Resampling_%28statistics%29#Monte_Carlo_testing).
+
+# Distribution of $\delta$ under $H_0$
+
+We can now proceed in a similar way to what we have done previously with bootstrapping by repeating this process many times to create simulated samples, assuming the null hypothesis is true.
+
+```{r}
+set.seed(1980)
+null_distn <- sneetches_tidy %>% 
+  specify(SSI ~ group) %>% 
+  hypothesize(null = "independence") %>% 
+  generate(reps = 1000, type = "permute") %>% 
+  calculate(stat = "diff in means", 
+            order = c("stars", "plain"))
+```
+
+A **null distribution** of simulated differences in sample means is created with the specification of `stat = "diff in means"` for the `calculate()` step. The **null distribution** is similar to the bootstrap distribution we saw in [Chapter 9](http://moderndive.netlify.com/9-confidence-intervals.html), but remember that it consists of statistics generated assuming the null hypothesis is true. Let's plot the permutation distribution, which is the distribution of mean differences across all permutation resamples:
+
+```{r}
+null_distn %>% 
+  visualize()
+```
+
+So here, what you are looking at, is our *new* null distribution- one that is *not* based on any distributional assumptions. Rather, this null distribution (the permutation distribution) is based on our sample data, and we ask "in how many permutation resamples did we get a [insert statistic here] as or more extreme than the one we got with our actual sample data?"
+
+So, how many resampled mean differences are as or more extreme than the one we got? The answer to this question is why we calculate the p-value.
+
+# The p-value
+
+Remember that we are interested in seeing where our observed sample mean difference of `r pull(mean_diff)` falls on this null/randomization distribution. We are interested stars being greater than plain, so "more extreme" corresponds to values in the right tail on the distribution. Let's shade our null distribution to show a visual representation of our $p$-value:
+
+```{r}
+null_distn %>% 
+  visualize(obs_stat = mean_diff, direction = "greater")
+```
+
+Remember that the observed difference in means was `r pull(mean_diff)`. We have shaded red all values at or above that value. By giving `obs_stat = mean_diff`, a vertical darker line is also shown at `r pull(mean_diff)`. 
+
+At this point, it is important to take a guess as to what the $p$-value may be.  We can see that there are only a few permuted differences as or more large than our observed effect. Lastly, we calculate the $p$-value directly using `infer`:
+
+```{r}
+mean_diff_number <- mean_diff %>% 
+  pull(1)
+
+(pvalue <- null_distn %>%
+  get_pvalue(obs_stat = mean_diff, direction = "greater"))
+
+# same as...
+null_distn %>% 
+  count(val = stat >= mean_diff_number) 
+
+159/1000
+```
+
+We have around `r pull(pvalue) * 100`% of values as or more large than our observed statistic. Assuming we are using a 5% significance level for $\alpha$, we lack evidence supporting the conclusion that the mean SSI scores are higher in star-bellied compared to plain-bellied sneetches. 
+
+# Corresponding confidence interval
+
+One of the great things about the `infer` pipeline is that going between hypothesis tests and confidence intervals is incredibly simple. To create a null distribution, we ran:
 
 ```{r eval = FALSE}
-anova(sticker_lm)
+null_distn <- sneetches_tidy %>% 
+  specify(SSI ~ group) %>% 
+  hypothesize(null = "independence") %>% 
+  generate(reps = 1000, type = "permute") %>% 
+  calculate(stat = "diff in means", 
+            order = c("stars", "plain"))
+```
+
+To get the corresponding bootstrap distribution with which we can compute a confidence interval, we can just remove or comment out the `hypothesize()` step since we are no longer assuming the null hypothesis is true when we bootstrap:
+
+
+```{r}
+boot_sneetch_ci <- sneetches_tidy %>% 
+  specify(SSI ~ group) %>% 
+  #hypothesize(null = "independence") %>% 
+  generate(reps = 1000, type = "bootstrap") %>% 
+  calculate(stat = "diff in means", 
+            order = c("stars", "plain")) %>% 
+  get_ci()
+
+boot_sneetch_ci
+
+#see ci
+null_distn %>% 
+  visualize(endpoints = boot_sneetch_ci, 
+            direction = "between")
 ```
 
 
-Note: aov versus anova in R
-
-`?aov`:
-
-> "aov is designed for balanced designs, and the results can
-be hard to interpret without balance: beware that missing values in the response(s) will likely lose the balance."
-
-* Use `anova(lm())`if you don’t have a balanced design
-
-But really, only use `anova(lm())` if you:
-
-* Have an unbalanced design (but not horribly so-generally bad idea) 
-* Are certain you wish to assume equal variances across groups
-* Only have one predictor (i.e., one-way ANOVA)
-    * Foreshadowing: types of sums of squares
-
-What are the ANOVA assumptions:
-
-* The k samples are randomly selected from the k populations of interest
-* Each of the k populations have a normal distribution
-* All k populations have the same variance
-
-Why does this matter?
-
-* Our observed F-statistic is based on the assumption that when $H_0$ is true, our F-statistic will have an F-distribution
-
-We assume:
-
-* Which group an observation falls into is fixed, not random
-* Residuals are all independent
-* Residuals are normally distributed 
-* Residuals have constant variance
+The question to ask yourself when looking at this plot is: is 0 in my 95% confidence interval? If it is, then a difference of 0 is plausible, and I cannot reject the null hypothesis.
 
 
 
+# Assumptions & Caveats
 
+Permutation tests cannot solve all problems: they are valid only when the null hypothesis is 'no association'. Pooling the data to do a two-sample permutation test *does* require that the two *populations* (not necessarily samples) have the same distribution when the null hypothesis is true, that is, the mean, spread, and shape are the same. But you should feel fairly confident that, for example, there is not bias present in one sample. Like all methods, it will only work if your samples are representative - always be careful about selection biases! You may also get into dangerous territory if you have sample sizes in your two groups that are pretty uneven (also known as unbalanced), and this is accompanied by group differences in spread. When groups are the same size, the Type I error rate is typically close to the nominal level, otherwise it can be too high or too low.
 
+<img src="https://booksmykidsread.files.wordpress.com/2014/03/sneetches.png"/>

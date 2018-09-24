@@ -2,6 +2,7 @@
 title: "Homework 2 Key"
 subtitle: Math 530/630 - Fall 2018
 output:
+  pdf_document: default
   html_document:
     df_print: paged
 ---

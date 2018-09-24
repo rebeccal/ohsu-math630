@@ -1,15 +1,22 @@
 ---
-subtitle: "Math 530/630 - Fall 2018"
-output: pdf_document
-params: 
+subtitle: Math 530/630
+params:
+  hw_title: Homework 3
+  key_title: Homework 3 - Key
   key: FALSE
-  hw_title: "Homework 3"
-  key_title: "Homework 3 - Key"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
 title: "`r ifelse (params$key, params$key_title, params$hw_title)`"
-
 ---
 
-1. The longitudinal study [“Bone mass is recovered from lactation to postweaning in adolescent mothers with low calcium intakes”](https://www.ncbi.nlm.nih.gov/pubmed/15531682) examined total-body bone mineral content of young mothers during breast feeding and then in the postweaning period. We want to test the hypothesis that mothers gained at least 25 grams of bone mineral content in the postwearning period. The data for 10 mothers is provided below; use a significance level of 0.05. The column `bf` stands for the first measurement (during breastfeeding). The column `pw` stands for the second measurement (during postweaning period). All values are in grams of bone density.
+<!-- To make the HW key -->
+<!-- rmarkdown::render("hw/HW3/HW3.Rmd", output_file = "HW3-key.pdf",  params = list(key=TRUE), output_format = "pdf_document") -->
+<!-- rmarkdown::render("hw/HW3/HW3.Rmd", output_file = "HW3-key.html", params = list(key=TRUE), output_format = "html_document") -->
+
+
+1. The longitudinal study [*Bone mass is recovered from lactation to postweaning in adolescent mothers with low calcium intakes*](https://www.ncbi.nlm.nih.gov/pubmed/15531682) examined total-body bone mineral content of young mothers during breast feeding and then in the postweaning period. We want to test the hypothesis that mothers gained at least 25 grams of bone mineral content in the postwearning period. The data for 10 mothers is provided below; use a significance level of 0.05. The column `bf` stands for the first measurement (during breastfeeding). The column `pw` stands for the second measurement (during postweaning period). All values are in grams of bone density.
 
     a. State the null and alternative hypotheses.
     b. First, do the test wrong: use an independent samples t-test, which ignores the paired nature of the dependent variables here, using the `t.test` function in R assuming equal variances. What would you conclude?
@@ -22,7 +29,7 @@ bones <- data.frame(mother=1:10,
 ```
 
 
-```{r eval= FALSE}
+```{r eval= params$key}
 # Remember, the two-sample test is inappropriate.
 t.test(bones$pw, bones$bf, mu=25, alternative="greater", var.equal = TRUE)
 
@@ -30,43 +37,74 @@ t.test(bones$pw, bones$bf, mu=25, alternative="greater", var.equal = TRUE)
 t.test(bones$pw, bones$bf, mu=25, paired = TRUE, alternative="greater")
 ```
 
+```{asis, echo=params$key}
+<b>Answers</b>
+  
+a.   Null hypothesis: Mothers gained less than or equal to 25 grams of bone mineral content.
+     Alternative hypothesis: Mothers gained more than 25 grams of bone mineral content.
+b.   There is insufficient evident to reject the null hypothesis.
+c.   At the .05 alpha level, there is sufficient evidence to reject the null hypothesis.
+
+RL - PLUS MORE....
+```
+
 
 2. Your office mate ran an experiment with *N*=50 to test the hypothesis that her sample would have a mean different from the population mean, $\mu$=0, previously found by her advisor. She conducted a one-sample *t* test with $\alpha$=.05 (two-tailed), and reported the 95% confidence interval for $\mu$ of variable *X* is (8.979, 10.349). Circle which of the following must also be true:
 
+```{asis, echo=params$key}
+<b>Answers</b>
+```
+  
 > a. She rejected her null hypothesis. 
 ```{asis, echo=(params$key)} 
-TRUE
+<b>TRUE</b> The population mean is well outside the critical value range.
 ```
 
 > b. The *t*-statistic based on her sample was greater than 2.01.
 ```{asis, echo=(params$key)} 
-TRUE
-```
-```{r include=params$key}
-qt(.975, 49)
+<b>TRUE</b>
 ```
 
 > c. The *p* value for her *t*-statistic was less than her $\alpha$-level.
 ```{asis, echo=(params$key)} 
-TRUE
+<b>TRUE</b>
 ```
 
 > d. Her degrees of freedom were 51.
 ```{asis, echo=(params$key)} 
-FALSE
+<b>FALSE</b>
 ```
 
 > e. Her sample mean of *X* was 9.664.
 ```{asis, echo=(params$key)} 
-TRUE
+<b>TRUE</b>
 ```
 
 > f. Her sample mean of *X* was 5.664.
 ```{asis, echo=(params$key)} 
-FALSE
+<b>FALSE</b>
 ```
+
+```{r include=params$key, eval=params$key}
+pop_mean <- 0 #population mean
+n <- 50
+df <- n-1 #degrees of freedom
+critical_value <- qt(.975, 49) #critical value in b.
+mu <- sum(8.979 + 10.349)/2 # sample mean
+sd <- (10.339-8.979)/1.96 # sample standard deviation 
+t_statistic <-  (mu-pop_mean)/(sd/sqrt(50))
+p_value <- 2*pt(t_statistic, df, lower=FALSE)
+
+critical_value
+mu
+sd
+t_statistic
+p_value
+```
+
+
 3. Suppose that the readings of a laboratory scale are normally distributed with unknown mean $\mu$ and standard deviation $\sigma$ = 0.01 grams. To assess the accuracy of the laboratory scale, a standard weight that is known to weigh exactly 1 gram is repeatedly weighed a total of *N* = 50 times. Let $\bar{x}$ = 0.998 be the average of the 50 readings. What is the 95% confidence interval for $\mu$?
 
-```{r include= params$key}
+```{r echo=params$key}
 #(0.99523, 1.00077)
 ```

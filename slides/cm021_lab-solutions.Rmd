@@ -1,8 +1,8 @@
 ---
-title: "CONJ620: CM 2.1 SOLUTIONS"
-subtitle: "Simple linear regression"
-author: "Alison Hill"
-date: "7/17/2018"
+title: "CM 2.1 - Simple linear regression: Solutions"
+subtitle: "Math 530/630"
+#author: "Alison Hill"
+#date: "7/17/2018"
 output: 
   html_document:
     toc: true
@@ -131,6 +131,6 @@ ggplot(crime, aes(x = public_houses, y = criminals)) +
 ```
 
 > Do this in three sentences: 
-There seems to be a moderately strong relationship. The slope of the regresion line is positive, also the correlation coefficient of `r round(cor(crime$public_houses, crime$criminals),2)` is moderate. Meaning as public houses increase, there is an associated increase in criminal activity.
+There seems to be a moderately strong relationship. The slope of the regression line is positive, also the correlation coefficient of `r round(cor(crime$public_houses, crime$criminals),2)` is moderate. Meaning as public houses increase, there is an associated increase in criminal activity.
 
 ![](`r knitr::fig_chunk('crime_scatterplot','png')`)

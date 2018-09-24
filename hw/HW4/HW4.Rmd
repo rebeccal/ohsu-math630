@@ -1,6 +1,6 @@
 ---
-title: "Math 530, HW4"
-date: "Due December 11, 2017"
+title: "Math 530/630, HW4"
+#date: "Due December 11, 2017"
 output: pdf_document
 ---
 

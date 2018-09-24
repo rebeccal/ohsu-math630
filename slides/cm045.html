@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>CONJ620: CM 4.5</title>
+    <title>Math 530/630 CM 4.5</title>
     <meta charset="utf-8">
-    <meta name="author" content="Alison Hill" />
     <link href="libs/remark-css/default.css" rel="stylesheet" />
     <link rel="stylesheet" href="css\ohsu.css" type="text/css" />
     <link rel="stylesheet" href="css\ohsu-fonts.css" type="text/css" />
@@ -12,1084 +11,579 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# CONJ620: CM 4.5
-## Post-hoc tests &amp; p-value adjustment
-### Alison Hill
+# Math 530/630 CM 4.5
+## The General Linear Model
 
 ---
 
 
 
 
+## Family of *t*-tests
 
+- One-sample *t*-test
+- Independent samples *t*-test
+- Dependent samples *t*-test (also known as paired) 
 
-# Two key equations
+---
+## What do they all have in common?
 
-When I introduced the *t*-test as a general linear model (GLM), I said that "all statistical procedures are basically the same thing":
+We want to compare two things- mean 1 and mean 2!
 
+---
+## Ways to get independent samples
+
+* Random assignment of participants to two different experimental conditions 
+  * Scream versus Scream 2
+  * Classical music versus silence
+* Naturally occurring assignment of participants to two different groups 
+  * Male versus female
+  * Young versus old
+  
+---
+## Formula for the independent groups *t*-test
+
+`$$t=\frac{(\bar{y}_1-\bar{y}_2)-(\mu_1-\mu_2)}{SE}$$`
+
+Generally, 
+&gt; `\(H_0: \mu_1-\mu_2=0\)` and `\(H_1: \mu_1-\mu_2\neq0\)`
+
+So `\(\mu_1-\mu_2\)` is often excluded from the formula. Since we now have two sample means and therefore two sample variances, we need some way to combine these two variances in a logical way. The answer is to __pool__ the variances to estimate the SE of the difference, `\((\bar{y}_1-\bar{y}_2)\)`:
+`$$s_{\bar{y}_1-\bar{y}_2}=s_{pooled}\times{\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}}$$`
+and `\(s_{pooled}\)` is:
+`$$s_{pooled}=\sqrt{\frac{(n_1-1)s_{y_1}^2+(n_2-1)s_{y_2}^2}{n_1+n_2-2}}$$`
+---
+## The *t*-test as a general linear model (GLM) 
+
+All statistical procedures are basically the same thing:
 `$$outcome_i=(model)+error_i$$`
 
-Where:
-* Outcome is your dependent variable (DV; also known as *y*) and
-* Model is a linear function or linear combination of your independent variable(s) (IVs) (also known as *x*'s)
+In my simple linear regression from the past few labs, this has been:
+`$$prestige_i=(intercept + education_i)+error_i$$`
 
-`$$DV_i=(model)+error_i$$`
+Or more generally:
+`$$y_i=(b_0 + b_1x_i)+error_i$$`
 
-"Essentially, all models are wrong, but some are useful"-George E. P. Box (1987)
-
-`$$deviation=\sum{(observed-model)^2}$$`
+&gt; __N.B.__ `\(Error_i\)` is an unknowable, incalculable statistic- it is the deviation of the `\(i^{th}\)` value from the (unobservable) true value. You can think of it as measurement error. This is different from the error of the regression formula, which is defined as the *residual* of the `\(i^{th}\)` value and calculated as the difference between the observed `\((y_i)\)` and predicted scores `\((\hat{y_i})\)`. 
 
 ---
+## Sidebar: The GLM in matrix notation
+The GLM we have been dealing with thus far includes just one independent variable and thus just one `\(b_1\)`. However, the full GLM is better represented as a matrix
 
-# The sample mean
-
-.pull-left[
-`\(DV_i=(1b)+error_i\)`
-
-Coefficient=1 is implied.
-]
-
-.pull-right[
-`\(DV_i=(model)+error_i\)`
-]
-
----
-
-# Correlation
-
-.pull-left[
-
-`\(DV_i=(bIV_i)+error_i\)`
-
-]
-
-.pull-right[
-`\(DV_i=(model)+error_i\)`
-]
-
----
-
-# Simple linear regression
-
-.pull-left[
-
-`\(DV_i=(b_0+b_1IV_i)+error_i\)`
-
-Where:
-* `\(b_0\)` is the intercept term and 
-* `\(b_1\)` is the slope.
-]
-
-.pull-right[
-`\(DV_i=(model)+error_i\)`
-]
-
----
-
-# *t* test
-
-.pull-left[
-
-`\(DV_i=(b_0+b_1IV_i)+error_i\)`
-
-Where:
-* `\(b_0\)` is the intercept term ( `\(\bar{y}_{group1}\)` ) and 
-* `\(b_1\)` is the slope ( `\(\bar{y}_{group2}-\bar{y}_{group1}\)` )
-]
-
-.pull-right[
-
-`\(DV_i=(model)+error_i\)`
-]
-
----
-
-# Analysis of Variance
-
-.pull-left[
-
-`\(DV_i=(b_0+b_1IV1_i+b_2IV2_i)+error_i\)`
-]
-.pull-right[
-
- `\(DV_i=(model)+error_i\)`
-]
----
-
-# GLM logic
-
-* The simplest model we can ever conceive of for predicting a DV of interest is the mean of that DV.
-* This is called the null (or reduced) model:
- * Simple linear regression: `\(y_i=b_0+\epsilon_i\)` 
- * ANOVA: `\(y_{ij}=\mu_{\bullet\bullet}+\epsilon_{ij}\)` where `\(\mu_{\bullet\bullet}\)` is the ___grand mean___
-
-&gt; __N.B.__ What is *not* present in these equations?
-
----
-
-## Superhero ANOVA 
-
-
-
-```
-            Df Sum Sq Mean Sq F value  Pr(&gt;F)   
-hero         3   3805  1268.3   6.716 0.00257 **
-Residuals   20   3777   188.9                   
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-```
-
-
----
-
-## Now what?
-
-&lt;img src="cm045_files/figure-html/unnamed-chunk-2-1.png" style="display: block; margin: auto;" /&gt;
-
----
-
-## Contrasts!
-
-|Contrast |Spiderman|Superman|Hulk|TNMT|
-|:------:|:------:|:-------:|:----:|:---:|
-|Spiderman vs. Superman|1|-1|0|0|
-|Spiderman vs. Hulk|1|0|-1|0|
-|Hulk vs. TNMT|0|0|1|-1|
-
-
-These say:
-`$$+1\mu_{spiderman}-1\mu_{superman}+0\mu_{hulk}+0\mu_{TNMT}$$`
-`$$+1\mu_{spiderman}+0\mu_{superman}-1\mu_{hulk}+0\mu_{TNMT}$$`
-`$$0\mu_{spiderman}+0\mu_{superman}+1\mu_{hulk}-1\mu_{TNMT}$$`
-
----
-
-## Contrasts!
-
-`$$+1\mu_{spiderman}-1\mu_{superman}+0\mu_{hulk}+0\mu_{TNMT}\rightarrow\mu_{spiderman}-\mu_{superman}=0$$`
-`$$+1\mu_{spiderman}+0\mu_{superman}-1\mu_{hulk}+0\mu_{TNMT}\rightarrow\mu_{spiderman}-\mu_{hulk}=0$$`
-`$$0\mu_{spiderman}+0\mu_{superman}+1\mu_{hulk}-1\mu_{TNMT}\rightarrow\mu_{hulk}-\mu_{TNMT}=0$$`
-
-
----
-
-## Doing all pairwise contrasts in R
-
-
-```r
-pairwise.t.test(superhero$injury,superhero$hero,p.adjust.method="none")
-```
-
-```
-
-	Pairwise comparisons using t tests with pooled SD 
-
-data:  superhero$injury and superhero$hero 
-
-         Spiderman Superman Hulk   
-Superman 0.02222   -        -      
-Hulk     0.26156   0.00165  -      
-TMNT     0.12144   0.00056  0.64897
-
-P value adjustment method: none 
-```
-
-&gt; Base R's output=just the *p*'s, please!
-
----
-
-## Doing all pairwise contrasts in R (better)
-
-
-```r
-library(multcomp)
-mcp &lt;- glht(heroaov,linfct=mcp(hero="Tukey"))
-summary(mcp,test=univariate())
-```
-
-You get:
-
-* the *p*'s __plus__
-* the *t*'s
-* the `\(\psi\)`'s
-* the `\(SE_{\psi}\)`'s
-* oh my!
-
-
-
----
-
-## Doing all pairwise contrasts in R (better)
-
-
-```
-
-	 Simultaneous Tests for General Linear Hypotheses
-
-Multiple Comparisons of Means: Tukey Contrasts
-
-
-Fit: aov(formula = injury ~ hero, data = superhero)
-
-Linear Hypotheses:
-                          Estimate Std. Error t value Pr(&gt;|t|)    
-Superman - Spiderman == 0   19.667      7.934   2.479 0.022218 *  
-Hulk - Spiderman == 0       -9.167      7.934  -1.155 0.261564    
-TMNT - Spiderman == 0      -12.833      7.934  -1.617 0.121436    
-Hulk - Superman == 0       -28.833      7.934  -3.634 0.001652 ** 
-TMNT - Superman == 0       -32.500      7.934  -4.096 0.000562 ***
-TMNT - Hulk == 0            -3.667      7.934  -0.462 0.648969    
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-(Univariate p values reported)
-```
-
----
-
-## Where are these numbers coming from?
-
-`$$estimate=\psi=\frac{\sum_{j=1}^kc_j\bar{y_j}}{\hat{\sigma_{\psi}}}$$`
+`$$\boldsymbol{Y}=\boldsymbol{X}\boldsymbol{\beta}+\boldsymbol{\epsilon}$$`
 
 where...
-`$$SE_{est}=\hat{\sigma_{\psi}}=\sqrt{MS_{error}\times{(\frac{1}{n_1}+\frac{1}{n_2})}}$$`
 
-And the *c* terms are contrast coefficients. Thus a more general formula is:
+* `\(\boldsymbol{Y}\)` is the *response vector* of length *N*;
 
-`$$t_{contrast}=\frac{estimate}{SE_{est}}=\frac{\psi}{\hat{\sigma_{\psi}}}=\frac{\sum_{j=1}^kc_j\bar{y_j}}{\sqrt{MS_{error}\times{\frac{\sum_{j=1}^kc_j^2}{n_j}}}}$$`
+* `\(\boldsymbol{\epsilon}\)` is the *error vector* of length *N*;
+
+* `\(\boldsymbol{\beta}\)` is the vector of parameters of length *p*+1 where *p* is the number of IVs and the 1 accounts for the intercept;
+
+* and `\(\boldsymbol{X}\)` is called the *design matrix* consisting of a matrix of *N* rows and *p+1* columns
+
+---
+
+# Design matrices with one independent variable
+
+.pull-left[
+In both simple linear regression and the independent samples *t*-test, `\(\boldsymbol{X}\)` is a matrix of *N* rows and *2* columns. Note that the number of columns in `\(\boldsymbol{X}\)` must always equal the number of rows in `\(\boldsymbol{\beta}\)`.
+
+![here](latex-image-2.pdf)
+]
+
+
+.pull-right[
+In simple linear regression, the vector *X* can take on any value. In the independent samples *t*-test, this vector simply contains 0's and 1's. Below, *n*=4 with 2 in each group to illustrate.
+
+![here](latex-image-1.pdf)
+]
 
 
 ---
 
-## This is different from the independent samples *t* test
+## Dummy variables
 
-`$$t=\frac{(\bar{y}_1-\bar{y}_2)-(\mu_1-\mu_2)}{\sqrt{\frac{(n_1-1)s_{y_1}^2+(n_2-1)s_{y_2}^2}{n_1+n_2-2}}}$$`
+.pull-left[
 
+Now, let's switch IVs in our example from education (a continuous variable) to a group variable:
+`$$prestige_i=(intercept + group_i)+error_i$$`
 
-Which is usually just written as:
-`$$t=\frac{(\bar{y}_1-\bar{y}_2)}{\sqrt{\frac{(n_1-1)s_{y_1}^2+(n_2-1)s_{y_2}^2}{n_1+n_2-2}}}$$`
+where group is a dummy or indicator variable that can only take two values: 0 or 1. 
 
----
+This is easy to do in R. Remember in my Prestige dataset, I have a categorical variable called "type." Let's let the variable Group denote:
 
-## Defining contrast coefficients
+&gt; 0 for blue collar (type="bc") and
 
-We base the *c* terms off of your hypotheses. Let's take a look at the superhero data:
+&gt; 1 for white collar (type="wc")
+]
 
-```
-Spiderman  Superman      Hulk      TMNT 
- 40.66667  60.33333  31.50000  27.83333 
-```
+.pull-right[
 
-```
-Spiderman  Superman      Hulk      TMNT 
-14.009521 17.851237 12.817956  8.727352 
-```
-
-```
-Spiderman  Superman      Hulk      TMNT 
-        6         6         6         6 
-```
-
+&lt;div style="position: relative; left: 0; top: 0;"&gt;
+  &lt;img height="250" width="250" src="http://ecx.images-amazon.com/images/I/41H0VBC6NML.jpg" style="position: relative; top: 0; left: 0;"/&gt;
+  &lt;img height="250" width="250" src="http://stargate-sg1-solutions.com/blog/wp-content/uploads/2011/07/White-Collar-poster-215x300.jpg" style="position: absolute; top: 150px; left: 250px;"/&gt;
+&lt;/div&gt;
+]
 
 ---
 
-## Defining contrast coefficients: contrast 1
+# Creating a dummy variable in R
 
-
-
-
-|Contrast |Spiderman|Superman|Hulk|TNMT|
-|:------:|:------:|:-------:|:----:|:---:|
-|Spiderman vs. Superman|1|-1|0|0|
-| `\(\bar{y_j}\)` |40.67|60.33|31.5|27.83|
-
-`$$\psi=\sum_{j=1}^kc_j\bar{y_j}=(1)\times{40.67}+(-1)\times{60.33}=-19.667$$`
-
-`$$\hat{\sigma_{\psi}}=\sqrt{188.85\times{(\frac{1}{6}+\frac{1}{6})}}=\sqrt{188.85\times{.333}}=7.934$$`
-
-`$$t_{contrast}=\frac{\psi}{\hat{\sigma_{\psi}}}=\frac{-19.667}{7.934}=-2.479$$`
 
 
 ```r
-2*(1-pt(2.479,20)) #unadjusted 2-tailed p-value; note the df!
+library(car)
+table(Prestige$type)
 ```
 
 ```
-[1] 0.02220591
+
+  bc prof   wc 
+  44   31   23 
 ```
 
----
 
-## Contrast degrees of freedom
-
-For the pairwise *t* tests ( `\(t_{contrast}\)` ), the degrees of freedom for __each__ contrast are the same: *N-k* (where *N*= total participants and *k*=number of groups)
-
-If we were to conduct an independent samples *t* test, what would the degrees of freedom be? 
-* The answer is: `\(n_1+n_2-2\)`
-* This is the same as *N-k*, where *k* must always be 2 for the independent samples *t*-test.
-* In our example contrast, this is the difference between 20 and 10 degrees of freedom
-
-
-
-
----
-
-## Increased degrees of freedom
-
-
-|Degrees of Freedom| `\(\alpha=.05,\:2-tailed\)` |
-|:-------:|:----------:|
-|10|__2.228__|
-|11|2.201|
-|12|2.179|
-|13|2.160|
-|14|2.145|
-|15|2.131|
-|16|2.120|
-|17|2.110|
-|18|2.101|
-|19|2.093|
-|20|__2.086__|
-
----
-
-## Another post-hoc option
-
-The Tukey Honestly Significant Difference (HSD) is a single-step procedure that analyzes all possible pairwise contrasts between group means.
-
-Instead of a *t* statistic ( `\(t_{contrast}\)` ), now we have:
-* The HSD value for a family of contrasts
-* The Tukey statistic, `\(q_{contrast}\)`, for each individual contrast within the family
-* Both will lead you to the same conclusion
-
----
-
-## Tukey Honestly Significant Difference (HSD)
-
-`$$HSD=q_{tukey}\sqrt{\frac{MSE}{2}({\frac{1}{n_1}+\frac{1}{n_2}})}$$`
 
 
 ```r
-mse &lt;- 188.85
-ngroups &lt;- 4 #4 groups, so 4 means
-dfmse &lt;- 20 #see ANOVA source table
-q_tuk &lt;- qtukey(.95,ngroups,dfmse)
-q_tuk
+Prestige$group &lt;- ifelse(Prestige$type=="bc",0, ifelse(Prestige$type=="wc",1,NA))
+table(Prestige$type, Prestige$group)
 ```
 
 ```
-[1] 3.958293
+      
+        0  1
+  bc   44  0
+  prof  0  0
+  wc    0 23
 ```
 
-`$$HSD=3.958\times\sqrt{\frac{188.85}{2}({\frac{1}{6}+\frac{1}{6}})}=22.36$$`
 
-So, any mean difference larger than 22.36 we will consider significant according to Tukey HSD. 
 
 ---
 
-## Which differences are &gt; than our HSD of 22.36?
+# Cleaning up the new dataset
 
+
+```r
+Prestige.2 &lt;- subset(Prestige, group %in% c(0,1))
+Prestige.2$type &lt;- droplevels(Prestige.2$type) #get rid of type=prof
+```
+
+---
+
+# OK, we are all set now with two groups
+
+
+```r
+table(Prestige.2$type, Prestige.2$group)
+```
+
+```
+    
+      0  1
+  bc 44  0
+  wc  0 23
+```
+
+
+
+
+```r
+head(Prestige.2)
+```
+
+```
+                    education income women prestige census type group
+nursing.aides            9.45   3485 76.14     34.9   3135   bc     0
+medical.technicians     12.79   5180 76.04     67.5   3156   wc     1
+radio.tv.announcers     12.71   7562 11.15     57.6   3337   wc     1
+secretaries             11.59   4036 97.51     46.0   4111   wc     1
+typists                 11.49   3148 95.97     41.9   4113   wc     1
+bookkeepers             11.32   4348 68.24     49.4   4131   wc     1
+```
+
+
+
+---
+
+# Plotting data for two groups
+
+Not surprisingly, mean prestige ratings appear to be higher among white collar workers than blue collar workers.
+
+&lt;img src="cm045_files/figure-html/unnamed-chunk-6-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# But are the two groups different?
+
+Let's do an independent samples *t*-test to find the answer:
+
+
+
+```r
+t.test(prestige~group,data=Prestige.2, var.equal=T)
+```
 
 ```
 
-	 Simultaneous Tests for General Linear Hypotheses
+	Two Sample t-test
 
-Multiple Comparisons of Means: Tukey Contrasts
+data:  prestige by group
+t = -2.6487, df = 65, p-value = 0.01013
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -11.780279  -1.652132
+sample estimates:
+mean in group 0 mean in group 1 
+       35.52727        42.24348 
+```
 
 
-Fit: aov(formula = injury ~ hero, data = superhero)
 
-Linear Hypotheses:
-                          Estimate Std. Error t value Pr(&gt;|t|)   
-Superman - Spiderman == 0   19.667      7.934   2.479  0.09434 . 
-Hulk - Spiderman == 0       -9.167      7.934  -1.155  0.66074   
-TMNT - Spiderman == 0      -12.833      7.934  -1.617  0.39189   
-Hulk - Superman == 0       -28.833      7.934  -3.634  0.00820 **
-TMNT - Superman == 0       -32.500      7.934  -4.096  0.00281 **
-TMNT - Hulk == 0            -3.667      7.934  -0.462  0.96641   
+---
+
+# What happens if I now run a linear regression?
+
+&lt;div style='text-align: center;'&gt;
+    &lt;img height='560' src='http://images.huffingtonpost.com/2009-03-29-rebeccabird3.jpg' /&gt;
+&lt;/div&gt;
+
+---
+
+# Kidding. Here's is the linear regression summary... 
+
+
+```r
+fit &lt;- lm(formula = prestige ~ group, data = Prestige.2)
+summary(fit)
+```
+
+```
+
+Call:
+lm(formula = prestige ~ group, data = Prestige.2)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-18.2273  -7.0273  -0.2273   6.8227  25.2565 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   35.527      1.486  23.914   &lt;2e-16 ***
+group          6.716      2.536   2.649   0.0101 *  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-(Adjusted p values reported -- single-step method)
-```
 
----
-
-## But wait!
-
-### Those *p*-values are different than before!
-
-Old `\(p\)`'s...
-
-
-```
-Superman - Spiderman     Hulk - Spiderman     TMNT - Spiderman 
-        0.0222176879         0.2615640877         0.1214364334 
-     Hulk - Superman      TMNT - Superman          TMNT - Hulk 
-        0.0016520896         0.0005617408         0.6489687464 
+Residual standard error: 9.855 on 65 degrees of freedom
+Multiple R-squared:  0.09742,	Adjusted R-squared:  0.08353 
+F-statistic: 7.016 on 1 and 65 DF,  p-value: 0.01013
 ```
 
 
-New `\(p\)`'s...
-
-
-```
-Superman - Spiderman     Hulk - Spiderman     TMNT - Spiderman 
-         0.094295429          0.660767430          0.391882914 
-     Hulk - Superman      TMNT - Superman          TMNT - Hulk 
-         0.008416796          0.002839687          0.966436809 
-```
 
 
 ---
 
-## Tukey HSD 
+# But what does it MEAN?
 
-That's because the *p* value is based on a __new__ statistic ( `\(q_{contrast}\)` ), but only the *p* values in the table *glht* provides changed (which is confusing!). Let's see that new statistic...
+Let's do a quick review of the linear regression formula:
+`$$y_i=(b_0 + b_1x_i)+error_i$$`
 
-For any specific contrast we can calculate:
-`$$q_{contrast}=\frac{|\psi|}{\sqrt{\frac{MSE}{2}({\frac{1}{n_1}+\frac{1}{n_2}})}}$$`
+Solving for the intercept term, for example, we need to apply some summation algebra:
+`$$\frac{1}{n}\sum_i^n{y_i}=\frac{1}{n}\sum_i^n{b_0} + \frac{1}{n}\sum_i^n{b_1x_i}+\frac{1}{n}\sum_i^n{error_i}$$`
+
+A few reminders about summation algebra in this context:
+- The mean is defined as: `\(\frac{1}{n}\sum_i^n{y_i}\)`
+- The sum of a constant is just *n* times the constant: `\(\sum_i^n{b_0}=n\times{b_0}\)`
+- The sum of a constant times a random variable is the constant times the sum of the variable: `\(\sum_i^n{b_1x_i}=b_1\sum_i^n{x_i}\)`
+- By definition, in GLM, we assume the mean of the error is 0: `\(\frac{1}{n}\sum_i^n{error_i}=0\)`
+
+---
+
+# Solving for the regression coefficients
+
+Applying the summation algebra from the previous slide, we get:
+`$$\frac{1}{n}\sum_i^n{y_i}=\frac{1}{n}nb_0 + \frac{1}{n}b_1\sum_i^n{x_i}$$`
+`$$\bar{y}=b_0 + b_1\bar{x}$$`
+
+This should look familiar! The formula for the regression intercept term, `\(b_0\)`, is:
+`$$b_0=\bar{y}-b_1\bar{x}$$`
+
+But look again: we also have the formula for `\(\bar{y}\)`. The intercept term in linear regression is the expected mean value of `\(y\)` when `\(x_i\)`=0.
+
+---
+
+# Solving for `\(\bar{x}\)`
+
+.pull-left[
+
+`$$\bar{y}=b_0 + b_1\bar{x}$$`
+
+But, you protest, how do we calculate `\(\bar{x}\)`? Is it the mean of the 0/1 values in *x*? What is happening?
+
+]
+
+.pull-right[
+
+&lt;div style='text-align: right;'&gt;
+    &lt;img height='560' src='http://4.bp.blogspot.com/_D_Z-D2tzi14/TJAGr3y2spI/AAAAAAAADzg/-9K3i4ih4Hg/s1600/anesthesia30.png' /&gt;
+&lt;/div&gt;
+]
+
+--- 
+
+# Solving for `\(\bar{x}\)`
+
+.pull-left[
+`$$t=\frac{(\bar{y}_1-\bar{y}_2)-(\mu_1-\mu_2)}{SE}$$`
+Remember the original formula I gave you for the *t* statistic. There is no *x*! But implicitly, this formula is actually:
+`$$t=\frac{(\bar{y}_{x=1}-\bar{y}_{x=2})-(\mu_{x=1}-\mu_{x=2})}{SE}$$`
+
+So what we are actually interested in the mean of *y* when *x* takes on one value versus another (in my current example, *x*=0 or 1). 
+]
+
+.pull-right[
+
+&lt;div style='text-align: right;'&gt;
+    &lt;img height='560' src='http://1.bp.blogspot.com/_D_Z-D2tzi14/TJAHB22PzNI/AAAAAAAADzw/AiLPtefqhx4/s1600/anesthesia.png' /&gt;
+&lt;/div&gt;
+]
+
+---
+
+# The intercept
+
+For the *t*-test, we can solve for the intercept just as we can for the simple linear regression. Remember our formula for `\(\bar{y}\)`:
+`$$\bar{y}=b_0 + b_1\bar{x}$$`
+
+Let's re-write it two ways:
+`$$\bar{y}_{x=0}=b_0 + b_1\bar{x_0}$$`
+`$$\bar{y}_{x=1}=b_0 + b_1\bar{x_1}$$`
+
+Start with the top formula: What is `\(\bar{x_0}\)`? This is simple to think about in matrix notation- the mean of a vector of 0's is 0. So, when the group variable is equal to zero (blue collar)...
+ 
+`$$\bar{y}_{bc}=(b_0 + b_1\times0)=b_0$$`
+
+Therefore, `\(b_0\)` (the intercept term) is equal to the mean prestige score of the blue collar group (the one coded as 0).
+
+---
+
+# The slope
+
+Now, let's tackle the second formula:
+`$$\bar{y}_{x=1}=b_0 + b_1\bar{x_1}$$`
+
+When the group variable is equal to 1 (white collar), `\(\bar{x_1}=1\)` because the mean of a vector of 1's is 1.
+`$$\bar{y}_{wc}=(b_0 + b_1\times1)$$`
+`$$\bar{y}_{wc}=b_0+ b_1$$`
+`$$\bar{y}_{wc}=\bar{y}_{bc}+ b_1$$`
+
+Solving for `\(b_1\)`:
+`$$b_1=\bar{y}_{wc}-\bar{y}_{bc}$$`
+
+Therefore, `\(b_1\)` (the slope) is equal to the difference between group means in prestige scores. 
+
+---
+
+# What does this mean?
+
+We could represent a two-group experiment as a regression equation in which the regression coefficient `\(b_1\)` is equal to the difference between group means and the intercept term `\(b_0\)` is the mean of the group coded as 0.
+
+Our independent samples *t*-test would take the form:
+`$$y_i=\bar{y}_{bc} + (\bar{y}_{wc}-\bar{y}_{bc})x_i+error_i$$`
+
+Think of it this way: the regression line must pass through these two points:
+- (0, `\(\bar{y}_{bc}\)`)
+- (1, `\(\bar{y}_{wc}\)`)
+
+---
+
+# Trust but verify
+
 
 
 ```r
-psi &lt;- abs(-19.667) 
-qobs &lt;- psi/sqrt((mse/2)*(1/6+1/6))
-qobs
+y_bc &lt;- mean(Prestige.2$prestige[Prestige.2$group==0])
+y_wc &lt;- mean(Prestige.2$prestige[Prestige.2$group==1])
+diff &lt;- y_wc-y_bc
+cbind(y_bc,y_wc, diff)
 ```
 
 ```
-[1] 3.505543
+         y_bc     y_wc     diff
+[1,] 35.52727 42.24348 6.716206
 ```
 
-`$$q_{contrast}=\frac{19.667}{\sqrt{\frac{188.85}{2}({\frac{1}{6}+\frac{1}{6}})}}=3.506$$`
 
----
+So, y_bc is `\(b_0\)` and diff is `\(b_1\)`...right?
 
-## Finding the *p*-value for Tukey HSD
-
-So, according to Tukey HSD, we have the following:
-`$$q_{Spiderman\:v.\:Superman}=3.506$$`
-
-Because our critical `\(q_{tukey}\)` was 3.958, we know that our `\(q_{contrast}\)` of 3.506 is not significant. In fact, the *p*-value for our `\(q_{contrast}\)` is...
 
 
 ```r
-ptukey(qobs,ngroups,dfmse,lower.tail=F)
+coef(fit)
 ```
 
 ```
-[1] 0.09425035
+(Intercept)       group 
+  35.527273    6.716206 
 ```
 
-* __N.B.__ #1: This is the same *p* value in the *glht* output.
-* __N.B.__ #2: We reach the same conclusion based on comparing our difference in means to the HSD: for Spiderman vs. Superman, 19.667 &lt; 22.36.
-
----
-
-## Note about Tukey HSD in *glht*
-
-We have just observed something important in the *glht* output. 
-
-* The *t* statistics correspond to our pairwise *t* test ( `\(t_{contrast}\)` ). This is a standard *t* distributed variable.
-* The *p*-values correspond to the Tukey Studentized Range Distribution ( `\(q_{contrast}\)` ).
-
-So in our example contrast between Spiderman and Superman:
-
-|Distribution of Statistic|Statistic|SE|*p*-value|tails|
-|:-------:|:----------:|:----:|:----:|:----:|
-|Student *t* Distribution|2.479|7.93|.022|2 (can be 1)|
-|Tukey Studentized Range Distribution|3.506|5.61|.094|always 1|
-
----
-
-## To sum up...
-
-### Those *p*-values are different than before! Yes they are.
-
-Old `\(p\)`'s based on Student *t* distributed statistic ( `\(t_{contrast}\)` )...
-
-
-```
-Superman - Spiderman     Hulk - Spiderman     TMNT - Spiderman 
-        0.0222176879         0.2615640877         0.1214364334 
-     Hulk - Superman      TMNT - Superman          TMNT - Hulk 
-        0.0016520896         0.0005617408         0.6489687464 
-```
-
-
-New `\(p\)`'s based on Tukey Studentized Range statistic ( `\(q_{contrast}\)` )...
-
-
-```
-Superman - Spiderman     Hulk - Spiderman     TMNT - Spiderman 
-         0.094218817          0.660701718          0.391786679 
-     Hulk - Superman      TMNT - Superman          TMNT - Hulk 
-         0.008451605          0.002953789          0.966424599 
-```
 
 
 ---
 
-## Doing all pairwise contrasts in R better*
+# The General Linear Model
+
+A number of different statistical models are extensions of this same idea of a GLM:
+
+- Ordinary least squares (OLS) linear regression (simple and multiple): 1+ predictors may be continuous or factors
+- *t*-test: a *t*-test is basically a regression model where the 1 predictor is a factor with exactly 2 levels
+- Analysis of Variance/Covariance (ANOVA/ANCOVA): an ANOVA is basically a regression model where the 1+ predictors are factors
+- Multivariate Analysis of Variance/Covariance (MANOVA/MANCOVA): a MANOVA is basically a regression model with 2+ DVs where the 1+ predictors are factors
+
+---
+
+# Further food for thought...
+
+The independent samples *t*-test is a special case of an ANOVA. Specifically, a one-way ANOVA (definition: 1 IV that is a factor and 1 DV that is continuous) in which the IV factor has *exactly* two levels.
+
+Again, trust but verify!
 
 
 ```r
-summary(mcp, test = adjusted("BH")) #Tukey HSD + BH p-adjustment!
+anova(lm(prestige~group,data=Prestige.2)) #doing an ANOVA in R
 ```
 
 ```
+Analysis of Variance Table
 
-	 Simultaneous Tests for General Linear Hypotheses
-
-Multiple Comparisons of Means: Tukey Contrasts
-
-
-Fit: aov(formula = injury ~ hero, data = superhero)
-
-Linear Hypotheses:
-                          Estimate Std. Error t value Pr(&gt;|t|)   
-Superman - Spiderman == 0   19.667      7.934   2.479  0.04444 * 
-Hulk - Spiderman == 0       -9.167      7.934  -1.155  0.31388   
-TMNT - Spiderman == 0      -12.833      7.934  -1.617  0.18215   
-Hulk - Superman == 0       -28.833      7.934  -3.634  0.00496 **
-TMNT - Superman == 0       -32.500      7.934  -4.096  0.00337 **
-TMNT - Hulk == 0            -3.667      7.934  -0.462  0.64897   
+Response: prestige
+          Df Sum Sq Mean Sq F value  Pr(&gt;F)  
+group      1  681.3  681.32  7.0156 0.01013 *
+Residuals 65 6312.5   97.12                  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-(Adjusted p values reported -- BH method)
-```
-
----
-
-## But wait!
-
-### You changed the *p*-values again! Yes I did.
-
-Unadjusted `\(p\)`'s based on Tukey's HSD...
-
-
-```
-Superman - Spiderman     Hulk - Spiderman     TMNT - Spiderman 
-         0.094218817          0.660701718          0.391786679 
-     Hulk - Superman      TMNT - Superman          TMNT - Hulk 
-         0.008451605          0.002953789          0.966424599 
 ```
 
 
-Tukey HSD `\(p\)`'s with Benjamini-Hochberg adjustment...
 
-
-```
-Superman - Spiderman     Hulk - Spiderman     TMNT - Spiderman 
-         0.044435376          0.313876905          0.182154650 
-     Hulk - Superman      TMNT - Superman          TMNT - Hulk 
-         0.004956269          0.003370445          0.648968746 
-```
+(hint: square the *t*-statistic to get the *F*-statistic equivalent)
 
 ---
 
-## The Benjamini-Hochberg False Discovery Rate (FDR)
+# The non-centrality parameter of the *t* distribution
 
-The basic idea of the FDR is to try to achieve the smallest possible fraction of false signals among all those that appear to be true (i.e., significant).
+In an earlier class, I alluded to the fact that the *t*-distribution has an another parameter in addition to the degrees of freedom- a non-centrality parameter, `\(\delta\)`. 
 
-Said another way: we estimate the expected proportion of false rejections among all rejected null hypotheses and attempt to keep it under a threshold level.
+&gt; When `\(H_0\)` is true, `\(\delta=0\)`.
 
-Using the FDR method, we are trying to control the number of "false discoveries" rather than the number of "false positives." 
+&gt; When `\(H_0\)` is false, `\(\delta\neq0\)`.
 
-&gt; What is the difference?
+Why is this? Let's look at the formula:
 
----
+`$$\delta=\sqrt{\frac{n_1n_2}{n_1+n_2}}(\frac{\mu_1-\mu_2}{SE})$$`
 
-## False Positives &amp; False Discoveries
-
-Let's revisit the good ol' decision table. Let *m* be the total number of hypotheses tested.
-
-|   |Decision: Do not reject `\(H_0\)` |Decision: Reject `\(H_0\)` | Total |
-|:-:|:----:|:---:|:---:|
-| `\(H_0\)` is true |U &lt;br&gt; *True Negative*|V &lt;br&gt; __Type I error__/*False Positive*|   `\(m_0\)` |
-| `\(H_0\)` is false |T &lt;br&gt; __Type II error__/*False Negative*|S &lt;br&gt; *True Positive*|  `\(m-m_0\)`
-| Total | `\(m-R\)` | `\(R\)` | `\(m\)` |
-
-The false positive rate is:
-`$$FPR=\frac{V}{m_0}$$`
-
-The false discovery rate is:
-`$$FDR=\frac{V}{R}$$`
+As you can see, if `\(\mu_1-\mu_2\)`=0 then `\(\delta\)`=0.
 
 ---
 
-## False Positives &amp; False Discoveries
 
-The __false positive rate__ is:
-`$$FPR=\frac{number\:of\:falsely\:rejected\:H_0s}{total\:number\:of\:true\:H_0s}$$`
+# The *t*-distribution... 
 
-The __false discovery rate__ is:
-`$$FDR=\frac{number\:of\:falsely\:rejected\:H_0s}{total\:number\:of\:rejected\:H_0s}$$`
+.pull-left[
 
-Benjamini-Hochberg proposed to keep the latter less than `\(\alpha\)` such that the maximum FDR is capped at `\(q&lt;\alpha\)`.
+&gt; When the null is true
 
----
+&lt;img src="cm045_files/figure-html/unnamed-chunk-12-1.png" style="display: block; margin: auto;" /&gt;
+]
 
-## The FDR Method
+.pull-right[
 
-Sort your obtained *p*-values from lowest to highest, and add the following information:
+&gt; When the null is false
 
-* `\(p\)` = sorted unadjusted *p*-values (these can be based on any statistic, here Tukey HSD)
-* `\(j\)` = variable indexing the order of that contrast in the sort ( `\(j=1,\dotsc,m\)` ) 
-* `\(p_{BH}^*\)` = critical values for *p*, based on Benjamini-Hochberg per contrast adjustments holding `\(q&lt;.05\)` (see next slides)
-
-
-```
-     TMNT - Superman Hulk - Superman Superman - Spiderman TMNT - Spiderman
-p              0.003           0.008                0.094            0.392
-j              1.000           2.000                3.000            4.000
-p*BH           0.008           0.017                0.025            0.033
-     Hulk - Spiderman TMNT - Hulk
-p               0.661       0.966
-j               5.000       6.000
-p*BH            0.042       0.050
-```
+&lt;img src="cm045_files/figure-html/unnamed-chunk-13-1.png" style="display: block; margin: auto;" /&gt;
+]
 
 ---
 
-## The Benjamini-Hochberg False Discovery Rate
+# Non-central *t*-distributions... 
 
-The previous table can be summarized more generally as:
+.pull-left[
 
-| |smallest| `\(\rightarrow\)` | `\(\rightarrow\)`  | `\(\rightarrow\)` |largest|
-|:--:|:---:|:--:|:--:|:--------:|:----:|
-| `\(p-values\)` | `\(p_1\)` | `\(p_2\)` | `\(p_3\)` | `\(\dotsc\)` | `\(p_m\)` |
-| `\(j\)` |1|2|3| `\(\dotsc\)` | `\(m\)` |
-| `\(p_{BH}^*\)` | `\(\frac{1}{m}\times{\alpha}\)` | `\(\frac{2}{m}\times{\alpha}\)` | `\(\frac{3}{m}\times{\alpha}\)` | `\(\dotsc\)` | `\(\frac{m}{m}\times{\alpha}=\alpha\)` |
+&gt; Degrees of freedom=9
 
-Where the `\(p_{BH}^*\)` threshold for each individual contrast is:
-`$$\frac{j}{m}\times{\alpha}$$`
+&lt;img src="cm045_files/figure-html/unnamed-chunk-14-1.png" style="display: block; margin: auto;" /&gt;
+]
 
+.pull-right[
 
----
+&gt; `\(\delta\)`=5
 
-## Decision Time
-
-
-
-```
-         TMNT - Superman Hulk - Superman Superman - Spiderman
-p                  0.003           0.008                0.094
-j                      1               2                    3
-p*BH               0.008           0.017                0.025
-Decision       REJECT H0       REJECT H0     DO NOT REJECT H0
-         TMNT - Spiderman Hulk - Spiderman      TMNT - Hulk
-p                   0.392            0.661            0.966
-j                       4                5                6
-p*BH                0.033            0.042             0.05
-Decision DO NOT REJECT H0 DO NOT REJECT H0 DO NOT REJECT H0
-```
+&lt;img src="cm045_files/figure-html/unnamed-chunk-15-1.png" style="display: block; margin: auto;" /&gt;
+]
 
 ---
 
-## Bonferroni Method
-
-A different approach to adjusting *p*-values per contrast is to control the __false positive rate__ by controlling the *family-wise error rate*= `\(\alpha\)` .
-
-__The idea:__ if you want to control your Type I error rate at `\(\alpha=.05\)` across all *m* contrasts, then simply compare your obtained *p*-value with a new `\(p_{Bonferroni}^*\)`:
-`$$p_{Bonferroni}^*=\frac{\alpha}{m}$$`
-
-Where *m* is the maximum total number of contrasts you'll need to perform.
-
-__The downside:__ comes at a cost of decreasing statisical power (increasing Type II errors) and thus being overly conservative
-
-In our current example, we conduct *m*=6 contrasts total, so our nominal per contrast *p* is:
-`$$p_{Bonferroni}^*=\frac{.05}{6}=.008$$`
-
----
-
-## False Positives 
-
-Recall that the __false positive rate__ is:
-`$$FPR=\frac{number\:of\:falsely\:rejected\:H_0s}{total\:number\:of\:true\:H_0s}$$`
-
-
----
-
-## Bonferroni vs. Benjamini-Hochberg
-
-Let's compare to the BH FDR:
-
-| |smallest| |  | `\(\rightarrow\)` |largest|
-|:--:|:---:|:--:|:--:|:--------:|:----:|
-| `\(p-values\)` | `\(p_1\)` | `\(p_2\)` | `\(p_3\)` | `\(\dotsc\)` | `\(p_m\)` |
-| `\(j\)` |1|2|3| `\(\dotsc\)` | `\(m\)` |
-| `\(p_{BH}^*\)` | `\(1\times{\frac{\alpha}{m}}\)` | `\(2\times{\frac{\alpha}{m}}\)` | `\(3\times{\frac{\alpha}{m}}\)` | `\(\dotsc\)` | `\(m\times{\frac{\alpha}{m}}=\alpha\)` |
-| `\(p_{Bonferroni}^*\)` | `\(\frac{\alpha}{m}\)` | `\(\frac{\alpha}{m}\)` | `\(\frac{\alpha}{m}\)` | `\(\dotsc\)` | `\(\frac{\alpha}{m}\)` |
-
-&gt; So for the smallest *p*-value, `\(p_{BH}^*\)` will always equal `\(p_{Bonferroni}^*\)`
-
----
-
-## Bonferroni vs. Benjamini-Hochberg
-
-Would our decisions have been any different if, instead of controlling the *false discovery rate* via Benjamini-Hochberg, we controlled the *family-wise error rate* via Bonferroni?
-
-
-```
-                     TMNT - Superman  Hulk - Superman Superman - Spiderman
-p                              0.003            0.008                0.094
-j                                  1                2                    3
-p*BH                           0.008            0.017                0.025
-Decision: BH               REJECT H0        REJECT H0     DO NOT REJECT H0
-p*Bonferroni                   0.008            0.008                0.008
-Decision: Bonferroni       REJECT H0 DO NOT REJECT H0     DO NOT REJECT H0
-                     TMNT - Spiderman Hulk - Spiderman      TMNT - Hulk
-p                               0.392            0.661            0.966
-j                                   4                5                6
-p*BH                            0.033            0.042             0.05
-Decision: BH         DO NOT REJECT H0 DO NOT REJECT H0 DO NOT REJECT H0
-p*Bonferroni                    0.008            0.008            0.008
-Decision: Bonferroni DO NOT REJECT H0 DO NOT REJECT H0 DO NOT REJECT H0
-```
-
-
----
-
-## Adjusted p-values options
-
-We just covered two *p* value adjustment options: 
-
-* Benjamini-Hochberg (in R, "BH" or "fdr")
-* Bonferroni
-* But there are many many more...
-
-From *multcomp*:
-&gt; "Shaffer" implements Bonferroni-adjustments taking logical constraints into account Shaffer [1986] and "Westfall" takes both logical constraints and correlations among the z statistics into account Westfall [1997]. In addition,
-all adjustment methods implemented in p.adjust can be specified as well.
-
-From *help(p.adjust)*:
-&gt; c("holm", "hochberg", "hommel", "bonferroni", "BH", "BY", "fdr", "none")
-
----
-
-## Why not just do a bunch of *t*-tests?
-
-* First, note that pairwise contrasts use the degrees of freedom __based on all groups in your sample__, rather than for just the two groups in the contrast. This increases your statistical power!
-
-* Second, pairwise contrasts (whether `\(t_{contrast}\)` or `\(q_{contrast}\)` ) base the standard error estimate (i.e., the denominator) on the weighted mean square error ( `\(MS_{error}\)` ) from the overall ANOVA. Again, this tends to increase power!
-
-* But, each individual pairwise contrast is designed to control the probability of false rejection at `\(\alpha\)`. Unfortunately, if our data analysis involves many hypothesis tests (and thus many contrasts), the probability of at least one Type I error increases rather sharply with the number of contrasts.
-
-
----
-
-## Probability(at least one error)
-
-For example:
-* If there are *m* tests
-* They are independent
-* Each is performed with `\(\alpha\)`=.05
-* All alternative hypotheses are __true__
-* What is the probability of at least one Type I error?
-
-
----
-
-## Probability refresher
-
-If we have 3 levels of a factor, and want to compare all three to each other:
-1. Contrast 1 vs. 2 ($\alpha=.05$)
-2. Contrast 2 vs. 3 ($\alpha=.05$)
-3. Contrast 1 vs. 3 ($\alpha=.05$)
-
-Probabilities:
-
-* What is the probability that I will __incorrectly reject__ all three null hypotheses?
-`$$P(\alpha)\times{P(\alpha)}\times{P(\alpha)}=(.05)(.05)(.05)=.000125$$`
-
-* Using the same logic, what is the probability that I will __correctly reject__ all three null hypotheses?
-`$$P(1-\alpha)\times{P(1-\alpha)}\times{P(1-\alpha)}=(.95)(.95)(.95)=.8574$$`
-* Hmmm...
-
----
-
-## Probability(at least one error)
-
-* `$$P(Type \: I \: error)=\alpha$$`
-* `$$P(no \: Type \: I \: error)=1-\alpha$$`
-* `$$P(no \:Type\:I\:errors\:in\:m\:tests)=(1-\alpha)^m$$`
-* `$$P(at\:least\:one\:Type\:I\:errors\:in\:m\:tests)=1-(1-\alpha)^m$$`
-
-
----
-
-## Family-wise error rate (FWER)
-
-* `$$P(1-\alpha)\times{P(1-\alpha)}\times{P(1-\alpha)}=(.95)(.95)(.95)=.8574$$`
-* This is the probability that I make __zero__ errors
-* `$$P(at\:least\:one\:error)=1-P(no\:errors)=1-.8574=.1426$$`
-* Thus, the probability that I will make at least one Type I error is &gt; .05
-* This is our *family-wise error rate*
-* `$$\alpha_{family}&gt;\alpha_{per\:test}$$`
-
----
-
-## We can plot this...
-
-&lt;img src="cm045_files/figure-html/unnamed-chunk-24-1.png" style="display: block; margin: auto;" /&gt;
-
----
-
-## An example:
-
-&gt; * As discussed in Benjamini and Yekutieli (2001), Needleman et al (New England Journal of Medicine, 300, 689–695) studied the neuropsychologic effects of unidentified childhood exposure to lead by comparing various
-psychological and classroom performances between two groups of children differing in the lead level observed in their shed teeth. 
-
-&gt; * While there is no doubt that high levels of lead are harmful, Needleman’s findings regarding exposure to low lead levels, especially because of their contribution to the Environmental Protection Agency’s review of lead exposure
-standards, are controversial.
-
-&gt; * The study was attacked on the grounds of methodological flaws, because they analyzed three independent "outcome" variables (or DVs)
-
-&gt; 1. Teacher Behavioral Ratings
-&gt; 2. WISC Scores
-&gt; 3. Verbal Processing and Reaction Time Scores
-
----
-
-## An example
-
-Inputting the *p*-values...
+# Using non-central *t*-distributions... 
 
 
 ```r
-Teacher &lt;- sort(c(0.003,0.05,0.05,0.14, 0.08,0.01,0.04,0.01,.050,0.003,0.003))
-WISC &lt;- sort(c(0.04,0.05,0.02,0.49,0.08,0.36,0.03,0.38,0.15,0.90,0.37,0.54))
-RT &lt;- sort(c(0.002,0.03,0.07,0.37,0.90,0.42,0.05,0.04, 0.32,0.001,0.001,0.01))
-```
-
-Now what happens if we treat analyses for each of the 3 DVs as one "family", setting the FWER=.05 for each family?
-
----
-
-## Bonferroni
-
-
-```r
-bonf.teacher &lt;- p.adjust(Teacher, method="bonferroni")
-bonf.wisc &lt;- p.adjust(WISC, method="bonferroni")
-bonf.rt &lt;- p.adjust(RT, method="bonferroni")
-```
-
----
-
-## Bonferroni
-
-Here, how many would we reject for each family?
-&gt; * Teacher? WISC? RT?
-
-
-```r
-round(bonf.teacher,2)
+help(TDist)
+pt(-1, 20, 0)
 ```
 
 ```
- [1] 0.03 0.03 0.03 0.11 0.11 0.44 0.55 0.55 0.55 0.88 1.00
+[1] 0.1646283
 ```
 
 ```r
-round(bonf.wisc,2)
+pt(-1, 20, 5)
 ```
 
 ```
- [1] 0.24 0.36 0.48 0.60 0.96 1.00 1.00 1.00 1.00 1.00 1.00 1.00
+[1] 1.624699e-09
 ```
+
+Recommended:
 
 ```r
-round(bonf.rt,2)
-```
-
-```
- [1] 0.01 0.01 0.02 0.12 0.36 0.48 0.60 0.84 1.00 1.00 1.00 1.00
-```
-
----
-
-## Benjamini Hochberg
-
-
-```r
-bh.teacher &lt;- p.adjust(Teacher, method="BH")
-bh.wisc &lt;- p.adjust(WISC, method="BH")
-bh.rt &lt;- p.adjust(RT, method="BH")
-```
-
----
-
-## Benjamini Hochberg
-
-Here, how many would we reject for each family?
-&gt; * Teacher? WISC? RT?
-
-
-```r
-round(bh.teacher,2)
-```
-
-```
- [1] 0.01 0.01 0.01 0.02 0.02 0.06 0.06 0.06 0.06 0.09 0.14
-```
-
-```r
-round(bh.wisc,2)
-```
-
-```
- [1] 0.15 0.15 0.15 0.15 0.19 0.30 0.51 0.51 0.51 0.59 0.59 0.90
-```
-
-```r
-round(bh.rt,2)
-```
-
-```
- [1] 0.01 0.01 0.01 0.03 0.07 0.08 0.09 0.11 0.43 0.44 0.46 0.90
+power.t.test()
 ```
 
 
 ---
 
-## (Briefly) Non-parametric omnibus
+# Welch's *t*-test: Dealing with unequal variances
 
-If we wanted to analyze this data using the extension of the Wilcoxon Mann Whitney Rank Sum Test, we would do a Kruskal-Wallis Rank Sum Test.
+Recall the formula for the independent groups *t*-test:
 
+`$$t=\frac{(\bar{x}_1-\bar{x}_2)-(\mu_1-\mu_2)}{SE}$$`
 
-```r
-kruskal.test(injury~hero,data=superhero)
-```
+In Welch's formula, we calculate the SE differently:
+`$$SE'=\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}$$`
 
-```
-
-	Kruskal-Wallis rank sum test
-
-data:  injury by hero
-Kruskal-Wallis chi-squared = 11.731, df = 3, p-value = 0.008363
-```
+So the formula for Welch's `\(t'\)`: 
+`$$t'=\frac{(\bar{x}_1-\bar{x}_2)-(\mu_1-\mu_2)}{\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}}$$`
 
 ---
 
-## (Briefly) Non-parametric contrasts
+# Welch's *t*-test: Modified degrees of freedom
 
+Recall the degrees of freedom for the independent groups *t*-test:
 
-```r
-pairwise.wilcox.test(superhero$injury,superhero$hero,p.adj=c('BH'))
-```
+`$$\nu=n_1+n_2-1$$`
 
-```
+The degrees of freedom are modified for Welch's `\(t'\)`: 
 
-	Pairwise comparisons using Wilcoxon rank sum test 
-
-data:  superhero$injury and superhero$hero 
-
-         Spiderman Superman Hulk 
-Superman 0.095     -        -    
-Hulk     0.288     0.045    -    
-TMNT     0.095     0.045    0.514
-
-P value adjustment method: BH 
-```
+`$$\nu'=\frac{(\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2})^2}{\frac{s_1^4}{n_1^2(n_1-1)}+\frac{s_2^4}{n_2^2(n_2-1)}}$$`
 
 ---
 
-## (Briefly) Non-parametric omnibus + contrasts (way better)
+# George E. P. Box
 
-
-```r
-library(agricolae)
-k1 &lt;- kruskal(superhero$injury,superhero$hero,alpha=.05,group=F,p.adj=c('BH'))
-```
-
----
-
-## (Briefly) Non-parametric omnibus + contrasts (way better)
-
-
-```r
-k1
-```
-
-```
-$statistics
-     Chisq     p.chisq
-  11.73121 0.008363013
-
-$parameters
-            test p.ajusted         name.t ntr alpha
-  Kruskal-Wallis        BH superhero$hero   4  0.05
-
-$means
-          superhero.injury      rank       std r Min Max  Q25  Q50   Q75
-Hulk              31.50000  9.416667 12.817956 6  10  45 27.0 32.5 41.00
-Spiderman         40.66667 13.750000 14.009521 6  20  58 32.5 42.0 50.00
-Superman          60.33333 19.916667 17.851237 6  32  85 53.5 62.0 68.25
-TMNT              27.83333  6.916667  8.727352 6  18  41 21.0 30.0 30.00
-
-$comparison
-                     Difference pvalue Signif.
-Hulk - Spiderman      -4.333333 0.2060        
-Hulk - Superman      -10.500000 0.0079      **
-Hulk - TMNT            2.500000 0.4230        
-Spiderman - Superman  -6.166667 0.0859       .
-Spiderman - TMNT       6.833333 0.0739       .
-Superman - TMNT       13.000000 0.0023      **
-
-$groups
-NULL
-
-attr(,"class")
-[1] "group"
-```
-
----
-
-## (Briefly) Effect size
-
-
-```r
-library(orddom)
-hulk &lt;- subset(superhero,select=("injury"),hero=="Hulk")
-tnmt &lt;- subset(superhero,select=("injury"),hero=="TMNT")
-orddom(hulk, tnmt,alpha=.05,paired=FALSE)
-```
-
-```
-              ordinal              metric              
-var1_X        "group 1 (x)"        "group 1 (x)"       
-var2_Y        "group 2 (y)"        "group 2 (y)"       
-type_title    "indep"              "indep"             
-n in X        "6"                  "6"                 
-n in Y        "6"                  "6"                 
-N #Y&gt;X        "12"                 "12"                
-N #Y=X        "3"                  "3"                 
-N #Y&lt;X        "21"                 "21"                
-PS X&gt;Y        "0.583333333333333"  "0.593459235722213" 
-PS Y&gt;X        "0.333333333333333"  "0.406540764277787" 
-A X&gt;Y         "0.625"              "0.625"             
-A Y&gt;X         "0.375"              "0.375"             
-delta         "-0.25"              "-3.66666666666667" 
-1-alpha       "95"                 "95"                
-CI low        "-0.76689711774936"  "-18.0334552608998" 
-CI high       "0.463629363759192"  "10.7001219275665"  
-s delta       "0.35"               "10.9650961388094"  
-var delta     "0.1225"             "120.233333333333"  
-se delta      NA                   "6.33070120743175"  
-z/t score     "-0.714285714285714" "-0.579188078306758"
-H1 tails p/CI "2"                  "2"                 
-p             "0.49138699486592"   "0.576959741821073" 
-Cohen's d     "-0.279420597763724" "-0.334394392921829"
-d CI low      "-0.70935460297946"  "-1.47386102605883" 
-d CI high     "0.775419652830103"  "0.805072240215168" 
-var d.i       "0.641666666666667"  "164.3"             
-var dj.       "0.141666666666667"  "76.1666666666667"  
-var dij       "0.878571428571429"  "206.114285714286"  
-df            "10"                 "8.81578245703572"  
-NNT           "-4"                 "-3.2654824476779"  
-```
-
----
+&gt; "Equally, the statistician knows, for example, that in nature there never was a normal distribution. There never was a straight line, yet with normal and linear assumptions, known to be false, he can often derive results which match, to a useful approximation, those found in the real world." -*Journal of the American Statistical Association, 71*(356), pp. 791-799.
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
