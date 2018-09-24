@@ -1,7 +1,7 @@
 ---
-title: "Summarizing & Visualizing Data"
-subtitle: "Class 2"
-author: "Rebecca Lunsford"
+title: "Math 530/630: CM 1.2"
+subtitle: "Summarizing & Visualizing Data"
+#author: "Rebecca Lunsford"
 output:
   xaringan::moon_reader:
     css: ["default", "css/ohsu.css", "css/ohsu-fonts.css"]
@@ -191,11 +191,11 @@ You have:
 
 - a working version of RStudio,
 
-- read chapters 1.1, 2, and 3 in ModernDive
+- read chapters 2-5 and the Markdown Tutorial in ModernDive
 
-- read chapter 4 in R4DS
+- read the Markdown and Workflow Projects chapters in R4DS (and maybe more...)
 
-- ?? completed DataCamp's "Introduction to the Tidyverse" (all 4 chapters)
+- completed DataCamp's "Introduction to the Tidyverse" (all 4 chapters)
 
 ---
 ## Data Wrangling
