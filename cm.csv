@@ -1,5 +1,5 @@
 Weekday,Month,Day,CM / Block,Topics,lab,lab_link,2017-Video(https://echo360.org/section/72b3c579-f753-43e4-a144-7368377e0936/home),Orig Source,Staged
-,Week ,One,,,,,,,
+,Week ,One,1.0 Intro to Data and R,,,,,,
 Tues,September,25,1.1: Summarizing Data,"Welcome & Introductions<br>(<a href='syllabus.html'>syllabus</a>)
 <br><a href='slides/01-sample-data.html'>Sample Data </a>",,,1,Slide deck 01 from fall 2017,
 Thurs,September,27,1.2: Visualizing distributions,"<a href='slides/02-visualizing_distributions.html'> 1.2 - Distributions</a> 
@@ -17,7 +17,7 @@ Thurs,October,25,3.3: Continuous Probability Functions,,,,4,Slide deck 04 from f
 <br> (https://github.com/apreshill/conj620labs)"
 ,Week ,Six-Eight,4.0 Inference,,,,,,
 Tues,October,30,4.1: Bootstrapping (confidence intervals),,,,12,cm032 (slide deck),<a href='slides/cm041.html'>cm041</a>
-Thurs,November,1,4.2: Sampling distributions,,,,5,Slide deck 05 from fall 2017 (md sampling reading),<a href='slides/05-sampling.pdf'>05-sampling</a>
+Thurs,November,1,4.2: Sampling distributions,,,,5,Slide deck 05 from fall 2017,<a href='slides/05-sampling.pdf'>05-sampling</a>
 Tues,November,6,4.3: Hypothesis testing (resampling),,Lab 4.3,slides/cm043_lab.html,10,cm034 (in class lab),
 Thurs,November,8,4.4: Hypothesis testing (classical),,,,11,slide deck 11 from fall 2017,<a href='slides/11-classical-inference.pdf'>11-classical-inference</a>
 Tues,November,13,4.5: t-test as Linear Regression,,,,13,cm035,<a href='slides/cm045.html'>cm045</a>
@@ -25,7 +25,7 @@ Tues,November,13,4.5: t-test as Linear Regression,,,,13,cm035,<a href='slides/cm
 Thurs,November,15,5.1: Many means,,,,14,cm041 (slide deck),<a href='slides/cm051.html'>cm051</a>
 Tues,November,20,5.2: ANOVA by hand,,Lab 5.2,slides/cm052_lab.html,14,cm043 (in class lab),
 Thurs,November,22,NO CLASS,,,,,,Thanksgiving - Enjoy!
-Tues,November,27,5.3: Contrasts,,,,15,slide deck 15 from fall 2017 (replace CM045 slide deck),<a href='slides/cm053.html'>cm053</a>
+Tues,November,27,5.3: Contrasts,,,,15,CM045 (slide deck),<a href='slides/cm053.html'>cm053</a>
 Thurs,November,29,5.4: Family-wise error rates,,,,15,split from slide deck 15 2017,<a href='slides/cm53.html'>cm053-cont'd</a> 
 Tues,December,4,5.5: Two-way ANOVA/3-way ANOVA,,,,16,slide deck 16 from fall 2017,<a href='slides/16-twoway.pdf'>16-twoway</a>
 ,Week ,Eleven-Twelve,,,,,,,
