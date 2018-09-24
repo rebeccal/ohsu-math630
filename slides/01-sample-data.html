@@ -755,7 +755,7 @@ head(z.x) #show the first six numbers in z.x
 ```
 
 ```
-## [1] -1.1943669  0.7730184  1.1837518 -0.8215086 -0.4230437 -0.3676135
+## [1] -0.1444898  0.2873785 -0.1646531 -0.2164040 -1.4232362 -0.7278141
 ```
 
 ```r
@@ -764,7 +764,7 @@ head(z.y) #show the first six numbers in z.y
 ```
 
 ```
-## [1] -1.1943669  0.7730184  1.1837518 -0.8215086 -0.4230437 -0.3676135
+## [1] -0.1444898  0.2873785 -0.1646531 -0.2164040 -1.4232362 -0.7278141
 ```
 
 ```r
@@ -825,7 +825,7 @@ skewness(x)
 ```
 
 ```
-## [1] 0.1902018
+## [1] 0.1104386
 ```
 
 
@@ -865,28 +865,23 @@ n*s4.x/s2.x^2
 ```
 
 ```
-## [1] 2.787033
+## [1] 3.18953
 ```
 
 ```r
-# [1] 2.438948
 s4.z &lt;- sum((z.x-mean(z.x))^4) #using z
 s2.z &lt;- sum((z.x-mean(z.x))^2) #using z
 n*s4.z/s2.z^2
 ```
 
 ```
-## [1] 2.787033
-```
-
-```r
-# [1] 2.438948
+## [1] 3.18953
 ```
 
 ---
 class: center, middle, inverse
 
-# All list-wise operations have no effect on shape.
+# All linear list-wise operations have no effect on shape.
 
 ---
 
@@ -952,7 +947,7 @@ Spread `$$s_y = \frac{s_x}{a}$$`
 
 # Linear Transformations
 
-Finding `\(a\)` and `\(b\)`, given `\(\bar{y}\)` and `\(s_y\)`
+Finding `\(a\)` and `\(b\)`, given `\(\bar{y}\)`, `\(s_y\)`, and `\(\bar{x}\)` 
 
 --
 
@@ -968,7 +963,7 @@ There are two unknowns in these equations: `\(a\)` and `\(b\)`
 --
 
 
-Take 2 minutes to solve for `\(a\)` and `\(b\)`
+Take 2 minutes to solve for `\(a\)` and `\(b\)`, in terms of `\(\bar{y}\)`, `\(s_y\)`, and `\(\bar{x}\)`
 
 Try solving for `\(a\)` in the second equation first.
 
