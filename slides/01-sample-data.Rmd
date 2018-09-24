@@ -1,6 +1,6 @@
 ---
-title: "Sample Data"
-subtitle: "Math 530/630: Class 1"
+title: "Math 530/630: CM 1.1"
+subtitle: "Sample Data"
 #author: "Alison Hill"
 
 output:

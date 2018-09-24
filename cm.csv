@@ -1,7 +1,7 @@
 Weekday,Month,Day,CM / Block,Topics,lab,lab_link,2017-Video(https://echo360.org/section/72b3c579-f753-43e4-a144-7368377e0936/home),Orig Source,Staged
 ,Week ,One,1.0 Intro to Data and R,,,,,,
 Tues,September,25,1.1: Summarizing Data,"Welcome & Introductions<br>(<a href='syllabus.html'>syllabus</a>)
-<br><a href='slides/01-sample-data.html'>Sample Data </a>",,,1,Slide deck 01 from fall 2017,
+<br><a href='slides/01-sample-data.html'>1.1 - Sample Data </a>",,,1,Slide deck 01 from fall 2017,
 Thurs,September,27,1.2: Visualizing distributions,"<a href='slides/02-visualizing_distributions.html'> 1.2 - Distributions</a> 
 <br> <a href = 'Reference/SummariesAndDistributions.html'>Distributions and Summary Statistics</a>",,,,Conj  or DV?,
 ,Week ,Two-Four,2.0 Linear Regression,,,,6-9 (no 8),,
