@@ -1,8 +1,8 @@
 ---
-title: "CONJ620: CM 2.2"
-subtitle: "Simple linear regression, continued"
-author: "Alison Hill"
-date: "7/19/2018"
+title: "CM 2.2 - Simple linear regression, continued"
+subtitle: "Math 530/630"
+#author: "Alison Hill"
+#date: "7/19/2018"
 output: 
   html_document:
     toc: true
@@ -29,7 +29,7 @@ In the [previous lab](cm021.html), we conducted a new exploratory data analysis 
 
 In this lab, we'll start where we left off! Refer back to the [lab solutions](cm021-solutions.html) to see the code we used to do the EDA.
 
-- A complete knitted `html` file is due on Sakai by beginning of class Tuesday July 24th (2:30pm). 
+- A complete knitted `html` file is due on Sakai by the beginning of the next class. 
 - This lab is estimated to take approximately 45 minutes. We'll work together in chunks to keep tabs on time, with the aim that we all *finish* during the in-class work period. 
 - This lab is based on [Chapter 6: Basic Regression in ModernDive](http://moderndive.netlify.com/6-regression.html). Please open it and follow closely!
 - You'll need to load these packages to do the lab (make sure they are installed first, not in your .Rmd file!):
