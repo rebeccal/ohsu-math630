@@ -874,17 +874,15 @@ s4.x <- sum((x-mean(x))^4) #using raw
 s2.x <- sum((x-mean(x))^2) #using raw
 n <- length(x)
 n*s4.x/s2.x^2
-# [1] 2.438948
 s4.z <- sum((z.x-mean(z.x))^4) #using z
 s2.z <- sum((z.x-mean(z.x))^2) #using z
 n*s4.z/s2.z^2
-# [1] 2.438948
 ```
 
 ---
 class: center, middle, inverse
 
-# All list-wise operations have no effect on shape.
+# All linear list-wise operations have no effect on shape.
 
 ---
 
@@ -950,7 +948,7 @@ Spread $$s_y = \frac{s_x}{a}$$
 
 # Linear Transformations
 
-Finding $a$ and $b$, given $\bar{y}$ and $s_y$
+Finding $a$ and $b$, given $\bar{y}$, $s_y$, and $\bar{x}$ 
 
 --
 
@@ -966,7 +964,7 @@ There are two unknowns in these equations: $a$ and $b$
 --
 
 
-Take 2 minutes to solve for $a$ and $b$
+Take 2 minutes to solve for $a$ and $b$, in terms of $\bar{y}$, $s_y$, and $\bar{x}$
 
 Try solving for $a$ in the second equation first.
 
