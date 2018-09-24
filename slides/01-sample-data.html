@@ -3,7 +3,6 @@
   <head>
     <title>Sample Data</title>
     <meta charset="utf-8">
-    <meta name="date" content="2018-09-25" />
     <link href="libs/remark-css/default.css" rel="stylesheet" />
     <link rel="stylesheet" href="css\ohsu.css" type="text/css" />
     <link rel="stylesheet" href="css\ohsu-fonts.css" type="text/css" />
@@ -14,7 +13,6 @@ class: center, middle, inverse, title-slide
 
 # Sample Data
 ## Math 530/630: Class 1
-### September 25, 2018
 
 ---
 
@@ -757,7 +755,7 @@ head(z.x) #show the first six numbers in z.x
 ```
 
 ```
-## [1]  0.3355249 -0.4657415  0.5228656 -1.9884476 -0.2833562  0.2613611
+## [1] -1.1943669  0.7730184  1.1837518 -0.8215086 -0.4230437 -0.3676135
 ```
 
 ```r
@@ -766,7 +764,7 @@ head(z.y) #show the first six numbers in z.y
 ```
 
 ```
-## [1]  0.3355249 -0.4657415  0.5228656 -1.9884476 -0.2833562  0.2613611
+## [1] -1.1943669  0.7730184  1.1837518 -0.8215086 -0.4230437 -0.3676135
 ```
 
 ```r
@@ -801,7 +799,7 @@ The standard definition of skewness in a population is the average cubed z-score
 
 Here is one way to calculate skewness, using the formula for the adjusted Fisher-Pearson standardized moment coefficient, `\(G_1\)`:
 
-`$$G_1 = \frac{n}{(n-1)(n-2)}\sum_{i=1}^n {\frac{x_i - \bar{x}}{x}}^3$$`
+`$$G_1 = \frac{n}{(n-1)(n-2)}\sum_{i=1}^n {\frac{(x_i - \bar{x})^3}{s^3}}$$`
 
 
 
@@ -827,7 +825,7 @@ skewness(x)
 ```
 
 ```
-## [1] -0.1609215
+## [1] 0.1902018
 ```
 
 
@@ -867,7 +865,7 @@ n*s4.x/s2.x^2
 ```
 
 ```
-## [1] 2.695132
+## [1] 2.787033
 ```
 
 ```r
@@ -878,7 +876,7 @@ n*s4.z/s2.z^2
 ```
 
 ```
-## [1] 2.695132
+## [1] 2.787033
 ```
 
 ```r

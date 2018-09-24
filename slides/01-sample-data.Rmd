@@ -818,7 +818,7 @@ The standard definition of skewness in a population is the average cubed z-score
 
 Here is one way to calculate skewness, using the formula for the adjusted Fisher-Pearson standardized moment coefficient, $G_1$:
 
-$$G_1 = \frac{n}{(n-1)(n-2)}\sum_{i=1}^n {\frac{x_i - \bar{x}}{x}}^3$$
+$$G_1 = \frac{n}{(n-1)(n-2)}\sum_{i=1}^n {\frac{(x_i - \bar{x})^3}{s^3}}$$
 
 
 ```{r}
