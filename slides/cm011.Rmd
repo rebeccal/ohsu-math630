@@ -64,15 +64,15 @@ class: center, middle
 ![](01-images/childes.png)
 
 
----
-class: center, middle
+<!-- --- -->
+<!-- class: center, middle -->
 
-![](01-images/inter_speaker.pdf)
+<!-- ![](01-images/inter_speaker.pdf) -->
 
----
-class: center, middle
+<!-- --- -->
+<!-- class: center, middle -->
 
-![](01-images/targets_female_vowels.pdf)
+<!-- ![](01-images/targets_female_vowels.pdf) -->
 
 ---
 class: center, middle, inverse
