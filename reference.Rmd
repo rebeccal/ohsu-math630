@@ -1,0 +1,85 @@
+---
+title: "Reference/Data"
+#author: "Rebecca Lunsford"
+subtitle: Fall 2018
+---
+
+Links to data, cheatsheets, handouts, and reference texts.
+
+```{r echo = FALSE, message = FALSE, warning = FALSE}
+library(tidyverse)
+library(knitr)
+library(DT)
+reference <- read_csv("reference.csv")
+
+datalinks <- reference %>%
+  filter(type == "data") %>% 
+  mutate(`Dataset` = ifelse(title == "-" | is.na(link) ,
+                                    title,
+                                    paste0("<a href='", link, "'>", title, "</a>"))) %>% 
+  select(Dataset)
+
+
+textlinks <- reference %>%
+  filter(type == "reference") %>% 
+  mutate(`Reference` = ifelse(title == "-" | is.na(link) ,
+                                    title,
+                                    paste0("<a href='", link, "'>", title, "</a>"))) %>% 
+  select(Reference)
+
+
+cheatlinks <- reference %>%
+  filter(type == "cheatsheet") %>% 
+  mutate(`CheatSheet` = ifelse(title == "-" | is.na(link) ,
+                                    title,
+                                    paste0("<a href='", link, "'>", title, "</a>"))) %>% 
+  select(CheatSheet)
+```
+
+## Cheatsheets
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+if(knitr:::is_html_output()){
+  cheatlinks %>% datatable(rownames = FALSE,
+                         class = 'cell-border stripe',
+                         options = list(pageLength = nrow(cm), 
+                                        autoWidth = TRUE,
+                                        bInfo = FALSE,
+                                        paging = FALSE),
+                         escape = FALSE)
+} else {
+  knitr::kable(cheatlinks, booktabs = TRUE, longtable = TRUE)
+}
+```
+
+## Data Sets
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+if(knitr:::is_html_output()){
+  datalinks %>% datatable(rownames = FALSE,
+                         class = 'cell-border stripe',
+                         options = list(pageLength = nrow(cm), 
+                                        autoWidth = TRUE,
+                                        bInfo = FALSE,
+                                        paging = FALSE),
+                         escape = FALSE)
+} else {
+  knitr::kable(datalinks, booktabs = TRUE, longtable = TRUE)
+}
+```
+
+## Reference
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+if(knitr:::is_html_output()){
+  textlinks %>% datatable(rownames = FALSE,
+                         class = 'cell-border stripe',
+                         options = list(pageLength = nrow(cm), 
+                                        autoWidth = TRUE,
+                                        bInfo = FALSE,
+                                        paging = FALSE),
+                         escape = FALSE)
+} else {
+  knitr::kable(textlinks, booktabs = TRUE, longtable = TRUE)
+}
+```
