@@ -382,7 +382,7 @@ cm013 <- datasaurus_dozen %>%
 for_class <- cm013 %>% 
   select(dataset = number, x, y)
 
-write_csv(for_class, here::here("data", "cm013data.csv"))
+write_csv(for_class, here::here("data", "bakers_dozen.csv"))
 ```
 
 

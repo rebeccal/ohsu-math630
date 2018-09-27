@@ -1,34 +1,34 @@
 Weekday,Month,Day,CM / Block,Topics,lab,lab_link,2017-Video(https://echo360.org/section/72b3c579-f753-43e4-a144-7368377e0936/home),Orig Source,Staged
 ,Week ,One,1.0 Intro to Data and R,,,,,,
 Tues,September,25,1.1: Summarizing Data,"Welcome & Introductions<br>(<a href='syllabus.html'>syllabus</a>)
-<br><a href='slides/cm011.html'>1.1 - Sample Data </a>",,,1,Slide deck 01 from fall 2017 or (01-sample-data),
-Thurs,September,27,1.2: Visualizing distributions,,,,,Conj  or DV?,"<a href='slides/cm012.html'> 1.2 - Distributions</a> 
+<br><a href='slides/cm011.html'>1.1 - Sample Data </a>",,,9/26/2017,Slide deck 01 from fall 2017 or (01-sample-data),
+Thurs,September,27,1.2: Visualizing distributions,,,,NA,Conj  or DV?,"<a href='slides/cm012.html'> 1.2 - Distributions</a> 
 <br> <a href = 'Reference/SummariesAndDistributions.html'>Distributions and Summary Statistics</a>"
-,Week ,Two-Four,2.0 Linear Regression,,,,6-9 (no 8),,
-Tues,October,2,2.1: Simple linear regression,,Lab 2.1,slides/cm021_lab.html,6,cm021 (in class lab),
-Thurs,October,4,2.2: Simple linear regression,,Lab 2.2,slides/cm022_lab.html,7,cm022 (in class lab),
+,Week ,Two-Four,2.0 Linear Regression,,,,,,
+Tues,October,2,2.1: Simple linear regression,,Lab 2.1,slides/cm021_lab.html,10/24/2017 (Slide deck 7),cm021 (in class lab),
+Thurs,October,4,2.2: Simple linear regression,,Lab 2.2,slides/cm022_lab.html,10/19/2017(SLR:55:00),cm022 (in class lab),
 Tues,October,9,2.3: Linear models (general),,,,,cm023 (slide deck),<a href='slides/cm023.html'>cm023</a>
 Thurs,October,11,2.4: Multiple regression,,Lab 2.4,slides/cm024_lab.html,,cm024 (in class lab),
-Tues,October,16,2.5: LM diagnostics/outliers,,,,9,Slide deck 09 from fall 2017,<a href='slides/09-mlr-diagnostic'>09-mlr-diagnostic</a>
+Tues,October,16,2.5: LM diagnostics/outliers,,,,10/31/2017,Slide deck 09 from fall 2017,<a href='slides/09-mlr-diagnostic'>09-mlr-diagnostic</a>
 ,Week ,Four-Five,3.0 Probability,,,,,,
-Thurs,October ,18,3.1: Probability Review,,,,2,Slide deck 02 from fall 2017,<a href='slides/02-probability.pdf'>02-probability</a>
-Tues,October,23,3.2: Discrete Probability Functions,,,,3,Slide deck 03 from fall 2017,<a href='slides/03-discrete-rvs.pdf'>03-discrete-rvs</a>
-Thurs,October,25,3.3: Continuous Probability Functions,,,,4,Slide deck 04 from fall 2017,"<a href='slides/04-continuous.pdf'>04-continuous</a> 
+Thurs,October ,18,3.1: Probability Review,,,,9/28/2017,Slide deck 02 from fall 2017,<a href='slides/02-probability.pdf'>02-probability</a>
+Tues,October,23,3.2: Discrete Probability Functions,,,,10/3/2017,Slide deck 03 from fall 2017,<a href='slides/03-discrete-rvs.pdf'>03-discrete-rvs</a>
+Thurs,October,25,3.3: Continuous Probability Functions,,,,10/5/2017,Slide deck 04 from fall 2017,"<a href='slides/04-continuous.pdf'>04-continuous</a> 
 <br> (https://github.com/apreshill/conj620labs)"
 ,Week ,Six-Eight,4.0 Inference,,,,,,
-Tues,October,30,4.1: Bootstrapping (confidence intervals),,,,12,cm032 (slide deck),<a href='slides/cm041.html'>cm041</a>
-Thurs,November,1,4.2: Sampling distributions,,,,5,Slide deck 05 from fall 2017 and Conj cm042,"<a href='slides/05-sampling.pdf'>05-sampling</a>
+Tues,October,30,4.1: Bootstrapping (confidence intervals),,,,Skipped??,cm032 (slide deck),<a href='slides/cm041.html'>cm041</a>
+Thurs,November,1,4.2: Sampling distributions,,,,10/10&17/2017,Slide deck 05 from fall 2017 and Conj cm042,"<a href='slides/05-sampling.pdf'>05-sampling</a>
 <a href='slides/cm042.html>Exercise</a>"
-Tues,November,6,4.3: Hypothesis testing (resampling),,Lab 4.3,slides/cm043_lab.html,10,cm034 (in class lab),
-Thurs,November,8,4.4: Hypothesis testing (classical),,,,11,slide deck 11 from fall 2017,<a href='slides/11-classical-inference.pdf'>11-classical-inference</a>
-Tues,November,13,4.5: t-test as Linear Regression,,,,13,cm035,<a href='slides/cm045.html'>cm045</a>
+Tues,November,6,4.3: Hypothesis testing (resampling),,Lab 4.3,slides/cm043_lab.html,11/2/2017,cm034 (in class lab),
+Thurs,November,8,4.4: Hypothesis testing (classical),,,,11/7/2017,slide deck 11 from fall 2017,<a href='slides/11-classical-inference.pdf'>11-classical-inference</a>
+Tues,November,13,4.5: t-test as Linear Regression,,,,?? 11/16/2017,cm035,<a href='slides/cm045.html'>cm045</a>
 ,Week ,Eight-Eleven,5.0 Comparing Groups,,,,,,
-Thurs,November,15,5.1: Many means,,,,14,cm041 (slide deck),<a href='slides/cm051.html'>cm051</a>
-Tues,November,20,5.2: ANOVA by hand,,Lab 5.2,slides/cm052_lab.html,14,cm043 (in class lab),
+Thurs,November,15,5.1: Many means,,,,11/21/2017,cm041 (slide deck),<a href='slides/cm051.html'>cm051</a>
+Tues,November,20,5.2: ANOVA by hand,,Lab 5.2,slides/cm052_lab.html,,cm043 (in class lab),
 Thurs,November,22,NO CLASS,,,,,,Thanksgiving - Enjoy!
-Tues,November,27,5.3: Contrasts,,,,15,CM045 (slide deck),<a href='slides/cm053.html'>cm053</a>
-Thurs,November,29,5.4: Family-wise error rates,,,,15,CM045-split (slide deck),<a href='slides/cm53.html'>cm053-cont'd</a> 
-Tues,December,4,5.5: Two-way ANOVA/3-way ANOVA,,,,16,slide deck 16 from fall 2017,<a href='slides/16-twoway.pdf'>16-twoway</a>
+Tues,November,27,5.3: Contrasts,,,,11/28-30/2017,CM045 (slide deck),<a href='slides/cm053.html'>cm053</a>
+Thurs,November,29,5.4: Family-wise error rates,,,,11/28-30/2017,CM045-split (slide deck),<a href='slides/cm53.html'>cm053-cont'd</a> 
+Tues,December,4,5.5: Two-way ANOVA/3-way ANOVA,,,,12/5-7/2017,slide deck 16 from fall 2017,<a href='slides/16-twoway.pdf'>16-twoway</a>
 ,Week ,Eleven-Twelve,,,,,,,
 Thurs,December,6,Final presentations,,,,,,
 Tues,December,11,Final presentations,,,,,,
