@@ -16,7 +16,7 @@ ggplot() +
 
 bakers_dozen %>%
 group_by(dataset) %>%
-summarize_all(., funs(mean, sd))
+summarize_all(funs(mean, sd))
 
 
 bakers_dozen %>% 
