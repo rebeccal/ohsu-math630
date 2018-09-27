@@ -2,7 +2,8 @@ Weekday,Month,Day,CM / Block,Topics,lab,lab_link,2017-Video(https://echo360.org/
 ,Week ,One,1.0 Intro to Data and R,,,,,,
 Tues,September,25,1.1: Summarizing Data,"Welcome & Introductions<br>(<a href='syllabus.html'>syllabus</a>)
 <br><a href='slides/cm011.html'>1.1 - Sample Data </a>",,,9/26/2017,Slide deck 01 from fall 2017 or (01-sample-data),
-Thurs,September,27,1.2: Visualizing distributions,<a href = 'reference/SummariesAndDistributions.html'>Distributions and Summary Statistics</a>,,,NA,Conj  or DV?,"<a href='slides/cm012.html'> 1.2 - Distributions</a> 
+Thurs,September,27,1.2: Visualizing distributions,"<a href='slides/cm012.html'> 1.2 - Distributions</a> 
+<br> <a href = 'reference/SummariesAndDistributions.html'>Distributions and Summary Statistics</a>",,,NA,Conj  or DV?,"<a href='slides/cm012.html'> 1.2 - Distributions</a> 
 <br> <a href = 'reference/SummariesAndDistributions.html'>Distributions and Summary Statistics</a>"
 ,Week ,Two-Four,2.0 Linear Regression,,,,,,
 Tues,October,2,2.1: Simple linear regression,,Lab 2.1,slides/cm021_lab.html,10/24/2017 (Slide deck 7),cm021 (in class lab),
