@@ -1,21 +1,9 @@
 ---
-title: 'Final Project'
-author: "MATH 530/630"
-subtitle: 'Part 0: Pick Groups and a Paper'
+title: "Papers Selected"
 output: 
   html_document:
   code_folding: hide
 ---
-
-
-## Overview
-
-Due Tuesday October 2 by 2pm (submit on [Sakai](https://sakai.ohsu.edu)).
-
-The goal of this project piece is to choose your final project groups and to pick a paper you'll use for your final project. No overlap will be allowed - that is each paper can be used by only one group. Because of this, each group should submit their top 3 choices, and we'll do what we can to accomodate. 
-
-
-NOTE: If the link below does not have the full pdf, you can find the papers using the [OHSU Library](https://www.ohsu.edu/xd/education/library/) .
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
@@ -51,16 +39,20 @@ comb_table <- comb_choices %>%
   spread(Preference, n)%>%
   select(-`0`)
 
-#Should be tidied...
 options(knitr.kable.NA = '')
 kab_table <- kable(comb_table, format="html", escape = FALSE)
 add_header_above(kab_table, c(" " = 2,"Preference (counts)" = 3)) %>% 
     kable_styling(bootstrap_options = c("hover", "condensed"))
 ```
-
-
 ## Groups
 ```{r}
+#group_table <- groups %>%
+#  group_by(Group) 
+
+# options(knitr.kable.NA = '')
+# kab_table <- kable(groups, align = c('l','c'))
+# collapse_rows(kab_table, columns = 1)
+
 options(knitr.kable.NA = '')
 groups %>% 
   kable(align = c('l','c')) %>% 
@@ -68,5 +60,3 @@ groups %>%
   kable_styling()
 
 ```
-
-<!-- The goal of this project piece is to look at and explore your dataset for your final project. You will use the [Quartz Bad Data Guide](https://github.com/Quartz/bad-data-guide/) to help guide your data quality review. Please use this  [`.csv`](quartz-bad-data-checklist.csv) file to indicate which, if any variable(s), in your dataset has any of the issues listed. If you indicate a variable with an issue, please include a brief paragraph (2-3 sentences tops) describing the issue further.  -->
