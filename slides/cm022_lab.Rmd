@@ -21,17 +21,17 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE,
 
 # Overview
 
-In the [previous lab](cm021.html), we conducted a new exploratory data analysis with the `crime` data, which involved three things:
+In the [previous lab](cm021_lab.html), we conducted a new exploratory data analysis with the `crime` data, which involved three things:
 
 - Looking at the raw values.
 - Computing summary statistics of the variables of interest.
 - Creating informative visualizations.
 
-In this lab, we'll start where we left off! Refer back to the [lab solutions](cm021-solutions.html) to see the code we used to do the EDA.
+In this lab, we'll start where we left off! Refer back to the [lab solutions](cm021_lab-solutions.html) to see the code we used to do the EDA.
 
 - A complete knitted `html` file is due on Sakai by the beginning of the next class. 
 - This lab is estimated to take approximately 45 minutes. We'll work together in chunks to keep tabs on time, with the aim that we all *finish* during the in-class work period. 
-- This lab is based on [Chapter 6: Basic Regression in ModernDive](http://moderndive.netlify.com/6-regression.html). Please open it and follow closely!
+- This lab is based on [Chapter 6: Basic Regression in ModernDive](https://moderndive.com/6-regression.html). Please open it and follow closely!
 - You'll need to load these packages to do the lab (make sure they are installed first, not in your .Rmd file!):
 ```{r load_packages, include = TRUE}
 library(moderndive)
@@ -67,23 +67,23 @@ $$\hat{\textrm{criminals}} = b_0 + b_1{\textrm{public_houses}}$$
 
 # EDA
 
-Refer back to the [lab solutions](cm021-solutions.html) to see the code we used to do the EDA.
+Refer back to the [lab solutions](cm021_lab-solutions.html) to see the code we used to do the EDA.
 
 
-# [Simple linear regression](http://moderndive.netlify.com/6-regression.html#model1table) (⏰ 20 min)
+# [Simple linear regression](https://moderndive.com/6-regression.html#model1EDA) (⏰ 20 min)
 
 **Part 1:** First “fit” the linear regression model to the data using the `lm()` function, then apply the `get_regression_table()` function from the `moderndive` R package to the model object. Use the output to fill in this formula with `y`, `x`, and the intercept and slope coefficients: (copy and paste into your narative: `$$\hat{y} = b_0 + b_1{x}$$`)
 
 $$\hat{y} = b_0 + b_1{x}$$
 
-**Part 2:** Interpret the intercept coefficient and the slope coefficient (see [here](http://moderndive.netlify.com/6-regression.html#model1table) for an example). How do the regression results match up with the results from your exploratory data analysis above?
+**Part 2:** Interpret the intercept coefficient and the slope coefficient (see [here](http://moderndive.com/6-regression.html#model1table) for an example). How do the regression results match up with the results from your exploratory data analysis above?
 
 ```{r}
 crime_lm <- lm(criminals ~ public_houses, data = crime)
 get_regression_table(crime_lm)
 ```
 
-# [Observed/fitted values and residuals](http://moderndive.netlify.com/6-regression.html#model1points) (⏰ 20 min)
+# [Observed/fitted values and residuals](http://moderndive.com/6-regression.html#model1points) (⏰ 20 min)
 
 **Part 1:** What are the observed and fitted values for the Cornwall (`ID` = 20) and Monmouth regions (`ID` = 23)? Which region do you think the reverend called "the happiest example of the infrequency of crime"?
 
@@ -108,7 +108,7 @@ regression_points %>%
   filter(criminals == min(criminals) | residual == min(residual))
 ```
 
-# [Residual analysis](http://moderndive.netlify.com/6-regression.html#model1residuals) (⏰ 20 min)
+# [Residual analysis](http://moderndive.com/6-regression.html#model1residuals) (⏰ 20 min)
 
 **Part 1:** Perform a residual analysis and look for any systematic patterns in the residuals. Ideally, there should be little to no pattern- why? Does it seem like there is no systematic pattern to the residuals? 
   

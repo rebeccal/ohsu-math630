@@ -23,7 +23,7 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE,
 
 - A complete knitted `html` file is due on Sakai by end of class Tuesday July 17th (before 5pm). 
 - This lab is estimated to take approximately 45 minutes. We'll work together in chunks to keep tabs on time, with the aim that we all *finish* during the in-class work period. 
-- This lab is based on [Chapter 6: Basic Regression in ModernDive](http://moderndive.netlify.com/6-regression.html). Please open it and follow closely!
+- This lab is based on [Chapter 6: Basic Regression in ModernDive](http://moderndive.com/6-regression.html). Please open it and follow closely!
 - You'll need to load these packages to do the lab (make sure they are installed first, not in your .Rmd file!):
 ```{r load_packages, include = TRUE}
 library(moderndive)
@@ -72,18 +72,18 @@ Note: you don't need to use R to answer these questions, but please create a sec
 $$\hat{\textrm{criminals}} = b_0 + b_1{\textrm{public_houses}}$$
 
 - The “best-fitting” regression line is “best” in that it minimizes what?
-    - Make sure you read [this](http://moderndive.netlify.com/6-regression.html#leastsquares)
+    - Make sure you read [this](http://moderndive.com/6-regression.html#leastsquares)
   
 > The best-fitting regression is one that minimizes the sum of the squared residuals. Squared residuals are calculated by taking the difference between the observed y values (here, criminals) and the fitted or predicted y values (so y hat!), then squaring each of those differences. The differences are squared so that positive and negative deviations of the same amount are treated equally. 
 
-- Why is this method called "simple linear regression" (as opposed to the method in [Chapter 7](http://moderndive.netlify.com/7-multiple-regression.html))?
+- Why is this method called "simple linear regression" (as opposed to the method in [Chapter 7](http://moderndive.com/7-multiple-regression.html))?
 
 > Linear regression refers to the form of the statistical model we are using- in linear regression, our model is in the form of a line, defined by an intercept and slope. The "simple" part refers to the fact that we have only one predictor variable (or independent variable/IV). In multiple regression, we'll have two or more predictor variables or IVs. All of these cases of regression are univariate, as opposed to multivariate. Univariate vs. multivariate refers to the number of dependent variables or DVs. In this case, we just want to predict one variable (here, `criminals`). In this course we will not cover multivariate methods.
 
 
 # EDA
 
-Conduct a [new exploratory data analysis](http://moderndive.netlify.com/6-regression.html#model1EDA), which involves three things:
+Conduct a [new exploratory data analysis](http://moderndive.com/6-regression.html#model1EDA), which involves three things:
 
 - Looking at the raw values.
 - Computing summary statistics of the variables of interest.
