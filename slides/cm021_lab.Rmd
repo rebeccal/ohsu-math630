@@ -23,7 +23,7 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE,
 
 - A complete knitted `html` file is due on Sakai by the beginning of the next class. 
 - This lab is estimated to take approximately 45 minutes. We'll work together in chunks to keep tabs on time, with the aim that we all *finish* during the in-class work period. 
-- This lab is based on [Chapter 6: Basic Regression in ModernDive](http://moderndive.netlify.com/6-regression.html). Please open it and follow closely!
+- This lab is based on [Chapter 6: Basic Regression in ModernDive](https://moderndive.com/6-regression.html). Please open it and follow closely!
 - You'll need to load these packages to do the lab (make sure they are installed first, not in your .Rmd file!):
 ```{r load_packages, include = TRUE}
 library(moderndive)
@@ -123,5 +123,5 @@ ggplot(crime, aes(x = public_houses, y = criminals)) +
 
 ![](`r knitr::fig_chunk('crime_scatterplot','png')`)
 
-Stop here, and turn in your in-class work! We'll start with simple linear regression with this dataset in the [next lab](cm022.html).
+Stop here, and turn in your in-class work! We'll start with simple linear regression with this dataset in the [next lab](cm022_lab.html).
 
