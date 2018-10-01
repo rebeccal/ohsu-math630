@@ -6,7 +6,7 @@ subtitle: Fall 2018
 
 Links to all slide decks and in-class lab materials will be posted here.
 
-[Class Videos](https://mail.ohsu.edu/owa/redir.aspx?C=AuS0hQvbvb7A1w7nV44AaKgi4m2Y8ioWqIRmD-1k506XFBRsUSXWCA..&URL=https%3a%2f%2flogin.echo360.org%2flogin%3fappId%3dc08c41ee-50e3-45e8-a6e6-e9579b28f620%26afterLoginUrl%3d%2fhome).
+[Class Videos](https://echo360.org).
 
 ```{r echo = FALSE, message = FALSE, warning = FALSE}
 library(tidyverse)
