@@ -2,7 +2,7 @@ library(tidyverse)
 bakers_dozen <- read_csv("http://bit.ly/conj620-bakers-dozen")
 
 our_data <- bakers_dozen %>%
-filter(dataset==1)
+  filter(dataset==1)
 
 # One way
 our_data %>%

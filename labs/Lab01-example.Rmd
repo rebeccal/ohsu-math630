@@ -1,0 +1,381 @@
+---
+title: "Sample Lab1 - EDA:Self Assessment"
+author: "Annie"
+date: "September 28, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+
+**Self-Assessment**
+
+<ul style="color:cadetblue">
+How to: 
+
+- Start with your initial submission, and save it as a new file. Then add a sub-section to each of the sections with content called "Self-Assessment". 
+
+- You may want to add color formatting to further highlight the self-assessment section. You can change the color of the font by using `<span style="color:deeppink">` <span style="color:deeppink">span styles like this</span> `</span>`. 
+
+- If you want to change the color of a bulleted list, change `span` to `ul` and use the same method (pick any [color](http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf)). 
+
+- My code is provided here so that you can problem solve- if you need to copy and paste, do so in your self-assessment section, but you'll need to include narrative including attribution and reflection on *what* part of that code chunk you struggled with and *why*.My code below is just an example and your data analysis should be based on the dataset you have been working with. If you feel your answers are perfect and need no correction, in the subsection just leave a comment that you are happy with your results/work.
+
+</ul>`
+
+
+**Integrative Lab 1 - Exploratory Data Analysis**
+
+###Reprohealth dataset
+####Download the below libraries required for the exploration of the reprohealth dataset
+
+```{r}
+library(tidyverse) 
+library(skimr)
+library(readxl) 
+library(here) 
+library(janitor) 
+library(knitr)
+library(remotes)
+library(reprohealth)
+```
+
+
+##Explore the wb_reprohealth data
+
+Load the dataset and read it.
+```{r}
+wb_stats <- wb_reprohealth %>% 
+  mutate(year = parse_number(year)) 
+head(wb_stats,n=3)#retrieve the first three elements in the dataset
+```
+
+The below questions can be answered using "skim" from the skimr package. Alternatively, I've included code to answer each question individually.
+```{r}
+skim(wb_stats)
+```
+NOTE: please disregard the lack of pretty skim histograms - it's a knitting in Windows issue.
+
+
+1.How many variables/columns?
+
+There are 9 variables in the dataset
+
+```{r}
+ncol(wb_stats)
+
+colnames(wb_stats)
+```
+
+2.How many rows/observations?
+
+There are 3296 observations in the dataset
+
+```{r}
+nrow(wb_stats)
+
+```
+
+You can also use the below dim() command to find out the rows and the columns.
+```{r}
+dim(wb_stats)
+```
+
+3.Which variables are numbers?
+
+Out of the 9 variables,we have 6 number variables in the dataset.
+
+```{r}
+number_variables = wb_stats %>% select_if(is.numeric) %>% colnames()
+number_variables
+```
+
+4.Which are categorical variables (numeric or character variables with variables that have a fixed and known set of possible values; aka factor variables)?
+
+ We have 3 categorical variables in the dataset.
+
+```{r}
+categorical_variables = wb_stats %>% select_if(is.character) %>% colnames()
+categorical_variables
+```
+
+5. There is one row per country for each  year.
+
+
+
+
+#Gapminder Dataset
+##Load your choice of gapminder dataset.
+I have used the Gapminder data - life expectancy at birth dataset. Life expectancy at birth is defined as how long, on average, a newborn can expect to live, if current death rates do not change. Life expectancy at birth is one of the most frequently used health status indicators.
+
+Load the dataset and read it
+
+```{r}
+
+Life_expectancy <- read_xlsx(here::here("data", "life_expectancy_years.xlsx"),
+                      sheet = 1) %>% clean_names() 
+                      
+
+```
+###Answer the same 5 questions as you did above for the reprohealth data.
+NOTE: Not using skim here - try it and you'll see why!
+
+1.How many variables/columns?
+
++There are 220 variables in the dataset
+
+```{r}
+ncol(Life_expectancy)
+
+```
+
+2.How many rows/observations?
+
++There are 187 observations in the dataset 
+
+```{r}
+nrow(Life_expectancy)
+```
+
+3.Which variables are numbers?
+
++ Out of the 220 variables,we have 219 number variables in the dataset.
+
+```{r}
+number_variables = Life_expectancy %>% select_if(is.numeric) %>% colnames()
+head(number_variables,4)#displaying only 4 variables
+```
+
+4.Which are categorical variables (numeric or character variables with variables that have a fixed and known set of possible values; aka factor variables)?
+
++ We have 1 categorical variable in the dataset.
+
+
+```{r}
+categorical_variables = Life_expectancy %>% select_if(is.character) %>% colnames()
+categorical_variables
+```
+
+5.There is one row per country.
+
+
+
+
+##Join this new data using dplyr with the reprohealth data you have been working with, and make some observations about the process and result.
+
+
+###Use dplyr::gather() to convert data from wide format into long.
+
+```{r}
+lifeExp_tidy <- Life_expectancy %>% 
+   dplyr::select(country = 1, everything()) %>% 
+  gather(year, life_exp, -country,convert = TRUE) %>% 
+  mutate(year = readr::parse_number(year))
+head(lifeExp_tidy,3)
+```
+
+reprohealth dataset contains data from 2000 - 2015
+
+lifeexpectancy dataset contains data from 1800 - 2018
+
+For my analysis, I have filtered the life expectancy dataset between 2000 - 2018
+
+```{r}
+
+lifeExp_tidy_filter <- lifeExp_tidy %>%
+  filter(year %>% between(2000, 2018))
+head(lifeExp_tidy_filter,3)
+```
+
+
+##Using merge in R
+1.Natural join: To keep only rows that match from the data frames, specify the argument all=FALSE.
+
+2.Full outer join:To keep all rows from both data frames, specify all=TRUE.
+
+3.Left outer join:To include all the rows of your data frame x and only those from y that match, specify x=TRUE.
+
+4.Right outer join:To include all the rows of your data frame y and only those from x that match, specify y=TRUE.
+
+```{r}
+merge_data <- merge(wb_stats, lifeExp_tidy_filter, by=c("year", "country"), all.x = TRUE)
+
+
+#Since this is an example, for this analysis I have omitted the NA's in my dataset.
+
+merge_data_omit <- na.omit(merge_data)
+head(merge_data_omit,3)
+```
+#Explore questions
+
+Before moving to the exploration part, I just want to see how the data has been distribution within the continent level. As you can see below all the continents data contribution ranges around 20-25% except for Oceania whose contribution of data is only 4%. Only two countries from Oceania has contributed to this dataset. Based on this data, carefully make your assumptions.
+
+
+```{r}
+ merge_data_omit %>% 
+  group_by(continent) %>% 
+  dplyr::summarise(n_levels = n()) %>% 
+  mutate(Proportions = n_levels/sum(n_levels) )
+
+```
+
+
+###1.Get the maximum and minimum of children per woman (tot_fertility) for all continents.
+
+
+As we can see from the below results, there has been some variations in the fertility rate in continents like Africa and Asia with the maximum children per household being seven to minimum being one. You can further analyze these variations by calculating the variations within the continent level.
+
+```{r}
+fertility_continent <- merge_data_omit %>% 
+  filter(!is.na(tot_fertility)) %>%  
+  group_by(continent) %>% 
+  summarize(min_fertility = min(tot_fertility), max_fertility = max(tot_fertility)) %>%
+  arrange(min_fertility, max_fertility)
+fertility_continent
+```
+
+
+
+
+```{r}
+ggplot(merge_data_omit, aes(x = continent, y = tot_fertility)) +
+  scale_y_log10() +
+  geom_jitter(position = position_jitter(width = 0.1), alpha = 0.5) +
+  geom_point(data = fertility_continent, aes(x = continent, y = min_fertility), colour = "blue", size = 10) +
+  geom_point(data = fertility_continent, aes(x = continent, y = max_fertility), colour = "red", size = 10)+
+  ggtitle("Maximum and minimum of children per woman  for all continents")
+```
+
+###2.Look at the spread of children per woman (tot_fertility) across countries within the continents.
+
+As discussed in the classroom, spread of the data can be calculated using Standard Deviation, Interquartile range and Median Absolute Deviation. To analyze the spread across the countries within the continent, group the data by continent and country
+
+In the below r chunk, we calculate the spread of the data within the continent level. Africa and Asia have high standard deviation followed by the rest of the continents. The average deviation seems to be on the larger side. 
+
+```{r}
+continent_fertility_spread <- merge_data_omit %>%
+  filter(!is.na(tot_fertility)) %>% 
+  group_by(continent) %>% 
+  summarise( Std = sd(tot_fertility),Interquartile=IQR(tot_fertility))
+continent_fertility_spread
+```
+As we can see from the below plot, the fertility rate of Africa has spread across the graph with the number of children per household ranging form 2 to 8, but it is densely populated on the heavier side with children 4 and more per household. In continents like Americas and Oceania, we can see the average children per household to be 4 or less.
+
+```{r}
+plot_spread <- ggplot(merge_data_omit,aes(x=tot_fertility,by=country)) + 
+  facet_wrap(~continent) + 
+  geom_histogram(col="black",fill = "red",bins = 10) +
+  ggtitle("Spread of children per woman across all continents")
+plot_spread
+
+```
+
+
+
+```{r}
+fertility_spread <- merge_data_omit %>% 
+  group_by(continent,country) %>% 
+  summarise( Std = sd(tot_fertility), IRange= IQR(tot_fertility),medianabs= mad(tot_fertility))
+head(fertility_spread,3)
+```
+Here I am filtering the data for the African continent and plotting the fertility rate across the countries. Now you can further filter and analyze the individual countries and its contribution to the fertility rate. You can see that countries like Chad, Niger, and Swaziland top the chart with highest fertility rates. One interesting factor here is country Chad is the country with the highest maternal mortality rate. It would be interesting to find out if there is a correlation between the fertility rate and the maternal mortality rate later in the analysis.
+
+
+```{r}
+filter_continent <-merge_data_omit %>% 
+  filter(continent=="Africa")
+
+filter_continent %>% 
+  ggplot(aes(x=country, y=tot_fertility))+geom_bar(stat="identity") + 
+  coord_flip() +
+  ggtitle("Spread of children per woman across countries within African continent")
+  
+  
+```
+
+###3.Compute a trimmed mean of maternal mortality (mat_mortality) for different years. Or a weighted mean, weighting by population. Just trying something other than the plain vanilla mean.
+
+The trimmed mean calculates the mean after "trimming" the data sample by discarding a certain amount of entries at the high and low end. Use the trim() function in R to calculate the trimmed mean. The trim factor, which determines the amount of data entries to be discarded, is a fraction between 0 and 0.5. 
+
+```{r}
+trimfactor <- 0.05
+trimmean <-merge_data_omit %>% group_by(year) %>% 
+  summarise(mean_regular=mean(mat_mortality),mean_trimmed = mean(mat_mortality, trimfactor))
+  
+head(trimmean,3)    
+```
+Plot the trimmed_mean change over the years and, as you can see from the below plot, the mortality rate has been gradually decreasing over a period of years.
+
+```{r}
+trimmean %>% ggplot(aes(x=year,y=mean_trimmed))+geom_point(color="darkblue")+geom_line()
+```
+
+
+4.How does maternal mortality (mat_mortality) vary across different continents?
+
+
+
+```{r}
+summary(merge_data_omit$mat_mortality)
+```
+Group by the continent and year, then calculate the median mortality rate
+
+```{r}
+mat_mortal <- merge_data_omit %>% 
+  group_by(continent,year) %>% 
+  dplyr::summarise(mat_avg=median(mat_mortality))
+head(mat_mortal,3)
+```
+Converting the data from long format into wide
+
+```{r}
+mat_wide <- spread(mat_mortal, year, mat_avg)
+mat_wide
+```
+The below plot shows the change of maternal mortality rate across the continents. There seems to be a fluctuation in the mortality rate across the African continent. It seems to be gradually decreasing and that's a good sign.
+We can see some variations in the Oceania continent as well, but remember there are only two countries from Oceania that have contributed data. So we cannot be sure of making any analysis on this.
+
+
+```{r}
+
+mat_mortality_data <- ggplot(mat_mortal, aes(x=year, y=mat_avg, color=continent))+ geom_point()+geom_line()
+mat_mortality_data
+```
+
+###5.Report the absolute and/or relative abundance of countries with low maternal mortality (mat_mortality) over time by continent: Compute some measure of worldwide maternal mortality - you decide - a mean or median or some other quantile or perhaps your current age. Then determine how many countries on each continent have a maternal mortality rate less than this benchmark, for each year.
+
+I have chosen the benchmark to be the median of the motality rate. Then subset the dataset with mortality rate less than the benchmark and find out the number of countries that falls below the benchmark.
+
+
+
+```{r}
+
+measure_mortality <- median(merge_data_omit$mat_mortality)
+
+mat_long_mortality<-merge_data_omit %>%
+  group_by(continent,year) %>% 
+  dplyr::summarise(count=sum(mat_mortality < measure_mortality, na.rm=T),
+    proportion=round(sum(mat_mortality < measure_mortality, na.rm=T)/length(mat_mortality), 2))
+head(mat_long_mortality,3)
+
+```
+Filtering the mortality rate for Europe and finding the  proportion of countries with low mortality rate.
+
+```{r}
+europe_mortality <- mat_long_mortality %>% filter(continent=="Europe")
+tail(europe_mortality,3)
+```
+
+As we can see from the above dataframe, Africa continues to have high mortality rate in the dataset. In the year 2015,out of 25 countries in Africa only one was able to meet the median mortality rate.
+From the second table,Out of 34 countries in Europe each one of them was able to meet the median benchmark 
+
+```{r}
+boxplot(merge_data_omit$mat_mortality~merge_data_omit$continent,col= rainbow(2),main = "Box plot of maternal mortaility across the continents")
+```
+
+  
+
