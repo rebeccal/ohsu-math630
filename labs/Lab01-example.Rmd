@@ -1,5 +1,5 @@
 ---
-title: "Sample Lab1 - EDA:Self Assessment"
+title: "Lab1 - EDA Example"
 author: "Annie"
 date: "September 28, 2018"
 output: html_document
