@@ -1,10 +1,12 @@
 ---
 title: "MATH 530/630"
-subtitle: "Integrative Lab 1 - Exploratory Data Analysis"
-output: 
+subtitle: Integrative Lab 1 - Exploratory Data Analysis
+output:
+  pdf_document:
+    toc: yes
   html_document:
-    toc: TRUE
-    toc_float: TRUE
+    toc: yes
+    toc_float: yes
 ---
 
 ```{r setup, include=FALSE}
@@ -90,7 +92,7 @@ Go to the [gapminder](https://www.gapminder.org/data/) site and find a new indic
 - Read the data file into your EDA .Rmd document using the [`readxl` package](https://readxl.tidyverse.org) (remember, it must be installed first). Use the `here` package, with the `here` function, to build up the relative file path ([example code-through](https://github.com/jennybc/here_here)). Here is an example code chunk:
 
 ```{r}
-internet <- read_xlsx(here::here("data", "Internet user per 100.xlsx"),
+internet <- read_xlsx(here::here("data", "Internet_user_per_100.xlsx"),
                       sheet = 1) %>% 
   clean_names() # highly recommended
 
@@ -108,7 +110,7 @@ internet_tidy <- internet %>%
 
 ```{r}
 # another example dataset
-age_marriage <- read_xlsx(here::here("data", "indicator age of marriage.xlsx"),
+age_marriage <- read_xlsx(here::here("data", "indicator_age_of_marriage.xlsx"),
                       sheet = 1) 
 
 age_marriage
@@ -124,8 +126,7 @@ Pathological in the same way as the previous...
 
 ```{r}
 # yet another example dataset
-alcohol <- read_xlsx(here::here("data", "indicator alcohol consumption  20100830.xlsx"),
-                      sheet = 1) 
+alcohol <- read_xlsx(here::here("data", "indicator_alcohol_consumption _20100830.xlsx"), sheet = 1) 
 
 alcohol
 
