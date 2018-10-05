@@ -260,13 +260,14 @@ vitd_ss <- d_diag %>%
 vitd_ss
 ```
 
+
 Using `dplyr`, show that:
 
 * The total sums of squares is equal to the residual plus the model sums of squares
 
 $$\textrm{total_ss} = \textrm{resid_ss} + \textrm{model_ss}$$
 
-* The total sums of squares divided by $(n-1)$ is equal to the variance of the `y` outcome variable (*hint:* you may need to look how many observations actually contributed to the model- not the same as the original $n$ due to missing values!)
+* The total sums of squares divided by $(n-1)$ is equal to the variance of the `y` outcome variable (*hint:* you may need to look at how many observations actually contributed to the model- not the same as the original $n$ due to missing values!)
 
 $$var_y = \frac{\textrm{total_ss}}{n-1}$$
 
