@@ -12,7 +12,7 @@ editor_options:
 ```{r setup, include = FALSE}
 # set up global options here
 knitr::opts_chunk$set(fig.width = 4, fig.height = 8, fig.path = 'Figs/', 
-                      warning = FALSE, message = FALSE, eval = FALSE)
+                      warning = FALSE, message = FALSE, eval = TRUE)
 ```
 
 Install any of these packages if you don't have them.
@@ -50,7 +50,7 @@ NOTE: equations are auto numbered!
 
 # Read in the advertising data
 
-```{r}
+```{r read_csv}
 ad <- read_csv("http://www-bcf.usc.edu/~gareth/ISL/Advertising.csv") %>% 
   clean_names() %>% 
   select(-x1)
@@ -59,7 +59,7 @@ ad <- read_csv("http://www-bcf.usc.edu/~gareth/ISL/Advertising.csv") %>%
 
 # Explore dataset
 
-```{r}
+```{r view_raw}
 # SO many options
 glimpse(ad)
 head(ad)
@@ -116,7 +116,7 @@ Note that the gray region shows the confidence interval around the line. Call th
 
 Now see what happens when you take away the `method = "lm"` argument (so there is nothing inside the parentheses).
 
-```{r}
+```{r loess}
 # your code goes here
 ```
 
@@ -209,6 +209,10 @@ ggplot(admod_aug, aes(x = , y = ))
 
 What do you think? Is this a good candidate for linear regression? 
 
+Another way to see the relationship
+```{r autoplot}
+autoplot(admod)
+```
 
 
 # If we have time:
