@@ -1,9 +1,9 @@
 /*
 OHSU-themed fonts are:
 Lato (headers)
-Lora (body; my selection!)
+Noto Serif (body)
 Fira Code (code; my selection!)
-Sofia (my selection!)
+Sofia (script; my selection!)
 Author: Alison Presmanes Hill
 Updated: 2018-03-22
 */
@@ -11,8 +11,8 @@ Updated: 2018-03-22
 
 @import url(https://fonts.googleapis.com/css?family=Lato);
 @import url(https://fonts.googleapis.com/css?family=Inconsolata:400,700);
-@import url('https://fonts.googleapis.com/css?family=Lora');
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,700);
+@import url(https://fonts.googleapis.com/css?family=Noto+Serif);
+@import url(https://fonts.googleapis.com/css?family=Sofia);
 
 
 @font-face{
@@ -60,8 +60,7 @@ Updated: 2018-03-22
 }
 
 body { 
-  font-family: 'Lora', 'Palatino Linotype', 'Book Antiqua', Palatino, 'Microsoft YaHei', 'Songti SC', serif;
-  font-weight: light;
+  font-family: 'Noto Serif', 'Palatino Linotype', 'Book Antiqua', Palatino, 'Microsoft YaHei', 'Songti SC', serif;
 }
 
 h1, h2, h3 {
@@ -78,14 +77,12 @@ h1, h2, h3 {
 
 @media print {
   body {
-      font-family: 'Lora', 'Palatino Linotype', 'Book Antiqua', Palatino, 'Microsoft YaHei', 'Songti SC', serif; 
-      font-weight: light;
+      font-family: 'Noto Serif', 'Palatino Linotype', 'Book Antiqua', Palatino, 'Microsoft YaHei', 'Songti SC', serif; 
 }
 
 
 .title-slide h2 {
-  font-family: 'Raleway';
+  font-family: 'Sofia';
 }
-
 
 

@@ -220,6 +220,10 @@ data %>%
 hate_demo %>% 
   select(-state, -cat_trump) %>%  
   cor(., use = "pairwise.complete.obs")
+
+hate_crimes %>% 
+  select(avg_hatecrimes_per_100k_fbi, share_pop_hs, gini_index, share_vote_trump) %>%  
+  cor(., use = "pairwise.complete.obs")
 ```
 
 
@@ -254,6 +258,12 @@ data %>%
   ggpairs()
 ```
 
+```{r include = FALSE}
+hate_demo %>% 
+  select(-state) %>% 
+  ggpairs()
+```
+
 
 And here is some demo output of how to use it using a dataset called `tips`:
 
@@ -276,15 +286,27 @@ tips %>%
 > Make a `ggpairs` plot between all explanatory and outcome variables.
 > Following this narrative in [ModernDive](http://moderndive.com/7-multiple-regression.html#model3EDA), write a few sentences describing the output here.
 
+```{r include = FALSE}
+hate_demo %>% 
+  select(-state) %>% 
+  ggpairs(., aes(color=cat_trump),
+          columns=c("avg_hatecrimes_per_100k_fbi", "share_pop_hs", "gini_index"))
+```
+```{r include = FALSE}
+hate_demo %>% 
+  select(-state) %>% 
+  ggpairs(., aes(color=cat_trump))
+```
+
 # Multiple regression models  (⏰ 20 min)
 
 Do the following:
 
 - Fit a multiple regression model and get the regression table. You'll be assigned **one** of the following models:
-    - Two numerical predictors with a `+` (`gini_index` and `share_pop_hs`)
-    - One numerical / one categorical with parallel slopes (`gini_index` and `cat_trump`)
-    - One numerical / one categorical interaction model (`gini_index` and `cat_trump`)
-    - Two numerical predictors with a `*` (`gini_index` and `share_pop_hs`)
+    1. Two numerical predictors with a `+` (`gini_index` and `share_pop_hs`)
+    1. One numerical / one categorical with parallel slopes (`gini_index` and `cat_trump`)
+    1. One numerical / one categorical interaction model (`gini_index` and `cat_trump`)
+    1. Two numerical predictors with a `*` (`gini_index` and `share_pop_hs`)
 - Sketch out the *modeling equation* for your model (not in your R Markdown)
     - Parallel slopes example [here](http://moderndive.com/7-multiple-regression.html#model4table)
     - Interaction model [here](http://moderndive.com/7-multiple-regression.html#model4interactiontable)
@@ -315,27 +337,61 @@ dim_scatter
 ```
 
 ```{r include = FALSE}
+
+#
 hate_model1 <- lm(avg_hatecrimes_per_100k_fbi ~ 
-                   gini_index + 
-                   cat_trump,
-                 data = hate_demo)
-
-get_regression_table(hate_model1)
-
-
-
-hate_model2 <- lm(avg_hatecrimes_per_100k_fbi ~ 
                    gini_index + 
                    share_pop_hs,
                  data = hate_demo)
 
-get_regression_table(hate_model2)
+get_regression_table(hate_model1)
 
-hate_model3 <- lm(avg_hatecrimes_per_100k_fbi ~ 
-                   gini_index*share_pop_hs,
+#mean
+hate_model1m <- lm(avg_hatecrimes_per_100k_fbi ~ 
+                   I(gini_index-mean(gini_index)) + 
+                   I(share_pop_hs-mean(share_pop_hs)),
                  data = hate_demo)
 
+get_regression_table(hate_model1m)
+
+#z
+hate_model1z <- lm(avg_hatecrimes_per_100k_fbi ~ 
+                   scale(gini_index) + 
+                   scale(share_pop_hs),
+                 data = hate_demo)
+
+get_regression_table(hate_model1z)
+
+#
+hate_model2 <- lm(avg_hatecrimes_per_100k_fbi ~ 
+                   gini_index + 
+                   cat_trump,
+                data = hate_demo)
+
+get_regression_table(hate_model2)
+
+#
+hate_model3 <- lm(avg_hatecrimes_per_100k_fbi ~ 
+                   gini_index * 
+                   cat_trump,
+                data = hate_demo)
+
 get_regression_table(hate_model3)
+
+#
+hate_model4 <- lm(avg_hatecrimes_per_100k_fbi ~ 
+                  gini_index * 
+                  share_pop_hs,
+                data = hate_demo)
+
+get_regression_table(hate_model4)
+
+hate_model4z <- lm(avg_hatecrimes_per_100k_fbi ~ 
+                  scale(gini_index) * 
+                  scale(share_pop_hs),
+                data = hate_demo)
+
+get_regression_table(hate_model4z)
 ```
 
 

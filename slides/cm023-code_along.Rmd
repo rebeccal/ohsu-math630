@@ -73,8 +73,9 @@ skimr::skim(ad) #What's with the '::'
 Traditionally, the response variable (Y) goes on the y-axis, and the predictor variable (X) goes on the x-axis.
 
 ```{r scatterplot}
-adplot <- ggplot(, aes( )) +
-  geom_()
+adplot <- ggplot(ad,aes(x=tv, y=sales)) +
+  geom_point() + 
+  geom_smooth(method="lm")
 adplot
 #What if I don't specifiy the variables in aes()? What if no "geom_?"
 ```
@@ -86,8 +87,8 @@ Is there a relationship between TV advertising budgets and sales?
 # Find the correlation
 
 ```{r correlation}
-data %>% 
-  dplyr?(pearson = cor( , ))
+ad %>% 
+  dplyr::summarize(pearson = cor(sales,tv))
 ```
 
 Would you quantify the value of correlation calculated above as being:
@@ -117,7 +118,10 @@ Note that the gray region shows the confidence interval around the line. Call th
 Now see what happens when you take away the `method = "lm"` argument (so there is nothing inside the parentheses).
 
 ```{r loess}
-# your code goes here
+adplot <- ggplot(ad,aes(x=tv, y=sales)) +
+  geom_point() + 
+  geom_smooth()
+adplot
 ```
 
 Call the help function `?geom_smooth` and figure out the default setting for the `method` argument. What kind of method is this geom using to create the line you see in the code above?
@@ -127,22 +131,23 @@ Call the help function `?geom_smooth` and figure out the default setting for the
 # Build a linear regression model
 
 ```{r model}
-admod <- lm(outcome ~ predictor, data = )
+admod <- lm(sales ~ tv, data = ad)
 ```
 
 Print that object by calling `admod`, and use the `summary()` function also. What are you looking at?
 
 ```{r}
-# your code goes here
+summary(admod)
 ```
 
 Note that this output is not very "tidy". What different "sections" of output do you see?
 
 [your answer goes here:]
 
-1. markdown
-1. will
-1. format this correctly
+1. formual
+1. Residuals
+1. Coefficients
+1. Model level statistics
 
 We'll come back to this topic later.
 

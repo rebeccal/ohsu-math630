@@ -361,11 +361,11 @@ $ avg_hatecrimes_per_100k_fbi &lt;dbl&gt; 1.8064105, 1.6567001, 3.4139280, 0...<
  n obs: 51 
  n variables: 5 
 
--- Variable type:character ---------------------------------------------------------------------------------------------
+-- Variable type:character ------------------------------------------------------------------------------------------
  variable missing complete  n min max empty n_unique
     state       0       51 51   4  20     0       51
 
--- Variable type:numeric -----------------------------------------------------------------------------------------------
+-- Variable type:numeric --------------------------------------------------------------------------------------------
                     variable missing complete  n mean    sd   p0  p25  p50
  avg_hatecrimes_per_100k_fbi       1       50 51 2.37 1.71  0.27 1.29 1.99
                   gini_index       0       51 51 0.45 0.021 0.42 0.44 0.45
@@ -469,12 +469,12 @@ tips %&gt;%
 <p>Do the following:</p>
 <ul>
 <li>Fit a multiple regression model and get the regression table. You’ll be assigned <strong>one</strong> of the following models:
-<ul>
+<ol style="list-style-type: decimal">
 <li>Two numerical predictors with a <code>+</code> (<code>gini_index</code> and <code>share_pop_hs</code>)</li>
 <li>One numerical / one categorical with parallel slopes (<code>gini_index</code> and <code>cat_trump</code>)</li>
 <li>One numerical / one categorical interaction model (<code>gini_index</code> and <code>cat_trump</code>)</li>
 <li>Two numerical predictors with a <code>*</code> (<code>gini_index</code> and <code>share_pop_hs</code>)</li>
-</ul></li>
+</ol></li>
 <li>Sketch out the <em>modeling equation</em> for your model (not in your R Markdown)
 <ul>
 <li>Parallel slopes example <a href="http://moderndive.com/7-multiple-regression.html#model4table">here</a></li>
