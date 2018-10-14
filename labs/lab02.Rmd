@@ -120,7 +120,7 @@ You may wish to have a level 1 header (`#`) for your EDA, then use level 2 sub-h
 - How many rows/observations?
 - Which variables are numbers?
 - Which are categorical variables (numeric or character variables with variables that have a fixed and known set of possible values; aka [factor](https://stats.idre.ucla.edu/r/modules/factor-variables/) variables)?
-- Complete this sentence: "There is one row per..."
+- Complete this sentence: "There is one row/observation per..."
 - What are the correlations between variables? Does each scatterplot support a linear relationship between variables? Do any of the correlations appear to be conditional on the value of a categorical variable (like `sex`)?
 
 At this stage, you may also find you want to use `filter`, `mutate`, `arrange`, `select`, or `count`. Let your questions lead you! 
@@ -203,7 +203,7 @@ ggplot(d_pts, aes(x = zhfa, y = residual)) +
 
 # Outlier Analysis
 
-Examine points with high leverage and discrepancy (use the externally studentized residuals as the index for discrepancy). Remember that these statistics are not in the output of the `moderndive::get_regression_points()` function- you'll want to use `broom::augment()` instead.
+Examine points with high leverage and discrepancy (use the externally studentized residuals as the index for discrepancy). Remember that these statistics are not in the output of the `moderndive::get_regression_points()` function- you'll want to use `broom::augment()` and `rstudent` instead.
 
 * How many observations would you expect to have high discrepancy in this sample? 
     * You may want to account for how many females versus males you would expect
