@@ -49,7 +49,6 @@ Using this key, your self-assessment should include even **more** narrative; whe
 - Correct worked solutions with some discussion and analysis of why your initial solution was incorrect, and reflection on the source of your confusion (if you got an answer correct, this is not necessary)
 - Attributions as appropriate to other students who helped you, or other sources such as lecture notes, readings, online resources, etc. that helped you 
 
-
 # Logistics
 
 You will use R Markdown to construct your analysis report. You'll submit your work as an html file knit from your `.Rmd` file (please leave the default code chunk options for `eval = TRUE` and `echo = TRUE`). Your lab should serve as your own personal cheatsheet in the future for regression analyses. Give yourself the cheatsheet you deserve! 
