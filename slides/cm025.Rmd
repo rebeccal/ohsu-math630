@@ -5,8 +5,6 @@ subtitle: "Outliers & Diagnostics"
 output:
   xaringan::moon_reader:
     css: ["default", "css/ohsu.css", "css/ohsu-fonts.css"]
-    header-includes:
-    - \usepackage[amsmath]{amsmath}
     lib_dir: libs
     nature:
       highlightStyle: atelier-lakeside-light
