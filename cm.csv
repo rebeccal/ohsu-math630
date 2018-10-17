@@ -11,10 +11,9 @@ Tues,October,9,2.3: Linear models (general),<a href='slides/cm023.html'>2.3  - L
 Thurs,October,11,2.4: Multiple regression,,Lab 2.4,slides/cm024_lab.html,,cm024 (in class lab),
 Tues,October,16,2.5: LM diagnostics/outliers,<a href='slides/cm025.html'>2.5 - LM Diagnostics and Outliers</a>,,,10/31/2017,Slide deck 09 from fall 2017 - cm025-026 slides and cm025 lab,
 ,Week ,Four-Five,3.0 Probability,,,,,,
-Thurs,October ,18,3.1: Probability Review,<a href='slides/cm031-probability.pdf'>3.1 - Probability</a>,,,9/28/2017,Slide deck 02 from fall 2017,<a href='slides/02-probability.pdf'>02-probability</a>
-Tues,October,23,3.2: Discrete Probability Functions,,,,10/3/2017,Slide deck 03 from fall 2017,<a href='slides/03-discrete-rvs.pdf'>03-discrete-rvs</a>
-Thurs,October,25,3.3: Continuous Probability Functions,,,,10/5/2017,Slide deck 04 from fall 2017,"<a href='slides/04-continuous.pdf'>04-continuous</a> 
-<br> (https://github.com/apreshill/conj620labs)"
+Thurs,October ,18,3.1: Probability Review,<a href='slides/cm031.pdf'>3.1 - Probability and Random Variables</a>,,,9/28/2017,Slide deck 02 from fall 2017,
+Tues,October,23,3.2: Discrete Probability Functions,<a href='slides/cm032.pdf'>3.2 - Discrete Random Variables</a>,,,10/3/2017,Slide deck 03 from fall 2017,
+Thurs,October,25,3.3: Continuous Probability Functions,<a href='slides/cm033.pdf'>3.3 - Continuous Random Variables</a> ,,,10/5/2017,Slide deck 04 from fall 2017,
 ,Week ,Six-Eight,4.0 Inference,,,,,,
 Tues,October,30,4.1: Bootstrapping (confidence intervals),,,,Skipped??,cm032 (slide deck),<a href='slides/cm041.html'>cm041</a>
 Thurs,November,1,4.2: Sampling distributions,,,,10/10&17/2017,Slide deck 05 from fall 2017 and Conj cm042,"<a href='slides/05-sampling.pdf'>05-sampling</a>
