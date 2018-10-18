@@ -378,6 +378,26 @@ hate_model3 <- lm(avg_hatecrimes_per_100k_fbi ~
 
 get_regression_table(hate_model3)
 
+hate_model3c <- lm(avg_hatecrimes_per_100k_fbi ~ 
+                   I(gini_index - mean(gini_index))* 
+                   cat_trump,
+                 data = hate_demo)
+
+#what if I just do two models??
+hate_model3c_0 <- lm(avg_hatecrimes_per_100k_fbi ~ 
+                   I(gini_index - mean(gini_index)),
+                 data = hate_demo[hate_demo$cat_trump=="less than half",])
+
+hate_model3c_1 <- lm(avg_hatecrimes_per_100k_fbi ~ 
+                   I(gini_index - mean(gini_index)), 
+                 data = hate_demo[hate_demo$cat_trump=="more than half",])
+tidy(hate_model3c)
+tidy(hate_model3c_0)
+tidy(hate_model3c_1)
+glance(hate_model3c)
+glance(hate_model3c_0)
+glance(hate_model3c_1)
+
 #
 hate_model4 <- lm(avg_hatecrimes_per_100k_fbi ~ 
                   gini_index * 

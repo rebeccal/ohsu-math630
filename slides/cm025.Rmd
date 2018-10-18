@@ -288,9 +288,9 @@ ggplot(hate_demo, aes(x = gini_index,
 
 Would this be easier to interpret after centering the predictor `gini_index`?
 
-$$\widehat{\textrm{avg_crimes}_{trump=1}} = 2.54 - 7.3*\textrm{gini_index}$$
+$$\widehat{\textrm{avg_crimes}_{trump=1}} = 1.98 - 7.3*\textrm{gini_index}$$
 
-$$\widehat{\textrm{avg_crimes}_{trump=0}} = 1.98 + 50.6*\textrm{gini_index}$$
+$$\widehat{\textrm{avg_crimes}_{trump=0}} = 2.54 + 50.6*\textrm{gini_index}$$
 
 ```{r echo = FALSE}
 hate_int <- lm(avg_hatecrimes_per_100k_fbi ~ 
