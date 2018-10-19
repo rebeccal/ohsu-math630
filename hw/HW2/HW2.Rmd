@@ -1,42 +1,207 @@
 ---
-title: "Homework 2"
-subtitle: "Math 530/630 - Fall 2018"
-output: pdf_document
+subtitle: Math 530/630
+params:
+  hw_title: Homework 2
+  key_title: Homework 2 - Key
+  key: FALSE
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+title: "`r ifelse (params$key, params$key_title, params$hw_title)`"
 ---
 
-1. A coin is tossed three times and the sequence of heads and tails is recorded.
+<!-- To make the HW key -->
+<!-- rmarkdown::render("hw/HW2/HW2.Rmd", output_file = "HW2-key.pdf",  params = list(key=TRUE), output_format = "pdf_document") -->
+<!-- rmarkdown::render("hw/HW2/HW2.Rmd", output_file = "HW2-key.html", params = list(key=TRUE), output_format = "html_document") -->
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.width=3, fig.height=3)
+library(tibble)
+library(ggplot2)
+```
+
+
+1. A coin is tossed three times and the sequence of heads and tails is recorded.  
     a. List the sample space.
-    b. :ist the elements that make up the following events: 
-        - $A =$ at least two heads; 
-        - $B =$ the first two tosses are heads; 
-        - $C =$ the last toss is a tail.
+    b. List the elements that make up the following events: 
+        1. $A =$ at least two heads; 
+        1. $B =$ the first two tosses are heads; 
+        1. $C =$ the last toss is a tail.
     c. List the elements of the following events:  
-        - complement of $A$, 
-        - $A \cap B$, 
-        - $A \cup C$.
+        1. complement of $A$, 
+        1. $A \cap B$, 
+        1. $A \cup C$.  
+  
+```{asis, echo=params$key}
+Note, for all answers in this homework that don't explicitly call for R, I don't require or expect that you use R. I use it on most problems just for the sake of convenience and so you can follow the calculations.
+```
+
+
+```{asis, echo = params$key}
+<b>Answers</b>
+
+a) hhh, ttt, hht, tth, htt, hth, tht, thh
+b)  
+    1. hhh, hht, hth, thh
+    2. hhh, hht
+    3. ttt, hht, htt, tht
+c)  
+    1. ttt, tth, tht, htt
+    2. hhh, hht
+    3. ttt, hht, htt, tht, hhh, hth, thh
+``` 
 
 
 2. In a city, 65% of people drink coffee, 50% drink tea, and 25% drink both.
     a. What is the probability that a person chosen at random will drink at least one of coffee or tea? 
     b. Will drink neither? 
 
-3. In this problem, we'll explore quantile-quantile (Q-Q) plots. A quantile is the proportion of cases we find below a certain value, calculated from the inverse of the cumulative distribution function (CDF) of a random variable, *X*. The *p*th quantile of *X* is the value $q_p$ such that $P(X\leq{q_p})=p$. In other words, *p* is the amount of area under the density curve of *X* that is to the left of $q_p$. So the smallest observation in *X* corresponds to a probability of 0 and the largest to a probability of 1. A Q-Q plot displays quantiles of one distribution against quantiles of another. What this means is that the data are ranked and sorted. A normal Q-Q plot displays quantiles of the normal distribution on the *x*-axis against quantiles of the empirical (i.e., the observed) distribution on the *y*-axis. A straight line is typically plotted through the points corresponding to the 1st and 3rd quantiles of each variable. If the empirical data is normally distributed, all the points on the normal Q-Q plot will form a perfectly straight line. 
+```{asis, echo=params$key}
+<b>Answers</b>
+```
 
+
+```{asis, echo=params$key}
+ a) .9
+```
+
+```{r, eval = params$key, echo=params$key}
+coffee <- .65
+tea <- .5
+both <- .25
+```
+
+```{asis, echo=params$key}
+Recalling that $P(A \cup B) = P(A) + P(B) - P(A \cap B)$:
+```
+
+```{r, eval = params$key, echo=params$key}
+coffee_or_tea <- coffee + tea - both
+coffee_or_tea
+```
+
+```{asis, echo=params$key}
+b) .1
+
+Recalling that $P(A^{c}) = 1 - P(A)$:
+```
+
+```{r, eval = params$key, echo = params$key}
+1 - coffee_or_tea
+```
+
+3. In this problem, we'll explore quantile-quantile (Q-Q) plots. A quantile is the proportion of cases we find below a certain value, calculated from the inverse of the cumulative distribution function (CDF) of a random variable, *X*. The *p*th quantile of *X* is the value $q_p$ such that $P(X\leq{q_p})=p$. In other words, *p* is the amount of area under the density curve of *X* that is to the left of $q_p$. So the smallest observation in *X* corresponds to a probability of 0 and the largest to a probability of 1. A Q-Q plot displays quantiles of one distribution against quantiles of another. What this means is that the data are ranked and sorted. A normal Q-Q plot displays quantiles of the normal distribution on the *x*-axis against quantiles of the empirical (i.e., the observed) distribution on the *y*-axis. A straight line is typically plotted through the points corresponding to the 1st and 3rd quantiles of each variable. If the empirical data is normally distributed, all the points on the normal Q-Q plot will form a perfectly straight line. 
     a. Draw a random sample of size *n* = 15 from $N(0,1)$ and plot both the normal quantile plot and the histogram. Do the points on the quantile plot appear to fall on a straight line? Is the histogram symmetric, unimodal, and mound-shaped? Do this several times.
     b. Repeat part(a) for of size n = 30, n = 60, and n = 100.
     c. What lesson do you draw about using graphs to assess whether or not a data set follows a normal distribution?
 
-```{r eval = FALSE}
-library(tibble)
-x <- as_data_frame(rnorm(15)) # draw random sample of size 15 from N(0,1)
-library(ggplot2)
-ggplot(x, aes(sample = value)) +
-  stat_qq() +
-  stat_qq_line()
-ggplot(x, aes(x = value)) + 
-  geom_histogram()
+
+```{asis, echo = params$key}
+<b>Answers</b>
+
+<b>*Note:</b> When plotting histograms, you typically want to reduce the number of bins until there are few/no breaks (empty bins) in your histogram. With small data sets, this can make it hard to visualize the true underlying distribution, so sometimes a density plot can be a bit more helpful here. From `?geom_density`:
+
+> *"Computes and draws kernel density estimate, which is a smoothed version of the histogram. This is a useful alternative to the histogram for continuous data that comes from an underlying smooth distribution."*
 ```
 
 
+```{r eval = params$key, echo = TRUE}
+library(tibble)
+library(ggplot2)
 
-  
+x <- as_tibble(rnorm(15)) # draw random sample of size 15 from N(0,1)
+
+ggplot(x, aes(sample = value)) +
+  stat_qq() +
+  stat_qq_line()
+```
+
+```{r, eval = params$key, echo = params$key}
+ggplot(x, aes(x = value)) + 
+  geom_histogram(bins = 5)
+
+ggplot(x, aes(x = value)) + 
+  geom_density()
+```
+
+\newpage
+
+```{asis, echo=params$key}
+Now here are the results for n = 30, n = 60, and n = 100.
+```
+
+```{r, include = params$key}
+
+x <- as_tibble(rnorm(30)) # draw random sample of size 15 from N(0,1)
+
+ggplot(x, aes(sample = value)) +
+  stat_qq() +
+  stat_qq_line()
+
+ggplot(x, aes(x = value)) + 
+  geom_histogram(bins = 8)
+
+ggplot(x, aes(x = value)) + 
+  geom_density()
+```
+
+\newpage
+
+```{r, include = params$key}
+
+x <- as_tibble(rnorm(60)) # draw random sample of size 15 from N(0,1)
+
+ggplot(x, aes(sample = value)) +
+  stat_qq() +
+  stat_qq_line()
+
+ggplot(x, aes(x = value)) + 
+  geom_histogram(bins = 12)
+
+ggplot(x, aes(x = value)) + 
+  geom_density()
+```
+
+\newpage
+```{r, include = params$key}
+
+x <- as_tibble(rnorm(100)) # draw random sample of size 15 from N(0,1)
+
+ggplot(x, aes(sample = value)) +
+  stat_qq() +
+  stat_qq_line()
+
+ggplot(x, aes(x = value)) + 
+  geom_histogram(bins = 12)
+
+ggplot(x, aes(x = value)) + 
+  geom_density()
+```
+
+
+\newpage
+```{asis, echo = params$key} 
+
+Here's the meat of the problem. Your answer should be something along the lines of: 
+
+**For small values of $n$, samples drawn from the normal distribution may not have the classic "bell shaped" distribution. In addition, qq-plots may not fall precisely on a straight line.**
+
+And an example with a very large $n$ just to drive the point home...
+```
+
+```{r, include = params$key}
+
+x <- as_tibble(rnorm(10000)) # draw random sample of size 15 from N(0,1)
+
+ggplot(x, aes(sample = value)) +
+  stat_qq() +
+  stat_qq_line()
+
+ggplot(x, aes(x = value)) + 
+  geom_histogram(bins = 40)
+
+ggplot(x, aes(x = value)) + 
+  geom_density()
+```
