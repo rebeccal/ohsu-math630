@@ -1,4 +1,4 @@
-Weekday,Month,Day,CM / Block,Reading,material,material_link,px,px_link,i_lab,i_lab_link,hw,hw_link,class_lab,cl_link,staged,
+Weekday,Month,Day,CM / Block,Reading,material,material_link,px,px_link,i_lab,i_lab_link,hw,hw_link,class_lab,cl_link,staged,notes
 Tues,September,25,1.1: Summarizing data,"<a href='http://moderndive.com/2-getting-started.html'>- MD Ch 2: Getting Started</a>
 <br><a href='https://www.markdowntutorial.com'>- MD: Markdown Tutorial</a>
 <br><a href='http://r4ds.had.co.nz/r-markdown.html'>- R4DS: R Markdown</a>
@@ -21,7 +21,7 @@ Tues,October,9,2.3: Linear models (general),"<a href='https://www.nature.com/art
 <br><a href='https://www.discoveringstatistics.com/repository/linearmodels.pdf'>- Discovering Statistics: Linear Models</a>", Intro to Modeling in the Tidyverse (Ch 3 + 4),https://www.datacamp.com/courses/modeling-with-data-in-the-tidyverse,,,Lab 01 - Self-assessment,labs/Lab01-example.html,,,2.2,slides/cm022_lab.html,,
 Thurs,October,11,2.4: Multiple regression,<a href='http://moderndive.com/7-multiple-regression#model4.html'>- MD Ch7.2: Multiple Regression</a>, Exploratory Data Analysis Case Study (Ch 1 + 2),https://www.datacamp.com/courses/exploratory-data-analysis-in-r-case-study,,,,,HW1,hw/HW1/HW1.pdf,,,,
 Tues,October,16,2.5: LM diagnostics/outliers,"<a href = 'https://www.nature.com/articles/nmeth.3812'>- Nature POS: Outliers</a>
-<br><a href = 'https://www.nature.com/articles/nmeth.3854'>- Nature POS: Diagnostics</a>", Exploratory Data Analysis Case Study (Ch 3 + 4),https://www.datacamp.com/courses/exploratory-data-analysis-in-r-case-study,,,,,,,2.4,slides/cm024_lab.html,,
+<br><a href = 'https://www.nature.com/articles/nmeth.3854'>- Nature POS: Diagnostics</a>", Exploratory Data Analysis Case Study (Ch 3 + 4),https://www.datacamp.com/courses/exploratory-data-analysis-in-r-case-study,,,,,,,2.4,slides/cm024_lab.html,,Add DataCamp Correlation and Regression course
 Thurs,October ,18,3.1: Probability,<a href=reference/Wasserman-all_of_stats.pdf>- All of Statistics: Chapter 2</a>, Foundations of Probability in R (Chap 1 + 2),https://www.datacamp.com/courses/foundations-of-probability-in-r,P1,final_project.html,,,,,,,,
 Tues,October,23,3.2: Discrete Probability Functions,, Foundations of Probability in R (Chap 3 + 4),https://www.datacamp.com/courses/foundations-of-probability-in-r,,,Lab 02 - Linear Regression,labs/lab02.html,,,,,,
 Thurs,October,25,3.3: Continuous Probability Functions,<a href='http://moderndive.com/8-sampling.html'>- MD Ch 8: Sampling</a>,,,,,,,,,,,,
