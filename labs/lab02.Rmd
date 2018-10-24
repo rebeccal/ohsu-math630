@@ -217,8 +217,9 @@ d_diag <- augment(dmod, data = vitd) %>%
   mutate(.ext.resid = rstudent(dmod))
 
 # leverage
-k <- 3
-mean_hat <- (k + 1)/nrow(vitd)
+k <- 4 #There are 4 predictors/coefficients, sex, age, sex X age, and z-score
+# k <- sum(d_diag$.hat)
+mean_hat <- (k + 1)/nrow(vitd) # Or, mean(d_diag$.hat)
 d_diag %>% 
   select(id, .hat) %>%
   filter(.hat > (3*mean_hat))
@@ -232,7 +233,7 @@ d_diag %>%
 
 ```{r include = FALSE}
 n <- nrow(vitd)
-k <- 3 # predictors (not including intercept)
+k <- 4 # predictors (not including intercept) There are 4 predictors, sex, age, sex X age, and z-score 
 d <- 4/(n - k - 1)
 d
 

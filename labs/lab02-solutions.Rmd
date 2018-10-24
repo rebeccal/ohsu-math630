@@ -300,8 +300,10 @@ d_diag <- augment(dmod, data = vitd) %>%
   mutate(.ext.resid = rstudent(dmod))
 
 # leverage
-k <- 3
-mean_hat <- (k + 1)/nrow(small_vitd)
+k <- 4 # Number of predictors/coeeficients excluding the intercept, i.e. age, sex, age*sex, z_score
+# k <- sum(d_diag$.hat)-1 # The sum includes the intercept, so I subtracted it back out
+
+mean_hat <- (k + 1)/nrow(d_diag) # Or, mean(d_diag$.hat)
 d_diag %>% 
   select(id, .hat) %>%
   filter(.hat > (3*mean_hat))
@@ -324,8 +326,8 @@ d_diag %>%
 ```
 
 ```{r include = TRUE}
-n <- nrow(small_vitd)
-k <- 3 # predictors (not including intercept)
+n <- nrow(d_diag)
+k <- 4 # predictors (not including intercept)
 d <- 4/(n - k - 1)
 d
 
@@ -353,7 +355,7 @@ ggplot(d_diag, aes(x = .ext.resid, y = .cooksd, color = sex)) +
 * How many observations would you expect to have high discrepancy in this sample? You may want to account for how many females versus males you would expect.
   - DISCREPANCY: I expect 5% of observations to have high discrepancy, which is measured by externally studentized residuals, so I would expect generally $.05 \times 529 = 26$ observations to be high on this metric. Given the roughly equal sample sizes, this means I'd expect 13 high values for males and females. Instead, I see 7 females with high leverage, compared to 19 males. This is a pretty big difference, and suggests (as I observed with the unstandardized "raw" residuals), that the model may better explain variability in vitamind d levels for females than for males.
 * Do you see any observations that have *both* high leverage and discrepancy? 
-  - LEVERAGE: 9 observations with high leverage.
+  - LEVERAGE: 4 observations with high leverage.
   - LEVERAGE + DISCREPANCY: 0 observations. Huzzah.
 * Do any points that are either high leverage or high discrepancy **also** have high influence on the regression estimates, as measured by Cook's distance?
   - Yes! I do see one point with high leverage (`.hat`) and high cooks d values: 755 (a male)
