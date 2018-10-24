@@ -301,7 +301,7 @@ d_diag <- augment(dmod, data = vitd) %>%
 
 # leverage
 k <- 4 # Number of predictors/coeeficients excluding the intercept, i.e. age, sex, age*sex, z_score
-# k <- sum(d_diag$.hat)-1 # The sum includes the intercept, so I subtracted it back out
+# OR,  k <- sum(d_diag$.hat)-1 # The sum of the .hat scores is the number of coefficients, including the intercept
 
 mean_hat <- (k + 1)/nrow(d_diag) # Or, mean(d_diag$.hat)
 d_diag %>% 
