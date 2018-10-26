@@ -34,10 +34,10 @@ Tues,November,6,4.3: Hypothesis testing (resampling),"<a href='http://moderndive
 <br><a href='http://moderndive.com/b-appendixb'>- MD Appendix B: Inference Examples</a>", Inference for Categorical Data (Ch 1 + 2),https://www.datacamp.com/courses/inference-for-categorical-data,,,,,,,,,,
 Thurs,November,8,4.4: Hypothesis testing (classical),"<a href='https://www.nature.com/articles/nmeth.2698'>- Nature POS: t-tests</a>
 <br><a href='https://www.nature.com/articles/nmeth.2858'>- Nature POS: comparing samples</a>", Inference for Categorical Data (Ch 3 + 4),https://www.datacamp.com/courses/inference-for-categorical-data,,,,,,,4.3,slides/cm043_lab.html,Midterm,
-Tues,November,13,4.5: t-test as Linear Regression,, Inference for Linear Regression (Ch 1 + 2),https://www.datacamp.com/courses/inference-for-linear-regression,,,,,,,,,,
+Tues,November,13,4.5: t-test as Linear Regression,, Inference for Linear Regression (Ch 1 + 2),https://www.datacamp.com/courses/inference-for-linear-regression,,,,,Midterm,,,,,
 Thurs,November,15,5.1: Many means,"<a href='https://www.nature.com/articles/nmeth.3005'>- Nature POS: ANOVA</a>
 <br><a href = 'https://arxiv.org/pdf/1412.3416.pdf'>- ANOVA</a>
-<br><a href=https://www.discoveringstatistics.com/repository/onewayanova.pdf>- Discovering Statistics: One-way Independent ANOVA</a>", Inference for Linear Regression (Ch 3 - 5),https://www.datacamp.com/courses/inference-for-linear-regression,P2,final_project.html,,,Midterm,,,,,
+<br><a href=https://www.discoveringstatistics.com/repository/onewayanova.pdf>- Discovering Statistics: One-way Independent ANOVA</a>", Inference for Linear Regression (Ch 3 - 5),https://www.datacamp.com/courses/inference-for-linear-regression,P2,final_project.html,,,,,,,,
 Tues,November,20,5.2: ANOVA by hand,<a href='https://www.discoveringstatistics.com/repository/anovabyhand.pdf'>- Discovering Statistics: The Theory of ANOVA</a>,,,,,Lab 03 - Comparing Means,labs/lab03.html,HW3,,,,HW3,hw/HW3/HW3.pdf
 Thurs,November,22,NO CLASS,,,,,,,,,,,,,
 Tues,November,27,5.3: Contrasts,<a href='https://www.nature.com/articles/nmeth.2900'>- Nature POS: multiple comparisons</a>,,,P3,final_project.html,Lab 03 - Self-assessment,,,,5.2,slides/cm052_lab.html,,
