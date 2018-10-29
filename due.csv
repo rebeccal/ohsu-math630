@@ -25,11 +25,11 @@ Tues,October,16,2.5: LM diagnostics/outliers,"<a href = 'https://www.nature.com/
 Thurs,October ,18,3.1: Probability,<a href=reference/Wasserman-all_of_stats.pdf>- All of Statistics: Chapter 2</a>, Foundations of Probability in R (Chap 1 + 2),https://www.datacamp.com/courses/foundations-of-probability-in-r,P1,final_project.html,,,,,,,,
 Tues,October,23,3.2: Discrete Probability Functions,, Foundations of Probability in R (Chap 3 + 4),https://www.datacamp.com/courses/foundations-of-probability-in-r,,,Lab 02 - Linear Regression,labs/lab02.html,,,,,,
 Thurs,October,25,3.3: Continuous Probability Functions,<a href='http://moderndive.com/8-sampling.html'>- MD Ch 8: Sampling</a>,,,,,,,,,,,,
-Tues,October,30,4.1: Bootstrapping (confidence intervals),"<a href='http://moderndive.com/9-confidence-intervals'>- MD  Ch 9: Confidence Intervals</a>
+Tues,October,30,4.1: Sampling distributions,"<a href='http://moderndive.com/9-confidence-intervals'>- MD  Ch 9: Confidence Intervals</a>
 <br><a href='https://www.nature.com/articles/nmeth.3414'>- Nature POS: Bootstrapping</a>
 <br>Optional:
 <br><a href='https://youtu.be/BCMjVc9ncFo'>- The infer R package (video)</a>", Inference for Numerical Data (Ch 1 + 2),https://www.datacamp.com/courses/inference-for-numerical-data,,,Lab 02 - Self-assessment,labs/lab02-solutions.html,,,,,,
-Thurs,November,1,4.2: Sampling distributions,, Inference for Numerical Data (Ch 3 + 4),https://www.datacamp.com/courses/inference-for-numerical-data,,,,,HW2,hw/HW2/HW2.pdf,,,,
+Thurs,November,1,4.2: Bootstrapping (confidence intervals),, Inference for Numerical Data (Ch 3 + 4),https://www.datacamp.com/courses/inference-for-numerical-data,,,,,HW2,hw/HW2/HW2.pdf,,,,
 Tues,November,6,4.3: Hypothesis testing (resampling),"<a href='http://moderndive.com/10-hypothesis-testing.html'>- MD Ch 10: Hypothesis Testing </a>
 <br><a href='http://moderndive.com/b-appendixb'>- MD Appendix B: Inference Examples</a>", Inference for Categorical Data (Ch 1 + 2),https://www.datacamp.com/courses/inference-for-categorical-data,,,,,,,,,,
 Thurs,November,8,4.4: Hypothesis testing (classical),"<a href='https://www.nature.com/articles/nmeth.2698'>- Nature POS: t-tests</a>

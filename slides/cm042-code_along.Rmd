@@ -1,5 +1,6 @@
 ---
-title: 'Bootstrapping'
+title: "Math 530/630 CM 4.2 - lab"
+subtitle: 'Bootstrapping and Confidence Intervals' 
 #author: "Student Name"
 #date: "`r Sys.Date()`"
 output:
@@ -188,9 +189,9 @@ mh_resample3 <- male_heights %>%
 
 Now let's `generate` 1,000 replicates, `calculate` the mean for each replicate, and make a histogram to show the distribution of all the 1,000 calculated means.
 
-```{r}
+```{r big-replicate}
 #Make some space
-rm(mh_resample1, mh_resample2, mh_resample3, mh_boot)
+rm(mh_resample1, mh_resample2, mh_resample3)
 
 set.seed(1701)
 mh_boot <- male_heights %>% 
@@ -201,9 +202,9 @@ mh_boot %>%
   count(replicate)
 ```
 
-```{r}
+```{r visualize-big-replicate}
 #Make some space
-rm(mh_resample1, mh_resample2, mh_resample3, mh_boot)
+rm(mh_boot)
 
 set.seed(1701)
 mh_means <- male_heights %>% 
@@ -236,7 +237,7 @@ mh_means %>%
 
 We can also summarize the sampling distribution with a "confidence interval", which is a range that contains a specified fraction, like 95%, of the values in `mh_means`.
 
-The central 95% confidence interval is between the 2.5th and 97.55th percentiles of the sampling distribution.
+The central 95% confidence interval is between the 2.5th and 97.5th percentiles of the sampling distribution.
 
 ```{r}
 (percentile_ci <- mh_means %>% 
