@@ -3,7 +3,7 @@
   <head>
     <title>Math 530/630 CM 4.2</title>
     <meta charset="utf-8">
-    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link rel="stylesheet" href="css\ohsu.css" type="text/css" />
     <link rel="stylesheet" href="css\ohsu-fonts.css" type="text/css" />
   </head>
@@ -30,34 +30,23 @@ class: center, middle, inverse, title-slide
 
 
 
+
+
 class: middle, center
+
 ![](images/StatisticsVSProbability.png)
 
-[Ying Lin, course notes](http://srjcstaff.santarosa.edu/~ylin/Math15/notes/Sampling_Distribution_CLT.htm)
-
-
----
-class:middle, inverse, center
-
-## ModernDive
-
-[Chapter 8: Sampling](https://moderndive.com/8-sampling.html)
-
-[Chapter 9: Confidence Intervals](https://moderndive.com/9-confidence-intervals.html)
+[Ying Lin; course notes](http://srjcstaff.santarosa.edu/~ylin/Math15/notes/Sampling_Distribution_CLT.htm)
 
 ---
-class:middle, inverse, center
-## Plan for today
-
---
+class: middle, center 
 
 ## Bootstrapping
 
 ![](https://media.giphy.com/media/pfhdDIOWiYXaE/giphy.gif)
 
 ---
-class:middle, inverse, center
-
+class:middle, center
 ## Challenge
 
 What is "bootstrapping"?
@@ -66,8 +55,7 @@ What is a "confidence interval"?
 
 
 ---
-class:middle, inverse, center
-
+class:middle, center
 ## Challenge
 
 What is "bootstrapping"?
@@ -91,7 +79,6 @@ The data we originally collect estimates its own *approximate sampling distribut
 According to http://www.heightdb.com/
 
 ---
-## Just the male celebrities
 
 ![](images/bootstrap-slides/bootstrap-slides.002.png)
 
@@ -105,7 +92,7 @@ ggplot(celeb_heights, aes(x = Height)) +
   geom_histogram(binwidth = 5, color = "white", fill = "turquoise")
 ```
 
-&lt;img src="cm042_files/figure-html/unnamed-chunk-5-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+&lt;img src="cm042_files/figure-html/unnamed-chunk-4-1.png" width="50%" /&gt;
 
 ---
 ## EDA on `celeb_heights`
@@ -160,7 +147,7 @@ ggplot(celeb_heights, aes(x = Height)) +
   geom_vline(aes(xintercept = mean(Height)), colour = "red")
 ```
 
-&lt;img src="cm042_files/figure-html/unnamed-chunk-7-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+&lt;img src="cm042_files/figure-html/unnamed-chunk-6-1.png" width="40%" /&gt;
 
 
 ---
@@ -221,7 +208,7 @@ ggplot(celeb_heights, aes(x = Height)) +
 ![](images/bootstrap-slides/bootstrap-slides.016.png)
 
 ---
-class:middle, center, inverse
+class:middle, center
 ## How to do this in R
 
 
@@ -260,7 +247,7 @@ set.seed(0)
 
 .pull-right[
 
-&lt;img src="cm042_files/figure-html/unnamed-chunk-9-1.png" width="65%" style="display: block; margin: auto;" /&gt;
+&lt;img src="cm042_files/figure-html/unnamed-chunk-8-1.png" width="60%" /&gt;
 
 The mean is 176.08
 ]
@@ -335,25 +322,25 @@ class:middle
 ## Let's visualize two
 
 .pull-left[
-&lt;img src="cm042_files/figure-html/unnamed-chunk-13-1.png" width="65%" style="display: block; margin: auto;" /&gt;
+&lt;img src="cm042_files/figure-html/unnamed-chunk-12-1.png" width="60%" /&gt;
 
 The mean is 170.33
 ]
 
 .pull-left[
-&lt;img src="cm042_files/figure-html/unnamed-chunk-14-1.png" width="65%" style="display: block; margin: auto;" /&gt;
+&lt;img src="cm042_files/figure-html/unnamed-chunk-13-1.png" width="60%" /&gt;
 
 The mean is 177.08
 ]
 
 ---
-class:middle, center, inverse
+class:middle, center
 ## Let's do 1,000!
 
 ![](https://media.giphy.com/media/YGwNReSwzObrG/giphy.gif)
 
 ---
-class:middle, center, inverse
+class:middle, center
 ## We need to use `infer`
 
 ---
@@ -562,7 +549,7 @@ resamp_heights %&gt;%
 
 
 ---
-class: center, middle, inverse
+class: center, middle
 
 ## We now have 1,000 means
 
@@ -583,7 +570,7 @@ ch_means %&gt;%
   visualize()
 ```
 
-&lt;img src="cm042_files/figure-html/unnamed-chunk-23-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+&lt;img src="cm042_files/figure-html/unnamed-chunk-22-1.png" width="50%" /&gt;
 
 ---
 
@@ -592,7 +579,7 @@ ch_means %&gt;%
   visualize(obs_stat = x_bar)
 ```
 
-&lt;img src="cm042_files/figure-html/unnamed-chunk-24-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+&lt;img src="cm042_files/figure-html/unnamed-chunk-23-1.png" width="50%" /&gt;
 
 ---
 
@@ -602,7 +589,7 @@ ch_means %&gt;%
   geom_vline(aes(xintercept = mean(stat)), lty = 3, lwd = 3, colour = "green")
 ```
 
-&lt;img src="cm042_files/figure-html/unnamed-chunk-25-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+&lt;img src="cm042_files/figure-html/unnamed-chunk-24-1.png" width="50%" /&gt;
 
 "the bootstrap distribution is centered at the original sample mean"
 
@@ -628,7 +615,7 @@ ch_means %&gt;%
   visualize(endpoints = percentile_ci, direction = "between")
 ```
 
-&lt;img src="cm042_files/figure-html/unnamed-chunk-27-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+&lt;img src="cm042_files/figure-html/unnamed-chunk-26-1.png" width="50%" /&gt;
 
 ---
 Using the percentile method, our range of plausible values for the mean height of male celebrities is 169 to 178.67 centimeters.
@@ -641,7 +628,7 @@ ch_means %&gt;%
   visualize(endpoints = percentile_ci, direction = "between")
 ```
 
-&lt;img src="cm042_files/figure-html/unnamed-chunk-28-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+&lt;img src="cm042_files/figure-html/unnamed-chunk-27-1.png" width="50%" /&gt;
 
 
 ---

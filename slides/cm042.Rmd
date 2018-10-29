@@ -14,19 +14,27 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-options(htmltools.dir.version = FALSE)
+#options(htmltools.dir.version = FALSE)
+#options(knitr.table.format = "html") 
+#knitr::opts_chunk$set(warning = FALSE, message = FALSE, 
+#  comment = NA, dpi = 300,
+#  fig.align = "center", out.width = "65%", cache = FALSE)
+```
+
+```{r setup_new, include=FALSE}
+# leave this chunk alone
 options(knitr.table.format = "html") 
 knitr::opts_chunk$set(warning = FALSE, message = FALSE, 
-  comment = NA, dpi = 300,
-  fig.align = "center", out.width = "65%", cache = FALSE)
+  comment = NA, dpi = 300, out.width = '60%', cache = FALSE)
+```
+
+```{r libraries, include = FALSE}
 library(tidyverse)
 library(infer)
 library(moderndive)
 ```
 
-
-
-```{r include = FALSE}
+```{r setup_data, include = FALSE}
 # library(datapasta)
 celeb_heights <- tibble::tribble(
                ~Name, ~Height,
@@ -64,33 +72,20 @@ rerun(.n = 3, resample = sample_n(celeb_heights, size = 12, replace = TRUE)) %>%
 ```
 
 class: middle, center
+
 ![](images/StatisticsVSProbability.png)
 
-[Ying Lin, course notes](http://srjcstaff.santarosa.edu/~ylin/Math15/notes/Sampling_Distribution_CLT.htm)
-
-
----
-class:middle, inverse, center
-
-## ModernDive
-
-[Chapter 8: Sampling](https://moderndive.com/8-sampling.html)
-
-[Chapter 9: Confidence Intervals](https://moderndive.com/9-confidence-intervals.html)
+[Ying Lin; course notes](http://srjcstaff.santarosa.edu/~ylin/Math15/notes/Sampling_Distribution_CLT.htm)
 
 ---
-class:middle, inverse, center
-## Plan for today
-
---
+class: middle, center 
 
 ## Bootstrapping
 
 ![](https://media.giphy.com/media/pfhdDIOWiYXaE/giphy.gif)
 
 ---
-class:middle, inverse, center
-`r #emo::ji("alarm")`
+class:middle, center
 ## Challenge
 
 What is "bootstrapping"?
@@ -99,8 +94,7 @@ What is a "confidence interval"?
 
 
 ---
-class:middle, inverse, center
-`r #emo::ji("island")`
+class:middle, center
 ## Challenge
 
 What is "bootstrapping"?
@@ -124,7 +118,6 @@ The data we originally collect estimates its own *approximate sampling distribut
 According to http://www.heightdb.com/
 
 ---
-## Just the male celebrities
 
 ![](images/bootstrap-slides/bootstrap-slides.002.png)
 
@@ -157,7 +150,7 @@ options(pillar.sigfig = 5) # important!!
 
 We got an $\bar{x} =$ `r x_bar %>% pull() %>% round(., 2)`. What is the uncertainty around this estimate, based on our sample data?
 
-```{r out.width = "50%"}
+```{r out.width = "40%"}
 ggplot(celeb_heights, aes(x = Height)) +
   geom_histogram(binwidth = 5, color = "white", fill = "turquoise") +
   geom_vline(aes(xintercept = mean(Height)), colour = "red")
@@ -222,7 +215,7 @@ ggplot(celeb_heights, aes(x = Height)) +
 ![](images/bootstrap-slides/bootstrap-slides.016.png)
 
 ---
-class:middle, center, inverse
+class:middle, center
 ## How to do this in R
 
 
@@ -304,13 +297,13 @@ The mean is `r three %>% pluck(3) %>% summarize(xbar = mean(Height)) %>% pull() 
 ]
 
 ---
-class:middle, center, inverse
+class:middle, center
 ## Let's do 1,000!
 
 ![](https://media.giphy.com/media/YGwNReSwzObrG/giphy.gif)
 
 ---
-class:middle, center, inverse
+class:middle, center
 ## We need to use `infer`
 
 ---
@@ -419,7 +412,7 @@ resamp_heights %>%
 
 
 ---
-class: center, middle, inverse
+class: center, middle
 
 ## We now have 1,000 means
 
