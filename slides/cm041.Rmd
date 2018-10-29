@@ -94,7 +94,7 @@ What is a "confidence interval"?
 ---
 class:middle, inverse, center
 `r #emo::ji("island")`
-## Laptops down for now
+## Challenge
 
 What is "bootstrapping"?
 
