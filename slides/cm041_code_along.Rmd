@@ -255,12 +255,11 @@ n2_plot
 set.seed(12345)
 unif_means_ten <- numeric(10) # space for big results (vector of Os)
 for (i in 1:10){
-  x=y <- runif(10, min = 1, max = 6) # draw random sample with 10 observations each
+  y <- runif(10, min = 1, max = 6) # draw random sample with 10 observations each
   unif_means_ten[i] <- mean(y) # compute mean for each ith sample
 }
 my_sim <- unif_means_ten %>% tibble(sample_mean = .)
 ```
-
 
 What is the mean of the sample means? What is the standard error of the mean? (it is just the `sd()` of the sampling distribution of the sample means)
 
@@ -271,9 +270,23 @@ sem <- sd(unif_means_ten) # sem
 
 2. Use the code above to run this simulation for 100,000 (or 10,000) experiments, and make a plot of the sampling distribution of the sample means. What do you see?
 
+```{r include=FALSE}
+set.seed(12345)
+unif_means_ten <- numeric(10) # space for big results (vector of Os)
+for (i in 1:10000){
+  y <- runif(10, min = 1, max = 6) # draw random sample with 10 observations each
+  unif_means_ten[i] <- mean(y) # compute mean for each ith sample
+}
+my_sim2 <- unif_means_ten %>% tibble(sample_mean = .)
+```
 
-```{r eval = FALSE}
-ggplot(my_sim, aes(x = sample_mean)) +
+```{r include=FALSE}
+mm <- mean(unif_means_ten) # mean of the sampling distribution of means
+sem <- sd(unif_means_ten) # sem
+```
+
+```{r match_plots, include=FALSE}
+ggplot(my_sim2, aes(x = sample_mean)) +
   geom_density(color = "dodgerblue") +
   stat_function(fun = dnorm, args = list(mean = mm, sd = sem), color = "red") 
 ```
