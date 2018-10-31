@@ -18,8 +18,6 @@ library(tidyverse)
 theme_set(theme_minimal())
 ```
 
-
-
 ```{r load_packages}
 library(tidyverse)
 ```
@@ -37,7 +35,6 @@ x_probs_n1
 omega_n2 <- crossing(roll1 = x, roll2 = x) %>%
   mutate(xbar_i = (roll1 + roll2)/2)
 ```
-
 
 ```{r sample_size_3, include = FALSE}
 # creating sample space, omega, and general formatting with names/df/etc.
@@ -62,8 +59,6 @@ xbar_samp_n3
 xbar_samp_n3 %>%
   summarise(e_xbar = sum(e_x_i))
 ```
-
-
 
 ```{r sample_size_4, include = FALSE}
 # creating sample space, omega, and general formatting with names/df/etc.
@@ -250,15 +245,18 @@ n2_plot
 3. Calculate the probabilities for each distinct sample mean, so your $p_i$ values.
 4. Calculate the expected value of the sample mean! That is, the value of $E(\bar{x}) = \sum{\bar{x_i}p_i}$.
 5. Care to hazard a guess as to the expected value of the sample mean for 4 die?
-6. It turns out that the distribution of one die roll follows a uniform distribution, which is obviously quite different looking from a "normal" bell-shaped distribution. The question is: what is the sampling distribution of the sample mean for a uniformly distributed variable? Use the following code to simulate 10 experiments where a die is rolled 10 times and we take the mean pips for each experiment. 
+
+
+# Our Third Sampling Distribution: 10 rolls
+1. It turns out that the distribution of one die roll follows a uniform distribution, which is obviously quite different looking from a "normal" bell-shaped distribution. The question is: what is the sampling distribution of the sample mean for a uniformly distributed variable? Use the following code to simulate 10 experiments where a die is rolled 10 times and we take the mean pips for each experiment. 
 
 
 ```{r}
 set.seed(12345)
 unif_means_ten <- numeric(10) # space for big results (vector of Os)
 for (i in 1:10){
-  x <- runif(10, min = 1, max = 6) # draw random sample with 10 observations each
-  unif_means_ten[i] <- mean(x) # compute mean for each ith sample
+  x=y <- runif(10, min = 1, max = 6) # draw random sample with 10 observations each
+  unif_means_ten[i] <- mean(y) # compute mean for each ith sample
 }
 my_sim <- unif_means_ten %>% tibble(sample_mean = .)
 ```
@@ -271,7 +269,7 @@ mm <- mean(unif_means_ten) # mean of the sampling distribution of means
 sem <- sd(unif_means_ten) # sem
 ```
 
-7. Use the code above to run this simulation for 100,000 (or 10,000) experiments, and make a plot of the sampling distribution of the sample means. What do you see?
+2. Use the code above to run this simulation for 100,000 (or 10,000) experiments, and make a plot of the sampling distribution of the sample means. What do you see?
 
 
 ```{r eval = FALSE}
