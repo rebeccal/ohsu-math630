@@ -34,6 +34,13 @@ cheatlinks <- reference %>%
                                     title,
                                     paste0("<a href='", link, "'>", title, "</a>"))) %>% 
   select(CheatSheet)
+
+codelinks <- reference %>%
+  filter(type == "code") %>% 
+  mutate(`Code_Examples` = ifelse(title == "-" | is.na(link) ,
+                                    title,
+                                    paste0("<a href='", link, "'>", title, "</a>"))) %>% 
+  select(Code_Examples)
 ```
 
 ## Cheatsheets
@@ -49,6 +56,22 @@ if(knitr:::is_html_output()){
                          escape = FALSE)
 } else {
   knitr::kable(cheatlinks, booktabs = TRUE, longtable = TRUE)
+}
+```
+
+## Code Examples
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+if(knitr:::is_html_output()){
+  codelinks %>% datatable(rownames = FALSE,
+                         class = 'cell-border stripe',
+                         options = list(pageLength = nrow(cm), 
+                                        autoWidth = TRUE,
+                                        bInfo = FALSE,
+                                        paging = FALSE),
+                         escape = FALSE)
+} else {
+  knitr::kable(codelinks, booktabs = TRUE, longtable = TRUE)
 }
 ```
 
