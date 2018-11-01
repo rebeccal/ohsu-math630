@@ -469,15 +469,17 @@ n2_plot</code></pre></div>
 <li>It turns out that the distribution of one die roll follows a uniform distribution, which is obviously quite different looking from a &quot;normal&quot; bell-shaped distribution. The question is: what is the sampling distribution of the sample mean for a uniformly distributed variable? Use the following code to simulate 10 experiments where a die is rolled 10 times and we take the mean pips for each experiment.</li>
 </ol>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">12345</span>)
-unif_means_ten &lt;-<span class="st"> </span><span class="kw">numeric</span>(<span class="dv">10</span>) <span class="co"># space for big results (vector of Os)</span>
+unif_means_tenten &lt;-<span class="st"> </span><span class="kw">numeric</span>(<span class="dv">10</span>) <span class="co"># space for big results (vector of Os)</span>
 <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>){
   y &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">10</span>, <span class="dt">min =</span> <span class="dv">1</span>, <span class="dt">max =</span> <span class="dv">6</span>) <span class="co"># draw random sample with 10 observations each</span>
-  unif_means_ten[i] &lt;-<span class="st"> </span><span class="kw">mean</span>(y) <span class="co"># compute mean for each ith sample</span>
+  unif_means_tenten[i] &lt;-<span class="st"> </span><span class="kw">mean</span>(y) <span class="co"># compute mean for each ith sample</span>
 }
-my_sim &lt;-<span class="st"> </span>unif_means_ten <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">tibble</span>(<span class="dt">sample_mean =</span> .)</code></pre></div>
+my_sim &lt;-<span class="st"> </span>unif_means_tenten <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">tibble</span>(<span class="dt">sample_mean =</span> .)</code></pre></div>
 <p>What is the mean of the sample means? What is the standard error of the mean? (it is just the <code>sd()</code> of the sampling distribution of the sample means)</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mm &lt;-<span class="st"> </span><span class="kw">mean</span>(unif_means_ten) <span class="co"># mean of the sampling distribution of means</span>
-sem &lt;-<span class="st"> </span><span class="kw">sd</span>(unif_means_ten) <span class="co"># sem</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mm10 &lt;-<span class="st"> </span><span class="kw">mean</span>(my_sim<span class="op">$</span>sample_mean) <span class="co"># mean of the sampling distribution of means</span>
+sem10 &lt;-<span class="st"> </span><span class="kw">sd</span>(my_sim<span class="op">$</span>sample_mean) <span class="co"># sem</span>
+n10_var =<span class="st"> </span><span class="kw">sum</span>((my_sim<span class="op">$</span>sample_mean)<span class="op">^</span><span class="dv">2</span>)<span class="op">/</span><span class="kw">length</span>(my_sim<span class="op">$</span>sample_mean) <span class="op">-</span><span class="st"> </span>(<span class="kw">mean</span>(my_sim<span class="op">$</span>sample_mean))<span class="op">^</span><span class="dv">2</span>
+check_sem10 &lt;-<span class="st"> </span><span class="kw">sqrt</span>(n10_var)</code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li>Use the code above to run this simulation for 100,000 (or 10,000) experiments, and make a plot of the sampling distribution of the sample means. What do you see?</li>
 </ol>
