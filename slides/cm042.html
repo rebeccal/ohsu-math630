@@ -62,6 +62,12 @@ What is "bootstrapping"?
 
 --
 &lt;br&gt;
+Def: 
+
+Get (oneself or something) into or out of a situation using existing resources.
+
+--
+&lt;br&gt;
 How: 
 
 Simulate the distribution by *drawing samples with replacement*
@@ -570,7 +576,7 @@ ch_means %&gt;%
   visualize()
 ```
 
-&lt;img src="cm042_files/figure-html/unnamed-chunk-22-1.png" width="50%" /&gt;
+&lt;img src="cm042_files/figure-html/sample1000_output-1.png" width="50%" /&gt;
 
 ---
 
@@ -579,7 +585,7 @@ ch_means %&gt;%
   visualize(obs_stat = x_bar)
 ```
 
-&lt;img src="cm042_files/figure-html/unnamed-chunk-23-1.png" width="50%" /&gt;
+&lt;img src="cm042_files/figure-html/unnamed-chunk-21-1.png" width="50%" /&gt;
 
 ---
 
@@ -589,7 +595,7 @@ ch_means %&gt;%
   geom_vline(aes(xintercept = mean(stat)), lty = 3, lwd = 3, colour = "green")
 ```
 
-&lt;img src="cm042_files/figure-html/unnamed-chunk-24-1.png" width="50%" /&gt;
+&lt;img src="cm042_files/figure-html/unnamed-chunk-22-1.png" width="50%" /&gt;
 
 "the bootstrap distribution is centered at the original sample mean"
 
@@ -615,7 +621,7 @@ ch_means %&gt;%
   visualize(endpoints = percentile_ci, direction = "between")
 ```
 
-&lt;img src="cm042_files/figure-html/unnamed-chunk-26-1.png" width="50%" /&gt;
+&lt;img src="cm042_files/figure-html/unnamed-chunk-24-1.png" width="50%" /&gt;
 
 ---
 Using the percentile method, our range of plausible values for the mean height of male celebrities is 169 to 178.67 centimeters.
@@ -628,7 +634,7 @@ ch_means %&gt;%
   visualize(endpoints = percentile_ci, direction = "between")
 ```
 
-&lt;img src="cm042_files/figure-html/unnamed-chunk-27-1.png" width="50%" /&gt;
+&lt;img src="cm042_files/figure-html/unnamed-chunk-25-1.png" width="50%" /&gt;
 
 
 ---

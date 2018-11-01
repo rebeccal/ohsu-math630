@@ -101,6 +101,12 @@ What is "bootstrapping"?
 
 --
 <br>
+Def: 
+
+Get (oneself or something) into or out of a situation using existing resources.
+
+--
+<br>
 How: 
 
 Simulate the distribution by *drawing samples with replacement*
@@ -385,7 +391,7 @@ resamp_heights %>%
 class:middle
 ## For 1,000 resamples
 
-```{r}
+```{r sample1000}
 set.seed(0)
 resamp_heights <- celeb_heights %>% 
   specify(response = Height) %>% 
@@ -421,7 +427,7 @@ class: center, middle
 This is too many numbers to summarize in a table. We need to *summarize* and *visualize* these numbers.
 
 ---
-```{r out.width='50%'}
+```{r sample1000_output, out.width='50%'}
 ch_means <- celeb_heights %>% 
   specify(response = Height) %>% 
   generate(reps = 1000, 
