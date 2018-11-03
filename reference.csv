@@ -17,3 +17,4 @@ reference,Hat Matrix,http://www.stat.ucla.edu/~cocteau/stat201b/handout/hat.pdf
 reference,pmf and pdfs,http://www.stat.tamu.edu/~twehrly/611/distab.pdf
 data,male_heights.csv,data/male_heights.csv
 code,cm041 - Sampling Distributions,slides/cm041_code_along.Rmd
+code,Perfect t-test,https://github.com/Lakens/perfect-t-test
