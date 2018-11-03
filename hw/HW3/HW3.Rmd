@@ -37,8 +37,8 @@ t.test(bones$pw, bones$bf, mu=25, alternative="greater", var.equal = TRUE)
 t.test(bones$pw, bones$bf, mu=25, paired = TRUE, alternative="greater")
 ```
 
-\newpage
 ```{asis, echo=params$key}
+\newpage
 <b>Answers</b>
   
 a.   
@@ -113,7 +113,10 @@ paste("p_value: ",p_value)
 ```
 
 
+```{asis, echo=params$key}
 \newpage
+```
+
 3. Suppose that the readings of a laboratory scale are normally distributed with unknown mean $\mu$ and standard deviation $\sigma$ = 0.01 grams. To assess the accuracy of the laboratory scale, a standard weight that is known to weigh exactly 1 gram is repeatedly weighed a total of *N* = 50 times. Let $\bar{x}$ = 0.998 be the average of the 50 readings. What is the 95% confidence interval for $\mu$?
 
 ```{asis, echo=params$key}
