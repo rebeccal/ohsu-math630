@@ -50,11 +50,11 @@ Using the key, your self-assessment should include even **more** narrative; wher
 - Parts of this lab are adapted from Ted Laderas' and Jessica Minnier's [R Bootcamp](https://www.datacamp.com/courses/rbootcamp) on DataCamp.com
 
 
-# Packages
+<!-- # Packages -->
 
-Please install a new version of `infer` first:
+<!-- Please install a new version of `infer` first: -->
 
-```{r eval = FALSE}
+```{r new_package, echo=FALSE, eval = FALSE}
 remotes::install_github("tidymodels/infer", ref = "develop")
 ```
 
@@ -78,7 +78,7 @@ We are going to work with a dataset called [`fishermen_mercury.csv`](https://raw
 
 
 
-```{r echo = FALSE}
+```{r install_data, eval=FALSE, echo = FALSE}
 mercury <- read_csv(here::here("data", "fishermen_mercury_original.csv")) %>% 
   rename(total_mercury = TotHg, methyl_mercury = MeHg)
 
@@ -330,11 +330,6 @@ mercury %>%
 
 * Interpret this output. What is the statistic? What is the meaning/interpretation of the confidence interval here? (hint: Does it include zero? What does it mean if it does or does not? What value is in the center of the interval?)
 
-```{r}
-obs_t <- mercury %>% 
-  t_test(total_mercury ~ fisherman, order = c(1, 0), var.equal = TRUE) %>% 
-  pull(1)
-```
 
 * Use the code below to compare the normal distribution to the $t$-distribution, which has only one parameter: degrees of freedom (`df`). You can use the `dt` and `dnorm` with the `stat_function` layer in `ggplot` to plot the *densities* for each distribution. Change the `df` argument here a few times to view its effect: what do you see? (you don't need to print any of these plots to your final file- I want you to reflect on how the two distributions differ). 
 
@@ -347,6 +342,11 @@ ggplot(data.frame(x = c(-4, 4)), aes(x)) +
 
 
 * Save your observed $t$-statistic, and use `infer` to make a plot of the null t-distribution with a red line for your `obs_stat`, shading in both directions. Try adding `geom_vline()` to this object so you can add vertical lines where your two "critical t-values" are. 
+```{r}
+obs_t <- mercury %>% 
+  t_test(total_mercury ~ fisherman, order = c(1, 0), var.equal = TRUE) %>% 
+  pull(1)
+```
 
 ```{r}
 mercury %>% 
