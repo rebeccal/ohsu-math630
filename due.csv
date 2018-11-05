@@ -34,7 +34,7 @@ Tues,November,6,4.3: Hypothesis testing (resampling),"<a href='http://moderndive
 <br><a href='http://moderndive.com/b-appendixb'>- MD Appendix B: Inference Examples</a>", Inference for Categorical Data (Ch 1 + 2),https://www.datacamp.com/courses/inference-for-categorical-data,,,,,,,,,,
 Thurs,November,8,4.4: Hypothesis testing (classical),"<a href='https://www.nature.com/articles/nmeth.2698'>- Nature POS: t-tests</a>
 <br><a href='https://www.nature.com/articles/nmeth.2858'>- Nature POS: comparing samples</a>
-<br><a href=reference/Wasserman-all_of_stats.pdf>- All of Statistics: pp. 92-94</a>", Inference for Categorical Data (Ch 3 + 4),https://www.datacamp.com/courses/inference-for-categorical-data,,,,,,,4.3,slides/cm043_lab.html,Midterm,
+<br><a href=reference/Wasserman-all_of_stats.pdf>- All of Statistics: pp. 92-94</a>", Inference for Categorical Data (Ch 3 + 4),https://www.datacamp.com/courses/inference-for-categorical-data,,,,,,,4.3,slides/cm043_lab.html,,
 Tues,November,13,4.5: t-test as Linear Regression,, Inference for Linear Regression (Ch 1 + 2),https://www.datacamp.com/courses/inference-for-linear-regression,,,,,HW3,hw/HW3/HW3.pdf,,,,
 Thurs,November,15,5.1: Many means,"<a href='https://www.nature.com/articles/nmeth.3005'>- Nature POS: ANOVA</a>
 <br><a href = 'https://arxiv.org/pdf/1412.3416.pdf'>- ANOVA</a>
@@ -45,7 +45,7 @@ Tues,November,27,5.3: Contrasts,<a href='https://www.nature.com/articles/nmeth.2
 Thurs,November,29,5.4: Family-wise error rates,"<a href='https://www.nature.com/news/scientific-method-statistical-errors-1.14700'>- Nature: p-values</a>
 <br><a href = 'https://fivethirtyeight.com/features/science-isnt-broken/#part1'>- 538: Science Isn't Broken</a>
 <br><a href='https://simplystatistics.org/2012/01/06/p-values-and-hypothesis-testing-get-a-bad-rap-but-we/'>- Simply Statistics blog</a>
-<br><a href='http://daniellakens.blogspot.com/2017/12/understanding-common-misconceptions.html'>- Lakens blog</a>", Communicating with Data in the Tidyverse,https://www.datacamp.com/courses/communicating-with-data-in-the-tidyverse,,,,,HW4,,,,HW4,hw/HW4/HW4.pdf
+<br><a href='http://daniellakens.blogspot.com/2017/12/understanding-common-misconceptions.html'>- Lakens blog</a>", Communicating with Data in the Tidyverse,https://www.datacamp.com/courses/communicating-with-data-in-the-tidyverse,,,,,HW4,hw/HW4/HW4.pdf,,,,
 Tues,December,4,5.5: Two-way ANOVA/3-way ANOVA,<a href='http://biostat.mc.vanderbilt.edu/wiki/Main/ManuscriptChecklist'>- Frank Harrell's Manuscript Checklist</a>,,,,,,,,,,,,
 Thurs,December,6,Final presentations,,,,P5,final_project.html,Lab 04 - ANOVA,labs/lab04.html,,,,,,
 Tues,December,11,Final presentations,,,,,,,,,,,,,

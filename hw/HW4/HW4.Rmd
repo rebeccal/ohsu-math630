@@ -1,8 +1,19 @@
 ---
-title: "Math 530/630, HW4"
-#date: "Due December 11, 2017"
-output: pdf_document
+subtitle: Math 530/630
+params:
+  hw_title: Homework 4
+  key_title: Homework 4 - Key
+  key: FALSE
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+title: "`r ifelse (params$key, params$key_title, params$hw_title)`"
 ---
+
+<!-- To make the HW key -->
+<!-- rmarkdown::render("hw/HW4/HW4.Rmd", output_file = "HW4-key.pdf",  params = list(key=TRUE), output_format = "pdf_document") -->
+<!-- rmarkdown::render("hw/HW4/HW4.Rmd", output_file = "HW4-key.html", params = list(key=TRUE), output_format = "html_document") -->
 
 1. One of the goals of the Edinburgh Artery Study was to investigate the risk factors for peripheral arterial disease among persons 55 to 75 years of age.You wish to compare mean LDL cholesterol levels, measured in mmol/liter, among four different populations of subjects: patients with intermittent claudication or interruptions in movement, those with major asymptomatic disease, those with minor asymptomatic disease, and those with no evidence of disease at all. Samples are selected from each population; summary statistics are shown below:
 
