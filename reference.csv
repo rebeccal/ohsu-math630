@@ -18,3 +18,4 @@ reference,pmf and pdfs,http://www.stat.tamu.edu/~twehrly/611/distab.pdf
 data,male_heights.csv,data/male_heights.csv
 code,cm041 - Sampling Distributions,slides/cm041_code_along.Rmd
 code,Perfect t-test,https://github.com/Lakens/perfect-t-test
+cheatsheet,Assumptions and Conditions for Hypothesis Tests and Confidence Intervals,http://www.b-g.k12.ky.us/userfiles/1525/Classes/33386/Conditions%20of%20Tests.08-09%20rev%201.pdf

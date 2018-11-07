@@ -407,32 +407,30 @@ To get the corresponding bootstrap distribution with which we can compute a conf
 
 
 ```r
-boot_sneetch_ci <- sneetches_tidy %>% 
+boot_sneetch <- sneetches_tidy %>% 
   specify(SSI ~ group) %>% 
   #hypothesize(null = "independence") %>% 
   generate(reps = 1000, type = "bootstrap") %>% 
   calculate(stat = "diff in means", 
-            order = c("stars", "plain")) %>% 
+            order = c("stars", "plain"))
+
+boot_sneetch_ci <- boot_sneetch %>% 
   get_ci()
 
-boot_sneetch_ci
-```
-
-```
-# A tibble: 1 x 2
-  `2.5%` `97.5%`
-   <dbl>   <dbl>
-1  -7.54    20.0
-```
-
-```r
 #see ci
 null_distn %>% 
-  visualize(endpoints = boot_sneetch_ci, 
-            direction = "between")
+  visualize(endpoints = boot_sneetch_ci,
+            endpoints_color = "blue",
+            ci_fill = "transparent",
+            alpha = 0.2,
+            direction = "between") #+
 ```
 
 ![](cm043_lab_files/figure-html/unnamed-chunk-15-1.png)<!-- -->
+
+```r
+#  geom_histogram(data = boot_sneetch, aes(x=stat), fill = "red", alpha = 0.4)
+```
 
 
 The question to ask yourself when looking at this plot is: is 0 in my 95% confidence interval? If it is, then a difference of 0 is plausible, and I cannot reject the null hypothesis.
