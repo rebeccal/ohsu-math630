@@ -235,23 +235,51 @@ null_distn <- sneetches_tidy %>%
 To get the corresponding bootstrap distribution with which we can compute a confidence interval, we can just remove or comment out the `hypothesize()` step since we are no longer assuming the null hypothesis is true when we bootstrap:
 
 
-```{r}
-boot_sneetch_ci <- sneetches_tidy %>% 
+```{r error=FALSE, message=FALSE}
+boot_sneetch <- sneetches_tidy %>% 
   specify(SSI ~ group) %>% 
   #hypothesize(null = "independence") %>% 
   generate(reps = 1000, type = "bootstrap") %>% 
   calculate(stat = "diff in means", 
-            order = c("stars", "plain")) %>% 
-  get_ci()
+            order = c("stars", "plain"))
 
-boot_sneetch_ci
+boot_sneetch_ci <- boot_sneetch %>% 
+  get_ci()
 
 #see ci
 null_distn %>% 
-  visualize(endpoints = boot_sneetch_ci, 
-            direction = "between")
+  visualize(endpoints = boot_sneetch_ci,
+            endpoints_color = "blue",
+            ci_fill = "transparent",
+            alpha = 0.2,
+            direction = "between") #+
+#  geom_histogram(data = boot_sneetch, aes(x=stat), fill = "red", alpha = 0.4)
 ```
+```{r include = FALSE}
+boot_sneetch <- sneetches_tidy %>% 
+  specify(SSI ~ group) %>% 
+  #hypothesize(null = "independence") %>% 
+  generate(reps = 1000, type = "bootstrap") %>% 
+  calculate(stat = "diff in means", 
+            order = c("stars", "plain"))
 
+boot_sneetch_ci <- boot_sneetch %>% 
+  get_ci()
+
+null_sneetch_ci <- null_distn %>%
+  get_ci()
+  
+#see ci
+null_distn %>% 
+  visualize(endpoints = null_sneetch_ci,
+            endpoints_color = "blue",
+            ci_fill = "transparent",
+            alpha = 0.2,
+            direction = "between") +
+  geom_histogram(data = boot_sneetch, aes(x=stat), fill = "red", alpha = 0.2) +
+  geom_vline(xintercept=mean_diff$stat)
+
+```
 
 The question to ask yourself when looking at this plot is: is 0 in my 95% confidence interval? If it is, then a difference of 0 is plausible, and I cannot reject the null hypothesis.
 
