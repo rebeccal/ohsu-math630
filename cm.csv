@@ -18,8 +18,8 @@ Thurs,October,25,3.3: Continuous Probability Functions,<a href='slides/cm033.pdf
 Tues,October,30,4.1: Sampling distributions,<a href='slides/cm041.pdf'>4.1 - Sampling</a>,CM4.1 Code-along,slides/cm041_code_along.html,10/10&17/2017,Slide deck 05 from fall 2017 and Conj cm042,
 Thurs,November,1,4.2: Bootstrapping (confidence intervals),<a href='slides/cm042.html'>4.2 - Bootstrapping</a>,CM4.2 Code-along,slides/cm042-code_along.html,Skipped??,cm032 (slide deck),
 Tues,November,6,4.3: Hypothesis testing (resampling),,Lab 4.3,slides/cm043_lab.html,11/2/2017,cm034 (in class lab),
-Thurs,November,8,4.4: Hypothesis testing (classical),,,,11/7/2017,slide deck 11 from fall 2017,<a href='slides/11-classical-inference.pdf'>11-classical-inference</a>
-Tues,November,13,4.5: t-test as Linear Regression,,,,11/16/2017,cm035 (slide deck) a nd slide deck 13 from 2017,<a href='slides/cm045.html'>cm045</a>
+Thurs,November,8,4.4: Hypothesis testing (classical),<a href='slides/cm044.pdf'>4.4 - Hypothesis Testing and Confidence Intervals</a>,,,11/7/2017,slide deck 11 from fall 2017,<a href='slides/11-classical-inference.pdf'>11-classical-inference</a>
+Tues,November,13,"4.5: Errors, Effect Size, and Power",,,,11/16/2017,cm035 (slide deck) and slide deck 13 from 2017,<a href='slides/cm045.html'>cm045</a>
 ,Week ,Eight-Eleven,5.0 Comparing Groups,,,,,,
 Thurs,November,15,5.1: Many means,,,,11/21/2017,cm041 (slide deck),<a href='slides/cm051.html'>cm051</a>
 Tues,November,20,5.2: ANOVA by hand,,Lab 5.2,slides/cm052_lab.html,,cm043 (in class lab),
