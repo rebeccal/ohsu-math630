@@ -699,7 +699,7 @@ Then the ANOVA source table is:
 Construct the ANOVA source table by hand, and evaluate the *p*-value of the *F*-ratio.
 
 ```{r eval = FALSE}
-superhero <- read.delim(file.choose(), header = T)
+superhero <- read.delim(file.choose(), header = T, sep=",")
 ```
 
 ---
