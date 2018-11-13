@@ -60,8 +60,10 @@ power.t.test(n=n, delta=diff,sd=13, type="one.sample", alternative = "two.sided"
 ################################################################
 
 #Potentially helpful plot
+library(ggfortify)
+ncp <- diff/(s/sqrt(n)) # How many standard deviations apart are the means?
 crit <- c(qt(0.025,df=n-1),qt(0.975,df=n-1))
-plot <- ggdistribution(dt,seq(-10,10,.1),df=24, colour="red") +
+plot <- ggdistribution(dt,seq(-10,10,.1),df=n-1, colour = "red", fill="red") +
   geom_vline(xintercept = crit, color="red")
 plot
-ggdistribution(dt,seq(-10,10,.1),df=24,ncp=ncp,p=plot, colour="blue")
+ggdistribution(dt,seq(-10,10,.1),df=n-1,ncp=ncp,p=plot, fill="blue")
