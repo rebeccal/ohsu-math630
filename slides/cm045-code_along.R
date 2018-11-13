@@ -9,8 +9,10 @@ diff <- 5 #Hypothesized diff, e.g. 105-100
 d <- (diff)/s #Cohen's d effect size
 
 
-#1) If we don't have the non-central parameter (typical). the below assumes a two-sided t-test, i.e. u0 <> u1 
-    #!! This is an approximations using a central t-distribution in lieue of a non-crentral distribution
+################################################################
+
+#1) If we don't have the non-central parameter (this is typical). the below assumes a two-sided t-test, i.e. u0 <> u1 
+    #!! This is an approximation using a central t-distribution in lieue of a non-central distribution
 error <- qt(0.975,df=n-1)*s/sqrt(n) # margon of error
 left <- a-error  # left critical value for the sample distribution
 right <- a+error # right critical value for the sample distribution
@@ -23,7 +25,7 @@ p <- pt(tright,df=n-1)-pt(tleft,df=n-1)
 p #beta
 1-p #power
 
-
+##############
 #1+) Don't really need to use the sample mean - instead just use the standard distribution and the diff (like the plot below)!
 #!! This is an approximations using a central t-distribution
 error <- qt(0.975,df=n-1)*s/sqrt(n) # margon of error
@@ -38,6 +40,7 @@ p #beta
 1-p #power
 
 
+################################################################
 
 #2) With computed ncp for t-test with one-sample
 ncp <- diff/(s/sqrt(n)) # How many standard deviations apart are the means?
@@ -47,9 +50,14 @@ pt(t,df=n-1,ncp=ncp)-pt(-t,df=n-1,ncp=ncp) #beta
 1-(pt(t,df=n-1,ncp=ncp)-pt(-t,df=n-1,ncp=ncp)) #power
 
 
+################################################################
+
 #3) The easy way
 #power.t.test(n=n, delta=diff,sd=13, type="one.sample", alternative = "one.sided")
 power.t.test(n=n, delta=diff,sd=13, type="one.sample", alternative = "two.sided")
+
+
+################################################################
 
 #Potentially helpful plot
 crit <- c(qt(0.025,df=n-1),qt(0.975,df=n-1))
