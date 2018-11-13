@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Confidence intervals For the Regression coefficients*</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Rebecca Lunsford" />
+    <link href="CI4Reg_files/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="CI4Reg_files/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Confidence intervals For the Regression coefficients*
+### Rebecca Lunsford
+
+---
+
+#  Why did I burden you with all this information? 
+
++ Our regression coefficients, divided by their standard errors, are **also** distributed as t variables
++ Degrees of freedom: *n* ? 2 (in simple linear regression, because we have to account for the 2 coefficients we estimated from the sample data: the intercept + the slope)
++ We typically call the quantile our t crit .
++ In our example, the t crit  quantile is ( df = n ? 2 = 926):
+
+**&gt;** **qt** **(.975,** **df** **= n - 2** **) # + or -**
+
+**[1] 1.962529**
+
+---
+#  Is the slope different from zero? 
+
++ What is ? 1 under the null hypothesis?
+![](assets/img/image2.emf)
+
+---
+#  What is the 95% confidence interval? 
+
++ Mainly of interest for slope, not so much intercept
++ i.e., &lt;U+0001D770&gt; = .05:
++ **qt** **(.975,** **df** **= n - 2)**
+![](assets/img/image3.emf)
+
+---
+
+.pull-left[![](assets/img/image3.emf)]
+
+.pull-right[![](assets/img/image2.emf)]
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create();
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+})();
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
