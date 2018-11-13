@@ -19,7 +19,7 @@ Tues,October,30,4.1: Sampling distributions,<a href='slides/cm041.pdf'>4.1 - Sam
 Thurs,November,1,4.2: Bootstrapping (confidence intervals),<a href='slides/cm042.html'>4.2 - Bootstrapping</a>,CM4.2 Code-along,slides/cm042-code_along.html,Skipped??,cm032 (slide deck),!! should have included deck 12
 Tues,November,6,4.3: Hypothesis testing (resampling),,Lab 4.3,slides/cm043_lab.html,11/2/2017,cm034 (in class lab),
 Thurs,November,8,4.4: Hypothesis testing (classical),<a href='slides/cm044.pdf'>4.4 - Hypothesis Testing and Confidence Intervals</a>,,,11/7/2017 & 11/16-58:21,slide deck 11&12 from fall 2017,
-Tues,November,13,"4.5: Errors, Effect Size, Power, and the GLM","<a href='slides/cm045.pdf'>4.5 - Errors, Effect Size and Power</a>",CM4.5 Code-along,slides/cm045-code_along.R,,,
+Tues,November,13,"4.5: Errors, Effect Size, and Power","<a href='slides/cm045.pdf'>4.5 - Errors, Effect Size and Power</a>",CM4.5 Code-along,slides/cm045-code_along.R,,,
 ,Week ,Eight-Eleven,5.0 Comparing Groups,,,,,,
 Thurs,November,15,5.1: Many means,,,,11/16 & 11/21/2017,cm035 & cm041 (slide deck),"<a href='slides/cm046.html'>cm046</a>
 <\br><a href='slides/cm051.html'>cm051</a>"
