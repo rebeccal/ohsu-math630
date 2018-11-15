@@ -65,7 +65,7 @@ class:center
 
 * Data is indicated with a single variable name like: `\(y_{ij}\)`
 * Observations are now of the form `\((x_{ij}, y_{ij})\)`
-* The first subscript refers to the row that the particular value is in; *i* = 1, 2, 3,$\dotsc$,*n*
+* The first subscript refers to the row that the particular value is in; *i* = 1, 2, 3, ...,*n*
 * The second subscript refers to the column; *j* = 1, 2, 3, ...,*k*
 
 ---
@@ -561,7 +561,7 @@ As we just showed, in a balanced design,
 
 ---
 
-## A little trick
+## A little trick - ANOVA by hand
 
 | Observation (*i*) | MIN (*j* = 1) | HALF (*j* = 2)| FULL (*j* = 3) |
 | :---| :------------:| :------------:|:------------:| 
@@ -581,8 +581,6 @@ As we just showed, in a balanced design,
 
 
 ---
-
-## By hand
 | Observation (*i*) | MIN (*j* = 1) | HALF (*j* = 2)| FULL (*j* = 3) |Sum|
 | :---| :------------:| :------------:|:------------:| :-----:|
 |A|30|174|446|650|
@@ -592,9 +590,7 @@ As we just showed, in a balanced design,
 * A = sum of the squared scores
 * B = sum of the scores
 * C = square the group *sum* of the scores ( `\(B_j\)` ) then divide by the group *n*
-* and D = `\(\frac{(\sum_{j = 1}^kB_j)^2}{kn}\)` (here, D = 507)
-
-Then the ANOVA source table is:
+* D = `\(\frac{(\sum_{j = 1}^kB_j)^2}{kn}\)` (here, D = 507)
 
 | Source | Sum of Squares | Degrees of freedom| Mean Square |F|
 | :---| :------------:| :------------:|:------------:| :-----:|
