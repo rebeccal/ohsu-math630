@@ -27,6 +27,13 @@ class:center
 
 ![](https://media.giphy.com/media/KmTnUKop0AfFm/giphy.gif)
 
+???
+Ex 1: Beethoven,Stones, None
+Ex 2: 1) Beethoven, Stones 2) Male, Female
+
+t-test: special case. One predictor, two levels, one outcome
+
+
 ---
 class:center
 
@@ -76,6 +83,17 @@ class:center
 | Means       | `\(\bar{y}_{\bullet1}\)` | `\(\bar{y}_{\bullet2}\)` | `\(\bar{y}_{\bullet3}\)` | `\(\ldots\)` | `\(\bar{y}_{\bullet{k}}\)` | `\(\bar{y}_{\bullet\bullet}\)` |
 | Variance    | `\({s_y}^2_{\bullet1}\)` | `\({s_y}^2_{\bullet2}\)` | `\({s_y}^2_{\bullet3}\)` | `\(\ldots\)` | `\({s_y}^2_{\bullet{k}}\)` | `\({s_y}^2_{\bullet\bullet}\)` |
 
+
+???
+j = groups/conditions
+i = subjects
+
+. = means, summary across
+.. = Grand Mean
+
+Null Hypothesis: j's don't matter!!
+
+
 ---
 ## Sums of squares in the GLM
 
@@ -91,6 +109,10 @@ class:center
 &gt; 2. `\(\bar{y} \longrightarrow \bar{y_{\bullet\bullet}}\)`
 &gt; 3. `\(\hat{y_i} \longrightarrow \bar{y_{\bullet{j}}}\)`
 &gt; 4. `\(\sum_{i = 1}^n \longrightarrow \sum_{j = 1}^k\sum_{i = 1}^n\)`
+
+???
+Observed - expected if the groups didn't matter
+`\(\bar{y}\)` instead of `\(\hat{y}\)` = group means instead of fitted values
 
 
 ---
@@ -111,6 +133,11 @@ class:center
 In words, this means the sum of the squared differences between each observed `\(y_{ij}\)` value and the *grand mean*, `\(\bar{y_{\bullet\bullet}}\)`. That is, it is the total deviation of the `\(y_{ij}\)`'s from the grand mean. 
 ]
 
+???
+Group agnostic - no j's
+Deviation of the observed values from the grand mean
+Dots vs the dotted line
+
 ---
 ## Total Degrees of Freedom
 
@@ -128,7 +155,7 @@ In words, this means the sum of the squared differences between each observed `\
 * Once I add in that I know their grand mean `\(\bar{y_{\bullet\bullet}}\)`, they cannot. 
 * Once I know `&lt;X&gt;` `\(y_{ij}\)` values *plus their grand mean*, I know __all__ `\(y_{ij}\)` values.
 * Here: `\(df_{total} = 12-1 = 11\)`
-* Generally: `\(df_{total} = kn-1\)`
+* Generally: `\(df_{total} = kn-1\)` (k groups and n per group)
 
 ]
 
@@ -141,7 +168,7 @@ Recall our conceptual formula for estimating the population variance, `\(\sigma^
 
 `$$s^2 = \frac{\sum_{i = 1}^n(y_i-\mu)^2}{N-1}$$`
 
-I am going to re-write this using bar/dot notation, and acknowledging that our total `\(N = k\times{n}\)`:
+Re-write this using bar/dot notation, and acknowledging that our total `\(N = k\times{n}\)`:
 
 `$$s^2 = \frac{\sum_{i = 1}^n(y_{ij}-\bar{y_{\bullet\bullet}})^2}{kn-1}$$`
 
@@ -185,7 +212,9 @@ In words, this means the sum of the squared differences between each *group* mea
 * Here: `\(df_{model} = 3-1 = 2\)`
 * Generally: `\(df_{model} = k-1\)`
 ]
-
+???
+Lines vs dotted line
+Group means vs grand mean
 ---
 
 ## Model Mean Squares
@@ -200,9 +229,14 @@ In words, this means the sum of the squared differences between each *group* mea
 
 Also known as: 
 `$$MS_{model} = MS_{treatment} = MS_{between} = MS_{method}$$`
+???
+Total = just the variance in y (outcome)
+Here = how much do the group means vary from each other
+  ? n*var(group means - columnwise)
+Many names - I like between
+
 
 ---
-
 ## Residual Sums of Squares
 
 .pull-left[
@@ -218,6 +252,9 @@ Also known as:
 
 In words, this means the sum of the squared differences between each observed `\(y_{ij}\)` value and its group mean `\(\bar{y_{\bullet{j}}}\)`. That is, it is the deviation of the `\(y_{ij}\)`s from the predicted score based on group.
 ]
+???
+Dots vs lines
+No grand mean
 
 
 ---
@@ -314,7 +351,7 @@ Estimate of the total variance in *y* __pooled__ across groups; the variance of 
 
 `$$s_j^2 = \frac{\sum_{i = 1}^n(y_{ij}-\bar{y_{\bullet{j}}})^2}{n-1}$$`
 
-If we have more than one group, we would pool our estimates across the *j* groups to be a more precise estimate of the population variance, `\(\sigma^2\)`:
+For more than one group, we pool our estimates across the *j* groups to be a more precise estimate of the population variance, `\(\sigma^2\)`:
 
 `$$s_{pooled}^2 = \frac{(n-1)s_1^2+\cdots+(n-1)s_k^2}{(n-1)+\cdots+(n-1)}$$`
 
@@ -323,7 +360,6 @@ If we have more than one group, we would pool our estimates across the *j* group
 `$$s_{pooled}^2 = \frac{\sum_{j = 1}^k\sum_{i = 1}^n(y_{ij}-\bar{y_{\bullet{j}}})^2}{k(n-1)} = \frac{SS_{residual}}{df_{residual}} = MS_{residual}$$`
 
 ---
-
 ## ANOVA Source Tables
 
 For OLS regression:
@@ -336,8 +372,8 @@ For OLS regression:
 
 &gt; where *p* is the number of model parameters excluding the intercept term
 
----
 
+---
 ## ANOVA Source Tables
 
 For ANOVA:
@@ -350,8 +386,15 @@ For ANOVA:
 
 &gt; where *k* is the number of groups and *n* is the sample size per group (balanced design)
 
----
+???
+              Observed    Model
+`\(MS_{total}\)`  Values      Grand Means
+`\(Ms_{model}\)`  Group Means Grand Means
+`\(Ms_{Resid}\)`  Values      Group Means
+Draw a triangle
+What does F mean?
 
+---
 ## Let's try an example
 
 I hypothesize that sleep-deprived students will answer less questions in class than non-sleep-deprived students. I expose *n* = 4 students each to one of three conditions prior to class:

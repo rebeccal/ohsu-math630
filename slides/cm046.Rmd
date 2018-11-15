@@ -466,23 +466,6 @@ A number of different statistical models are extensions of this same idea of a G
 
 ---
 
-# Food for thought...
-
-The independent samples *t*-test is a special case of an ANOVA. Specifically, a one-way ANOVA (definition: 1 IV that is a factor and 1 DV that is continuous) in which the IV factor has *exactly* two levels.
-
-Again, trust but verify!
-
-```{r}
-anova(lm(prestige~group,data=Prestige.2)) #doing an ANOVA in R
-```
-
-
-
-(hint: square the *t*-statistic to get the *F*-statistic equivalent)
-
-
----
-
 # Welch's *t*-test: Dealing with unequal variances
 
 Recall the formula for the independent groups *t*-test:
@@ -575,6 +558,24 @@ coefs_conf %>%
 summary(fit)
 (t <- coefs_conf$statistic[2]^2)
 ```
+
+
+---
+
+# Food for thought...
+
+The independent samples *t*-test is a special case of an ANOVA. Specifically, a one-way ANOVA (definition: 1 IV that is a factor and 1 DV that is continuous) in which the IV factor has *exactly* two levels.
+
+Again, trust but verify!
+
+```{r}
+anova(lm(prestige~group,data=Prestige.2)) #doing an ANOVA in R
+```
+
+
+
+(hint: square the *t*-statistic to get the *F*-statistic equivalent)
+
 
 ---
 
