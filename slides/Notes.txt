@@ -1,5 +1,7 @@
 Notes for next time...
 
+Look at the plots in ncp_plus.Rmd
+
 CM042 was way too short. Perhaps lecture longer/more on classic methods? (see below)
 
 The slides for 2017 Class 12 should be better incorporated into CM 4.2 or 4.4 - In general, confidence intervals deserve more attention in a cohesive manner.
