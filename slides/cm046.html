@@ -534,35 +534,6 @@ A number of different statistical models are extensions of this same idea of a G
 
 ---
 
-# Food for thought...
-
-The independent samples *t*-test is a special case of an ANOVA. Specifically, a one-way ANOVA (definition: 1 IV that is a factor and 1 DV that is continuous) in which the IV factor has *exactly* two levels.
-
-Again, trust but verify!
-
-
-```r
-anova(lm(prestige~group,data=Prestige.2)) #doing an ANOVA in R
-```
-
-```
-Analysis of Variance Table
-
-Response: prestige
-          Df Sum Sq Mean Sq F value  Pr(&gt;F)  
-group      1  681.3  681.32  7.0156 0.01013 *
-Residuals 65 6312.5   97.12                  
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-```
-
-
-
-(hint: square the *t*-statistic to get the *F*-statistic equivalent)
-
-
----
-
 # Welch's *t*-test: Dealing with unequal variances
 
 Recall the formula for the independent groups *t*-test:
@@ -707,6 +678,36 @@ F-statistic: 7.016 on 1 and 65 DF,  p-value: 0.01013
 ```
 [1] 7.015587
 ```
+
+
+---
+
+# Food for thought...
+
+The independent samples *t*-test is a special case of an ANOVA. Specifically, a one-way ANOVA (definition: 1 IV that is a factor and 1 DV that is continuous) in which the IV factor has *exactly* two levels.
+
+Again, trust but verify!
+
+
+```r
+anova(lm(prestige~group,data=Prestige.2)) #doing an ANOVA in R
+```
+
+```
+Analysis of Variance Table
+
+Response: prestige
+          Df Sum Sq Mean Sq F value  Pr(&gt;F)  
+group      1  681.3  681.32  7.0156 0.01013 *
+Residuals 65 6312.5   97.12                  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+
+
+(hint: square the *t*-statistic to get the *F*-statistic equivalent)
+
 
 ---
 
