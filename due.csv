@@ -36,7 +36,7 @@ Thurs,November,8,4.4: Hypothesis testing (classical),"<a href='https://www.natur
 <br><a href='https://www.nature.com/articles/nmeth.2858'>- Nature POS: comparing samples</a>
 <br><a href=reference/Wasserman-all_of_stats.pdf>- All of Statistics: pp. 92-94</a>", Inference for Categorical Data (Ch 3 + 4),https://www.datacamp.com/courses/inference-for-categorical-data,,,,,,,4.3,slides/cm043_lab.html,,
 Tues,November,13,"4.5: Errors, Effect Size, and Power",, Inference for Linear Regression (Ch 1 + 2),https://www.datacamp.com/courses/inference-for-linear-regression,,,,,HW3,hw/HW3/HW3.pdf,,,,
-Thurs,November,15,5.1: Many means,"<a href='https://www.nature.com/articles/nmeth.3005'>- Nature POS: ANOVA</a>
+Thurs,November,15,4.6 & 5.1: General Linear Model and Many Means,"<a href='https://www.nature.com/articles/nmeth.3005'>- Nature POS: ANOVA</a>
 <br><a href = 'https://arxiv.org/pdf/1412.3416.pdf'>- ANOVA</a>
 <br><a href=https://www.discoveringstatistics.com/repository/onewayanova.pdf>- Discovering Statistics: One-way Independent ANOVA</a>", Inference for Linear Regression (Ch 3 - 5),https://www.datacamp.com/courses/inference-for-linear-regression,P2,final_project.html,Lab 03 - Comparing Means,labs/lab03.html,,,,,,
 Tues,November,20,5.2: ANOVA by hand,<a href='https://www.discoveringstatistics.com/repository/anovabyhand.pdf'>- Discovering Statistics: The Theory of ANOVA</a>,,,,,,,Midterm,,,,,
