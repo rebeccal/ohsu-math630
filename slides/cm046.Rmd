@@ -1,7 +1,6 @@
 ---
 title: "Math 530/630 CM 4.6"
 subtitle: "The General Linear Model"
-#author: "Alison Hill"
 output:
   xaringan::moon_reader:
     css: ["default", "css/ohsu.css", "css/ohsu-fonts.css"]
@@ -10,42 +9,97 @@ output:
       highlightStyle: atelier-lakeside-light
       highlightLines: true
       countIncrementalSlides: false
+      beforeInit: "https://platform.twitter.com/widgets.js"
 ---
 
-```{r setup, include=FALSE}
+```{r setup_new, include=FALSE}
+# leave this chunk alone
 options(htmltools.dir.version = FALSE)
 options(knitr.table.format = "html") 
 knitr::opts_chunk$set(warning = FALSE, message = FALSE, 
-  comment = NA, dpi = 300,
-  fig.align = "center", cache = FALSE)
+  comment = NA, dpi = 300, out.width = '60%', cache = FALSE)
+
+# knitr::opts_chunk$set(warning = FALSE, message = FALSE, 
+#   comment = NA, dpi = 300,
+#   fig.align = "center", cache = FALSE)
+
+```
+
+
+```{r libraries, include=FALSE}
 library(tidyverse)
 library(infer)
 library(moderndive)
+library(car)
+library(broom)
 ```
+
 
 ## Family of *t*-tests
 
 - One-sample *t*-test
-- Independent samples *t*-test
 - Dependent samples *t*-test (also known as paired) 
+- Independent samples *t*-test
+
+???
+Already spent time on one-sample
+And paired vs independent in the homework
+
 
 ---
+class:center
 ## What do they all have in common?
 
+--
 We want to compare two things- mean 1 and mean 2!
+
+
+![](images/2Groups.bmp)
+
+
+---
+## Ways to get paired samples
+
+* Collect data from each participant under two different experimental conditions 
+  * Cognitive load - do people engage in more self-directed speech when the task is more difficult?
+  * Classical music versus silence - which is more conducive to writing?
+* Collect data before and after some "treatment" 
+  * Aromatherapy - do people react more quickly after being exposed to lavendar scent?
+  * Drug Trial - do Beta BLockers reduce blood pressure?
+  
+  
+???
+
+Paired - Careful of causation 
+- Conditions - balance!!
+- Treatment - causation
+
+---
+##Formulae for the paired _t-test_
+
+
+$$t_{n-1}=\frac{\bar{d}}{SE_d}$$
+
+$$\bar{d}=\frac{1}{n}\sum_{i=1}^n x_{i}-y_{i}$$
+
+$${SE_d}=\frac{sd(\bar{d})}{\sqrt{n}}$$
+???
+Why is it considered theoretically more powerful than the independent t-test?
+What happens to the distribution? 
+To the t-statistic?
+
 
 ---
 ## Ways to get independent samples
 
 * Random assignment of participants to two different experimental conditions 
-  * Scream versus Scream 2
-  * Classical music versus silence
+  * Scream versus Scream 2 - which was scarier?
+  * Classical music versus silence - which is more conducive to writing?
 * Naturally occurring assignment of participants to two different groups 
-  * Male versus female
-  * Young versus old
+  * Young versus old - how does the volume their self-directed speech differ?
   
 ---
-## Formula for the independent groups *t*-test
+## Formulae for the independent samples *t*-test
 
 $$t=\frac{(\bar{y}_1-\bar{y}_2)-(\mu_1-\mu_2)}{SE}$$
 
@@ -56,19 +110,47 @@ So $\mu_1-\mu_2$ is often excluded from the formula. Since we now have two sampl
 $$s_{\bar{y}_1-\bar{y}_2}=s_{pooled}\times{\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}}$$
 and $s_{pooled}$ is:
 $$s_{pooled}=\sqrt{\frac{(n_1-1)s_{y_1}^2+(n_2-1)s_{y_2}^2}{n_1+n_2-2}}$$
+
+???
+Assumes ~equal variances
+R - default is NOT pooled
+
+
 ---
-## The *t*-test as a general linear model (GLM) 
+class: center, middle
+# The *t*-test as a general linear model (GLM) 
+
+
+---
+##Prestige of Canadian Occupations - dataset
+
+* education
+  + Average education of occupational incumbents, years, in 1971.
+
+* income
+  + Average income of incumbents, dollars, in 1971.
+
+* prestige
+  + Pineo-Porter prestige score for occupation, from a social survey conducted in the mid-1960s (0 - 100).
+
+* type
+  + Type of occupation. A factor with levels (note: out of order): bc, Blue Collar; prof, Professional, Managerial, and Technical; wc, White Collar.
+
+---
+## The general linear model (GLM) 
 
 All statistical procedures are basically the same thing:
 $$outcome_i=(model)+error_i$$
 
-In my simple linear regression from the past few labs, this has been:
+For example: 
 $$prestige_i=(intercept + education_i)+error_i$$
 
 Or more generally:
 $$y_i=(b_0 + b_1x_i)+error_i$$
 
 > __N.B.__ $Error_i$ is an unknowable, incalculable statistic- it is the deviation of the $i^{th}$ value from the (unobservable) true value. You can think of it as measurement error. This is different from the error of the regression formula, which is defined as the *residual* of the $i^{th}$ value and calculated as the difference between the observed $(y_i)$ and predicted scores $(\hat{y_i})$. 
+
+
 
 ---
 ## Sidebar: The GLM in matrix notation
@@ -93,29 +175,31 @@ where...
 .pull-left[
 In both simple linear regression and the independent samples *t*-test, $\boldsymbol{X}$ is a matrix of *N* rows and *2* columns. Note that the number of columns in $\boldsymbol{X}$ must always equal the number of rows in $\boldsymbol{\beta}$.
 
-![here](latex-image-2.pdf)
+![](images/latex-image-2.bmp)
 ]
 
-
+--
 .pull-right[
 In simple linear regression, the vector *X* can take on any value. In the independent samples *t*-test, this vector simply contains 0's and 1's. Below, *n*=4 with 2 in each group to illustrate.
 
-![here](latex-image-1.pdf)
+![](images/latex-image-1.bmp)
 ]
 
 
+???
+All this happens under the covers in R when it conducts a t-test
 ---
 
 ## Dummy variables
 
 .pull-left[
 
-Now, let's switch IVs in our example from education (a continuous variable) to a group variable:
+Thus, we'll be using a group variable:
 $$prestige_i=(intercept + group_i)+error_i$$
 
 where group is a dummy or indicator variable that can only take two values: 0 or 1. 
 
-This is easy to do in R. Remember in my Prestige dataset, I have a categorical variable called "type." Let's let the variable Group denote:
+This is easy to do in R. In the Prestige dataset, there is a categorical variable called "type." Let's let the variable Group denote:
 
 > 0 for blue collar (type="bc") and
 
@@ -187,6 +271,10 @@ ggplot(Prestige.2, aes(x=factor(group.l),y=prestige)) + geom_dotplot(stackdir = 
 
 ```
 
+???
+Means are different
+Spread is okay-ish - not worried
+44 vs 23 data points - okay
 ---
 
 # But are the two groups different?
@@ -198,6 +286,12 @@ Let's do an independent samples *t*-test to find the answer:
 t.test(prestige~group,data=Prestige.2, var.equal=T)
 ```
 
+???
+Significant, note t-value
+df - not a decimal
+  Decimal always indicates a non-pooled variance
+Is 0 in the CI?
+Sample means
 
 
 ---
@@ -218,8 +312,11 @@ summary(fit)
 ```
 
 
-
-
+???
+Positive t is okay, symmetric
+Same p, same t on group
+Intercept = mean blue collar
+F = t-squared
 ---
 
 # But what does it MEAN?
@@ -369,7 +466,7 @@ A number of different statistical models are extensions of this same idea of a G
 
 ---
 
-# Further food for thought...
+# Food for thought...
 
 The independent samples *t*-test is a special case of an ANOVA. Specifically, a one-way ANOVA (definition: 1 IV that is a factor and 1 DV that is continuous) in which the IV factor has *exactly* two levels.
 
@@ -382,137 +479,6 @@ anova(lm(prestige~group,data=Prestige.2)) #doing an ANOVA in R
 
 
 (hint: square the *t*-statistic to get the *F*-statistic equivalent)
-
----
-
-# The non-centrality parameter of the *t* distribution
-
-In an earlier class, I alluded to the fact that the *t*-distribution has an another parameter in addition to the degrees of freedom- a non-centrality parameter, $\delta$. 
-
-> When $H_0$ is true, $\delta=0$.
-
-> When $H_0$ is false, $\delta\neq0$.
-
-Why is this? Let's look at the formula:
-
-$$\delta=\sqrt{\frac{n_1n_2}{n_1+n_2}}(\frac{\mu_1-\mu_2}{SE})$$
-
-As you can see, if $\mu_1-\mu_2$=0 then $\delta$=0.
-
----
-
-
-# The *t*-distribution... 
-
-.pull-left[
-
-> When the null is true
-
-```{r echo=FALSE}
-# Script 12.4 - The Normal distribution and several t-distributions
-# Clearing out the workspace
-rm(list = ls())
-# Setting the values for the abscissa
-tval <- pretty(c(-3.25, 3.25), 1000)
-# Find the ordinates for the normal distribution
-ordn <- dnorm(tval)
-# Drawing the normal distribution
-plot(tval, ordn, type = "l", lty = 1, lwd = 3,
-  ylab = "Ordinate", xlab = "Value")
-# Setting df for three different t-distributions
-nu <- c(1, 3, 10)
-# Drawing the three different t-distributions
-lines(tval, dt(tval, nu[1]), type = "l" ,lty = 2, lwd = 2)
-lines(tval, dt(tval, nu[2]), type = "l", lty = 3, lwd = 2)
-lines(tval, dt(tval, nu[3]), type = "l", lty = 5, lwd = 2)
-legend(-3,.40, c("Normal", "t, df=1", "t, df=3", "t, df=10"),
-  lwd = c(3,2,2,2), lty = c(1,2,3,5))
-```
-]
-
-.pull-right[
-
-> When the null is false
-
-```{r echo=FALSE}
-# Script 12.4 - The Normal distribution and several t-distributions
-# Clearing out the workspace
-rm(list = ls())
-# Setting the values for the abscissa
-tval <- pretty(c(-3.25, 3.25), 1000)
-# Find the ordinates for the normal distribution
-ordn <- dnorm(tval)
-# Drawing the normal distribution
-plot(tval, ordn, type = "l", lty = 1, lwd = 3,
-  ylab = "Ordinate", xlab = "Value")
-# Setting df for three different t-distributions
-nu <- c(9, 9, 9)
-delta <- c(.5, 1, 1.5)
-# Drawing the three different t-distributions
-lines(tval, dt(tval, nu[1], delta[1]), type = "l" ,lty = 2, lwd = 2)
-lines(tval, dt(tval, nu[2], delta[2]), type = "l", lty = 3, lwd = 2)
-lines(tval, dt(tval, nu[3], delta[3]), type = "l", lty = 5, lwd = 2)
-legend(-3,.40, c("Normal", "t, delta=.5", "t, delta=1", "t, delta=1.5"),
-  lwd = c(3,2,2,2), lty = c(1,2,3,5))
-```
-]
-
----
-
-# Non-central *t*-distributions... 
-
-.pull-left[
-
-> Degrees of freedom=9
-
-```{r echo=FALSE}
-nu <- c(9, 9, 9, 9)
-delta <- c(0, .5, 1, 1.5)
-plot(tval, dt(tval, nu[1], delta[1]), type = "l" ,lty = 1, lwd = 3,
-  ylab = "Ordinate", xlab = "Value", col="#d7191c")
-# Drawing the three different t-distributions
-lines(tval, dt(tval, nu[2], delta[2]), type = "l" ,lty = 2, lwd = 2, col="#fdae61")
-lines(tval, dt(tval, nu[3], delta[3]), type = "l", lty = 3, lwd = 2, col="#abdda4")
-lines(tval, dt(tval, nu[4], delta[4]), type = "l", lty = 5, lwd = 2, col="#2b83ba")
-legend(-3,.40, c("t, delta=0", "t, delta=.5", "t, delta=1", "t, delta=1.5"),
-  lwd = c(3,2,2,2), lty = c(1,2,3,5), col=c("#d7191c", "#fdae61","#abdda4", "#2b83ba"))
-```
-]
-
-.pull-right[
-
-> $\delta$=5
-
-```{r echo=FALSE}
-# Setting the values for the abscissa
-ntval <- pretty(c(0,12), 1000)
-nu <- c(10, 20, 30, 40)
-delta <- c(5,5,5,5)
-plot(ntval, dt(ntval, nu[1], delta[1]), type = "l" ,lty = 1, lwd = 3,
-  ylab = "Ordinate", xlab = "Value", xlim=c(0, 12), ylim=c(0, .45), col="#d7191c")
-# Drawing the three different t-distributions
-lines(ntval, dt(ntval, nu[2], delta[2]), type = "l" ,lty = 2, lwd = 2, col="#fdae61")
-lines(ntval, dt(ntval, nu[3], delta[3]), type = "l", lty = 3, lwd = 2, col="#abdda4")
-lines(ntval, dt(ntval, nu[4], delta[4]), type = "l", lty = 5, lwd = 2, col="#2b83ba")
-legend(0,.45, c("df=10", "df=20", "df=30", "df=40"),
-  lwd = c(3,2,2,2), lty = c(1,2,3,5), col=c("#d7191c", "#fdae61","#abdda4", "#2b83ba"))
-```
-]
-
----
-
-# Using non-central *t*-distributions... 
-
-```{r}
-help(TDist)
-pt(-1, 20, 0)
-pt(-1, 20, 5)
-```
-
-Recommended:
-```{r eval=FALSE}
-power.t.test()
-```
 
 
 ---
@@ -528,7 +494,8 @@ $$SE'=\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}$$
 
 So the formula for Welch's $t'$: 
 $$t'=\frac{(\bar{x}_1-\bar{x}_2)-(\mu_1-\mu_2)}{\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}}$$
-
+???
+Weighted combination of each groups sd
 ---
 
 # Welch's *t*-test: Modified degrees of freedom
@@ -537,12 +504,81 @@ Recall the degrees of freedom for the independent groups *t*-test:
 
 $$\nu=n_1+n_2-1$$
 
+
 The degrees of freedom are modified for Welch's $t'$: 
 
 $$\nu'=\frac{(\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2})^2}{\frac{s_1^4}{n_1^2(n_1-1)}+\frac{s_2^4}{n_2^2(n_2-1)}}$$
+
+???
+Yuck
+Remember, if you see a decimal df, it used and un-pooled variance
+
+
+---
+
+#  But wait, there's more... 
+
+* Regression coefficients, divided by their standard errors, are **also** distributed as t variables
+* Degrees of freedom: *n* - 2 (in simple linear regression, because we have to account for the 2 coefficients we estimated from the sample data: the intercept + the slope).
+* In our example, the $t_{crit}$ quantile is ( df = n - 2 = 65):
+
+``` {r lr-tcrit}
+qt(.975,df=65)
+```
+
+
+
+---
+#Is the slope different from zero? 
+
+$$t_{b_1}=\frac{b_1 - \beta_1}{\hat{SE_{b_1}}}$$
+
+###What is $\beta_1$ under the null hypothesis?
+
+???
+Thus the t-statistic is simply the regression coefficient divided by the standard error. 
+
+---
+#What is the 95% confidence interval? 
+
+$$b_1 \pm t_{\frac{\alpha}{2}}\hat{SE_{b_1}}$$
+
+
+i.e., $\alpha = .05: t_{crit}=t_{\frac{\alpha}{2}} = qt(.975, df=n-2)$
+
+ 
+### Mainly of interest for slope, not so much intercept
+
+---
+###Comparing...
+```{r}
+n=67
+coefs_t = tidy(fit) %>%
+  mutate (t = estimate/std.error)
+coefs_t
+```
+
+```{r}
+coefs <- tidy(fit, conf.int = TRUE)
+coefs_conf <- coefs %>% 
+   mutate(lower = estimate + qt(.025, df = n - 2)*std.error,
+          upper = estimate + qt(.975, df = n - 2)*std.error)
+coefs_conf %>%
+   select(conf.low,conf.high, lower, upper)
+```
+
+
+---
+###Model Level Significance. The F-statistic
+
+```{r}
+summary(fit)
+(t <- coefs_conf$statistic[2]^2)
+```
 
 ---
 
 # George E. P. Box
 
 > "Equally, the statistician knows, for example, that in nature there never was a normal distribution. There never was a straight line, yet with normal and linear assumptions, known to be false, he can often derive results which match, to a useful approximation, those found in the real world." -*Journal of the American Statistical Association, 71*(356), pp. 791-799.
+
