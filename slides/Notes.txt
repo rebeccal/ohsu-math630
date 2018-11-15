@@ -1,0 +1,13 @@
+Notes for next time...
+
+CM042 was way too short. Perhaps lecture longer/more on classic methods? (see below)
+
+The slides for 2017 Class 12 should be better incorporated into CM 4.2 or 4.4 - In general, confidence intervals deserve more attention in a cohesive manner.
+
+CM044 was almost too long. And definitely would be with the new CI/RoR slides. perhaps focus it more on NHST (z and t) and do CIs separately?
+
+CM045 - need to add readings - use the ones from the reference page.
+
+CM046 - Now doing a & b. a) GLM and t-tests. b) Anova
+  There were some good slides on ncp that "could" be incorporated into cm045, however, one is ppt and one Rmd. I've saved the Rmd as ncp_plus.Rmd. 
+
