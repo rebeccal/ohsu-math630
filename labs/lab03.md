@@ -11,6 +11,10 @@ output:
     toc_float: yes
 ---
 
+<!-- NOTE: need to update the "resampling lab" url -->
+
+
+
 
 # Overview
 
@@ -287,7 +291,7 @@ You should already have variables for the mean difference and the $t$-statistic 
 
 # Compare t-test results to permutation test
 
-Using [ModernDive 10.7](http://moderndive.netlify.com/10-hypothesis-testing.html#example-comparing-two-means) as an example, as well as our previous [resampling lab](https://apreshill.github.io/ohsu-basic-stats/cm034.html), conduct a permutation test to evaluate whether there is a mean difference in total mercury between fishermen and non-fishermen. What do you conclude, and how do these results compare to those based on the classical hypothesis test? What, if any, assumptions of each method are comfortable or uncomfortable with?
+Using [ModernDive 10.7](http://moderndive.netlify.com/10-hypothesis-testing.html#example-comparing-two-means) as an example, as well as our previous [resampling lab](https://ohsu-math630-fall-2018.netlify.com/slides/cm043_lab.html), conduct a permutation test to evaluate whether there is a mean difference in total mercury between fishermen and non-fishermen. What do you conclude, and how do these results compare to those based on the classical hypothesis test? What, if any, assumptions of each method are comfortable or uncomfortable with?
 
 # Compare t-test results to linear regression
 
