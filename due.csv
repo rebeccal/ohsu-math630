@@ -40,13 +40,13 @@ Thurs,November,15,4.6 & 5.1: General Linear Model and Many Means,"<a href='https
 <br><a href = 'https://arxiv.org/pdf/1412.3416.pdf'>- ANOVA</a>
 <br><a href=https://www.discoveringstatistics.com/repository/onewayanova.pdf>- Discovering Statistics: One-way Independent ANOVA</a>", Inference for Linear Regression (Ch 3 - 5),https://www.datacamp.com/courses/inference-for-linear-regression,P2,final_project.html,Lab 03 - Comparing Means,labs/lab03.html,,,,,,
 Tues,November,20,5.2: ANOVA by hand,<a href='https://www.discoveringstatistics.com/repository/anovabyhand.pdf'>- Discovering Statistics: The Theory of ANOVA</a>,,,,,,,Midterm,,,,,
-Thurs,November,22,NO CLASS,,,,,,,,,,,,,
+Thurs,November,22,NO CLASS,,,,,,Lab 03 - Self-assessment,,,,,,,
 Tues,November,27,5.3: Contrasts,<a href='https://www.nature.com/articles/nmeth.2900'>- Nature POS: multiple comparisons</a>,,,P3,final_project.html,Lab 03 - Self-assessment,labs/lab03-solutions.html,,,5.2,slides/cm052_lab.html,,
 Thurs,November,29,5.4: Family-wise error rates,"<a href='https://www.nature.com/news/scientific-method-statistical-errors-1.14700'>- Nature: p-values</a>
 <br><a href = 'https://fivethirtyeight.com/features/science-isnt-broken/#part1'>- 538: Science Isn't Broken</a>
 <br><a href='https://simplystatistics.org/2012/01/06/p-values-and-hypothesis-testing-get-a-bad-rap-but-we/'>- Simply Statistics blog</a>
 <br><a href='http://daniellakens.blogspot.com/2017/12/understanding-common-misconceptions.html'>- Lakens blog</a>", Communicating with Data in the Tidyverse,https://www.datacamp.com/courses/communicating-with-data-in-the-tidyverse,,,,,HW4,hw/HW4/HW4.pdf,,,,
 Tues,December,4,5.5: Two-way ANOVA/3-way ANOVA,<a href='http://biostat.mc.vanderbilt.edu/wiki/Main/ManuscriptChecklist'>- Frank Harrell's Manuscript Checklist</a>,,,,,,,,,,,,
-Thurs,December,6,Final presentations,,,,P5,final_project.html,Lab 04 - ANOVA,labs/lab04.html,,,,,,
-Tues,December,11,Final presentations,,,,,,,,,,,,,
-Thurs,December,13,Final presentations,,,,P4,final_project.html,Lab 04 - Self-assessment,,,,,,,
+Thurs,December,6,Final presentations,"Groups 4, 5, & 1 ",,,P5,final_project.html,Lab 04 - ANOVA,labs/lab04.html,,,,,,
+Tues,December,11,Final presentations,"Groups 7, 2, & 6 ",,,,,,,,,,,,
+Thurs,December,13,Final presentations,"Groups 3, 9, & 8",,,P4,final_project.html,Lab 04 - Self-assessment,,,,,,,
