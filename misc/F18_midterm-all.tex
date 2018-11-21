@@ -1,0 +1,916 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Midterm Exam},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\usepackage{longtable,booktabs}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{Midterm Exam}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+  \subtitle{Math 530/630}
+  \author{}
+    \preauthor{}\postauthor{}
+      \predate{\centering\large\emph}
+  \postdate{\par}
+    \date{Due: 11/20/2018}
+
+
+\begin{document}
+\maketitle
+
+To turn in, please submit 2 files: one is the raw .Rmd file and the
+other is a single knitted html(or PDF) file. For the multiple choice,
+please clearly indicate the problem number and your answer on separate
+lines as in:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  a
+\item
+  b
+\item
+  c
+\end{enumerate}
+
+\section{Grading:}\label{grading}
+
+\begin{itemize}
+\tightlist
+\item
+  Free Answer questions are each worth 4 points.
+\item
+  Multiple Choice are each worth 2 points.
+\end{itemize}
+
+You may include R chunks for the multiple choice problems if you like,
+but partial credit will not be given.
+
+\section{Key Terms You Should Know}\label{key-terms-you-should-know}
+
+\begin{quote}
+\textbf{Alpha-level (\(\alpha\))}: probability of making a Type I error;
+that is, rejecting the null hypothesis when it is in fact true (e.g., a
+test indicates that a man is pregnant)
+\end{quote}
+
+\begin{quote}
+\textbf{Alternative Hypothesis} (\(H_A\) or \(H_1\)): the prediction
+that there will be an effect.
+\end{quote}
+
+\begin{quote}
+\textbf{Critical Value(s)}: the value of a given test statistic that
+corresponds to a rejection point- the point at which you determine to
+reject the null hypothesis. The critical value defines the boundary of
+the rejection region for \(H_0\). This value depends on the significance
+level, \(\alpha\), and whether the test is one-sided or two-sided.
+\end{quote}
+
+\begin{quote}
+\textbf{Null Hypothesis} (\(H_0\)): the reverse of the alternative
+hypothesis that your prediction is wrong and the predicted effect does
+not exist.
+\end{quote}
+
+\newpage
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Given the probability density function (below) of the random variable
+  \(X\):
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \tightlist
+  \item
+    find \(c\)
+  \item
+    find the cumulative distribution function \(F(x)\).
+  \item
+    Compute \(P(1 < X < 3)\)
+  \end{enumerate}
+\end{enumerate}
+
+\[f(x) = \begin{cases} 
+  cx, & 0 < x < 4 \\
+  0, & \textrm{otherwise}
+  \end{cases}\]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\item
+  A friend claims that she has drawn a random sample of size 30 from the
+  exponential distribution with \(\lambda = \frac{1}{10}\). The mean of
+  her sample is 12.
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \tightlist
+  \item
+    What is the expected value of a sample mean? (hint:
+    \url{https://en.wikipedia.org/wiki/Exponential_distribution\#Mean.2C_variance.2C_moments_and_median})
+  \item
+    Run a simulation by drawing 1000 random samples, each of size 30
+    from Exp(1/10), and then compute the mean. What proportion of the
+    sample means are as large or larger than 12?
+  \item
+    Is a mean of 12 unusual for a sample of size 30 from Exp(1/10)?
+  \end{enumerate}
+\item
+  A researcher believes that in recent years women have been getting
+  taller. She knows that 10 years ago the average height of young adult
+  women living in her city was 63 inches (\(\sigma = 3\)). She randomly
+  samples eight young adult women currently residing in her city and
+  measures their heights. The following data are obtained (Height, in
+  inches): 64, 66, 68, 60, 62, 65, 66, 63
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \tightlist
+  \item
+    What is the alternative hypothesis? (In evaluating this experiment,
+    assume a non-directional hypothesis is appropriate because there are
+    insufficient theoretical and empirical bases to warrant a
+    directional hypothesis.)
+  \item
+    What is the null hypothesis?
+  \item
+    Using the generic test statistic formula given in class
+    (\(\frac{\hat{\theta}-{\theta_0}}{SE_{\theta_0}}\)), what is the
+    appropriate numerator?
+  \item
+    Using the generic test statistic formula given in class
+    (\(\frac{\hat{\theta}-{\theta_0}}{SE_{\theta_0}}\)), what is the
+    appropriate denominator?
+  \item
+    Using \(\alpha = 0.01\), what is/are the critical value(s) of the
+    test statistic?
+  \item
+    Using \(\alpha = 0.01\), what is the conclusion? (i.e.~do we reject
+    or fail to reject the null hypothesis, and why?)
+  \item
+    Looking at the actual data, how does the sample standard deviation
+    compare to that of the population?
+  \end{enumerate}
+\item
+  The mean height reported by men on the dating website OKCupid is
+  approximately 5 feet 11 inches. For men living in the US, heights are
+  normally distributed with a mean of 5 feet 9 inches, \(\sigma\)=3
+  inches. Answer the following:
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \tightlist
+  \item
+    State the null and alternative hypotheses.
+  \item
+    What is/are the critical value(s) of that test statistic (assume
+    \(\alpha = .05\), 2-tailed)? That is, for which values of the test
+    statistic would you reject the null hypothesis?
+  \end{enumerate}
+\item
+  What are the critical values of a t-distributed random variable
+  (\texttt{?TDist}) for each of the following values of \emph{N} and
+  \(\alpha\) using nondirectional hypotheses (assume testing of means)?
+\end{enumerate}
+
+\begin{quote}
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  \emph{N}=12; \(\alpha\)=.05
+\item
+  \emph{N}=20; \(\alpha\)=.01
+\item
+  \emph{N}=2; \(\alpha\)=.05
+\end{enumerate}
+\end{quote}
+
+\begin{quote}
+What are the critical values of a t-distributed random variable for each
+of the following values of \emph{N} and \(\alpha\) using a directional
+hypothesis in the upper tail (assume testing of means)?
+\end{quote}
+
+\begin{quote}
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  \emph{N}=8; \(\alpha\)=.05
+\item
+  \emph{N}=15; \(\alpha\)=.01
+\item
+  \emph{N}=51; \(\alpha\)=.025
+\end{enumerate}
+\end{quote}
+
+\section{Multiple-Choice Questions}\label{multiple-choice-questions}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Suppose you have 10 numbers and have computed the mean to be 8.0. You
+  then discover that the last number in the data was entered
+  incorrectly. It was entered as 8.0 when it should have been 4.0. If
+  you replace the incorrect value (8.0) with the correct one (4.0), and
+  recompute the mean, you will obtain a new mean of:
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \item
+    It is impossible to determine
+  \item
+    6.6
+  \item
+    8.6
+  \item
+    7.6
+  \end{enumerate}
+\item
+  You have a set of data that have a mean of 50 and a standard deviation
+  of 12. You wish them to have a mean of 65 and a standard deviation of
+  10, while retaining the shape of the distribution. What values of
+  \emph{a} and \emph{b} in the linear transformation formula \emph{Y =
+  aX + b} will produce a new set of data with the desired mean and
+  standard deviation?
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \item
+    \emph{a} = 0.833, \emph{b} = 23.3
+  \item
+    \emph{a} = 1.83, \emph{b} = -23.3
+  \item
+    \emph{a} = 1.67, \emph{b} = 23.3
+  \item
+    \emph{a} = 0.833, \emph{b} = 46.7
+  \item
+    \emph{a} = 1.2, \emph{b} = 22.3
+  \end{enumerate}
+\item
+  Jane had a z-score of 1.75 on her statistics midterm. If the class
+  mean is 65.0, and the class standard deviation is 12.0, what was
+  Jane's raw score?
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \item
+    It is impossible to determine
+  \item
+    66
+  \item
+    86
+  \item
+    76
+  \end{enumerate}
+\item
+  IQ scores have a distribution that is approximately normal in shape,
+  with a mean of 100 and a standard deviation of 15 in the general
+  population. Assuming the normal distribution is a good approximation,
+  what proportion of the general population has IQ scores between 79.0
+  and 109.0?
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \item
+    0.645
+  \item
+    0.745
+  \item
+    0.545
+  \item
+    0.709
+  \item
+    None of the above answers are correct
+  \end{enumerate}
+\item
+  You have 10 numbers with a sample mean of 9.0 and a sample variance of
+  11.0. You discover that the last number in the list was recorded as
+  8.0 when it should have been recorded as 12.0. If you correct your
+  error and correctly recompute the sample variance, what value will you
+  obtain?
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \item
+    11.71
+  \item
+    11.0
+  \item
+    10.54
+  \item
+    13.01
+  \item
+    None of the above answers are correct
+  \end{enumerate}
+\item
+  If \(\alpha\) = 0.01, then the probability of a correct acceptance of
+  a true statistical null hypothesis is:
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \item
+    0.0001
+  \item
+    \(\beta\)
+  \item
+    0.99
+  \item
+    0
+  \item
+    It cannot be determined from the information provided
+  \end{enumerate}
+\item
+  Given the following probability distribution for the random variable
+  \emph{X}, the variance of \emph{X} is:
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \item
+    3.5563
+  \item
+    3.7524
+  \item
+    2.95
+  \item
+    1.575
+  \item
+    1.8475
+  \end{enumerate}
+\end{enumerate}
+
+\begin{longtable}[]{@{}cc@{}}
+\toprule
+\emph{x} & \(P_X(x)\)\tabularnewline
+\midrule
+\endhead
+1 & 0.1\tabularnewline
+2 & 0.15\tabularnewline
+3 & 0.2\tabularnewline
+4 & 0.2\tabularnewline
+5 & 0.35\tabularnewline
+\bottomrule
+\end{longtable}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{7}
+\item
+  Given the following probability distribution for the random variable
+  \emph{X}, the expected value of \emph{X} is:
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \item
+    2.48
+  \item
+    3.68
+  \item
+    3.58
+  \item
+    3.48
+  \end{enumerate}
+\end{enumerate}
+
+\begin{longtable}[]{@{}cc@{}}
+\toprule
+\emph{x} & \(P_X(x)\)\tabularnewline
+\midrule
+\endhead
+1 & 0.1\tabularnewline
+2 & 0.2\tabularnewline
+3 & 0.2\tabularnewline
+4 & 0.12\tabularnewline
+5 & 0.38\tabularnewline
+\bottomrule
+\end{longtable}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{8}
+\item
+  The sampling distribution of the sample mean based on \emph{N} iid
+  observations
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \item
+    converges asymptotically to a normal distribution in shape under the
+    conditions of the Central Limit Theorem
+  \item
+    has a variance of \(\sigma^2/N\) for any population distribution
+  \item
+    is always exactly normal, for any sample size, when the population
+    distribution is normal
+  \item
+    all of the above answers are correct
+  \end{enumerate}
+\item
+  If one draws all possible samples for various values of \emph{N} from
+  the same population of raw scores, as \emph{N} increases:
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \item
+    The standard error of the mean increases
+  \item
+    The standard error of the mean stays the same
+  \item
+    The standard error of the mean decreases
+  \item
+    The standard error of the mean cannot be calculated
+  \end{enumerate}
+\item
+  If one draws all possible samples for various values of \emph{N} from
+  the same population of raw scores, as \emph{N} increases:
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \item
+    The mean of the sampling distribution of the mean increases
+  \item
+    The mean of the sampling distribution of the mean stays the same
+  \item
+    The mean of the sampling distribution of the mean decreases
+  \item
+    None of the above
+  \end{enumerate}
+\item
+  In cases where \emph{N} \textgreater{} 1, the relationship between the
+  raw score population standard deviation and the standard error is:
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \item
+    The standard error is greater than the population standard deviation
+  \item
+    The standard error is less than the population standard deviation
+  \item
+    The standard error equals the population standard deviation
+  \item
+    The standard error is the population standard deviation
+  \end{enumerate}
+\item
+  The variance can be thought of as:
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \item
+    half the range
+  \item
+    the sum of squared deviations from the mean
+  \item
+    the average deviation
+  \item
+    the average squared deviation from the mean
+  \end{enumerate}
+\item
+  What would happen to the mean of a distribution of scores if the
+  number 10 is added to each score?
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \item
+    It would stay the same
+  \item
+    It increases by 10
+  \item
+    It will become 10 times as large
+  \item
+    It will increase, but the amount depends on the shape of the
+    distribution
+  \end{enumerate}
+\item
+  What would happen to the standard deviation of a distribution of
+  scores if the number 10 is added to each score?
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \item
+    It would stay the same
+  \item
+    It increases by 10
+  \item
+    It will become 10 times as large
+  \item
+    It will increase, but the amount depends on the shape of the
+    distribution
+  \end{enumerate}
+\item
+  What would happen to the mean of a distribution of scores if each
+  score is multiplied by 2?
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \item
+    It would stay the same
+  \item
+    It increases by 2
+  \item
+    It will become twice as large
+  \item
+    It will increase, but the amount depends on the shape of the
+    distribution
+  \end{enumerate}
+\item
+  What would happen to the variance of a distribution of scores if each
+  score is multiplied by 2?
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \item
+    It would stay the same
+  \item
+    It will become twice as large
+  \item
+    It will become four times as large
+  \item
+    It will increase, but the amount depends on the shape of the
+    distribution
+  \end{enumerate}
+\item
+  A researcher has data for two variables, \emph{x} and \emph{y}. First,
+  she converts both variables to z-scores with a mean of 0 and standard
+  deviation of 1, and calls them \(z_x\) and \(z_y\). Next, she takes
+  the mean of both z-scores and calls that new variable \(ave_z\). What
+  is the mean and standard deviation of the \(ave_z\) variable?
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \item
+    mean = 0; standard deviation = 1
+  \item
+    mean = 0; standard deviation approximately 1
+  \item
+    mean = 0; standard deviation \textgreater{} 1
+  \item
+    Cannot be determined from the information given
+  \end{enumerate}
+\item
+  The sampling distribution and standard error of a statistic can be
+  calculated by:
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \item
+    exhaustive and exact calculations where formula solutions are
+    possible
+  \item
+    simulation
+  \item
+    formula approximations
+  \item
+    repeatedly taking random samples of a given size from a population
+  \item
+    all of the above
+  \end{enumerate}
+\item
+  IQ scores have a distribution that is approximately normal in shape,
+  with a mean of 100 and a standard deviation of 15. What percentage of
+  scores is at or above an IQ of 116?
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \item
+    12.464
+  \item
+    14.306
+  \item
+    15.737
+  \item
+    16.355
+  \item
+    None of the above answers are correct.
+  \end{enumerate}
+\item
+  Suppose you want to test the null hypothesis that \(\mu\)=100 with a
+  sample size of \emph{n}=25 and an \(\alpha\)=.05 using a t-statistic,
+  which you know follows the Student t-distribution (\texttt{?TDist}).
+  What will the critical value(s) for the \emph{t} statistic be? That
+  is, for which values of the \emph{t} statistic will you reject the
+  null hypothesis?
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \item
+    \(\leq\) -2.06, \(\geq\) 2.06
+  \item
+    \(\leq\) -1.71, \(\geq\) 1.71
+  \item
+    \(\leq\) -2.06, \(\geq\) 1.85
+  \item
+    \(\leq\) -1.85, \(\geq\) 2.06
+  \item
+    None of the above answers are correct.
+  \end{enumerate}
+\item
+  Could the sample \emph{X}=\{21,21,21,20,22,20,22\} reasonably have
+  been drawn from a normal population with a mean of 20 and standard
+  deviation of 1.5 with \(\alpha\)=0.05 (two-tailed)?
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \item
+    yes
+  \item
+    no
+  \item
+    cannot be tested with \emph{z} test
+  \item
+    insufficient information
+  \end{enumerate}
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+For the last set of questions, suppose you have four children in a
+reading group (Beth, Marianne, Steven, Joel) and you randomly pick one
+child to lead the discussion in group each day of a 5-day week.
+Furthermore, we define the outcome of each day's selection to be binary:
+Steven leads the discussion or he doesn't.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{22}
+\item
+  The number of times Steven leads the discussion in a week would be
+  the:
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \item
+    probability distribution for this experiment
+  \item
+    probability of an outcome
+  \item
+    constant in this experiment
+  \item
+    random variable in this experiment
+  \end{enumerate}
+\item
+  The probability that Steven leads the discussion all 5 days in a week
+  is the:
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \item
+    expected value
+  \item
+    probability distribution
+  \item
+    probability of a simple event
+  \item
+    random variable
+  \end{enumerate}
+\item
+  If we could replicate this experiment many, many times, the average
+  number of times that Steven leads the discussion in a week would be
+  the:
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \item
+    expected value
+  \item
+    probability distribution
+  \item
+    probability of an outcome
+  \item
+    random variable
+  \end{enumerate}
+\item
+  If we found the probability of Steven leading the discussion zero
+  times, one time, two times, three times, four times, and five times,
+  the set of six probabilities would be the:
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \item
+    expected value
+  \item
+    probability distribution
+  \item
+    probability of an outcome
+  \item
+    random variable
+  \end{enumerate}
+\item
+  Monday's selection of a discussion leader could be considered a
+  \_\_\_\_, while the selections of discussion leaders for the week
+  constitute a \_\_\_\_:
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \item
+    binomial experiment, bernoulli trial
+  \item
+    bernoulli trial, binomial experiment
+  \item
+    neither
+  \end{enumerate}
+\item
+  What is the probability that Steven would be selected all 5 days of
+  the week?
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \item
+    .00000000000000
+  \item
+    .0009765625
+  \item
+    .0039065500
+  \item
+    .25
+  \end{enumerate}
+\item
+  What is the expected number of times that Steven would be selected?
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \item
+    0.00
+  \item
+    1.00
+  \item
+    1.25
+  \item
+    2.50
+  \end{enumerate}
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{29}
+\item
+  Using the following code, run a permutation test with the hypothesis
+  that mean Hotwing consumption is different for men than for women
+  (assume \(\alpha = .05\), 2-tailed). Does the data support your
+  hypothesis, and what is the associated p-value?
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \item
+    The data supports \(H_A\), p = 0.00078
+  \item
+    The data supports \(H_A\), p = 0.00156
+  \item
+    We fail to reject \(H_0\), p = 0.156
+  \item
+    We fail to reject \(H_0\), p = 0.780
+  \end{enumerate}
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#install.packages("resampledata")}
+\KeywordTok{library}\NormalTok{(resampledata)}
+\KeywordTok{library}\NormalTok{(dplyr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{glimpse}\NormalTok{(Beerwings)}
+\CommentTok{# observed mean difference}
+\NormalTok{Beerwings }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(Gender) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{mean_wings =} \KeywordTok{mean}\NormalTok{(Hotwings)) }
+\end{Highlighting}
+\end{Shaded}
+
+Run the permutation:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{0}\NormalTok{)}
+\NormalTok{B <-}\StringTok{ }\DecValTok{10}\OperatorTok{^}\DecValTok{5}\OperatorTok{-}\DecValTok{1}  \CommentTok{#set number of times to repeat this process}
+\NormalTok{result <-}\StringTok{ }\KeywordTok{numeric}\NormalTok{(B) }\CommentTok{# space to save the random differences}
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\NormalTok{B)\{}
+\NormalTok{  index <-}\StringTok{ }\KeywordTok{sample}\NormalTok{(}\DecValTok{30}\NormalTok{, }\DataTypeTok{size=}\DecValTok{15}\NormalTok{, }\DataTypeTok{replace =} \OtherTok{FALSE}\NormalTok{) }\CommentTok{# sample of numbers from 1:30}
+\NormalTok{  result[i] <-}\StringTok{ }\KeywordTok{mean}\NormalTok{(Beerwings}\OperatorTok{$}\NormalTok{Hotwings[index]) }\OperatorTok{-}\StringTok{ }\KeywordTok{mean}\NormalTok{(Beerwings}\OperatorTok{$}\NormalTok{Hotwings[}\OperatorTok{-}\NormalTok{index])}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+
+\end{document}
