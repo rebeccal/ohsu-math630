@@ -45,7 +45,7 @@ a.
     * Null hypothesis: Mothers gained less than or equal to 25 grams of bone mineral content. 
     * Alternative hypothesis: Mothers gained more than 25 grams of bone mineral content.
 b.   As the p-value is greater than our alpha (e.i., 0.3292 > 0.05), we fail to reject the null hypothesis.
-c.   Running the appropriate test, we now have a p-value of 0.01815, which is less than our alpha (0.05). Thus, we reject the null hypothesis. The degress of freedom for the un-paired t.test is 18 (n1 + n2 - 2), whereas the degrees of freedom for the paired t.test is 9 (n/2-1). Although this higher degrees of freedom does mean a lower critical value for the un-paired t.test making it "easier" to reach statistical significance at the aplha=0.05 level, it also means that the standard error will be inflated. As the standard error is in the denominator of the t-statistic calcuation, this inflated standard error results in a smaller t-statistic, making it "harder" to reach statistical significance.
+c.   Running the appropriate test, we now have a p-value of 0.01815, which is less than our alpha (0.05). Thus, we reject the null hypothesis. The degress of freedom for the un-paired t.test is 18 (n1 + n2 - 2), whereas the degrees of freedom for the paired t.test is 9 (n/2-1). Although this higher degrees of freedom does mean a lower critical value for the un-paired t.test making it "easier" to reach statistical significance at the aplha=0.05 level, it also means that the standard error will be inflated. As the standard error is in the denominator of the t-statistic calculation, this inflated standard error results in a smaller t-statistic, making it "harder" to reach statistical significance.
 
 ```
 
