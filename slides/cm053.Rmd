@@ -1,6 +1,6 @@
 ---
 title: "Math 530/630 CM 5.3"
-subtitle: "Post-hoc tests & p-value adjustment"
+subtitle: "Contrasts, post-hoc tests & p-value adjustments"
 #author: "Alison Hill"
 output:
   xaringan::moon_reader:
@@ -423,7 +423,9 @@ $$q_{contrast}=\frac{|\psi|}{\sqrt{\frac{MSE}{2}({\frac{1}{n_1}+\frac{1}{n_2}})}
 
 ```{r comment=NA, warning=FALSE, message=FALSE}
 psi <- abs(-19.667) 
-qobs <- psi/sqrt((mse/2)*(1/6+1/6))
+se <- sqrt((mse/2)*(1/6+1/6))
+qobs <- psi/se
+se
 qobs
 ```
 
@@ -484,7 +486,84 @@ names(tukeyp) <- namep
 tukeyp
 ```
 
+---
 
+## Why not just do a bunch of *t*-tests?
+
+* First, note that pairwise contrasts use the degrees of freedom __based on all groups in your sample__, rather than for just the two groups in the contrast. This increases your statistical power!
+
+* Second, pairwise contrasts (whether $t_{contrast}$ or $q_{contrast}$ ) base the standard error estimate (i.e., the denominator) on the weighted mean square error ( $MS_{error}$ ) from the overall ANOVA. Again, this tends to increase power!
+
+* But, each individual pairwise contrast is designed to control the probability of false rejection at $\alpha$. Unfortunately, if our data analysis involves many hypothesis tests (and thus many contrasts), the probability of at least one Type I error increases rather sharply with the number of contrasts.
+
+
+---
+
+## Probability(at least one error)
+
+For example:
+* If there are *m* tests
+* They are independent
+* Each is performed with $\alpha$=.05
+* All alternative hypotheses are __true__
+* What is the probability of at least one Type I error?
+
+
+---
+
+## Probability refresher
+
+If we have 3 levels of a factor, and want to compare all three to each other:
+1. Contrast 1 vs. 2 ( $\alpha=.05$ )
+2. Contrast 2 vs. 3 ( $\alpha=.05$ )
+3. Contrast 1 vs. 3 ( $\alpha=.05$ )
+
+Probabilities:
+
+* What is the probability that I will __incorrectly reject__ all three null hypotheses?
+$$P(\alpha)\times{P(\alpha)}\times{P(\alpha)}=(.05)(.05)(.05)=.000125$$
+
+* Using the same logic, what is the probability that I will __correctly reject__ all three null hypotheses?
+$$P(1-\alpha)\times{P(1-\alpha)}\times{P(1-\alpha)}=(.95)(.95)(.95)=.8574$$
+* Hmmm...
+
+---
+
+## Probability(at least one error)
+
+ $$P(Type \: I \: error)=\alpha$$
+ $$P(no \: Type \: I \: error)=1-\alpha$$
+ $$P(no \:Type\:I\:errors\:in\:m\:tests)=(1-\alpha)^m$$
+ $$P(at\:least\:one\:Type\:I\:errors\:in\:m\:tests)=1-(1-\alpha)^m$$
+
+
+---
+
+## Family-wise error rate (FWER)
+
+The probability that I make __zero__ errors:
+$$P(1-\alpha)\times{P(1-\alpha)}\times{P(1-\alpha)}=(.95)(.95)(.95)=.8574$$
+The *family-wise error rate*:
+$$P(at\:least\:one\:error)=1-P(no\:errors)=1-.8574=.1426 > .05$$
+ Thus, the probability that I will make at least one Type I error is > .05
+
+ $$\alpha_{family}>\alpha_{per\:test}$$
+
+
+---
+
+## We can plot this...
+
+```{r comment=NA, echo=FALSE}
+curve(1 - (1-0.05)^x,1,100, xlab="Number of Tests (m)", ylab="Pr(At Least One Type I Error)",col="red")
+```
+
+---
+class: middle, center
+#What can we do?
+
+--
+##Adjust the p-values!
 ---
 
 ## Doing all pairwise contrasts in R better*
@@ -676,76 +755,6 @@ all adjustment methods implemented in p.adjust can be specified as well.
 
 From *help(p.adjust)*:
 > c("holm", "hochberg", "hommel", "bonferroni", "BH", "BY", "fdr", "none")
-
----
-
-## Why not just do a bunch of *t*-tests?
-
-* First, note that pairwise contrasts use the degrees of freedom __based on all groups in your sample__, rather than for just the two groups in the contrast. This increases your statistical power!
-
-* Second, pairwise contrasts (whether $t_{contrast}$ or $q_{contrast}$ ) base the standard error estimate (i.e., the denominator) on the weighted mean square error ( $MS_{error}$ ) from the overall ANOVA. Again, this tends to increase power!
-
-* But, each individual pairwise contrast is designed to control the probability of false rejection at $\alpha$. Unfortunately, if our data analysis involves many hypothesis tests (and thus many contrasts), the probability of at least one Type I error increases rather sharply with the number of contrasts.
-
-
----
-
-## Probability(at least one error)
-
-For example:
-* If there are *m* tests
-* They are independent
-* Each is performed with $\alpha$=.05
-* All alternative hypotheses are __true__
-* What is the probability of at least one Type I error?
-
-
----
-
-## Probability refresher
-
-If we have 3 levels of a factor, and want to compare all three to each other:
-1. Contrast 1 vs. 2 ($\alpha=.05$)
-2. Contrast 2 vs. 3 ($\alpha=.05$)
-3. Contrast 1 vs. 3 ($\alpha=.05$)
-
-Probabilities:
-
-* What is the probability that I will __incorrectly reject__ all three null hypotheses?
-$$P(\alpha)\times{P(\alpha)}\times{P(\alpha)}=(.05)(.05)(.05)=.000125$$
-
-* Using the same logic, what is the probability that I will __correctly reject__ all three null hypotheses?
-$$P(1-\alpha)\times{P(1-\alpha)}\times{P(1-\alpha)}=(.95)(.95)(.95)=.8574$$
-* Hmmm...
-
----
-
-## Probability(at least one error)
-
-* $$P(Type \: I \: error)=\alpha$$
-* $$P(no \: Type \: I \: error)=1-\alpha$$
-* $$P(no \:Type\:I\:errors\:in\:m\:tests)=(1-\alpha)^m$$
-* $$P(at\:least\:one\:Type\:I\:errors\:in\:m\:tests)=1-(1-\alpha)^m$$
-
-
----
-
-## Family-wise error rate (FWER)
-
-* $$P(1-\alpha)\times{P(1-\alpha)}\times{P(1-\alpha)}=(.95)(.95)(.95)=.8574$$
-* This is the probability that I make __zero__ errors
-* $$P(at\:least\:one\:error)=1-P(no\:errors)=1-.8574=.1426$$
-* Thus, the probability that I will make at least one Type I error is > .05
-* This is our *family-wise error rate*
-* $$\alpha_{family}>\alpha_{per\:test}$$
-
----
-
-## We can plot this...
-
-```{r comment=NA, echo=FALSE}
-curve(1 - (1-0.05)^x,1,100, xlab="Number of Tests (m)", ylab="Pr(At Least One Type I Error)",col="red")
-```
 
 ---
 
