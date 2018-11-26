@@ -3,7 +3,7 @@
   <head>
     <title>Math 530/630 CM 5.3</title>
     <meta charset="utf-8">
-    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link rel="stylesheet" href="css\ohsu.css" type="text/css" />
     <link rel="stylesheet" href="css\ohsu-fonts.css" type="text/css" />
   </head>
@@ -15,6 +15,10 @@ class: center, middle, inverse, title-slide
 ## Post-hoc tests &amp; p-value adjustment
 
 ---
+
+
+
+
 
 
 
@@ -129,6 +133,12 @@ Where:
 
 
 
+```r
+superhero$hero &lt;- factor(superhero$hero,labels=c("Spiderman", "Superman", "Hulk", "TMNT"))
+heroaov &lt;- aov(injury~hero,data=superhero)
+summary(heroaov)
+```
+
 ```
             Df Sum Sq Mean Sq F value  Pr(&gt;F)   
 hero         3   3805  1268.3   6.716 0.00257 **
@@ -142,7 +152,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 ## Now what?
 
-&lt;img src="cm053_files/figure-html/unnamed-chunk-2-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="cm053_files/figure-html/unnamed-chunk-2-1.png" width="60%" /&gt;
 
 ---
 
@@ -398,11 +408,11 @@ Fit: aov(formula = injury ~ hero, data = superhero)
 
 Linear Hypotheses:
                           Estimate Std. Error t value Pr(&gt;|t|)   
-Superman - Spiderman == 0   19.667      7.934   2.479  0.09424 . 
-Hulk - Spiderman == 0       -9.167      7.934  -1.155  0.66075   
-TMNT - Spiderman == 0      -12.833      7.934  -1.617  0.39177   
-Hulk - Superman == 0       -28.833      7.934  -3.634  0.00814 **
-TMNT - Superman == 0       -32.500      7.934  -4.096  0.00285 **
+Superman - Spiderman == 0   19.667      7.934   2.479  0.09432 . 
+Hulk - Spiderman == 0       -9.167      7.934  -1.155  0.66070   
+TMNT - Spiderman == 0      -12.833      7.934  -1.617  0.39186   
+Hulk - Superman == 0       -28.833      7.934  -3.634  0.00817 **
+TMNT - Superman == 0       -32.500      7.934  -4.096  0.00281 **
 TMNT - Hulk == 0            -3.667      7.934  -0.462  0.96643   
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
@@ -431,9 +441,9 @@ New `\(p\)`'s...
 
 ```
 Superman - Spiderman     Hulk - Spiderman     TMNT - Spiderman 
-         0.094302036          0.660732637          0.391818349 
+         0.094682551          0.660744479          0.391683267 
      Hulk - Superman      TMNT - Superman          TMNT - Hulk 
-         0.008175593          0.002900894          0.966427362 
+         0.008272286          0.002913828          0.966440459 
 ```
 
 
@@ -518,9 +528,9 @@ New `\(p\)`'s based on Tukey Studentized Range statistic ( `\(q_{contrast}\)` ).
 
 ```
 Superman - Spiderman     Hulk - Spiderman     TMNT - Spiderman 
-         0.094091239          0.660754161          0.391823266 
+         0.094108349          0.660687928          0.391801937 
      Hulk - Superman      TMNT - Superman          TMNT - Hulk 
-         0.008237726          0.002955091          0.966438777 
+         0.008044136          0.003076038          0.966426172 
 ```
 
 
@@ -566,9 +576,9 @@ Unadjusted `\(p\)`'s based on Tukey's HSD...
 
 ```
 Superman - Spiderman     Hulk - Spiderman     TMNT - Spiderman 
-         0.094091239          0.660754161          0.391823266 
+         0.094108349          0.660687928          0.391801937 
      Hulk - Superman      TMNT - Superman          TMNT - Hulk 
-         0.008237726          0.002955091          0.966438777 
+         0.008044136          0.003076038          0.966426172 
 ```
 
 
@@ -828,7 +838,7 @@ Probabilities:
 
 ## We can plot this...
 
-&lt;img src="cm053_files/figure-html/unnamed-chunk-24-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="cm053_files/figure-html/unnamed-chunk-24-1.png" width="60%" /&gt;
 
 ---
 

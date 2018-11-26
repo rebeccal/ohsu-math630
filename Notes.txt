@@ -18,3 +18,6 @@ The Transforms from the first class didn't really "stick". Maybe do them when we
 The sneetches in-class lab needs "insight" questions added.
 
 Too much content is now too late - squish Probability and/or RVs?
+
+Midterm - fix problems 
+  Free - 3, 5 Mult - 5,18 and 30

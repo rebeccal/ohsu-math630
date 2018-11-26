@@ -130,26 +130,45 @@ sum(my.means >= 12)/1000 # .132
     f. Using $\alpha = 0.01$, what is the conclusion? (i.e. do we reject or fail to reject the null hypothesis, and why?)
     g. Looking at the actual data, how does the sample standard deviation compare to that of the population?
     
+```{r, eval=params$key, include=params$key} 
+(mu <- 63)
+(sd_mu <- 3)
+(heights <- c(64, 66, 68, 60, 62, 65, 66, 63))
+(n <- length(heights))
+(sd_heights =  sd(heights))
+(x_obt <- mean(heights))
+(se <- sd_heights/sqrt(n))
+(t <- (x_obt-mu)/se)
+(t_crits <- c(qt(.005,n-1),qt(.995,n-1)))
+(ci <- x_obt+se*t_crits)
+t.test(heights, mu=63, alternative = "two.sided", conf.level = .99)
+```
+    
 ```{asis, echo=params$key}
 <b>Answers</b>
 
 a) In recent years the height of women has been changing. 
 Therefore the sample with $\bar{X_{obt}} = 64.25$ 
-is not a random sample from a population where $\mu \neq 63$
+is a random sample from a population where $\mu \neq 63$
 
 b) It is reasonable to consider the sample with 
 $\bar{X_{obt}} = 64.25$ is a random sample from a population 
 where $\mu = 63$
 
-c) single sample t-test on means
+Use the single sample t-test on means. Not the z-test, as n<30.
 
-d) S = 2.550, $t_{obt}$ = 1.39
+c)  $\bar{X_{obt}}-\mu$, 64.25-63
 
-e) df = n-1 = 7, $t_{crit} = \pm 3.499$
+d)  $\frac{sd_{obt}}{\sqrt{}n}$, sd(heights)/sqrt(8)
 
-f) since | $t_{obt}$ | < | $t_{crit}$ | , we retain the null hypothesis.
+e)  df = n-1 = 7, $t_{crit} = \pm 3.499$
 
-g) (61.1, 67.4)
+f)  SE = 2.55,  $t_{obt}$ = 1.39, 
+    since | $t_{obt}$ | < | $t_{crit}$ | , we retain the null hypothesis.
+
+g) The sample standard deviation is smaller than the population standard deviation. However, the population mean still lies well within the confodence interval.
+
+```
 
 \newpage
 ```
@@ -168,6 +187,10 @@ a)
 b)
 ```
 ```{r, eval=params$key, include=params$key}
+l_crit <- qnorm(.025)
+u_crit <- qnorm(.975)
+cbind(l_crit,u_crit)
+#Confidence Interval
 ll <- qnorm(.025,69,3)
 ul <- qnorm(.975,69,3)
 cbind(ll,ul)
@@ -260,16 +283,56 @@ pnorm(109, 100, 15) - pnorm(79, 100, 15)
 
 5. You have 10 numbers with a sample mean of 9.0 and a sample variance of 11.0. You discover that the last number in the list was recorded as 8.0 when it should have been recorded as 12.0. If you correct your error and correctly recompute the sample variance, what value will you obtain?
 
-```{asis, echo = params$key}
-*
-```
     a. 11.71
-
     b. 11.0
     c. 10.54
     d. 13.01
+```{asis, echo = params$key}
+*
+```
     e. None of the above answers are correct
 
+```{r, eval = params$key, include = params$key}
+n <- 10
+sample_mean <- 9
+sample_variance <- 11
+
+sum <- sample_mean*n
+new_mean <- (sum+4)/n
+# !!finish
+
+#Using faked data...
+set.seed(0)
+rnorm2 <- function(n,mean,sd) { mean+sd*scale(rnorm(n)) }
+
+(r <- rnorm2(10,9,sqrt(11)))
+r[9] <- 8
+mean(r)
+sd(r)
+var(r)
+r[9] <- 12
+mean(r)
+sd(r)
+var(r)
+# 11.71002
+
+#Programmatically, using equation manipulation - I have no clue how this works
+(samp_var <- (11*(9) + 4*(0.4)^2 + (12-9.4)^2 -1)/9)
+#11.71111
+
+#new_k = 8 # Used to check that the "backtrack" works
+# I should be able to put the 8 back in and get the original values
+new_k = 12
+
+mean_9 = 82/9 # Mean of x1..9
+#Compute next mean with new_k
+(mean_10 <- mean_9 + (new_k-mean_9)/10)
+
+#variance
+var_9 <- (856/9)-(82/9)^2 # variance of x1..9
+(var_10 <- var_9*9 + (new_k-mean_9)*(new_k-mean_10))/10
+# 11.64 - this is the same value I got by hand
+```
 
 6. If $\alpha$ = 0.01, then the probability of a correct acceptance of a true statistical null hypothesis is:
 
@@ -426,22 +489,28 @@ pnorm(109, 100, 15) - pnorm(79, 100, 15)
 
     a. mean = 0; standard deviation = 1
     b. mean = 0; standard deviation approximately 1
+    c. mean = 0; standard deviation > 1
 ```{asis, echo = params$key}
 *
 ```
-    c. mean = 0; standard deviation > 1
     d. Cannot be determined from the information given
 
-```{r, include = params$key, message=FALSE}
+```{r, include = params$key, eval = params$key, message=FALSE}
 library(dplyr)
 options(scipen=999)
-x <- c(0, -1, 1, -5, 10)
-y <- c(-2, -3, 5, -7, 7)
+#x <- c(0, -1, 1, -5, 10)
+#y <- c(-2, -3, 5, -7, 7)
+#x <- c(65, 66, 66, 67, 68)
+#y <- c(150, 125, 135, 145, 132)
+x <- c(65, 65, 68, 71, 71)
+y <- c(65, 65, 68, 71, 71)
+
 z_x <- scale(x)
 z_y <- scale(y)
 my_z <- data.frame(z_x, z_y)
-my_z %>% 
-  mutate(ave_z = z_x + z_y / 2) %>% 
+my_z = my_z %>% 
+  mutate(ave_z = (z_x + z_y) / 2)
+my_z  %>% 
   summarise_each(funs(mean, sd))
 ```
 
@@ -503,6 +572,19 @@ cbind(ll,ul)
     b. no
     c. cannot be tested with *z* test
     d. insufficient information
+
+```{r, include = params$key, eval = params$key}
+data <-c(21,21,21,20,22,20,22)
+sample_mean <- mean(data)
+# Check if the sample mean is in the region of non-rejection
+qnorm(.025,20,1.5/sqrt(7)) < sample_mean & sample_mean < qnorm(.975,20,1.5/sqrt(7))
+# Or if it's in one of the regions of rejection
+sample_mean <= qnorm(.025,20,1.5/sqrt(7)) 
+sample_mean >= qnorm(.975,20,1.5/sqrt(7))
+
+##Using t - not so good. False positive
+t.test(data ,mu=20)
+```
 
 
 ---

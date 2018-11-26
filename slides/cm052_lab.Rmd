@@ -1,14 +1,16 @@
 ---
 title: "CM 5.2 - One-way ANOVA"
-subtitle: "Math 530/630"
-#author: "Alison Presmanes Hill"
+subtitle: Math 530/630
 output:
+  pdf_document:
+    toc: yes
   html_document:
     highlight: pygments
+    smart: no
     theme: flatly
-    smart: false
-    toc: TRUE
-    toc_float: TRUE
+    toc: yes
+    toc_float: yes
+always_allow_html: yes
 ---
 ```{r include = FALSE}
 knitr::opts_chunk$set(error = TRUE, comment = NA, warning = FALSE, message = FALSE, tidy = FALSE)
