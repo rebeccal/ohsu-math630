@@ -1,13 +1,15 @@
 ---
 title: "MATH 530/630"
-subtitle: "Integrative Lab 4 - ANOVA"
+subtitle: Integrative Lab 4 - ANOVA
 output:
   html_document:
     highlight: pygments
+    smart: no
     theme: flatly
-    smart: false
-    toc: TRUE
-    toc_float: TRUE
+    toc: yes
+    toc_float: yes
+  pdf_document:
+    toc: yes
 ---
 ```{r include = FALSE}
 knitr::opts_chunk$set(error = TRUE, comment = NA, warning = FALSE, message = FALSE, tidy = FALSE, include = FALSE)
@@ -34,9 +36,9 @@ Using the key, your self-assessment should include even **more** narrative; wher
 
 # Headnotes
 
-- This slide deck on [post-hoc tests and p-value adjustment ](slides/cm045.html) may be helpful.
-- Also this slide deck on [comparing multiple sample means](slides/cm041.html).
-- Also this slide deck on [the general linear model](slides/cm035.html).
+- Also this slide deck on [the general linear model](slides/cm046.html) may be helpful.
+- Also this slide deck on [comparing multiple sample means](slides/cm051.html).
+- This slide deck on [post-hoc tests and p-value adjustment ](slides/cm54.html).
 
 
 # Logistics

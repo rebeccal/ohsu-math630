@@ -10,14 +10,25 @@ output:
       highlightStyle: atelier-lakeside-light
       highlightLines: true
       countIncrementalSlides: false
+#      beforeInit: "https://platform.twitter.com/widgets.js"
 ---
 
 ```{r setup, include=FALSE}
-options(htmltools.dir.version = FALSE)
+# options(htmltools.dir.version = FALSE)
+# options(knitr.table.format = "html") 
+# knitr::opts_chunk$set(warning = FALSE, message = FALSE, 
+#   comment = NA, dpi = 300,
+#   fig.align = "center", cache = FALSE)
+```
+
+```{r setup_new, include=FALSE}
+# leave this chunk alone
 options(knitr.table.format = "html") 
 knitr::opts_chunk$set(warning = FALSE, message = FALSE, 
-  comment = NA, dpi = 300,
-  fig.align = "center", cache = FALSE)
+  comment = NA, dpi = 300, out.width = '60%', cache = FALSE)
+```
+
+```{r setup_data, include=FALSE}
 library(knitr)
 library(tidyverse)
 superhero <- tibble::tribble(
@@ -158,7 +169,7 @@ $DV_i=(b_0+b_1IV1_i+b_2IV2_i)+error_i$
 ## Superhero ANOVA 
 
 
-```{r comment=NA, echo=FALSE}
+```{r comment=NA, echo=TRUE}
 superhero$hero <- factor(superhero$hero,labels=c("Spiderman", "Superman", "Hulk", "TMNT"))
 heroaov <- aov(injury~hero,data=superhero)
 summary(heroaov)
