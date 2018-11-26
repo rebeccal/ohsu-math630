@@ -408,11 +408,11 @@ Fit: aov(formula = injury ~ hero, data = superhero)
 
 Linear Hypotheses:
                           Estimate Std. Error t value Pr(&gt;|t|)   
-Superman - Spiderman == 0   19.667      7.934   2.479  0.09432 . 
-Hulk - Spiderman == 0       -9.167      7.934  -1.155  0.66070   
-TMNT - Spiderman == 0      -12.833      7.934  -1.617  0.39186   
-Hulk - Superman == 0       -28.833      7.934  -3.634  0.00817 **
-TMNT - Superman == 0       -32.500      7.934  -4.096  0.00281 **
+Superman - Spiderman == 0   19.667      7.934   2.479  0.09415 . 
+Hulk - Spiderman == 0       -9.167      7.934  -1.155  0.66067   
+TMNT - Spiderman == 0      -12.833      7.934  -1.617  0.39178   
+Hulk - Superman == 0       -28.833      7.934  -3.634  0.00820 **
+TMNT - Superman == 0       -32.500      7.934  -4.096  0.00291 **
 TMNT - Hulk == 0            -3.667      7.934  -0.462  0.96643   
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
@@ -441,9 +441,9 @@ New `\(p\)`'s...
 
 ```
 Superman - Spiderman     Hulk - Spiderman     TMNT - Spiderman 
-         0.094682551          0.660744479          0.391683267 
+         0.094523420          0.660697823          0.391785798 
      Hulk - Superman      TMNT - Superman          TMNT - Hulk 
-         0.008272286          0.002913828          0.966440459 
+         0.008420621          0.002979585          0.966427743 
 ```
 
 
@@ -459,7 +459,16 @@ For any specific contrast we can calculate:
 
 ```r
 psi &lt;- abs(-19.667) 
-qobs &lt;- psi/sqrt((mse/2)*(1/6+1/6))
+se &lt;- sqrt((mse/2)*(1/6+1/6))
+qobs &lt;- psi/se
+se
+```
+
+```
+[1] 5.610258
+```
+
+```r
 qobs
 ```
 
@@ -528,12 +537,87 @@ New `\(p\)`'s based on Tukey Studentized Range statistic ( `\(q_{contrast}\)` ).
 
 ```
 Superman - Spiderman     Hulk - Spiderman     TMNT - Spiderman 
-         0.094108349          0.660687928          0.391801937 
+         0.094149854          0.660751184          0.391790048 
      Hulk - Superman      TMNT - Superman          TMNT - Hulk 
-         0.008044136          0.003076038          0.966426172 
+         0.008345431          0.002881687          0.966434599 
 ```
 
+---
 
+## Why not just do a bunch of *t*-tests?
+
+* First, note that pairwise contrasts use the degrees of freedom __based on all groups in your sample__, rather than for just the two groups in the contrast. This increases your statistical power!
+
+* Second, pairwise contrasts (whether `\(t_{contrast}\)` or `\(q_{contrast}\)` ) base the standard error estimate (i.e., the denominator) on the weighted mean square error ( `\(MS_{error}\)` ) from the overall ANOVA. Again, this tends to increase power!
+
+* But, each individual pairwise contrast is designed to control the probability of false rejection at `\(\alpha\)`. Unfortunately, if our data analysis involves many hypothesis tests (and thus many contrasts), the probability of at least one Type I error increases rather sharply with the number of contrasts.
+
+
+---
+
+## Probability(at least one error)
+
+For example:
+* If there are *m* tests
+* They are independent
+* Each is performed with `\(\alpha\)`=.05
+* All alternative hypotheses are __true__
+* What is the probability of at least one Type I error?
+
+
+---
+
+## Probability refresher
+
+If we have 3 levels of a factor, and want to compare all three to each other:
+1. Contrast 1 vs. 2 ( `\(\alpha=.05\)` )
+2. Contrast 2 vs. 3 ( `\(\alpha=.05\)` )
+3. Contrast 1 vs. 3 ( `\(\alpha=.05\)` )
+
+Probabilities:
+
+* What is the probability that I will __incorrectly reject__ all three null hypotheses?
+`$$P(\alpha)\times{P(\alpha)}\times{P(\alpha)}=(.05)(.05)(.05)=.000125$$`
+
+* Using the same logic, what is the probability that I will __correctly reject__ all three null hypotheses?
+`$$P(1-\alpha)\times{P(1-\alpha)}\times{P(1-\alpha)}=(.95)(.95)(.95)=.8574$$`
+* Hmmm...
+
+---
+
+## Probability(at least one error)
+
+ `$$P(Type \: I \: error)=\alpha$$`
+ `$$P(no \: Type \: I \: error)=1-\alpha$$`
+ `$$P(no \:Type\:I\:errors\:in\:m\:tests)=(1-\alpha)^m$$`
+ `$$P(at\:least\:one\:Type\:I\:errors\:in\:m\:tests)=1-(1-\alpha)^m$$`
+
+
+---
+
+## Family-wise error rate (FWER)
+
+The probability that I make __zero__ errors:
+`$$P(1-\alpha)\times{P(1-\alpha)}\times{P(1-\alpha)}=(.95)(.95)(.95)=.8574$$`
+The *family-wise error rate*:
+`$$P(at\:least\:one\:error)=1-P(no\:errors)=1-.8574=.1426 &gt; .05$$`
+ Thus, the probability that I will make at least one Type I error is &gt; .05
+
+ `$$\alpha_{family}&gt;\alpha_{per\:test}$$`
+
+
+---
+
+## We can plot this...
+
+&lt;img src="cm053_files/figure-html/unnamed-chunk-18-1.png" width="60%" /&gt;
+
+---
+class: middle, center
+#What can we do?
+
+--
+##Adjust the p-values!
 ---
 
 ## Doing all pairwise contrasts in R better*
@@ -576,9 +660,9 @@ Unadjusted `\(p\)`'s based on Tukey's HSD...
 
 ```
 Superman - Spiderman     Hulk - Spiderman     TMNT - Spiderman 
-         0.094108349          0.660687928          0.391801937 
+         0.094149854          0.660751184          0.391790048 
      Hulk - Superman      TMNT - Superman          TMNT - Hulk 
-         0.008044136          0.003076038          0.966426172 
+         0.008345431          0.002881687          0.966434599 
 ```
 
 
@@ -738,13 +822,13 @@ Would our decisions have been any different if, instead of controlling the *fals
 
 
 ```
-                     TMNT - Superman Hulk - Superman Superman - Spiderman
-p                              0.003           0.008                0.094
-j                                  1               2                    3
-p*BH                           0.008           0.017                0.025
-Decision: BH               REJECT H0       REJECT H0     DO NOT REJECT H0
-p*Bonferroni                   0.008           0.008                0.008
-Decision: Bonferroni       REJECT H0       REJECT H0     DO NOT REJECT H0
+                     TMNT - Superman  Hulk - Superman Superman - Spiderman
+p                              0.003            0.008                0.094
+j                                  1                2                    3
+p*BH                           0.008            0.017                0.025
+Decision: BH               REJECT H0        REJECT H0     DO NOT REJECT H0
+p*Bonferroni                   0.008            0.008                0.008
+Decision: Bonferroni       REJECT H0 DO NOT REJECT H0     DO NOT REJECT H0
                      TMNT - Spiderman Hulk - Spiderman      TMNT - Hulk
 p                               0.392            0.661            0.966
 j                                   4                5                6
@@ -771,74 +855,6 @@ all adjustment methods implemented in p.adjust can be specified as well.
 
 From *help(p.adjust)*:
 &gt; c("holm", "hochberg", "hommel", "bonferroni", "BH", "BY", "fdr", "none")
-
----
-
-## Why not just do a bunch of *t*-tests?
-
-* First, note that pairwise contrasts use the degrees of freedom __based on all groups in your sample__, rather than for just the two groups in the contrast. This increases your statistical power!
-
-* Second, pairwise contrasts (whether `\(t_{contrast}\)` or `\(q_{contrast}\)` ) base the standard error estimate (i.e., the denominator) on the weighted mean square error ( `\(MS_{error}\)` ) from the overall ANOVA. Again, this tends to increase power!
-
-* But, each individual pairwise contrast is designed to control the probability of false rejection at `\(\alpha\)`. Unfortunately, if our data analysis involves many hypothesis tests (and thus many contrasts), the probability of at least one Type I error increases rather sharply with the number of contrasts.
-
-
----
-
-## Probability(at least one error)
-
-For example:
-* If there are *m* tests
-* They are independent
-* Each is performed with `\(\alpha\)`=.05
-* All alternative hypotheses are __true__
-* What is the probability of at least one Type I error?
-
-
----
-
-## Probability refresher
-
-If we have 3 levels of a factor, and want to compare all three to each other:
-1. Contrast 1 vs. 2 ($\alpha=.05$)
-2. Contrast 2 vs. 3 ($\alpha=.05$)
-3. Contrast 1 vs. 3 ($\alpha=.05$)
-
-Probabilities:
-
-* What is the probability that I will __incorrectly reject__ all three null hypotheses?
-`$$P(\alpha)\times{P(\alpha)}\times{P(\alpha)}=(.05)(.05)(.05)=.000125$$`
-
-* Using the same logic, what is the probability that I will __correctly reject__ all three null hypotheses?
-`$$P(1-\alpha)\times{P(1-\alpha)}\times{P(1-\alpha)}=(.95)(.95)(.95)=.8574$$`
-* Hmmm...
-
----
-
-## Probability(at least one error)
-
-* `$$P(Type \: I \: error)=\alpha$$`
-* `$$P(no \: Type \: I \: error)=1-\alpha$$`
-* `$$P(no \:Type\:I\:errors\:in\:m\:tests)=(1-\alpha)^m$$`
-* `$$P(at\:least\:one\:Type\:I\:errors\:in\:m\:tests)=1-(1-\alpha)^m$$`
-
-
----
-
-## Family-wise error rate (FWER)
-
-* `$$P(1-\alpha)\times{P(1-\alpha)}\times{P(1-\alpha)}=(.95)(.95)(.95)=.8574$$`
-* This is the probability that I make __zero__ errors
-* `$$P(at\:least\:one\:error)=1-P(no\:errors)=1-.8574=.1426$$`
-* Thus, the probability that I will make at least one Type I error is &gt; .05
-* This is our *family-wise error rate*
-* `$$\alpha_{family}&gt;\alpha_{per\:test}$$`
-
----
-
-## We can plot this...
-
-&lt;img src="cm053_files/figure-html/unnamed-chunk-24-1.png" width="60%" /&gt;
 
 ---
 
