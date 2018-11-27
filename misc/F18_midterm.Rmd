@@ -103,6 +103,7 @@ P(1 < x < 3) &= F(3) - F(1) \\
 ```{r, include=FALSE}
 #This is C&H Chapter 4, problem 12.  p.93
 ```
+
 ```{asis, echo=params$key}
 <b>Answers</b>
 
@@ -186,6 +187,7 @@ a)
   + H1 = OKCupid and US men have different heights
 b)
 ```
+
 ```{r, eval=params$key, include=params$key}
 l_crit <- qnorm(.025)
 u_crit <- qnorm(.975)
@@ -195,6 +197,7 @@ ll <- qnorm(.025,69,3)
 ul <- qnorm(.975,69,3)
 cbind(ll,ul)
 ```
+
 
 5. What are the critical values of a t-distributed random variable (`?TDist`) for each of the following values of *N* and $\alpha$ using nondirectional hypotheses (assume testing of means)?
 
@@ -278,12 +281,16 @@ qt(.975,50)
 
 ```{r, include=params$key, echo=params$key}
 pnorm(109, 100, 15) - pnorm(79, 100, 15)
-```
+``` 
 
 
 5. You have 10 numbers with a sample mean of 9.0 and a sample variance of 11.0. You discover that the last number in the list was recorded as 8.0 when it should have been recorded as 12.0. If you correct your error and correctly recompute the sample variance, what value will you obtain?
 
+```{asis, echo = params$key}
+*
+```
     a. 11.71
+
     b. 11.0
     c. 10.54
     d. 13.01
@@ -716,7 +723,7 @@ for(i in 1:B){
 ```
 
 
-```{r, include = params$key, eval = params$key}
+```{r mc_30, include = params$key, eval = params$key}
 # As calculated.
 # ...and some commented out alternatives that are equivalent at 4 decimal places :)
 observed <- 14.5333- 9.3333 

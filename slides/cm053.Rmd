@@ -228,7 +228,8 @@ pairwise.t.test(superhero$injury,superhero$hero,p.adjust.method="none")
 ```{r comment=NA, warning=FALSE, message=FALSE, results="hide"}
 library(multcomp)
 mcp <- glht(heroaov,linfct=mcp(hero="Tukey"))
-summary(mcp,test=univariate())
+#summary(mcp) # Tukeys with stepwise adjusted p-value
+summary(mcp,test=univariate()) # Fisher's LSD (like a set of paired-ts (pooled sd 2 groups), but with pooled sd from all groups)
 ```
 
 You get:

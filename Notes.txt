@@ -1,5 +1,7 @@
 Notes for next time...
 
+Create a map of what is covered where. think about what needs to be in class vs out...
+
 Look at the plots in ncp_plus.Rmd
 
 CM042 was way too short. Perhaps lecture longer/more on classic methods? (see below)
@@ -20,4 +22,7 @@ The sneetches in-class lab needs "insight" questions added.
 Too much content is now too late - squish Probability and/or RVs?
 
 Midterm - fix problems 
-  Free - 3, 5 Mult - 5,18 and 30
+  Free: 3g-make it a CI, 5- should be harder: Mult: replace 5(a or e), fix 18 to include the correct answer, and make 30 an infer (or less obtuse)
+  
+CM054 - add more about contrasts (from slide deck 15?) and using the contrast matrix to compare across factors  
+

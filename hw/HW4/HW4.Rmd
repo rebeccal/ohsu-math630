@@ -15,6 +15,7 @@ title: "`r ifelse (params$key, params$key_title, params$hw_title)`"
 <!-- rmarkdown::render("hw/HW4/HW4.Rmd", output_file = "HW4-key.pdf",  params = list(key=TRUE), output_format = "pdf_document") -->
 <!-- rmarkdown::render("hw/HW4/HW4.Rmd", output_file = "HW4-key.html", params = list(key=TRUE), output_format = "html_document") -->
 
+
 1. One of the goals of the Edinburgh Artery Study was to investigate the risk factors for peripheral arterial disease among persons 55 to 75 years of age.You wish to compare mean LDL cholesterol levels, measured in mmol/liter, among four different populations of subjects: patients with intermittent claudication or interruptions in movement, those with major asymptomatic disease, those with minor asymptomatic disease, and those with no evidence of disease at all. Samples are selected from each population; summary statistics are shown below:
 
     a. Use a one-way ANOVA to test the null hypothesis that the mean LDL cholesterol levels are the same for each of the four populations.  Calculate this by-hand, and include your ANOVA table.  
@@ -29,10 +30,62 @@ title: "`r ifelse (params$key, params$key_title, params$hw_title)`"
 | Minor Asymptomatic Disease  | 240      |  5.77         | 1.24 |
 | No Disease                  | 1080     |  5.47         | 1.31 |
 
-  
-```{r include=FALSE, eval=FALSE}
-# Intro to biostatistics, ch 12 problem #8  See joel's homework 4 for solution.
+```{asis, echo=params$key}
+<b>Answers</b>
 
+a. 
+```
+
+
+```{r include=params$key, eval=params$key}
+ns = c(73, 105, 240, 1080)
+means = c(6.22, 5.81, 5.77, 5.47)
+grand_mean = mean(means)
+sigmas = c(1.62, 1.43, 1.24, 1.31)
+ttl_n = sum(ns)
+df_between_groups = length(ns) - 1 
+df_within_groups = ttl_n - 1
+SSW_var = sum((ns-1)*sigmas^2)/df_within_groups
+x_bar = sum(ns*means)/ttl_n
+SSB_var = sum(ns*(means-x_bar)^2)/df_between_groups
+(F_stat = SSB_var/SSW_var)
+(F_crit = qf(.95,3,1494))
+
+```
+
+```{asis, echo=params$key}
+b.
+* F(3,1494) = 10.87
+* F_crit = 2.61
+* F(3,1494) = 10.87 > F_crit=2.61
+ + We can reject the null hypothesis, that LDL Cholesterol is the same for all the four groups.
+
+c. 
+Assumptions for one way ANOVA:
+* The k samples are randomly selected from the k populations of interest
+* Each of the k populations have a normal distribution 
+* All k populations have the same variance 
+
+d.
+The ANOVA F-test answers the question whether there are significant differences in the 4 population means.
+However, it does not provide us with any information about how they differ. Therefore when we reject H0 in
+ANOVA, additional analyses are required to determine what is driving the difference in means.
+The function pairwise.t.test computes the pair-wise comparisons between group means with corrections for
+multiple testing.
+
+
+pairwise.t.test(reponse, factor, p.adjust = method, alternative = c("two.sided", "less", "greater") ) 
+Here response is a vector of observations (the response variable), factor a list of factors and p.adjust is the correction
+method (e.g., "Bonferroni"). 
+
+*pairwise.t.test(cholestrol level, disease, p.adjust = "bonferroni" )
+
+Another multiple comparisons procedure is Tukeys method TukeyHSD(x, conf.level = 0.95) where x is a
+fitted model object.
+```
+
+```{asis, echo=params$key}
+\newpage
 ```
 
 2. In the early 1900s, Latter (1902) investigated the behavior of female cuckoos, that lay their eggs on the ground and then move them to the nests of other birds. In particular, Latter gathered data on the lengths of the cuckoo eggs found in these foster-nests. Data based on this work is used in (Tippett, 1952) and is located in the file cuckoos. The data contains the lengths, in millimeters, of the lengths of cuckoo eggs and the species of the nests where the eggs were placed. Get the data by installing and loading the `resampledata` R package, and use the `Cuckoos` dataset.
@@ -50,3 +103,95 @@ head(cuckoos)
   b. Conduct an ANOVA test (also in R) to see if the mean lengths of the cuckoo eggs are the same across the different foster nests.
   c. Perform the Tukey Honestly Significant Difference test (without p-value adjustment) to compare all pairwise means. What can you conclude from this analysis?
   d. Do the Tukey HSD test using the p-value adjustment method of your choice. Do your conclusions from "2c" change? Given the number of pairwise contrasts, without p-value adjustment, what would be your family-wise error rate if you were to conduct each pairwise contrast at $/alpha = .05$?
+  
+```{asis, echo=params$key}
+<b>Answers</b>
+
+a. 
+```  
+
+```{r include = params$key, eval=params$key, message = FALSE}
+library(ggplot2)
+library(dplyr)
+
+ggplot(aes(y = Eggs, x = Bird), data = cuckoos) + geom_boxplot()
+
+group_by(cuckoos,Bird) %>%
+  summarise(
+    count = n(),
+    mean = mean(Eggs, na.rm = TRUE),
+    sd = sd(Eggs, na.rm = TRUE)
+  )
+```
+```{asis, echo=params$key}
+
+b. 
+```  
+
+```{r include = params$key, eval=params$key, message = FALSE}
+cuckmod <- lm(Eggs ~Bird, data = cuckoos)
+anova(cuckmod)
+summary(cuckmod)
+confint(cuckmod)
+cuckmod1 = data.frame(Fitted = fitted(cuckmod),
+  Residuals = resid(cuckmod), Birds = cuckoos$Bird)
+
+ggplot(cuckmod1, aes(Fitted, Residuals, colour = Birds)) + geom_point()
+```
+```{asis, echo = params$key}
+c.
+
+```
+
+```{r}
+# !!Swap out for multcomp::glht
+aov.fit1 <- aov(Eggs ~ Bird, data=cuckoos)
+posthoc <- TukeyHSD(x=aov.fit1, conf.level=0.95)
+posthoc
+plot(posthoc)
+
+```
+
+```{asis, echo = params$key}
+
+Post-hoc analysis provides insight into any differences between the groups that may drive the significant omnibus F-statistic found in b. 
+
+Looking at the pairwise differences, we see that the below pairs are significantly different using an un-adjusted p-value of 0.05. 
+
+MeadowPipit-HedgeSparrow
+Wren-HedgeSparrow 
+TreePipit-MeadowPipit
+Wren-MeadowPipit
+Wren-PiedWagtail
+Wren-Robin
+Wren-TreePipit
+
+```
+
+```{asis, echo = params$key}
+d.
+```
+
+```{r eval=params$key, include=params$key}
+posthoc <- TukeyHSD(x=aov.fit1, conf.level=0.95)
+old <- round(posthoc$Bird[,4],5)
+(adjusted <- round(p.adjust(posthoc$Bird[,4]),5))
+
+```
+```{asis, echo = params$key}
+
+Using a Bonferroni adjusted p-value, we now find only 5 pairs that are significantly different - those involving Wrens.
+```
+
+```{asis, echo=params$key}
+Calculation of Familywise Error Rate:
+
+* alpha = 0.05
+* c = number of comparisons
+* FamilyWiseError = 1 - (1 - aplha)^c 
+* FamilyWiseError = 1 - (1 - 0.05)^15
+* FamilyWiseError = 0.5367
+
+Probability of Type I error is over 53% given 15 comparisons.
+
+```
