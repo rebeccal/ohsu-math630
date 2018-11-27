@@ -12,8 +12,8 @@ title: "`r ifelse (params$key, params$key_title, params$hw_title)`"
 ---
 
 <!-- To make the HW key -->
-<!-- rmarkdown::render("hw/HW3/HW3.Rmd", output_file = "HW3-key.pdf",  params = list(key=TRUE), output_format = "pdf_document") -->
-<!-- rmarkdown::render("hw/HW3/HW3.Rmd", output_file = "HW3-key.html", params = list(key=TRUE), output_format = "html_document") -->
+<!-- rmarkdown::render("hw/HW3/HW3.Rmd", output_file = "HW3-key.pdf", params = list(key=TRUE), output_format = "pdf_document") -->
+<!-- rmarkdown::render("hw/HW3/HW3.Rmd", output_file = "HW3-key.html",params = list(key=TRUE), output_format = "html_document") -->
 
 
 1. The longitudinal study [*Bone mass is recovered from lactation to postweaning in adolescent mothers with low calcium intakes*](https://www.ncbi.nlm.nih.gov/pubmed/15531682) examined total-body bone mineral content of young mothers during breast feeding and then in the postweaning period. We want to test the hypothesis that mothers gained more than 25 grams of bone mineral content in the postwearning period. The data for 10 mothers is provided below; use a significance level of 0.05. The column `bf` stands for the first measurement (during breastfeeding). The column `pw` stands for the second measurement (during postweaning period). All values are in grams of bone density.
