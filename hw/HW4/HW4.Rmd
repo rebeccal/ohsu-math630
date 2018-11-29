@@ -40,15 +40,14 @@ a.
 ```{r include=params$key, eval=params$key}
 ns = c(73, 105, 240, 1080)
 means = c(6.22, 5.81, 5.77, 5.47)
-grand_mean = mean(means)
-sigmas = c(1.62, 1.43, 1.24, 1.31)
+sd = c(1.62, 1.43, 1.24, 1.31)
 ttl_n = sum(ns)
 df_between_groups = length(ns) - 1 
 df_within_groups = ttl_n - 1
-SSW_var = sum((ns-1)*sigmas^2)/df_within_groups
-x_bar = sum(ns*means)/ttl_n
-SSB_var = sum(ns*(means-x_bar)^2)/df_between_groups
-(F_stat = SSB_var/SSW_var)
+MSE_W = sum((ns-1)*sd^2)/df_within_groups
+grand_mean = sum((means*ns))/ttl_n
+MSE_B = sum(ns*(means-grand_mean)^2)/df_between_groups
+(F_stat = MSE_B/MSE_W)
 (F_crit = qf(.95,3,1494))
 
 ```
@@ -70,22 +69,7 @@ d.
 The ANOVA F-test answers the question whether there are significant differences in the 4 population means.
 However, it does not provide us with any information about how they differ. Therefore when we reject H0 in
 ANOVA, additional analyses are required to determine what is driving the difference in means.
-The function pairwise.t.test computes the pair-wise comparisons between group means with corrections for
-multiple testing.
 
-
-pairwise.t.test(reponse, factor, p.adjust = method, alternative = c("two.sided", "less", "greater") ) 
-Here response is a vector of observations (the response variable), factor a list of factors and p.adjust is the correction
-method (e.g., "Bonferroni"). 
-
-*pairwise.t.test(cholestrol level, disease, p.adjust = "bonferroni" )
-
-Another multiple comparisons procedure is Tukeys method TukeyHSD(x, conf.level = 0.95) where x is a
-fitted model object.
-```
-
-```{asis, echo=params$key}
-\newpage
 ```
 
 2. In the early 1900s, Latter (1902) investigated the behavior of female cuckoos, that lay their eggs on the ground and then move them to the nests of other birds. In particular, Latter gathered data on the lengths of the cuckoo eggs found in these foster-nests. Data based on this work is used in (Tippett, 1952) and is located in the file cuckoos. The data contains the lengths, in millimeters, of the lengths of cuckoo eggs and the species of the nests where the eggs were placed. Get the data by installing and loading the `resampledata` R package, and use the `Cuckoos` dataset.
@@ -95,9 +79,6 @@ library(resampledata)
 cuckoos <- Cuckoos
 head(cuckoos)
 ```
-
-
-
 
   a. Create side-by-side boxplots (in R) to compare the distribution of lengths across the different foster nests.
   b. Conduct an ANOVA test (also in R) to see if the mean lengths of the cuckoo eggs are the same across the different foster nests.
@@ -129,43 +110,41 @@ b.
 ```  
 
 ```{r include = params$key, eval=params$key, message = FALSE}
+aov_model <- aov(Eggs ~Bird, data = cuckoos)
+summary(aov_model)
+
+#Let's look at the linear model and confidence intervals for the coefficients.
 cuckmod <- lm(Eggs ~Bird, data = cuckoos)
-anova(cuckmod)
 summary(cuckmod)
 confint(cuckmod)
+
+#While we're being diligent, let's check the residuals
 cuckmod1 = data.frame(Fitted = fitted(cuckmod),
   Residuals = resid(cuckmod), Birds = cuckoos$Bird)
-
 ggplot(cuckmod1, aes(Fitted, Residuals, colour = Birds)) + geom_point()
 ```
+
 ```{asis, echo = params$key}
+Looking at the "Analysis of Variance Table", we see that the means lengths of cuckoo eggs differ across foster nests.
+
+
 c.
 
 ```
 
-```{r}
-# !!Swap out for multcomp::glht
-aov.fit1 <- aov(Eggs ~ Bird, data=cuckoos)
-posthoc <- TukeyHSD(x=aov.fit1, conf.level=0.95)
-posthoc
-plot(posthoc)
-
+```{r include = params$key, eval=params$key, message = FALSE}
+library(multcomp)
+mcp <- glht(aov_model,linfct=mcp(Bird="Tukey"))
+summary(mcp,test=univariate()) #the test=univariate() => unadjusted p-value
+#summary(mcp) #is the same as ...#TukeyHSD(x=aov_model, conf.level=0.95) #and includes adjusted p-values
+plot(mcp)
 ```
 
 ```{asis, echo = params$key}
 
 Post-hoc analysis provides insight into any differences between the groups that may drive the significant omnibus F-statistic found in b. 
 
-Looking at the pairwise differences, we see that the below pairs are significantly different using an un-adjusted p-value of 0.05. 
-
-MeadowPipit-HedgeSparrow
-Wren-HedgeSparrow 
-TreePipit-MeadowPipit
-Wren-MeadowPipit
-Wren-PiedWagtail
-Wren-Robin
-Wren-TreePipit
-
+Looking at the pairwise differences above, we see that 8 pairs (all of those including Wrens, and all but one including MeadowPipits) are significantly different using an un-adjusted p-value of 0.05. 
 ```
 
 ```{asis, echo = params$key}
@@ -173,14 +152,12 @@ d.
 ```
 
 ```{r eval=params$key, include=params$key}
-posthoc <- TukeyHSD(x=aov.fit1, conf.level=0.95)
-old <- round(posthoc$Bird[,4],5)
-(adjusted <- round(p.adjust(posthoc$Bird[,4]),5))
-
+summary(mcp,test=adjusted(type="BH"))
+summary(mcp,test=adjusted(type="bonferroni"))
 ```
 ```{asis, echo = params$key}
 
-Using a Bonferroni adjusted p-value, we now find only 5 pairs that are significantly different - those involving Wrens.
+Using a Benjamini-Hochberg p-value adjustment, we replicate the results for the un-adjusted p-values. Using a Bonferroni adjusted p-value, we now find that the difference between lengths for the PiedWagtail-MeadowPipit foster nests is no longer significant.
 ```
 
 ```{asis, echo=params$key}
