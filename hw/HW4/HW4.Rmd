@@ -38,17 +38,23 @@ a.
 
 
 ```{r include=params$key, eval=params$key}
-ns = c(73, 105, 240, 1080)
-means = c(6.22, 5.81, 5.77, 5.47)
-sd = c(1.62, 1.43, 1.24, 1.31)
-ttl_n = sum(ns)
-df_between_groups = length(ns) - 1 
-df_within_groups = ttl_n - 1
-MSE_W = sum((ns-1)*sd^2)/df_within_groups
-grand_mean = sum((means*ns))/ttl_n
-MSE_B = sum(ns*(means-grand_mean)^2)/df_between_groups
-(F_stat = MSE_B/MSE_W)
-(F_crit = qf(.95,3,1494))
+ns <-  c(73, 105, 240, 1080)
+means <-  c(6.22, 5.81, 5.77, 5.47)
+sd <-  c(1.62, 1.43, 1.24, 1.31)
+ttl_n <-  sum(ns)
+
+df_between_groups <-  length(ns) - 1 
+df_within_groups <-  ttl_n - 1
+
+grand_mean <-  sum((means*ns))/ttl_n
+paste("SS_B <-", SS_B <- sum(ns*(means-grand_mean)^2))
+paste("MSE_B <- ", MSE_B <-  SS_B/df_between_groups)
+
+paste("SS_W <- ", SS_W <- sum((ns-1)*sd^2))
+paste("MSE_W <- ",  SS_W/df_within_groups)
+
+paste("F statistic <-", F_stat <-  MSE_B/MSE_W)
+paste("F critical value <- ", F_crit <-  qf(.95,3,1494))
 
 ```
 

@@ -127,7 +127,11 @@ Note! Do not copy/paste this data from the table into Excel- folks who did this 
 
 ```{r echo = FALSE, include = FALSE}
 mini_lm <- lm(prop_given ~ age_groups, data = mini_givers)
-anova(mini_lm)
+(anova_mini_lm <- anova(mini_lm))
+```
+```{r echo = FALSE, include = FALSE}
+glht(mini_lm)
+glht(mini_lm, linfct = mcp(age_groups = "Tukey"))
 ```
 
 

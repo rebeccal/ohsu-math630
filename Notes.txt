@@ -26,3 +26,6 @@ Midterm - fix problems
   
 CM054 - add more about contrasts (from slide deck 15?) and using the contrast matrix to compare across factors  
 
+Talk more about unbalanced data
+
+

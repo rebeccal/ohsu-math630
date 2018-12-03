@@ -255,8 +255,8 @@ $$\beta_2=-1\mu_1+0\mu_2+1\mu_3$$
 Note that if you solve each of these equations, our $\beta_0$ is simply the mean of group 1 ($\mu_1=\bar{y_1}$), $\beta_1$ is the difference between $\mu_2$ and $\mu_1$ ($\bar{y_2}-\bar{y_1}$), and $\beta_2$ is the difference between $\mu_3$ and $\mu_1$ ($\bar{y_3}-\bar{y_1}$). You might at this point wish to ask yourself- are these the effects you want to test? 
 
 In a typical ANOVA, we are likely to be more interested in the following contrasts:
-$$\beta_1=\frac{2}{k}\mu_1-\frac{1}{k}\mu_2-\frac{1}{k}\mu_3$$
-$$\beta_2=\frac{2}{k}\mu_2-\frac{1}{k}\mu_1-\frac{1}{k}\mu_3$$
+$$\beta_1=\frac{2}{k}\mu_1-\frac{1}{k}\mu_2-\frac{1}{k}\mu_3=\mu_1-(\frac{1}{k}\mu_1+\frac{1}{k}\mu_2+\frac{1}{k}\mu_3)$$
+$$\beta_2=\frac{2}{k}\mu_2-\frac{1}{k}\mu_1-\frac{1}{k}\mu_3=\mu_2-(\frac{1}{k}\mu_1+\frac{1}{k}\mu_2+\frac{1}{k}\mu_3)$$
 
 ```{r comment=NA}
 options(contrasts=c("contr.sum","contr.poly")) #this MUST be specified before aov
@@ -267,10 +267,10 @@ solve(tempnew)
 
 Here are our new $c_j$ values:
 $$\beta_0=.33\mu_1+.33\mu_2+.33\mu_3$$
-$$\beta_1=.67\mu_1-.33\mu_2-.33\mu_3$$
-$$\beta_2=-.33\mu_1+.67\mu_2-.33\mu_3$$
+$$\beta_1=.67\mu_1-.33\mu_2-.33\mu_3=\mu_1-(.33\mu_1+.33\mu_2+.33\mu_3)$$
+$$\beta_2=-.33\mu_1+.67\mu_2-.33\mu_3=\mu_2-(.33\mu_1+.33\mu_2+.33\mu_3)$$
 
-Note that __now__ if you solve each of these equations, our $\beta_0$ is the grand mean ($\mu_{\bullet\bullet}=\bar{y_{\bullet\bullet}}$), $\beta_1$ is the difference between $\mu_1$ and the combined $\mu_2$ and $\mu_3$ (equally weighted), and $\beta_2$ is the difference between $\mu_2$ and the combined $\mu_1$ and $\mu_3$ (equally weighted). Now of course, the ANOVA output does not provide estimates for $\beta$, but as we have seen, ANOVA is based off of regression- it is just a different way of summarizing the analyses in sums of squares form. Long story short, it is important to set the contrasts using the options I specify below, because the default contrast coding scheme in R rarely reflects your null/alternative hypotheses.
+Note that __now__ if you solve each of these equations, our $\beta_0$ is the grand mean ($\mu_{\bullet\bullet}=\bar{y_{\bullet\bullet}}$), $\beta_1$ is the difference between $\mu_1$ and the grand mean, and $\beta_2$ is the difference between $\mu_2$ and the grand mean. Now of course, the ANOVA output does not provide estimates for $\beta$, but as we have seen, ANOVA is based off of regression - it is just a different way of summarizing the analyses in sums of squares form. Long story short, it is important to set the contrasts using the options I specify below, because the default contrast coding scheme in R rarely reflects your null/alternative hypotheses.
 
 ```{r comment=NA}
 library(car)
@@ -309,7 +309,7 @@ All of these converge to the same conclusion: expenditures among White non-Hispa
 
 ## Unequal Variances
 
-With unequal variances with just one IV factor, we could run Welch's *F* test (oneway.test), which is the alternative to Welch's *t* test (t.test with var.equal=F) when we have a factor with more than two levels. Unfortunately, there are not many options for unequal variances when we have more than one IV. The *car* package does offer this "white.adjust" option, which if set to true will use a heteroscedasticity-corrected coefficient covariance matrix (see White, 1980, "A heteroskedastic consistent covariance matrix estiamtor and a direct rest of heteroskedasticity"). For now, I will introduce this as an option for the omnibus ANOVA, although there may be better ([non-NHST](http://doingbayesiandataanalysis.blogspot.mx/2011/04/anova-with-non-homogeneous-variances.html)) options for such a scenario.
+With unequal variances with just one IV factor, we could run Welch's *F* test (oneway.test), which is the alternative to Welch's *t* test (t.test with var.equal=F) when we have a factor with more than two levels. Unfortunately, there are not many options for unequal variances when we have more than one IV. The *car* package does offer this "white.adjust" option, which if set to true will use a heteroscedasticity-corrected coefficient covariance matrix (see White, 1980, "A heteroskedastic consistent covariance matrix estimator and a direct rest of heteroskedasticity"). For now, I will introduce this as an option for the omnibus ANOVA, although there may be better ([non-NHST](http://doingbayesiandataanalysis.blogspot.mx/2011/04/anova-with-non-homogeneous-variances.html)) options for such a scenario.
 
 ```{r comment=NA,eval=FALSE}
 Anova(ca_aov2,type=c("II"), white.adjust=T)
@@ -327,7 +327,7 @@ pairwise.t.test(cadds$exp,cadds$sex, p.adjust.method="BH", pool.sd=F)
 
 You will conduct an ANOVA to examine whether ethnicity and age affect expenditures. This ANOVA will be a 2 (2 levels of ethnicity: White non-Hispanic and Hispanic) x 5 (5 levels of age group: under 6, 6-12, 13-17, 18-21, and over 22). So, first, drop the "other" ethnicity category, and create an age group variable as follows:
 
-```{r comment=NA}
+```{r comment=NA, message = FALSE}
 ca2 <- subset(cadds, !eth3=="Other")
 ca2$eth3 <- droplevels(ca2$eth3)
 library(Hmisc)
