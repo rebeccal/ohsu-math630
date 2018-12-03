@@ -26,3 +26,4 @@ reference,"Using Effect Size, or Why the P-value is Not Enough",https://www.ncbi
 reference,"It's the Effect Size, Stupid",https://www.leeds.ac.uk/educol/documents/00002182.htm
 reference,Setting Up Contrasts,https://rcompanion.org/rcompanion/h_01.html
 reference,Contrasts: Examples with ANOVA and Linear Models,https://rstudio-pubs-static.s3.amazonaws.com/84177_4604ecc1bae246c9926865db53b6cc29.html
+data,cadds.csv,data/cadds.csv

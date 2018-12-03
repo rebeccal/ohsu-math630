@@ -1,0 +1,77 @@
+---
+title: "DC_Grades"
+output: html_document
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(readxl) #reading in excel files
+library(dplyr) #coalesce
+library(tidyr) #spread
+library(knitr) #kable
+library(kableExtra) #add_header
+```
+
+
+
+```{r include=FALSE}
+data_source <- here::here("DataCamp", "export_9014.xls")
+worksheets <- excel_sheets(data_source)
+paper_data <- read_excel(data_source,worksheets[1])
+course_names <- names(paper_data[,seq(5,99,4)])
+dc_courses <- (unlist(strsplit(course_names,"*_grade")))[1:9]
+assigned <- data.frame(dc_courses)
+assigned <- assigned %>% 
+  mutate(short_name = substr(dc_courses,0,20))
+
+
+tabs <- data.frame(worksheets)
+names(tabs) <- "tab_name"
+tabs <- tabs %>% 
+  mutate(short_name = substr(tab_name,0,20))
+
+#Map the course names to the tab names
+courses <- inner_join(assigned,tabs)
+courses <- droplevels.data.frame(courses)
+
+#Get the number of chapters
+chapters <- list()
+master <- data.frame()
+index <- 0
+for (w_sheet in as.character(courses$tab_name)) {
+  index <- index+1 
+  course_worksheet <- read_excel(data_source, w_sheet)
+  chapt_count <- (ncol(course_worksheet)-2)/4
+  chapters[index] <- chapt_count
+  test  <- select(course_worksheet, -ends_with("grade"), -ends_with("start"), -ends_with("completed"))
+  test2 <- gather(test, key="chapter", value="percent_complete", 3:(chapt_count+2))
+  test2$course_code <- w_sheet
+  test2$course <- courses$dc_courses[index]
+  master <- rbind(master,test2)
+  }
+
+#rm(w_sheet)
+
+courses$chapters <- unlist(chapters)
+
+
+completed <- master %>% 
+  filter(percent_complete >= .95) %>%
+  count(user_name) %>%
+  group_by(user_name) %>%
+  mutate(percent_of_29 = n/29, points = percent_of_29*40, min(points,40))
+  
+
+  
+# paper_data_cleaned <- paper_data %>%  
+#     mutate(Study = paste0("<a href='", Paper, "'>", Study, "</a>")) %>% 
+#     mutate(RepoLink = paste0("<a href='", RepoLink, "'>Data Repo Link</a>")) %>% 
+#   select(PaperNum, Study, RepoLink)
+#   
+# groups <- read_excel(data_source,sheets[2])
+# choices <- read_excel(data_source,sheets[3])
+# comb_choices <- left_join(paper_data_cleaned, choices)
+# comb_choices<- replace_na(comb_choices,list(Groups=0, Preference=0))
+
+```
