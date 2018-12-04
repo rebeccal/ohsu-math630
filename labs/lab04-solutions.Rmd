@@ -47,9 +47,9 @@ Using the key, your self-assessment should include even **more** narrative; wher
 
 # Headnotes
 
-- This slide deck on [post-hoc tests and p-value adjustment ](slides/cm045.html) may be helpful.
-- Also this slide deck on [comparing multiple sample means](slides/cm041.html).
-- Also this slide deck on [the general linear model](slides/cm035.html).
+- Also this slide deck on [the general linear model](../slides/cm046.html) may be helpful.
+- Also this slide deck on [comparing multiple sample means](../slides/cm051.html).
+- This slide deck on [post-hoc tests and p-value adjustment ](../slides/cm054.pdf).
 
 
 # Logistics
