@@ -352,6 +352,7 @@ agebox2
 3. Examine the means, sds, and n's using *tapply(DV, list(IV1,IV2), function)* as I did in the previous example. Look very carefully at each. Do you see any patterns, in particular in the sample sizes? Knowing that Hispanic children tend to be diagnosed later than White non-Hispanic children (and thus should be under-represented at younger ages), do these numbers surprise you?
 
 ```{r comment=NA, include=FALSE}
+#
 tapply(ca2$exp,list(ca2$agegroup,ca2$eth3), mean)
 tapply(ca2$exp,list(ca2$agegroup,ca2$eth3), sd)
 tapply(ca2$exp,list(ca2$agegroup,ca2$eth3), length)

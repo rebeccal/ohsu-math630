@@ -37,7 +37,7 @@ sqrt(rse2)
 sqrt(diag(solve(crossprod(design_matrix))) * rse2)
 
 
-# Pretty much all of the below could be done with either augment or get_regression_points
+# Pretty much all of the below could be done with EITHER augment or get_regression_points
 lm_swiss_aug <- augment(lm_swiss)
 lm_swiss_pts <- moderndive::get_regression_points(lm_swiss)
 
@@ -80,7 +80,7 @@ lm_swiss_aug # Using augment for direct comparison of hat
 
 #Hat
 X <- design_matrix
-ols_estimator <- ginv(t(X)%*%X)%*%t(X) #dreivable, but yuck!
+ols_estimator <- ginv(t(X)%*%X)%*%t(X) #derivable, but yuck!
 hat_matrix <- X%*%ols_estimator 
 #hat_matrix <- X%*%ginv(crossprod(X))%*%t(X) #Same
 #hat_matrix <- X%*%solve(crossprod(X))%*%t(X) #Same
@@ -131,5 +131,4 @@ lev = 1 - (residuals(fit)[1]/(mtcars[1,'mpg'] -  y_hat_without)) # Leverage
 all.equal(diag(hat2_matrix)[1],lev) #TRUE
 
 augment(fit)
-
 

@@ -1,5 +1,6 @@
 
-advertising <- read_csv("http://www-bcf.usc.edu/~gareth/ISL/Advertising.csv")
+
+advertising <- read.csv("http://www-bcf.usc.edu/~gareth/ISL/Advertising.csv")
 
 #Fixed - but cool!!
 advertising_fit1 <- lm(sales~TV+radio, data = advertising)
