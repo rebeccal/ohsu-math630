@@ -29,3 +29,5 @@ CM054 - add more about contrasts (from slide deck 15?) and using the contrast ma
 Talk more about unbalanced data
 
 Next time ,teach ANOVA with eta-squared - Actually teach it all with effect sizes and CIs?
+
+cadds.Rmd - "tidy" the assignment - it's still using tapply
