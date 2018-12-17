@@ -16,7 +16,7 @@ library(kableExtra) #add_header
 
 
 ```{r include=FALSE}
-data_source <- here::here("DataCamp", "export_9014.xls")
+data_source <- here::here("DataCamp", "export_9296.xls")
 worksheets <- excel_sheets(data_source)
 paper_data <- read_excel(data_source,worksheets[1])
 course_names <- names(paper_data[,seq(5,99,4)])
@@ -62,16 +62,5 @@ completed <- master %>%
   group_by(user_name) %>%
   mutate(percent_of_29 = n/29, points = percent_of_29*40, min(points,40))
   
-
-  
-# paper_data_cleaned <- paper_data %>%  
-#     mutate(Study = paste0("<a href='", Paper, "'>", Study, "</a>")) %>% 
-#     mutate(RepoLink = paste0("<a href='", RepoLink, "'>Data Repo Link</a>")) %>% 
-#   select(PaperNum, Study, RepoLink)
-#   
-# groups <- read_excel(data_source,sheets[2])
-# choices <- read_excel(data_source,sheets[3])
-# comb_choices <- left_join(paper_data_cleaned, choices)
-# comb_choices<- replace_na(comb_choices,list(Groups=0, Preference=0))
 
 ```
