@@ -7,6 +7,7 @@
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
@@ -22,9 +23,9 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<script src="site_libs/htmlwidgets-1.2/htmlwidgets.js"></script>
+<script src="site_libs/htmlwidgets-1.3/htmlwidgets.js"></script>
 <link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="site_libs/datatables-binding-0.4/datatables.js"></script>
+<script src="site_libs/datatables-binding-0.8/datatables.js"></script>
 <link href="site_libs/dt-core-1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
 <link href="site_libs/dt-core-1.10.16/css/jquery.dataTables.extra.css" rel="stylesheet" />
 <script src="site_libs/dt-core-1.10.16/js/jquery.dataTables.min.js"></script>
@@ -34,9 +35,8 @@
 <script src="site_libs/selectize-0.12.0/selectize.min.js"></script>
 <link href="site_libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
 <script src="site_libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
-<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
-<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
-<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -84,9 +84,7 @@ h6 {
 </style>
 
 
-</head>
 
-<body>
 
 <style type = "text/css">
 .main-container {
@@ -100,7 +98,6 @@ code {
 }
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -110,6 +107,9 @@ img {
 }
 button.code-folding-btn:focus {
   outline: none;
+}
+summary {
+  display: list-item;
 }
 </style>
 
@@ -125,7 +125,6 @@ body {
   padding-top: 69px;
   margin-top: -69px;
 }
-
 .section h2 {
   padding-top: 69px;
   margin-top: -69px;
@@ -145,6 +144,43 @@ body {
 .section h6 {
   padding-top: 69px;
   margin-top: -69px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
 }
 </style>
 
@@ -166,19 +202,73 @@ $(document).ready(function () {
 });
 </script>
 
-
-<div class="container-fluid main-container">
-
 <!-- tabsets -->
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-</script>
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
 
 <!-- code folding -->
 
 
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
 
 
 
@@ -256,19 +346,19 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">Class Meetings</h1>
-<h3 class="subtitle"><em>Fall 2018</em></h3>
+<h3 class="subtitle">Fall 2019</h3>
 
 </div>
 
 
 <p>Links to all slide decks and in-class lab materials will be posted here.</p>
 <p><a href="https://echo360.org">Class Videos</a>.</p>
-<div id="htmlwidget-5552274ddece11311d66" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-5552274ddece11311d66">{"x":{"filter":"top","filterHTML":"<tr>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","data":[[null,"Tues","Thurs",null,"Tues","Thurs","Tues","Thurs","Tues",null,"Thurs","Tues","Thurs",null,"Tues","Thurs","Tues","Thurs","Tues",null,"Thurs","Tues","Thurs","Tues","Thurs","Tues",null,"Thurs","Tues","Thurs"],["<b>Week One<\/b>","September 25","September 27","<b>Week Two-Four<\/b>","October 2","October 4","October 9","October 11","October 16","<b>Week Four-Five<\/b>","October 18","October 23","October 25","<b>Week Six-Eight<\/b>","October 30","November 1","November 6","November 8","November 13","<b>Week Eight-Eleven<\/b>","November 15","November 20","November 22","November 27","November 29","December 4","<b>Week Eleven-Twelve<\/b>","December 6","December 11","December 13"],["1.0 Intro to Data and R","1.1: Summarizing Data","1.2: Visualizing distributions","2.0 Linear Regression","2.1: Simple linear regression","2.2: Simple linear regression","2.3: Linear models (general)","2.4: Multiple regression","2.5: LM diagnostics/outliers","3.0 Probability","3.1: Probability Review","3.2: Discrete Probability Functions","3.3: Continuous Probability Functions","4.0 Inference","4.1: Sampling distributions","4.2: Bootstrapping (confidence intervals)","4.3: Hypothesis testing (resampling)","4.4: Hypothesis testing (classical)","4.5: Errors, Effect Size, and Power","5.0 Comparing Groups","4.6 & 5.1: General Linear Model and Many Means","5.2: ANOVA by hand","NO CLASS","5.3: Contrasts, post-hoc tests, and p-value adjustments","5.4: Two-way ANOVA/3-way ANOVA","Extra Credit Lab / Q&A",null,"Final presentations","Final presentations","Final presentations"],[null,"Welcome & Introductions<br>(<a href='syllabus.html'>syllabus<\/a>)\n<br><a href='slides/cm011.html'>1.1 - Sample Data <\/a>","<a href='slides/cm012.html'> 1.2 - Distributions<\/a> \n<br> <a href = 'reference/SummariesAndDistributions.html'>Distributions and Summary Statistics<\/a>",null,null,null,"<a href='slides/cm023.html'>2.3  - Linear Models<\/a>",null,"<a href='slides/cm025.html'>2.5 - LM Diagnostics and Outliers<\/a>",null,"<a href='slides/cm031.pdf'>3.1 - Probability and Random Variables<\/a>","<a href='slides/cm032.pdf'>3.2 - Discrete Random Variables<\/a>","<a href='slides/cm033.pdf'>3.3 - Continuous Random Variables<\/a>",null,"<a href='slides/cm041.pdf'>4.1 - Sampling<\/a>","<a href='slides/cm042.html'>4.2 - Bootstrapping<\/a>",null,"<a href='slides/cm044.pdf'>4.4 - Hypothesis Testing and Confidence Intervals<\/a>","<a href='slides/cm045.pdf'>4.5 - Errors, Effect Size and Power<\/a>",null,"<a href='slides/cm046.html'>4.6 - The General Linear Model<\/a>\n<br><a href='slides/cm051.html'>5.1 - Many Means - ANOVA<\/a>",null,"Thanksgiving - Enjoy!","<a href='slides/cm053.html'>5.3 - Contrasts and post-hoc tests<\/a>","<a href='slides/cm054.pdf'>5.4 - 2-way and 3-way ANOVA<\/a>",null,null,"Groups 4, 5, & 1","Groups 7, 2, & 6","Groups 3, 9, & 8"],[null,null,null,null,"<a href='slides/cm021_lab.html'>Lab 2.1<\/a>","<a href='slides/cm022_lab.html'>Lab 2.2<\/a>","<a href='slides/cm023-code_along.Rmd'>CM2.3 Code-along<\/a>","<a href='slides/cm024_lab.html'>Lab 2.4<\/a>",null,null,null,null,null,null,"<a href='slides/cm041_code_along.html'>CM4.1 Code-along<\/a>","<a href='slides/cm042-code_along.html'>CM4.2 Code-along<\/a>","<a href='slides/cm043_lab.html'>Lab 4.3<\/a>",null,"<a href='slides/cm045-code_along.R'>CM4.5 Code-along<\/a>",null,null,"<a href='slides/cm052_lab.html'>Lab 5.2<\/a>",null,null,null,"<a href='slides/two-way-anova-cadds.html'>Xtra Credit<\/a>",null,null,null,null]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>Weekday<\/th>\n      <th>Date<\/th>\n      <th>CM / Block<\/th>\n      <th>Topics<\/th>\n      <th>In-class Lab<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":30,"autoWidth":true,"columnDefs":[{"width":"300px","targets":3},{"width":"20px","targets":0}],"bInfo":false,"paging":false,"order":[],"orderClasses":false,"orderCellsTop":true,"lengthMenu":[10,25,30,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-eafa1062d557bda8d792" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-eafa1062d557bda8d792">{"x":{"filter":"top","filterHTML":"<tr>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","data":[[null,"Tues","Thurs",null,"Tues","Thurs","Tues","Thurs","Tues",null,"Thurs","Tues","Thurs",null,"Tues","Thurs","Tues","Thurs","Tues",null,"Thurs","Tues","Thurs","Tues","Thurs","Tues",null,"Thurs","Tues","Thurs"],["<b>Week One<\/b>","September 25","September 27","<b>Week Two-Four<\/b>","October 2","October 4","October 9","October 11","October 16","<b>Week Four-Five<\/b>","October 18","October 23","October 25","<b>Week Six-Eight<\/b>","October 30","November 1","November 6","November 8","November 13","<b>Week Eight-Eleven<\/b>","November 15","November 20","November 22","November 27","November 29","December 4","<b>Week Eleven-Twelve<\/b>","December 6","December 11","December 13"],["1.0 Intro to Data and R","1.1: Summarizing Data","1.2: Visualizing distributions","2.0 Linear Regression","2.1: Simple linear regression","2.2: Simple linear regression","2.3: Linear models (general)","2.4: Multiple regression","2.5: LM diagnostics/outliers","3.0 Probability","3.1: Probability Review","3.2: Discrete Probability Functions","3.3: Continuous Probability Functions","4.0 Inference","4.1: Sampling distributions","4.2: Bootstrapping (confidence intervals)","4.3: Hypothesis testing (resampling)","4.4: Hypothesis testing (classical)","4.5: Errors, Effect Size, and Power","5.0 Comparing Groups","4.6 & 5.1: General Linear Model and Many Means","5.2: ANOVA by hand","NO CLASS","5.3: Contrasts, post-hoc tests, and p-value adjustments","5.4: Two-way ANOVA/3-way ANOVA","Extra Credit Lab / Q&A",null,"Final presentations","Final presentations","Final presentations"],[null,"Welcome & Introductions<br>(<a href='syllabus.html'>syllabus<\/a>)\n<br><a href='slides/cm011.html'>1.1 - Sample Data <\/a>","<a href='slides/cm012.html'> 1.2 - Distributions<\/a> \n<br> <a href = 'reference/SummariesAndDistributions.html'>Distributions and Summary Statistics<\/a>",null,null,null,"<a href='slides/cm023.html'>2.3  - Linear Models<\/a>",null,"<a href='slides/cm025.html'>2.5 - LM Diagnostics and Outliers<\/a>",null,"<a href='slides/cm031.pdf'>3.1 - Probability and Random Variables<\/a>","<a href='slides/cm032.pdf'>3.2 - Discrete Random Variables<\/a>","<a href='slides/cm033.pdf'>3.3 - Continuous Random Variables<\/a>",null,"<a href='slides/cm041.pdf'>4.1 - Sampling<\/a>","<a href='slides/cm042.html'>4.2 - Bootstrapping<\/a>",null,"<a href='slides/cm044.pdf'>4.4 - Hypothesis Testing and Confidence Intervals<\/a>","<a href='slides/cm045.pdf'>4.5 - Errors, Effect Size and Power<\/a>",null,"<a href='slides/cm046.html'>4.6 - The General Linear Model<\/a>\n<br><a href='slides/cm051.html'>5.1 - Many Means - ANOVA<\/a>",null,"Thanksgiving - Enjoy!","<a href='slides/cm053.html'>5.3 - Contrasts and post-hoc tests<\/a>","<a href='slides/cm054.pdf'>5.4 - 2-way and 3-way ANOVA<\/a>",null,null,"Groups 4, 5, & 1","Groups 7, 2, & 6","Groups 3, 9, & 8"],[null,null,null,null,"<a href='slides/cm021_lab.html'>Lab 2.1<\/a>","<a href='slides/cm022_lab.html'>Lab 2.2<\/a>","<a href='slides/cm023-code_along.Rmd'>CM2.3 Code-along<\/a>","<a href='slides/cm024_lab.html'>Lab 2.4<\/a>",null,null,null,null,null,null,"<a href='slides/cm041_code_along.html'>CM4.1 Code-along<\/a>","<a href='slides/cm042-code_along.html'>CM4.2 Code-along<\/a>","<a href='slides/cm043_lab.html'>Lab 4.3<\/a>",null,"<a href='slides/cm045-code_along.R'>CM4.5 Code-along<\/a>",null,null,"<a href='slides/cm052_lab.html'>Lab 5.2<\/a>",null,null,null,"<a href='slides/two-way-anova-cadds.html'>Xtra Credit<\/a>",null,null,null,null]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th>Weekday<\/th>\n      <th>Date<\/th>\n      <th>CM / Block<\/th>\n      <th>Topics<\/th>\n      <th>In-class Lab<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":30,"autoWidth":true,"columnDefs":[{"width":"300px","targets":3},{"width":"20px","targets":0}],"bInfo":false,"paging":false,"order":[],"orderClasses":false,"orderCellsTop":true,"lengthMenu":[10,25,30,50,100]}},"evals":[],"jsHooks":[]}</script>
 
 <p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">
-<img alt="Creative Commons License" style="border-width:0" src="by-nc.png" height="400" width="65"/></a>
+<img alt="Creative Commons License" style="border-width:0" src="by-nc.png" height="10" width="75"/></a>
 </p>
 
 
@@ -287,6 +377,23 @@ $(document).ready(function () {
 
 
 </script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

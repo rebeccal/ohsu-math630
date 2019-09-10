@@ -1,7 +1,6 @@
 ---
 title: "Class Meetings"
-subtitle: Fall 2018
-output: pdf_document
+subtitle: Fall 2019
 ---
 
 Links to all slide decks and in-class lab materials will be posted here.

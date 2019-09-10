@@ -1,7 +1,7 @@
 ---
 title: "What is Due & When?"
 #author: "Rebecca Lunsford"
-subtitle: Fall 2018
+subtitle: Fall 2019
 ---
 
 You are expected to come to each class meeting prepared, which means that you will have done the readings and DataCamp assignments that are due for that date *before* coming to class. 

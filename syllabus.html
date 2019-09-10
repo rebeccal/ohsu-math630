@@ -7,11 +7,12 @@
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 <meta name="author" content="Instructor: Rebecca Lunsford" />
 
-<meta name="date" content="2018-09-25" />
+<meta name="date" content="2019-09-24" />
 
 <title>Syllabus - Probability &amp; Statistical Inference for Scientists and Engineers</title>
 
@@ -26,9 +27,8 @@
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
 <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
-<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
-<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
-<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -76,9 +76,7 @@ h6 {
 </style>
 
 
-</head>
 
-<body>
 
 <style type = "text/css">
 .main-container {
@@ -92,7 +90,6 @@ code {
 }
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -102,6 +99,9 @@ img {
 }
 button.code-folding-btn:focus {
   outline: none;
+}
+summary {
+  display: list-item;
 }
 </style>
 
@@ -117,7 +117,6 @@ body {
   padding-top: 69px;
   margin-top: -69px;
 }
-
 .section h2 {
   padding-top: 69px;
   margin-top: -69px;
@@ -137,6 +136,43 @@ body {
 .section h6 {
   padding-top: 69px;
   margin-top: -69px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
 }
 </style>
 
@@ -158,19 +194,73 @@ $(document).ready(function () {
 });
 </script>
 
-
-<div class="container-fluid main-container">
-
 <!-- tabsets -->
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-</script>
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
 
 <!-- code folding -->
 
 
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
 
 
 
@@ -223,10 +313,10 @@ $(document).ready(function () {
   </a>
 </li>
 <li>
-  <a href="cm.html">
+  <a href="reference.html">
     <span class="fa fa-glasses"></span>
      
-    Reference (pending)
+    Reference Plus
   </a>
 </li>
       </ul>
@@ -248,17 +338,17 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">Syllabus - Probability &amp; Statistical Inference for Scientists and Engineers</h1>
-<h3 class="subtitle"><em>MATH 530/630; Fall 2018</em></h3>
-<h4 class="author"><em>Instructor: Rebecca Lunsford</em></h4>
-<h4 class="date"><em>September 25, 2018</em></h4>
+<h3 class="subtitle">MATH 530/630; Fall 2019</h3>
+<h4 class="author">Instructor: Rebecca Lunsford</h4>
+<h4 class="date">September 24, 2019</h4>
 
 </div>
 
 
-<p>This course will introduce fundamental concepts underlying statistical data display, analysis, inference, and statistical decision making. The topics include presentation and description of data, basic concepts of probability, Bayes’ theorem, discrete and continuous probability distributions, estimation, sampling distributions, classical tests of hypotheses on means, variances and proportions, and linear models. One of the key notions underlying this course is the role of mathematical modeling in science and engineering with a particular focus on the need for an understanding of variability and uncertainty. Examples are chosen from a wide range of engineering, clinical, and social domains.</p>
+<p>This course will introduce fundamental concepts underlying statistical data display, analysis, inference, and statistical decision making. The topics include presentation and description of data, basic concepts of probability, Bayes’ theorem, discrete and continuous probability distributions, estimation, sampling distributions, classical tests of hypotheses on means, variances and proportions, and linear models. One of the key notions underlying this course is the role of mathematical modeling in science and engineering with a particular focus on the need for an understanding of variability and uncertainty. Examples are chosen from a wide range of domains.</p>
 <div id="prerequisites" class="section level1">
 <h1>Prerequisites</h1>
-<p>Although there are no formal prerequistes for this class, this course will include topics in which students will use various mathematical tools. As such, students must be very comfortable with the following:</p>
+<p>Although there are no formal prerequistes for this class, this course will include topics in which students will use various mathematical tools. As such, students must be familiar with the following topics:</p>
 <table>
 <thead>
 <tr class="header">
@@ -280,16 +370,13 @@ $(document).ready(function () {
 <td>Univariate calculus</td>
 </tr>
 <tr class="even">
-<td>Multivariate random variables</td>
-<td>Multivariate calculus</td>
-</tr>
-<tr class="odd">
 <td>Statistical inference</td>
 <td>All of the above</td>
 </tr>
 </tbody>
 </table>
-<p>What does this mean? It means that you should feel comfortable being asked to review any of the above topics, and to apply them in this course.</p>
+<!-- |Multivariate random variables    | Multivariate calculus | -->
+<p>What does this mean? It means that you should feel comfortable being asked to review any of the above topics, and to apply them (after demonstration) in this course.</p>
 </div>
 <div id="textbook" class="section level1">
 <h1>Textbook</h1>
@@ -404,7 +491,7 @@ $(document).ready(function () {
 <div id="grading-rubric-for-the-ilabs-is-20-points-scored-as-follows" class="section level2">
 <h2>Grading rubric for the iLabs is 20 points, scored as follows:</h2>
 <ul>
-<li><p>8 points for each initial solution being “in good faith”&quot;</p>
+<li><p>8 points for each initial solution being “in good faith”"</p>
 <ul>
 <li>8: answer reflects strong independent problem solving, with clearly thought out attempts to approach the problem and a diligent and honest effort to find the solution.</li>
 <li>6: answer reflects some attempt to approach the problem, but approach appears to be superficial and lacks depth of analysis.</li>
@@ -427,11 +514,8 @@ $(document).ready(function () {
 <div id="what-is-a-good-faith-effort" class="section level3">
 <h3>What is a “good faith effort”?</h3>
 <p>Simply submitting nonsense or saying “I can’t do this” will not meet our criteria for a good faith effort, because there is no attempt on your part to show us why you are struggling, what you tried but didn’t work, what specific part of the problem you got stuck on, which other examples in the text/lecture you tried to work through to get a grasp on the problem, etc. This is especially true if you don’t attend any office hours, post your problem online, or otherwise seek out help <em>before</em> the due date. The good faith effort is just that- we are interested in seeing evidence of a diligent and honest effort on your part, made with deliberate intention, to understand the problem and attempt an answer.</p>
+<p>##In-class Labs There will be 5 in-class labs in this course. Your completed labs will be submitted as a raw R Markdown file and a knitted HTML file. You may submit (and re-submit) labs to Sakai until the following class date at 5PM. Labs will receive a grade of check-minus, check, or check-plus. The lowest will be dropped. Full points will be awarded for 4 checks. A check-plus balances out a check-minus.</p>
 </div>
-</div>
-<div id="in-class-labs" class="section level2">
-<h2>In-class Labs</h2>
-<p>There will be 5 in-class labs in this course. Your completed labs will be submitted as a raw R Markdown file and a knitted HTML file. You may submit (and re-submit) labs to Sakai until the following class date at 5PM. Labs will receive a grade of check-minus, check, or check-plus. The lowest will be dropped. Full points will be awarded for 4 checks. A check-plus balances out a check-minus.</p>
 </div>
 <div id="midterm" class="section level2">
 <h2>Midterm</h2>
@@ -444,7 +528,7 @@ $(document).ready(function () {
 </div>
 <div id="datacamp" class="section level2">
 <h2>DataCamp</h2>
-<p>DataCamp provides an interactive environment for learning and practicing data science and statistics skills in R. Full points will be awarded for completing at least 80% of the assigned DataCamp chapters. Lesser quantities will receiving a commensurate reduction in points.</p>
+<p>DataCamp provides an interactive environment for learning and practicing data science and statistics skills in R. Full points will be awarded for completing at least 80% of the assigned DataCamp chapters. Lesser proportions will receiving a commensurate reduction in points.</p>
 </div>
 <div id="homework" class="section level2">
 <h2>Homework</h2>
@@ -456,7 +540,7 @@ $(document).ready(function () {
 <p>Students are expected to follow University policy with regards to issues of academic dishonesty (e.g., cheating or plagiarism) and proper conduct in the classroom, as detailed in the Student Handbook. Violation of academic integrity is considered a serious offense by the University and is treated accordingly. Violations include, but are not limited to, cheating on exams, having unauthorized possession of exams, and submitting the work of another person as your own. Disciplinary action for violation of these policies will be decided on a case-by-case basis and will be in accord with University policy.</p>
 <div id="students-with-disabilities" class="section level2">
 <h2>Students with Disabilities</h2>
-<p>Our program is committed to all students achieving their potential. If you have a disability or think you may have a disability (physical, learning, hearing, vision, psychological) which may need a reasonable accommodation please contact Student Access at (503) 494-0082 or e-mail at <a href="mailto:orchards@ohsu.edu">orchards@ohsu.edu</a> to discuss your needs. You can also find more information at www.ohsu.edu/student-access. Because accommodations can take time to implement, it is important to have this discussion as soon as possible. All information regarding a student’s disability is kept in accordance with relevant state and federal laws.</p>
+<p>Our program is committed to all students achieving their potential. If you have a disability or think you may have a disability (physical, learning, hearing, vision, psychological) which may need a reasonable accommodation please contact Student Access at (503) 494-0082 or e-mail at <a href="mailto:orchards@ohsu.edu" class="email">orchards@ohsu.edu</a> to discuss your needs. You can also find more information at www.ohsu.edu/student-access. Because accommodations can take time to implement, it is important to have this discussion as soon as possible. All information regarding a student’s disability is kept in accordance with relevant state and federal laws.</p>
 </div>
 <div id="using-code-from-others" class="section level2">
 <h2>Using code from others</h2>
@@ -468,13 +552,13 @@ $(document).ready(function () {
 </div>
 <div id="ohsu-commitment-to-equity-and-inclusion" class="section level2">
 <h2>OHSU Commitment to Equity and Inclusion</h2>
-<p>OHSU is committed to creating and fostering a learning and working environment based on open communication and mutual respect. If you encounter sexual harassment, sexual misconduct, sexual assault, or discrimination based on race, color, religion, age, national origin or ancestry, veteran or military status, sex, marital status, pregnancy or parenting status, sexual orientation, gender identity, disability or any other protected status please contact the Affirmative Action and Equal Opportunity Department at 503-494-5148 or <a href="mailto:aaeo@ohsu.edu">aaeo@ohsu.edu</a>. Inquiries about Title IX compliance or sex/gender discrimination and harassment may be directed to the OHSU Title IX Coordinator at 503-494-0258 or <a href="mailto:titleix@ohsu.edu">titleix@ohsu.edu</a>.</p>
+<p>OHSU is committed to creating and fostering a learning and working environment based on open communication and mutual respect. If you encounter sexual harassment, sexual misconduct, sexual assault, or discrimination based on race, color, religion, age, national origin or ancestry, veteran or military status, sex, marital status, pregnancy or parenting status, sexual orientation, gender identity, disability or any other protected status please contact the Affirmative Action and Equal Opportunity Department at 503-494-5148 or <a href="mailto:aaeo@ohsu.edu" class="email">aaeo@ohsu.edu</a>. Inquiries about Title IX compliance or sex/gender discrimination and harassment may be directed to the OHSU Title IX Coordinator at 503-494-0258 or <a href="mailto:titleix@ohsu.edu" class="email">titleix@ohsu.edu</a>.</p>
 </div>
 </div>
 
 <p>
 <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">
-<img alt="Creative Commons License" style="border-width:0" src="by-nc.png" height="400" width="65"/></a>
+<img alt="Creative Commons License" style="border-width:0" src="by-nc.png" height="10" width="75"/></a>
 </p>
 
 
@@ -493,6 +577,23 @@ $(document).ready(function () {
 
 
 </script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
