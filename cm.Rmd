@@ -5,7 +5,7 @@ subtitle: Fall 2019
 
 Links to all slide decks and in-class lab materials will be posted here.
 
-[Class Videos](https://echo360.org).
+[Class Videos](https://echo360.org)
 
 ```{r echo = FALSE, message = FALSE, warning = FALSE}
 library(tidyverse)

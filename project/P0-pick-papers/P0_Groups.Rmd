@@ -1,16 +1,16 @@
 ---
-title: 'Final Project'
+title: "Final Project"
 author: "MATH 530/630"
 subtitle: 'Part 0: Pick Groups and a Paper'
-output: 
-  html_document:
+output:
+  pdf_document: default
+  html_document: null
   code_folding: hide
 ---
 
 
 ## Overview
 
-Due Tuesday October 2 by 2pm (submit on [Sakai](https://sakai.ohsu.edu)).
 
 The goal of this project piece is to choose your final project groups and to pick a paper you'll use for your final project. No overlap will be allowed - that is each paper can be used by only one group. Because of this, each group should submit their top 3 choices, and we'll do what we can to accomodate. 
 
@@ -26,8 +26,9 @@ library(knitr) #kable
 library(kableExtra) #add_header
 ```
 
+
 ```{r include=FALSE}
-data_source <- here::here("project", "P0-pick-papers", "PaperChoices.xlsx")
+data_source <- here::here("project", "P0-pick-papers", "PaperChoices2019.xlsx")
 sheets <- excel_sheets(data_source)
 paper_data <- read_excel(data_source,sheets[1])
 paper_data_cleaned <- paper_data %>%  
@@ -43,8 +44,19 @@ comb_choices<- replace_na(comb_choices,list(Groups=0, Preference=0))
 ```
 
 
-# Picks so far....
+
 ```{r}
+options(knitr.kable.NA = '')
+paper_data_cleaned %>% 
+  kable(format="html", escape=FALSE) %>% 
+  kable_styling()
+
+```
+
+
+```{r eval=FALSE}
+# Picks so far.... - move this outside the code chunk when ready
+
 comb_table <- comb_choices %>%
   group_by(Study, RepoLink, Preference) %>%
   summarise(n=n()) %>%
@@ -59,8 +71,8 @@ add_header_above(kab_table, c(" " = 2,"Preference (counts)" = 3)) %>%
 ```
 
 
-## Groups
-```{r}
+```{r eval=FALSE}
+# Groups - move this outside the code chunk when ready
 options(knitr.kable.NA = '')
 groups %>% 
   kable(align = c('l','c')) %>% 
@@ -69,4 +81,3 @@ groups %>%
 
 ```
 
-<!-- The goal of this project piece is to look at and explore your dataset for your final project. You will use the [Quartz Bad Data Guide](https://github.com/Quartz/bad-data-guide/) to help guide your data quality review. Please use this  [`.csv`](quartz-bad-data-checklist.csv) file to indicate which, if any variable(s), in your dataset has any of the issues listed. If you indicate a variable with an issue, please include a brief paragraph (2-3 sentences tops) describing the issue further.  -->

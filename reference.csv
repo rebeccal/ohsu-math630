@@ -1,5 +1,13 @@
 type,title,link
-reference,All of Stats,reference/Wasserman-all_of_stats.pdf
+cheatsheet,Rstudio IDE,https://www.rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf
+cheatsheet,R Markdown,https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf
+cheatsheet,Data Wrangling,https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf
+cheatsheet,ggplot2,https://www.rstudio.com/wp-content/uploads/2016/11/ggplot2-cheatsheet-2.1.pdf
+cheatsheet,Summaries and Distributions,reference/SummariesAndDistributions.html
+cheatsheet,Assumptions and Conditions for Hypothesis Tests and Confidence Intervals,http://www.b-g.k12.ky.us/userfiles/1525/Classes/33386/Conditions%20of%20Tests.08-09%20rev%201.pdf
+code,cm041 - Sampling Distributions,slides/cm041_code_along.Rmd
+code,Perfect t-test,https://github.com/Lakens/perfect-t-test
+code,cm045 - Power for one-sample t-test,slides/cm045_code_along.R
 data,beerhall.dat,data/beerhall.dat
 data,Superhero.csv,data/Superhero.csv
 data,fishermen_mercury.csv,data/fishermen_mercury.csv
@@ -7,23 +15,11 @@ data,indicator_age_of_marriage.xlsx,data/indicator_age_of_marriage.xlsx
 data,indicator_alcohol_consumption _20100830.xlsx,data/indicator_alcohol_consumption _20100830.xlsx
 data,Internet_user_per_100.xlsx,data/Internet_user_per_100.xlsx
 data,bakers_dozen.csv,data/bakers_dozen.csv
-cheatsheet,Rstudio IDE,https://www.rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf
-cheatsheet,R Markdown,https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf
-cheatsheet,Data Wrangling,https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf
-cheatsheet,ggplot2,https://www.rstudio.com/wp-content/uploads/2016/11/ggplot2-cheatsheet-2.1.pdf
-cheatsheet,Summaries and Distributions,reference/SummariesAndDistributions.html
+data,male_heights.csv,data/male_heights.csv
+data,cadds.csv,data/cadds.csv
+reference,All of Stats,reference/Wasserman-all_of_stats.pdf
 reference,Multicollinearity,https://www3.nd.edu/~rwilliam/stats1/x91.pdf
 reference,Hat Matrix,http://www.stat.ucla.edu/~cocteau/stat201b/handout/hat.pdf
 reference,pmf and pdfs,http://www.stat.tamu.edu/~twehrly/611/distab.pdf
-data,male_heights.csv,data/male_heights.csv
-code,cm041 - Sampling Distributions,slides/cm041_code_along.Rmd
-code,Perfect t-test,https://github.com/Lakens/perfect-t-test
-cheatsheet,Assumptions and Conditions for Hypothesis Tests and Confidence Intervals,http://www.b-g.k12.ky.us/userfiles/1525/Classes/33386/Conditions%20of%20Tests.08-09%20rev%201.pdf
-reference,"Degrees of Freedom, Helen M. Walker, 1940 (link goes to OHSU Library - online access)","https://librarysearch.ohsu.edu/primo-explore/fulldisplay?docid=CP71186127210001451&context=L&vid=OHSU&lang=en_US&search_scope=ohsu_alma&adaptor=Local%20Search%20Engine&tab=default_tab&query=any,contains,journal%20of%20educational%20psychology&sortby=rank&offset=0"
-reference,How is Effect Size Used in Power Analysis,https://stats.idre.ucla.edu/other/mult-pkg/faq/general/effect-size-power/faqhow-is-effect-size-used-in-power-analysis/
-code,cm045 - Power for one-sample t-test,slides/cm045_code_along.R
-reference,"Using Effect Size, or Why the P-value is Not Enough",https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3444174
-reference,"It's the Effect Size, Stupid",https://www.leeds.ac.uk/educol/documents/00002182.htm
-reference,Setting Up Contrasts,https://rcompanion.org/rcompanion/h_01.html
 reference,Contrasts: Examples with ANOVA and Linear Models,https://rstudio-pubs-static.s3.amazonaws.com/84177_4604ecc1bae246c9926865db53b6cc29.html
-data,cadds.csv,data/cadds.csv
+reference,An R Companion for the Handbook of Biological Statistics,https://rcompanion.org/rcompanion/h_01.html

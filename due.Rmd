@@ -1,7 +1,10 @@
 ---
 title: "What is Due & When?"
-#author: "Rebecca Lunsford"
 subtitle: Fall 2019
+output:
+  html_document:
+    df_print: paged
+  pdf_document: default
 ---
 
 You are expected to come to each class meeting prepared, which means that you will have done the readings and DataCamp assignments that are due for that date *before* coming to class. 
@@ -51,7 +54,7 @@ due <- read_csv("due.csv") %>%
 ```
 
 ```{r echo=FALSE, warning=FALSE, message=FALSE}
-if(knitr:::is_html_output()){
+if(knitr::is_html_output()){
   due %>% 
     datatable(rownames = FALSE,
               class = 'cell-border stripe',
@@ -64,6 +67,15 @@ if(knitr:::is_html_output()){
                              paging = FALSE),
               escape = FALSE)
 } else {
-  knitr::kable(due, booktabs = TRUE, longtable = TRUE)
+  knitr::kable(due, format = "latex", booktabs = TRUE, longtable = TRUE)
 }
+```
+
+```{r echo=FALSE, eval=FALSE}
+# how to get links into the pdf cleanly - modify the above to make sense in pdf format
+urls <- rep("https://stackoverflow.com/", 10)
+# use paste0 to compose markdown-formatted hyperlinks
+mtcars$mpg <- paste0("[", mtcars$mpg, "](", urls, ")")
+# print the table, with hyperlinked text
+knitr::kable(head(mtcars))
 ```

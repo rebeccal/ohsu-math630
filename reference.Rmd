@@ -1,7 +1,6 @@
 ---
 title: "Reference/Data"
 #author: "Rebecca Lunsford"
-subtitle: Fall 2018
 ---
 
 Links to data, cheatsheets, handouts, and reference texts.
