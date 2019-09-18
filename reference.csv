@@ -17,9 +17,10 @@ data,Internet_user_per_100.xlsx,data/Internet_user_per_100.xlsx
 data,bakers_dozen.csv,data/bakers_dozen.csv
 data,male_heights.csv,data/male_heights.csv
 data,cadds.csv,data/cadds.csv
-reference,All of Stats,reference/Wasserman-all_of_stats.pdf
 reference,Multicollinearity,https://www3.nd.edu/~rwilliam/stats1/x91.pdf
 reference,Hat Matrix,http://www.stat.ucla.edu/~cocteau/stat201b/handout/hat.pdf
 reference,pmf and pdfs,http://www.stat.tamu.edu/~twehrly/611/distab.pdf
 reference,Contrasts: Examples with ANOVA and Linear Models,https://rstudio-pubs-static.s3.amazonaws.com/84177_4604ecc1bae246c9926865db53b6cc29.html
 reference,An R Companion for the Handbook of Biological Statistics,https://rcompanion.org/rcompanion/h_01.html
+reference,All of Stats,reference/Wasserman-all_of_stats.pdf
+reference,DataCamp Tidyverse Tutorials,https://www.datacamp.com/tidyverse-tutorials/

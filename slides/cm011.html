@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
   <head>
     <title>Math 530/630: CM 1.1</title>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <link href="libs/remark-css/default.css" rel="stylesheet" />
     <link rel="stylesheet" href="css\ohsu.css" type="text/css" />
     <link rel="stylesheet" href="css\ohsu-fonts.css" type="text/css" />
@@ -12,7 +12,7 @@
 class: center, middle, inverse, title-slide
 
 # Math 530/630: CM 1.1
-## Sample Data
+## Sample Data and Intuitive Statistics
 
 ---
 
@@ -32,10 +32,15 @@ class: center, middle, inverse, title-slide
 
 --
 
-- What properties of data are meaningful, vulnerable, and robust (i.e., invariant) under specific conditions?
+- How do we describe our sample data?
+
+--
+
+- How do we make "stats" from our sample data?
+
 
 ---
-class: center, middle, inverse
+class: center, middle
 
 # What does data look like?
 
@@ -61,25 +66,41 @@ class: center, middle
 ![](01-images/childes.png)
 
 
-&lt;!-- --- --&gt;
-&lt;!-- class: center, middle --&gt;
+---
+class: center, middle
 
-&lt;!-- ![](01-images/inter_speaker.pdf) --&gt;
-
-&lt;!-- --- --&gt;
-&lt;!-- class: center, middle --&gt;
-
-&lt;!-- ![](01-images/targets_female_vowels.pdf) --&gt;
+![](01-images/inter_speaker-1.png)
 
 ---
-class: center, middle, inverse
+class: center, middle
+
+![](01-images/targets_female_vowels-1.png)
+
+---
+class: center, middle
 
 # What does your data look like?
 
 Take 2 minutes
 
 ---
-class: center, middle, inverse
+
+# Types of data
+
+.pull-left[
+##Categorical
+- Nominal (names)
+- Ordinal (ordered, but unknown or unequal intervals)
+]
+.pull-right[
+##Quantitative 
+- Continuous, consistent intervals)
+- Integer
+- Real
+]
+
+---
+class: center, middle
 
 ## At some point in the research process, "data" becomes a list of numbers
 
@@ -89,10 +110,14 @@ class: center, middle, inverse
 
 --
 
+  FYI - No one wants to see your list :(
+
+--
+
 ## So how do you talk about your data with others?
 
 ---
-class: inverse, center, middle
+class: center, middle
 
 # Two ways to talk to others about your data
 
@@ -100,204 +125,14 @@ class: inverse, center, middle
 
 ## Words
 
+&gt; Overall, 216 tasks (28.2%) contained self talk. Twelve of the sixteen participants, seven younger and five older adults, engaged in self talk at some point in the session. The average rates of self talk for younger and older adults were not significantly different (25.9% and 32.1%, respectively) by Wilcoxon Rank Sum test, z &lt; 1, N.S. As found in study one and illustrated in Figure 4, there were large individual differences in participants’ rate of self talk for both younger adults and elder adults.  
+
 --
 
 ## Plots
 
-
 ---
-
-# Talking about data
-
-Categorical vs quantitative
-
---
-
-We need a common language
-
---
-
-For quantitative data:
-
-1. Central tendency
-2. Spread
-3. Shape
-
----
-class: center
-
-# A simple sample
-
-Data as a list of numbers
-
-
-
-```r
-x &lt;- c(1, 4, 5, 8, 15)
-x
-```
-
-```
-## [1]  1  4  5  8 15
-```
-
-
---
-
-![](cm011_files/figure-html/unnamed-chunk-2-1.png)&lt;!-- --&gt;
-
-
----
-
-# List-wise operations
-
---
-
-What happens to a list of numbers when we apply the same transformation to every number in the list?
-
---
-
-List-wise operations can be summarized in a simple equation
-
---
-
-`$$y = x + 2$$`
-
-
-*&lt;center&gt;“add 2 to every number in list `\(x\)` and put this in a new list called `\(y\)`”&lt;/center&gt;*
-
-
-
----
-class: center
-
-# List-wise addition
-
-`$$y = x + 2$$`
-
-
-What changed? What didn't?
-
-
-
-![](cm011_files/figure-html/unnamed-chunk-3-1.png)&lt;!-- --&gt;
-
-
-
----
-class: center
-
-# List-wise subtraction
-
-`$$y = x - 2$$`
-
-What changes? What stays the same?
-
-Take 2 minutes
-
----
-class: center
-
-# List-wise subtraction
-
-`$$y = x - 2$$`
-
-What changes? What stays the same?
-
---
-
-
-![](cm011_files/figure-html/unnamed-chunk-4-1.png)&lt;!-- --&gt;
-
----
-class: center
-
-# List-wise multiplication
-
-`$$y = x \times 2$$`
-
-What changed? What didn't?
-
-
-![](cm011_files/figure-html/unnamed-chunk-5-1.png)&lt;!-- --&gt;
-
-
-
----
-class: center
-
-# List-wise division
-
-`$$y = x \div 2$$`
-
-What changes? What stays the same?
-
-Take 2 minutes
-
----
-class: center
-
-# List-wise division
-
-`$$y = x \div 2$$`
-
-What changes? What stays the same?
-
---
-
-
-![](cm011_files/figure-html/unnamed-chunk-6-1.png)&lt;!-- --&gt;
-
-
----
-
-# Invariance properties
-
-The question of what does not change during statistical operations refers to invariance properties
-
---
-
-What stays constant under certain transformations is a key concept is modern statistics, as well as other branches of science
-
---
-
-Einstein actually wanted to call his theory of relativity the “theory of invariants”- what remains invariant in the space-time continuum (http://www.economist.com/node/3518580)
-
----
-
-# What did we just show?
-
-List-wise addition or subtraction 
-- Moves the numbers as a group, as though they were mounted on a rigid stick, and slid to the left or right.
-- Does not change any of the distances between numbers.
-
---
-
-List-wise multiplication or division
-- Can move the numbers as a group
-- But also causes them to "fan in" or "fan out."
-
-
----
-
-# Limitations of lists
-
---
-
-Number of rows/columns
-
---
-
-We started by showing how all the information in a list of `\(n\)` numbers can be re-expressed in terms of `\(n\)` new numbers
-
-$$ list_x \longrightarrow list_y$$
---
-
-These new numbers contain all the information in the original list, and the original list can be perfectly reconstructed from the new list
-
----
-
-# Descriptive statistics
+# Descriptive statistics - summarizing quantitative data
 
 Measures of location or central tendency
 - In general, in what region is the list located on the number line?
@@ -316,7 +151,30 @@ Measures of shape
 
 
 ---
-class: inverse, center, middle
+class: center
+
+# A simple sample
+
+Data as a list of numbers
+
+
+
+```r
+(x &lt;- c(1, 4, 5, 8, 15))
+```
+
+```
+## [1]  1  4  5  8 15
+```
+
+
+--
+
+![](cm011_files/figure-html/unnamed-chunk-3-1.png)&lt;!-- --&gt;
+
+
+---
+class: center, middle
 
 # The center
 
@@ -346,7 +204,28 @@ stat.mode(x)
 ## [1] 1
 ```
 
-You don't need to understand the above R function
+NOTE: You don't need to understand the above R function.
+
+---
+
+# The sample median
+
+
+- Order the numbers from highest to lowest
+- If number of numbers is odd, choose the middle
+- If number of numbers is even, choose the average of the 2 middle values
+
+
+```r
+median(x)
+```
+
+```
+## [1] 5
+```
+
+
+![](cm011_files/figure-html/unnamed-chunk-6-1.png)&lt;!-- --&gt;
 
 ---
 
@@ -385,266 +264,12 @@ mean(x)
 ## [1] 6.6
 ```
 
-![](cm011_files/figure-html/unnamed-chunk-9-1.png)&lt;!-- --&gt;
+![](cm011_files/figure-html/unnamed-chunk-8-1.png)&lt;!-- --&gt;
 
----
-class: middle, center, inverse
-
-
-# What happens to the **center** if we do list-wise addition?
-
----
-class: middle, center
-
-# `$$y = x + 2$$`
-
-
-
-
-
-```r
-mean(x)
-```
-
-```
-## [1] 6.6
-```
-
-```r
-mean(y)
-```
-
-```
-## [1] 8.6
-```
-
---
-
-![](cm011_files/figure-html/unnamed-chunk-12-1.png)&lt;!-- --&gt;
-
-
----
-class: center, middle, inverse
-
-# What happens to the **center** if we do list-wise subtraction?
-
----
-class: center, middle
-
-# `$$y = x - 2$$`
-
-
-
-
-
-
-```r
-mean(x)
-```
-
-```
-## [1] 6.6
-```
-
-```r
-mean(y)
-```
-
-```
-## [1] 4.6
-```
-
---
-
-![](cm011_files/figure-html/unnamed-chunk-15-1.png)&lt;!-- --&gt;
-
----
-class: center, middle, inverse
-
-# What about the median?
-
-
-Take 2 minutes
-
-
----
-
-# The sample median
-
-
-- Order the numbers from highest to lowest
-- If number of numbers is odd, choose the middle
-- If number of numbers is even, choose the average of the 2 middle values
-
----
-
-# What about the median?
-
-
-```r
-y &lt;- x + 2
-median(x)
-```
-
-```
-## [1] 5
-```
-
-```r
-median(y)
-```
-
-```
-## [1] 7
-```
-
-
-```r
-y &lt;- x - 2
-median(x)
-```
-
-```
-## [1] 5
-```
-
-```r
-median(y)
-```
-
-```
-## [1] 3
-```
-
----
-class: center, middle
-
-# The median after addition
-
-`$$y = x + 2$$`
-
-![](cm011_files/figure-html/unnamed-chunk-18-1.png)&lt;!-- --&gt;
-
----
-class: center, middle
-
-# The median after subtraction
-
-`$$y = x - 2$$`
-
-![](cm011_files/figure-html/unnamed-chunk-19-1.png)&lt;!-- --&gt;
-
----
-class: center, middle, inverse
-
-# List-wise addition &amp; subtraction come straight through to the center
-
-$$c_y = c_x \pm b $$
-
-
----
-class: center, middle, inverse
-
-# What happens to the center if we do list-wise multiplication?
 
 
 ---
 class: center, middle
-
-# `$$y = x \times 2$$`
-
-
-
-
-```r
-mean(x)
-```
-
-```
-## [1] 6.6
-```
-
-```r
-mean(y)
-```
-
-```
-## [1] 13.2
-```
-
---
-
-![](cm011_files/figure-html/unnamed-chunk-22-1.png)&lt;!-- --&gt;
-
----
-class: center, middle, inverse
-
-# What happens to the center if we do list-wise division?
-
----
-class: center, middle
-
-# `$$y = x \div 2$$`
-
-
-
-
-
-```r
-mean(x)
-```
-
-```
-## [1] 6.6
-```
-
-```r
-mean(y)
-```
-
-```
-## [1] 3.3
-```
-
---
-
-![](cm011_files/figure-html/unnamed-chunk-25-1.png)&lt;!-- --&gt;
-
-
----
-class: center, middle, inverse
-
-
-# List-wise multiplication/division comes straight through to the **center**.
-
-$$c_y = a \times c_x $$
-
----
-
-# Linear transformation theory
-
-| Operation  | Center  | Spread           | Shape|
-|:----------:|:-------:|:----------------:|:----:|
-| `\(+\)`        | `\(+\)`     | ?                | ?  |
-| `\(-\)`        | `\(-\)`     | ?                | ?  |
-| `\(\times\)`   | `\(\times\)`| ?                | ?  |
-| `\(\div\)`     | `\(\div\)`  | ?                | ?  |
-
---
-
-So the central tendency of any list of numbers is affected by *all* possible linear transformations.
-
----
-class: center, middle, inverse
-
-
-# What happens to the **spread**?
-
-Take 2 minutes
-$$ y = x + 2$$
-$$ z = (x \times 2) + 2$$
----
-class: inverse, center, middle
 
 # The spread
 
@@ -657,10 +282,12 @@ Interquartile range
 Min-to-max range
 
 ---
+class: center
+# Variance and Standard deviation 
 
-# Standard deviation 
+$$variance = s^2 = \frac{1}{n-1} \sum_{i=1}^n (x_i - \bar{x})^2 $$
 
-$$s = \sqrt{\frac{1}{n-1} \sum_{i=1}^n (x_i - \bar{x})^2} $$
+$$sd  = s = \sqrt{s^2} $$
 
 
 ```r
@@ -671,58 +298,51 @@ sd(x)
 ```
 ## [1] 5.319774
 ```
+???
+
+-Measure of how far the data, as a whole, falls from the mean
+
+-Talk about width  - draw two pictures
+
+-How sure are you about that mean?
+
+
+---
+
+# Z-score
+
+$$z_i = \frac{x_i - \bar{x}}{s} $$
+
+--
+- Represents each data point as it's distance from the dataset mean, in terms of standard deviations
+- Transformed dataset: sd = 1 and mean = 0
+- Reversible
+
+
 
 ```r
-y &lt;- x + 2
-sd(y)
+z &lt;- (x-mean(x))/sd(x)
+round(mean(z),0)
 ```
 
 ```
-## [1] 5.319774
+## [1] 0
 ```
 
 ```r
-z &lt;- x*2 + 2
 sd(z)
 ```
 
 ```
-## [1] 10.63955
+## [1] 1
 ```
-
-
----
-class: center, middle, inverse
-
-## List-wise addition/subtraction have no effect on **spread**...
-
 --
-
-## But, list-wise multiplication/division come straight through to the **spread**.
-
---
-
-$$s_y = a \times s_x $$
+- Critical data transformation in statistics - the basis for the _standard normal distribution_
+- Warning!! Does not result in a _normal_ distribution unless the dataset was normal
 
 ---
 
-# Linear transformation theory
-
-| Operation  | Center  | Spread           | Shape|
-|:----------:|:-------:|:----------------:|:----:|
-| `\(+\)`        | `\(+\)`     | nothing changes  | ?  |
-| `\(-\)`        | `\(-\)`     | nothing changes  | ?  |
-| `\(\times\)`   | `\(\times\)`| `\(\times\)`         | ?  |
-| `\(\div\)`     | `\(\div\)`  | `\(\div\)`           | ?  |
-
---
-
-So you can only affect the spread of a list of numbers by using multiplication/division.
-
-
----
-
-# Shape
+# Shape 
 
 - Modality [think: mounds]
 
@@ -740,39 +360,6 @@ class: center
 # Modality
 
 ![](01-images/mode.png)
-
----
-
-#  start here
-
-
-```r
-x &lt;- rnorm(100,50,12) #draws 100 samples from normal dist., M=50, SD=12
-y &lt;- 2*x + 5 #y is a linear transformation of x
-z.x &lt;- (x - mean(x))/sd(x) #makes z-scores using x
-z.y &lt;- (y - mean(y))/sd(y) #makes z-scores using y
-head(z.x) #show the first six numbers in z.x
-```
-
-```
-## [1]  0.9295010 -0.4559864  0.2454212  0.7416664 -2.2086828  0.6073326
-```
-
-```r
-#[1]  0.3053039  0.4164851 -0.3180144 -0.6267830  0.3235671 -1.8508084
-head(z.y) #show the first six numbers in z.y
-```
-
-```
-## [1]  0.9295010 -0.4559864  0.2454212  0.7416664 -2.2086828  0.6073326
-```
-
-```r
-#[1]  0.3053039  0.4164851 -0.3180144 -0.6267830  0.3235671 -1.8508084
-```
-
-What does the above show?
-What will be the location, spread, and shape of the new numbers in z.x? In z.y?
 
 ---
 
@@ -810,13 +397,26 @@ g1_calculate &lt;- function(x = data){
   g1 &lt;- (n/((n-1)*(n-2)))*s3.x
   return(g1)
 }
+
+g1_calculate(x)
 ```
 
+```
+## [1] 1.101962
+```
+
+```r
+g1_calculate(scale(x)) #scale is one way to create a z-score
+```
+
+```
+## [1] 1.101962
+```
+
+?? If the data have high skewness (due to "long" tails), what does that say about the sample mean and variance/sd ??
 
 ---
-
-
-# Calculating skewness
+# Calculating skewness in R
 
 ```r
 # install.packages("moments")
@@ -825,13 +425,24 @@ skewness(x)
 ```
 
 ```
-## [1] -0.1155352
+## [1] 0.7392188
+```
+
+```r
+skewness(scale(x))
+```
+
+```
+## [1] 0.7392188
 ```
 
 
 ---
 
 # Kurtosis
+
+`$$K = n*\frac{\sum_{i=1}^n{(x_i - \bar{x})^4}} {(\sum_{i=1}^n{(x_i - \bar{x})^2)^2}}$$`
+
 
 The basic idea of kurtosis is that it is the average 4th power of the z-scores
 Kurtosis of a distribution is typically expressed relative to that of a normal distribution.
@@ -846,15 +457,11 @@ This can be computed in a number of ways. The simplest version is biased for a n
 
 --
 
-If the data have high kurtosis due to long tails, then the sample mean may be an unreliable estimator of the population mean.
-
---
-
-Standard formulas for the variance of the sample correlation and sample variance can be seriously in error if the data come from a population with high kurtosis.
+?? If the data have high kurtosis (due to "heavy" tails), what does that say about the sample mean and variance/sd ??
 
 ---
 
-# Calculating kurtosis
+# Calculating kurtosi4
 
 
 ```r
@@ -865,190 +472,33 @@ n*s4.x/s2.x^2
 ```
 
 ```
-## [1] 2.441936
+## [1] 2.348269
 ```
 
 ```r
+z.x &lt;- (x - mean(x))/sd(x) #makes z-scores using x
 s4.z &lt;- sum((z.x-mean(z.x))^4) #using z
 s2.z &lt;- sum((z.x-mean(z.x))^2) #using z
 n*s4.z/s2.z^2
 ```
 
 ```
-## [1] 2.441936
+## [1] 2.348269
+```
+
+```r
+kurtosis(x)
+```
+
+```
+## [1] 2.348269
 ```
 
 ---
-class: center, middle, inverse
-
-# All linear list-wise operations have no effect on shape.
-
----
-
-# Linear transformation theory
-
-| Operation  | Center  | Spread           | Shape            |
-|:----------:|:-------:|:----------------:|:----------------:|
-| `\(+\)`        | `\(+\)`     | nothing changes  | nothing changes  |
-| `\(-\)`        | `\(-\)`     | nothing changes  | nothing changes  |
-| `\(\times\)`   | `\(\times\)`| `\(\times\)`         | nothing changes  |
-| `\(\div\)`     | `\(\div\)`  | `\(\div\)`           | nothing changes  |
-
-
----
-class: center, middle
-
-# Review: list-wise addition &amp; subtraction
-
-
-`$$y = x \pm b$$`
-
---
-
-Center `$$c_y = c_x \pm b$$`
-
---
-
-Spread `$$s_y = s_x$$`
-
----
-class: center, middle
-
-# Review: list-wise addition &amp; multiplication
-
-
-`$$y = (a \times x) \pm b$$`
-
---
-
-Center `$$c_y = (a \times c_x)  \pm b$$`
-
---
-
-Spread `$$s_y = (a \times s_x)$$`
-
----
-class: center, middle
-
-# Review: list-wise subtraction &amp; division
-
-
-`$$y = \frac{x - b}{a}$$`
-
---
-
-Center `$$c_y = \frac{c_x - b}{a}$$`
-
---
-
-Spread `$$s_y = \frac{s_x}{a}$$`
-
----
-
-# Linear Transformations
-
-Finding `\(a\)` and `\(b\)`, given `\(\bar{y}\)`, `\(s_y\)`, and `\(\bar{x}\)` 
-
---
-
-How are the mean and sd affected by linear transformation?
-
-`$$\bar{y} = a \bar{x} + b$$`
-
-`$$s_{y} = as_x$$`
---
-
-There are two unknowns in these equations: `\(a\)` and `\(b\)`
-
---
-
-
-Take 2 minutes to solve for `\(a\)` and `\(b\)`, in terms of `\(\bar{y}\)`, `\(s_y\)`, and `\(\bar{x}\)`
-
-Try solving for `\(a\)` in the second equation first.
-
----
-
-# Linear Transformations
-
---
-
-
-`$$a = \frac{s_{y}}{s_{x}}$$`
-
-
-`$$b = \bar{y} - a \bar{x}$$`
-
----
-
-# What if we want z-scores?
-
-So, given `\(\bar{y} = 0\)` and `\(s_y= 1\)`, what are `\(a\)` and `\(b\)`?
-
-Take 2 minutes
-
---
-
-
-`$$a = \frac{1}{s_{x}}$$`
-and
-
-`$$b = -a\bar{x}$$`
-
----
-class: center, middle
-
-# Goal: linear rescaling
-
-| Operation  | Center  | Spread           | Shape            |
-|:----------:|:-------:|:----------------:|:----------------:|
-| `\(+\)`        | `\(+\)`     | nothing changes  | nothing changes  |
-| `\(-\)`        | `\(-\)`     | nothing changes  | nothing changes  |
-| `\(\times\)`   | `\(\times\)`| `\(\times\)`         | nothing changes  |
-| `\(\div\)`     | `\(\div\)`  | `\(\div\)`           | nothing changes  |
-
---
-
-Change center only?
-
---
-
-`$$y = x \pm b$$` 
-
---
-
-Change center &amp; spread?
-
---
-
-`$$y = (a \times x) \pm b$$`
-
---
-
-Change shape?
-
-
-
----
-
-- We explored quantitative data using different types of graphic plots
-
---
-
-- We developed some intuition about properties of our data that are meaningful, vulnerable, and robust (i.e., invariant) under specific conditions
-
---
-
-- We discussed and calculated meaningful descriptive statistics to measure location, spread, and shape
-
---
-
-- We demonstrated how list-wise operations can impact measures of location, spread, and shape
-
---
-
-- We have proven that for any list of numbers with non-zero spread, the z-score transformation produces numbers with the same shape (same skewness, same kurtosis) as the original numbers but with location of 0 and spread of 1.
+class: center
+#Some intuitions about stats - to the board
     </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script src="https://platform.twitter.com/widgets.js"></script>
 <script>var slideshow = remark.create({
@@ -1059,16 +509,57 @@ Change shape?
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));
 });
-(function() {
-  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
   if (!r) return;
   s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
   d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
 })();</script>
 
 <script>
 (function() {
-  var i, text, code, codes = document.getElementsByTagName('code');
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
   for (i = 0; i < codes.length;) {
     code = codes[i];
     if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
@@ -1082,14 +573,15 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     }
     i++;
   }
-})();
+};
+slideshow._releaseMath(document);
 </script>
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
 (function () {
   var script = document.createElement('script');
   script.type = 'text/javascript';
-  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
   if (location.protocol !== 'file:' && /^https?:/.test(script.src))
     script.src  = script.src.replace(/^https?:/, '');
   document.getElementsByTagName('head')[0].appendChild(script);

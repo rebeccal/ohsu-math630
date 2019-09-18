@@ -21,9 +21,32 @@ These books will be supplemented by blog posts, YouTube videos, and several open
 - A special PEERJ issue called ["Practical Data Science for Stats"](https://peerj.com/collections/50-practicaldatascistats/), and
 - [Nature: Points of Significance](https://www.nature.com/collections/qghhqm/pointsofsignificance)
 
-### DataCamp
-Be sure to check the **DataCamp** link above for more details on the DataCamp (DC) assignments.
-<!-- DataCamp assignments are *optional*, but strongly recommended . Practice is a good thing! -->
+
+## Ramping Up
+The following DataCamp courses, tutorials, and readings are optional, but will help you come up to speed with the skills you'll need to complete this class. Unless you have strong, recent experience with R, RStudio, RMarkdown and the TidyVerse, I strongly suggest you complete, or at least review, them.
+
+- [Markdown Tutorial](https://www.markdowntutorial.com)
+
+DataCamp
+
+- [Intro the to Tidyverse](https://www.datacamp.com/courses/introduction-to-the-tidyverse)
+- [Working with data in the Tidyverse (long)](https://www.datacamp.com/courses/working-with-data-in-the-tidyverse)
+
+ModernDive
+
+- [MD Ch 1: Getting Started](https://moderndive.com/1-getting-started.html)
+- [MD Ch 2: Data Visualization](https://moderndive.com/2-viz.html)	
+- [MD Ch 3: Data Wrangling](https://moderndive.com/3-wrangling.html)	
+- [MD Ch 4: Tidy Data](https://moderndive.com/4-tidy.html)	
+
+R4DS (The below are chapter suggestions. The entire site serves as a good reference.)
+
+- [R4DS: Workflow Projects](http://r4ds.had.co.nz/workflow-projects.html) 
+- [R4DS: R Markdown](http://r4ds.had.co.nz/r-markdown.html)	
+- [R4DS: Data Visualisation](http://r4ds.had.co.nz/data-visualisation.html)	
+- [R4DS: Data Transformation](http://r4ds.had.co.nz/transform.html)	
+- [R4DS: Tidy Data](http://r4ds.had.co.nz/tidy-data.html)	
+
 
 
 ```{r echo = FALSE, message = FALSE, warning = FALSE}

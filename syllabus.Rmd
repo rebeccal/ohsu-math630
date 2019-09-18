@@ -128,7 +128,7 @@ For the final project, you will reproduce and extend a published research articl
 Read more about the [final project here](final_project.html)
 
 ## DataCamp
-DataCamp provides an interactive environment for learning and practicing data science and statistics skills in R. Full points will be awarded for completing at least 80% of the assigned DataCamp chapters. Lesser proportions will receiving a commensurate reduction in points.
+DataCamp provides an interactive environment for learning and practicing data science and statistics skills in R. Full points will be awarded for completing at least 90% of the assigned DataCamp chapters. Lesser proportions will receive a commensurate reduction in points.
 
 
 ## Homework
