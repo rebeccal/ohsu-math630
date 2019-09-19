@@ -76,7 +76,11 @@ Launch RStudio. You should get a window similar to the screenshot you see [here]
 
 The version of R that you just downloaded is considered base R, which provides you with good but basic statistical computing and graphics powers. For analytical and graphical super-powers, you'll need to install add-on packages, which are user-written, to extend/expand your R capabilities. Packages can live in one of two places:
 
-* They may be carefully curated by CRAN (which involves a thorough submission and review process), and thus are easy install using `install.packages("name_of_package", dependencies = TRUE)`. 
+* They may be carefully curated by CRAN (which involves a thorough submission and review process), and thus are easy to install using:
+```{r eval = FALSE} 
+`install.packages("name_of_package", dependencies = TRUE)`. 
+```
+
 * Alternatively, they may be available via GitHub. To download these packages, you first need to install the `devtools` package.
 
 ```{r devtools, eval = FALSE}
@@ -210,11 +214,11 @@ There is no self-assessment component to this iLab, because you'll need these to
 # Other cool `babynames` projects
 
 
-- Julia Silge *'My Baby Boomer Name Might Have Been "Debbie"'*: https://juliasilge.com/blog/my-baby-boomer-name/
+- Julia Silge ['My Baby Boomer Name Might Have Been "Debbie"'](https://juliasilge.com/blog/my-baby-boomer-name/)
     - Use Julia's Shiny app: https://juliasilge.shinyapps.io/PredictNamesApp/
 ![](https://juliasilge.com/figs/2016-02-29-My-Baby-Boomer-Name/unnamed-chunk-8-1.png)
 
-- Hilary Parker: Hilary: The Most Poisoned Baby Name in US History: https://hilaryparker.com/2013/01/30/hilary-the-most-poisoned-baby-name-in-us-history/
+- Hilary Parker: ['Hilary: The Most Poisoned Baby Name in US History'](https://hilaryparker.com/2013/01/30/hilary-the-most-poisoned-baby-name-in-us-history/)
 
 ![](https://hilaryparker.files.wordpress.com/2013/01/more_names_trimmed2.png)
 
@@ -222,13 +226,10 @@ There is no self-assessment component to this iLab, because you'll need these to
 
 # Resources
 
-- https://alison.rbind.io/html/jamboree_heart_ggplot.html
+- https://moderndive.com/1-getting-started.html
 
-- http://moderndive.com/2-getting-started.html
-
-- http://r4ds.had.co.nz
+- https://r4ds.had.co.nz
 
 - https://www.rstudio.com/resources/cheatsheets/
 
-- https://rweekly.org
 
