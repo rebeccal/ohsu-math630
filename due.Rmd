@@ -23,7 +23,7 @@ These books will be supplemented by blog posts, YouTube videos, and several open
 
 
 ## Ramping Up
-The following DataCamp courses, tutorials, and readings are optional, but will help you come up to speed with the skills you'll need to complete this class. Unless you have strong, recent experience with R, RStudio, RMarkdown and the TidyVerse, I strongly suggest you complete, or at least review, them.
+The following tutorial, DataCamp courses, and readings are optional, but will help you come up to speed with the skills you'll need to complete this class. Unless you have strong, recent experience with R, RStudio, RMarkdown and the TidyVerse, I strongly suggest you complete, or at least review, them.
 
 - [Markdown Tutorial](https://www.markdowntutorial.com)
 
@@ -38,15 +38,6 @@ ModernDive
 - [MD Ch 2: Data Visualization](https://moderndive.com/2-viz.html)	
 - [MD Ch 3: Data Wrangling](https://moderndive.com/3-wrangling.html)	
 - [MD Ch 4: Tidy Data](https://moderndive.com/4-tidy.html)	
-
-R4DS (The below are chapter suggestions. The entire site serves as a good reference.)
-
-- [R4DS: Workflow Projects](http://r4ds.had.co.nz/workflow-projects.html) 
-- [R4DS: R Markdown](http://r4ds.had.co.nz/r-markdown.html)	
-- [R4DS: Data Visualisation](http://r4ds.had.co.nz/data-visualisation.html)	
-- [R4DS: Data Transformation](http://r4ds.had.co.nz/transform.html)	
-- [R4DS: Tidy Data](http://r4ds.had.co.nz/tidy-data.html)	
-
 
 
 ```{r echo = FALSE, message = FALSE, warning = FALSE}
