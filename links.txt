@@ -159,7 +159,6 @@ reference/SummariesAndDistributions.Rmd:http://www.cookbook-r.com/Graphs/Plottin
 RL_RSamples/Equations.Rmd:http://visualmatheditor.equatheque.net/VisualMathEditor.html
 slides/cm011.Rmd:https://platform.twitter.com/widgets.js
 slides/cm012.Rmd:https://platform.twitter.com/widgets.js
-slides/cm012.Rmd:https://apreshill.github.io/ohsu-basic-stats/slides/cm012.html#39
 slides/cm012.Rmd:https://media.giphy.com/media/tis8aekJB9s0E/giphy.gif
 slides/cm012.Rmd:https://media.giphy.com/media/zZRxy466qETsY/giphy.gif
 slides/cm012.Rmd:https://www.tidyverse.org/articles/2017/12/workflow-vs-script/
@@ -172,14 +171,14 @@ slides/cm012.Rmd:https://tibble.tidyverse.org
 slides/cm012.Rmd:https://reprex.tidyverse.org/articles/reprex-dos-and-donts.html
 slides/cm012.Rmd:https://media.giphy.com/media/D7IkqiEvf70ty/giphy.gif
 slides/cm012.Rmd:http://r4ds.had.co.nz/transform.html#summarise-funs
-slides/cm012.Rmd:https://github.com/rstudio/cheatsheets/blob/master/base-r.pdf
+slides/cm012.Rmd:https://github.com/rstudio/cheatsheets/raw/master/base-r.pdf
 slides/cm012.Rmd:https://media.giphy.com/media/l44Q7lmy0QVQVbIm4/giphy.gif
 slides/cm012.Rmd:https://bit.ly/conj620-cm013
 slides/cm012.Rmd:https://embed.ted.com/talks/hans_rosling_shows_the_best_stats_you_ve_ever_seen
 slides/cm012.Rmd:https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3127352/
 slides/cm012.Rmd:http://bit.ly/conj620-bakers-dozen
 slides/cm012.Rmd:https://t.co/63RxirsTuY
-slides/cm012.Rmd:https://t.co/63RxirsTuY</a
+slides/cm012.Rmd:https://t.co/63RxirsTuY
 slides/cm012.Rmd:https://t.co/5j94Dw9UAf
 slides/cm012.Rmd:https://twitter.com/albertocairo/status/765167969139765250?ref_src=twsrc%5Etfw
 slides/cm012.Rmd:https://platform.twitter.com/widgets.js

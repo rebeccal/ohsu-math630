@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
   <head>
     <title>Math 530/630: CM 1.2</title>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <link href="libs/remark-css/default.css" rel="stylesheet" />
     <link rel="stylesheet" href="css\ohsu.css" type="text/css" />
     <link rel="stylesheet" href="css\ohsu-fonts.css" type="text/css" />
@@ -15,6 +15,11 @@ class: center, middle, inverse, title-slide
 ## Summarizing &amp; Visualizing Data
 
 ---
+
+
+&lt;!-- Remember to save 1st --&gt;
+&lt;!-- rmarkdown::render("slides/cm012.Rmd") --&gt;
+
 
 
 
@@ -37,8 +42,6 @@ class: middle, inverse
 heart_bp &lt;- heart_bp %&gt;% 
   mutate(bp_ratio = BPXDI1 / BPXDI2)
 ```
-
-&lt;!-- [From CM 1.2, slide #39](https://apreshill.github.io/ohsu-basic-stats/slides/cm012.html#39) --&gt;
 
 ---
 class:middle, inverse, center
@@ -92,7 +95,7 @@ sessionInfo()
 ```
 
 ```
-R version 3.5.1 (2018-07-02)
+R version 3.6.1 (2019-07-05)
 Platform: x86_64-w64-mingw32/x64 (64-bit)
 Running under: Windows 8.1 x64 (build 9600)
 
@@ -109,23 +112,25 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] forcats_0.3.0   stringr_1.3.1   dplyr_0.7.6     purrr_0.2.5    
-[5] readr_1.1.1     tidyr_0.8.1     tibble_1.4.2    ggplot2_3.0.0  
-[9] tidyverse_1.2.1
+ [1] datasauRus_0.1.4 forcats_0.4.0    stringr_1.4.0    dplyr_0.8.3     
+ [5] purrr_0.3.2      readr_1.3.1      tidyr_0.8.3      tibble_2.1.3    
+ [9] ggplot2_3.2.1    tidyverse_1.2.1 
 
 loaded via a namespace (and not attached):
- [1] Rcpp_0.12.18     cellranger_1.1.0 plyr_1.8.4       compiler_3.5.1  
- [5] pillar_1.3.0     bindr_0.1.1      tools_3.5.1      digest_0.6.16   
- [9] lubridate_1.7.4  jsonlite_1.5     evaluate_0.11    nlme_3.1-137    
-[13] gtable_0.2.0     lattice_0.20-35  pkgconfig_2.0.2  rlang_0.2.2     
-[17] cli_1.0.0        rstudioapi_0.7   yaml_2.2.0       haven_1.1.2     
-[21] xfun_0.3         bindrcpp_0.2.2   withr_2.1.2      xml2_1.2.0      
-[25] httr_1.3.1       knitr_1.20       hms_0.4.2        rprojroot_1.3-2 
-[29] grid_3.5.1       tidyselect_0.2.4 glue_1.3.0       R6_2.2.2        
-[33] readxl_1.1.0     rmarkdown_1.10   xaringan_0.7     modelr_0.1.2    
-[37] magrittr_1.5     backports_1.1.2  scales_1.0.0     htmltools_0.3.6 
-[41] rvest_0.3.2      assertthat_0.2.0 colorspace_1.3-2 stringi_1.1.7   
-[45] lazyeval_0.2.1   munsell_0.5.0    broom_0.5.0      crayon_1.3.4    
+ [1] tidyselect_0.2.5 xfun_0.9         haven_2.1.1      lattice_0.20-38 
+ [5] colorspace_1.4-1 generics_0.0.2   vctrs_0.2.0      htmltools_0.3.6 
+ [9] yaml_2.2.0       utf8_1.1.4       rlang_0.4.0      pillar_1.4.2    
+[13] glue_1.3.1       withr_2.1.2      modelr_0.1.5     readxl_1.3.1    
+[17] munsell_0.5.0    gtable_0.3.0     cellranger_1.1.0 rvest_0.3.4     
+[21] evaluate_0.14    labeling_0.3     knitr_1.24       fansi_0.4.0     
+[25] highr_0.8        broom_0.5.2      Rcpp_1.0.2       scales_1.0.0    
+[29] backports_1.1.4  jsonlite_1.6     hms_0.5.1        digest_0.6.20   
+[33] stringi_1.4.3    xaringan_0.11    grid_3.6.1       rprojroot_1.3-2 
+[37] here_0.1         cli_1.1.0        tools_3.6.1      magrittr_1.5    
+[41] lazyeval_0.2.2   crayon_1.3.4     pkgconfig_2.0.2  zeallot_0.1.0   
+[45] xml2_1.2.2       lubridate_1.7.4  assertthat_0.2.1 rmarkdown_1.15  
+[49] httr_1.4.1       rstudioapi_0.10  R6_2.4.0         nlme_3.1-140    
+[53] compiler_3.6.1  
 ```
 
 
@@ -249,11 +254,13 @@ You have:
 
 - a working version of RStudio,
 
-- read chapters 2-5 and the Markdown Tutorial in ModernDive
+- read the assigned chapters in R4DS (and maybe more?)
 
-- read the Markdown and Workflow Projects chapters in R4DS (and maybe more...)
+Also (if you needed more R, RStudio, RMarkdown, and/or Tidyverse experience):
 
-- completed DataCamp's "Introduction to the Tidyverse" (all 4 chapters)
+- read chapters 1-4 and the Markdown Tutorial in ModernDive
+
+- completed DataCamp's "Introduction to the Tidyverse"
 
 ---
 ## Data Wrangling
@@ -307,9 +314,8 @@ all `ggplot2`
 - `dplyr::summarize`
 
 ---
-class: middle, center, inverse
+class: middle, center
 
-# ⌛️
 
 ## Let's review some helpful functions for `summarize`
 
@@ -317,7 +323,7 @@ class: middle, center, inverse
 
 *even more useful after a* `group_by`
 
-See:
+Fron the readings:
 
 http://r4ds.had.co.nz/transform.html#summarise-funs
 
@@ -372,29 +378,16 @@ http://r4ds.had.co.nz/transform.html#summarise-funs
 * All allow for `na.rm` argument to remove `NA` values before summarizing. The default setting for this argument is *always* `na.rm = FALSE`, so if there is one `NA` value the summary will be `NA`.
 
 * See "Maths Functions" in the RStudio Base R Cheatsheet:
-https://github.com/rstudio/cheatsheets/blob/master/base-r.pdf
+https://github.com/rstudio/cheatsheets/raw/master/base-r.pdf
 
-
-&lt;!-- --- --&gt;
-&lt;!-- class:center, middle, inverse --&gt;
-
-
-
-&lt;!-- ## Muddiest points --&gt;
-
-
-&lt;!-- ![](https://media.giphy.com/media/l44Q7lmy0QVQVbIm4/giphy.gif) --&gt;
-
-&lt;!-- Go here: --&gt;
-
-&lt;!-- https://bit.ly/conj620-cm013 --&gt;
 
 ---
 class:middle, inverse, center
 
 ## Visualizing Data - Hans Rosling
 
-&lt;iframe src="https://embed.ted.com/talks/hans_rosling_shows_the_best_stats_you_ve_ever_seen" width="100%" height="400px"&gt;&lt;/iframe&gt;
+
+
 
 
 ---
@@ -474,6 +467,7 @@ bakers_dozen &lt;- read_csv("http://bit.ly/conj620-bakers-dozen")
 1. Find the mean and standard deviation of `x` and `y` using `summarize`
 
 
+
 ---
 class: center, middle
 
@@ -513,7 +507,7 @@ for_class %&gt;%
 ---
 class: center, middle
 
-&lt;img src="cm012_files/figure-html/unnamed-chunk-12-1.png" width="65%" style="display: block; margin: auto;" /&gt;
+&lt;img src="cm012_files/figure-html/unnamed-chunk-13-1.png" width="65%" style="display: block; margin: auto;" /&gt;
 
 
 
@@ -542,6 +536,7 @@ class: middle, inverse, center
 
 &lt;!-- Turn in on Sakai. --&gt;
     </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script src="https://platform.twitter.com/widgets.js"></script>
 <script>var slideshow = remark.create({
@@ -552,16 +547,57 @@ class: middle, inverse, center
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));
 });
-(function() {
-  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
   if (!r) return;
   s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
   d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
 })();</script>
 
 <script>
 (function() {
-  var i, text, code, codes = document.getElementsByTagName('code');
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
   for (i = 0; i < codes.length;) {
     code = codes[i];
     if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
@@ -575,14 +611,15 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     }
     i++;
   }
-})();
+};
+slideshow._releaseMath(document);
 </script>
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
 (function () {
   var script = document.createElement('script');
   script.type = 'text/javascript';
-  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
   if (location.protocol !== 'file:' && /^https?:/.test(script.src))
     script.src  = script.src.replace(/^https?:/, '');
   document.getElementsByTagName('head')[0].appendChild(script);

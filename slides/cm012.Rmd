@@ -13,6 +13,11 @@ output:
       beforeInit: "https://platform.twitter.com/widgets.js"
 ---
 
+<!-- Remember to save 1st -->
+<!-- rmarkdown::render("slides/cm012.Rmd") -->
+
+
+
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
 options(knitr.table.format = "html") 
@@ -40,8 +45,6 @@ class: middle, inverse
 heart_bp <- heart_bp %>% 
   mutate(bp_ratio = BPXDI1 / BPXDI2)
 ```
-
-<!-- [From CM 1.2, slide #39](https://apreshill.github.io/ohsu-basic-stats/slides/cm012.html#39) -->
 
 ---
 class:middle, inverse, center
@@ -191,11 +194,13 @@ You have:
 
 - a working version of RStudio,
 
-- read chapters 2-5 and the Markdown Tutorial in ModernDive
+- read the assigned chapters in R4DS (and maybe more?)
 
-- read the Markdown and Workflow Projects chapters in R4DS (and maybe more...)
+Also (if you needed more R, RStudio, RMarkdown, and/or Tidyverse experience):
 
-- completed DataCamp's "Introduction to the Tidyverse" (all 4 chapters)
+- read chapters 1-4 and the Markdown Tutorial in ModernDive
+
+- completed DataCamp's "Introduction to the Tidyverse"
 
 ---
 ## Data Wrangling
@@ -249,9 +254,8 @@ all `ggplot2`
 - `dplyr::summarize`
 
 ---
-class: middle, center, inverse
+class: middle, center
 
-# ⌛️
 
 ## Let's review some helpful functions for `summarize`
 
@@ -259,7 +263,7 @@ class: middle, center, inverse
 
 *even more useful after a* `group_by`
 
-See:
+Fron the readings:
 
 http://r4ds.had.co.nz/transform.html#summarise-funs
 
@@ -287,30 +291,17 @@ knitr::kable(summary_table, format = "html")
 * All allow for `na.rm` argument to remove `NA` values before summarizing. The default setting for this argument is *always* `na.rm = FALSE`, so if there is one `NA` value the summary will be `NA`.
 
 * See "Maths Functions" in the RStudio Base R Cheatsheet:
-https://github.com/rstudio/cheatsheets/blob/master/base-r.pdf
+https://github.com/rstudio/cheatsheets/raw/master/base-r.pdf
 
-
-<!-- --- -->
-<!-- class:center, middle, inverse -->
-
-
-
-<!-- ## Muddiest points -->
-
-
-<!-- ![](https://media.giphy.com/media/l44Q7lmy0QVQVbIm4/giphy.gif) -->
-
-<!-- Go here: -->
-
-<!-- https://bit.ly/conj620-cm013 -->
 
 ---
 class:middle, inverse, center
 
 ## Visualizing Data - Hans Rosling
 
+
 ```{r echo = FALSE, out.width='100%'}
-knitr::include_url("https://embed.ted.com/talks/hans_rosling_shows_the_best_stats_you_ve_ever_seen")
+ # knitr::include_url("https://embed.ted.com/talks/hans_rosling_shows_the_best_stats_you_ve_ever_seen")
 ```
 
 
@@ -403,6 +394,11 @@ bakers_dozen <- read_csv("http://bit.ly/conj620-bakers-dozen")
 
 1. Find the mean and standard deviation of `x` and `y` using `summarize`
 
+```{r eval = FALSE, echo=FALSE}
+for_class %>% 
+  filter(dataset==1) %>% 
+  count()
+```
 
 ---
 class: center, middle
