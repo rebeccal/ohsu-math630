@@ -13,7 +13,7 @@ output:
       beforeInit: "https://platform.twitter.com/widgets.js"
 ---
 
-<!-- Remember to save 1st -->
+<!-- Remember to save 1st, and (uncomment the video) before using render -->
 <!-- rmarkdown::render("slides/cm012.Rmd") -->
 
 
@@ -301,7 +301,7 @@ class:middle, inverse, center
 
 
 ```{r echo = FALSE, out.width='100%'}
- # knitr::include_url("https://embed.ted.com/talks/hans_rosling_shows_the_best_stats_you_ve_ever_seen")
+  knitr::include_url("https://embed.ted.com/talks/hans_rosling_shows_the_best_stats_you_ve_ever_seen")
 ```
 
 
@@ -406,7 +406,7 @@ class: center, middle
 ```{r}
 for_class %>% 
   group_by(dataset) %>% 
-  summarise_all(., funs(mean, sd)) 
+  summarise_all(list(mean = mean, sd = sd)) 
 ```
 ---
 ## Datasets Exercise Part 2

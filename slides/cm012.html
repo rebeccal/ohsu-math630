@@ -17,7 +17,7 @@ class: center, middle, inverse, title-slide
 ---
 
 
-&lt;!-- Remember to save 1st --&gt;
+&lt;!-- Remember to save 1st, and (uncomment the video) before using render --&gt;
 &lt;!-- rmarkdown::render("slides/cm012.Rmd") --&gt;
 
 
@@ -387,7 +387,7 @@ class:middle, inverse, center
 ## Visualizing Data - Hans Rosling
 
 
-
+&lt;iframe src="https://embed.ted.com/talks/hans_rosling_shows_the_best_stats_you_ve_ever_seen" width="100%" height="400px"&gt;&lt;/iframe&gt;
 
 
 ---
@@ -475,7 +475,7 @@ class: center, middle
 ```r
 for_class %&gt;% 
   group_by(dataset) %&gt;% 
-  summarise_all(., funs(mean, sd)) 
+  summarise_all(list(mean = mean, sd = sd)) 
 ```
 
 ```
