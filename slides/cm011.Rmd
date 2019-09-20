@@ -450,7 +450,27 @@ kurtosis(x)
 ```
 
 ---
-class: center
-#Some intuitions about stats - to the board
+#Some intuitions about stats
 
+To the board!
 
+- Confidence Intervals
+
+- Linear Modeling
+
+- Comparing samples
+
+???
+Talk about clasical vs computer vs ML
+
+CI - what would happen if I sampled a bunch?
+
+Modeling
+  - whats a good model
+    - indedendent vars (more? less? 2 have same effect)
+    - fit (sloped, flat close, messy)
+
+Comparing  
+  - need the same shape, thus why we worry about transformations
+  - Most of what we'll do is based on the glm
+  - z-test. t-test. anova, chi-square

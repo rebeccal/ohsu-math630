@@ -13,7 +13,7 @@ You are expected to come to each class meeting prepared, which means that you wi
 
 Readings will primarily be from two free, open-source, completely online textbooks:
 
-1. [**MODERN DIVE into Data with R (MD)**](http://moderndive.netlify.com) 
+1. [**MODERN DIVE into Data with R (MD)**](http://moderndive.com) 
 1. [**R for Data Science (R4DS)**](http://r4ds.had.co.nz) 
 
 These books will be supplemented by blog posts, YouTube videos, and several open-access articles, including from:
@@ -87,7 +87,7 @@ if(knitr::is_html_output()){
 
 ```{r echo=FALSE, eval=FALSE}
 # how to get links into the pdf cleanly - modify the above to make sense in pdf format
-urls <- rep("https://stackoverflow.com/", 10)
+urls <- rep("https://moderndive.com/", 10)
 # use paste0 to compose markdown-formatted hyperlinks
 mtcars$mpg <- paste0("[", mtcars$mpg, "](", urls, ")")
 # print the table, with hyperlinked text

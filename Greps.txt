@@ -1,0 +1,10 @@
+#All the .jpg refs
+
+c:/Rtools/bin/grep.exe -or --include=\*.Rmd '"[^" ]\+.jpg"'
+
+
+
+# All the http links in .Rmd files. The [^ ] is a negated character set designator
+# with the following *, it means keep going until you hit one of these ( ), >, " or space)   
+
+c:/Rtools/bin/grep.exe -or --include=\*.Rmd "http[^)>\" ]*" > links.txt
