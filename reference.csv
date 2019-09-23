@@ -4,7 +4,7 @@ cheatsheet,R Markdown,https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdo
 cheatsheet,Data Wrangling,https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf
 cheatsheet,ggplot2,https://www.rstudio.com/wp-content/uploads/2016/11/ggplot2-cheatsheet-2.1.pdf
 cheatsheet,Summaries and Distributions,reference/SummariesAndDistributions.html
-cheatsheet,Assumptions and Conditions for Hypothesis Tests and Confidence Intervals,http://www.b-g.k12.ky.us/userfiles/1525/Classes/33386/Conditions%20of%20Tests.08-09%20rev%201.pdf
+cheatsheet,Assumptions/Conditions for Hypothesis Tests and Confidence Intervals,reference/ConditionsofTests.pdf
 code,cm041 - Sampling Distributions,slides/cm041_code_along.Rmd
 code,Perfect t-test,https://github.com/Lakens/perfect-t-test
 code,cm045 - Power for one-sample t-test,slides/cm045_code_along.R
@@ -30,3 +30,5 @@ reference,Reprex - Do's and Don'ts,https://reprex.tidyverse.org/articles/reprex-
 reference,Measures of central tendency: The mean,https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3127352/
 reference,Same Stats - Different Graphs,https://www.autodeskresearch.com/publications/samestats
 reference,Happy Git and GitHub for the useR, https://happygitwithr.com/rstudio-git-github.html
+reference,The Quartz guide to bad data,https://github.com/Quartz/bad-data-guide
+cheatsheet,Common Distributions,http://www.stat.tamu.edu/~twehrly/611/distab.pdf
