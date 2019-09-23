@@ -97,14 +97,6 @@ sessionInfo()
 ```
 
 
-<!-- --- -->
-<!-- class: inverse, middle, center -->
-<!-- ## New `gitter` chat -->
-
-
-<!-- ![](https://media.giphy.com/media/uRb2p09vY8lEs/giphy.gif) -->
-
-<!-- Now on our class site: link to [gitter](https://gitter.im/conj620/Lobby?utm_source=share-link&utm_medium=link&utm_campaign=share-link) -->
 
 ---
 ## How to ask for help
@@ -434,6 +426,8 @@ class: middle, inverse, center
 
 
 ---
+class: middle, center
+
 ## Datasaurus Dozen
 
 ```{r out.width = '50%', echo = FALSE}
@@ -441,15 +435,5 @@ knitr::include_graphics("https://i2.wp.com/flowingdata.com/wp-content/uploads/20
 ```
 
 
-- https://www.autodeskresearch.com/publications/samestats
+_See the references for a how-to on creating similar statistically ambiguous data._ ["Same stats, Different graphs"](https://www.autodeskresearch.com/publications/samestats)
 
-- https://github.com/lockedata/datasauRus
-
-<!-- --- -->
-<!-- ## Due before Thursday's class... -->
-
-<!-- Do [these learning checks from Chapter 3](../cm013.html) in [ModernDive](http://moderndive.netlify.com/): -->
-
-<!-- LC3.2-LC3.7, LC3.9-LC3.13, LC3.15 -->
-
-<!-- Turn in on Sakai. -->

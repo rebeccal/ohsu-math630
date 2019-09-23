@@ -12,15 +12,57 @@
 class: center, middle, inverse, title-slide
 
 # Math 530/630: CM 1.1
-## Sample Data and Intuitive Statistics
+## Sample Data and Some Intuitive Statistics
 
 ---
 
 
 
+# First - A little history
+???
+Design of Experiments - basis for future stats academic programs, introduced the null hypothesis!
+
+R- 
+- based on S, a functional language
+- in 2011 it was rough
+- Tidyverse makes it possible to easily teach data science/stats as well as R
+- OHSU fully supports R
+
+- Has changed the nature of this class
+  - You need to be aware of all these options
+  - Focus on concepts and practical application
+  - No so "mathy", much more programmy
+
+--
+  
+- Classical Statistics, as used today, is not that old
+  - The first University Statistics program was started in 1911 by Karl Pearson
+  - [_The Design of Experiments_ - Ronald Fisher, 1935](https://en.wikipedia.org/wiki/The_Design_of_Experiments)
+
+--
+
+- The practice of "statistics" is changing quickly 
+  - by hand (using look-up tables)
+  - computer software (Minitab, SPSS, SAS, Stata, Matlab, even Excel)
+  - BIG/FAST computers
+--
+
+- R
+  - Free and powerful
+  - Relatively difficult, relatively recently 
+  - Tidyverse package ~2016, currently supported by RStudio
+
+--
+
+&gt;"The tidyverse is an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures."
+&gt;
+&gt;_tidyverse.org_
 
 
-# Today
+
+  
+---
+# Sample Data
 
 --
 
@@ -48,34 +90,41 @@ class: center, middle
 class: center, middle
 
 ![](01-images/brains.jpg)
+???
+Images or FMRI
 
 ---
 class: center, middle
 
 ![](01-images/genes.png)
-
+???
+Genetics
 ---
 class: center, middle
 
 ![](01-images/text.png)
-
+???
+Text - Conversation Transcripts
 
 ---
 class: center, middle
 
 ![](01-images/childes.png)
-
+???
+Flat files
 
 ---
 class: center, middle
 
 ![](01-images/inter_speaker-1.png)
-
+???
+Spectogram
 ---
 class: center, middle
 
 ![](01-images/targets_female_vowels-1.png)
-
+???
+Speech frequency
 ---
 class: center, middle
 
@@ -88,16 +137,28 @@ Take 2 minutes
 # Types of data
 
 .pull-left[
-##Categorical
+###Categorical
 - Nominal (names)
 - Ordinal (ordered, but unknown or unequal intervals)
 ]
 .pull-right[
-##Quantitative 
-- Continuous, consistent intervals)
+###Quantitative 
+- Continuous (consistent intervals)
 - Integer
 - Real
 ]
+
+--
+
+.center[_** Which of these is your data? **_]
+
+???
+- Nominal - think job names or gender
+- ordinal - think scales on a survey (Happy, Not happy)
+
+- Quantitative - difference between 1 and 2 the same as 4 and 5
+
+- typically, all of them at some time
 
 ---
 class: center, middle
@@ -116,20 +177,29 @@ class: center, middle
 
 ## So how do you talk about your data with others?
 
+???
+In this class - flat files that have been "tidied"
+
 ---
-class: center, middle
+class: center
 
 # Two ways to talk to others about your data
 
 --
 
-## Words
-
-&gt; Overall, 216 tasks (28.2%) contained self talk. Twelve of the sixteen participants, seven younger and five older adults, engaged in self talk at some point in the session. The average rates of self talk for younger and older adults were not significantly different (25.9% and 32.1%, respectively) by Wilcoxon Rank Sum test, z &lt; 1, N.S. As found in study one and illustrated in Figure 4, there were large individual differences in participants’ rate of self talk for both younger adults and elder adults.  
+## Plots
 
 --
 
-## Plots
+## Words
+
+&gt; "Overall, 216 tasks (28.2%) contained self talk. Twelve of the sixteen participants, seven younger and five older adults, engaged in self talk at some point in the session. The average rates of self talk for younger and older adults were not significantly different (25.9% and 32.1%, respectively) by Wilcoxon Rank Sum test, z &lt; 1, N.S. As found in study one and illustrated in Figure 4, there were large individual differences in participants’ rate of self talk for both younger adults and elder adults."  
+
+???
+
+- Point out the "stats"
+- Description of the data
+- Talk about categorical as ## and mean as as central tendency
 
 ---
 # Descriptive statistics - summarizing quantitative data
@@ -149,6 +219,9 @@ Measures of spread or variability
 Measures of shape
 - Pattern of relative interval sizes, moving from left to right
 
+???
+- Measures used differ based on field and the nature of the data
+- Tend to treat the "normal dist" as the basis
 
 ---
 class: center
@@ -239,15 +312,19 @@ where `\(x_1, x_2, x_3, \dots, x_n\)` represent the `\(n\)` observed values.
 
 --
 
-Number with the smallest sum of *squared* distances to the list of numbers
+- Number with the smallest sum of *squared* distances to the list of numbers
 
 --
 
-Hence, the mean is a *least squares estimator*
+- Hence, the mean is a *least squares estimator*
 
 --
 
 Unless ALL scores are identical, most if not all, scores will be different from the mean.
+
+???
+There are other ways of calculating the mean - see refs
+
 
 ---
 class: middle, center
@@ -338,7 +415,11 @@ sd(z)
 ```
 --
 - Critical data transformation in statistics - the basis for the _standard normal distribution_
-- Warning!! Does not result in a _normal_ distribution unless the dataset was normal
+- Warning!! Does not result in a _normal_ distribution unless the dataset was already normally distributed
+
+???
+- Measure of the distance from the mean in terms of standard deviations
+- We'll come back to the z-score many times
 
 ---
 
@@ -379,6 +460,9 @@ The standard definition of skewness in a population is the average cubed z-score
 
 ![](01-images/skew.png)
 
+???
+- The terms for skewness appear to be reversed for some people (due to "weightiness")
+- Think of "pulling? in the direction of the skew term
 ---
 
 
@@ -413,7 +497,13 @@ g1_calculate(scale(x)) #scale is one way to create a z-score
 ## [1] 1.101962
 ```
 
-?? If the data have high skewness (due to "long" tails), what does that say about the sample mean and variance/sd ??
+.center[**_?? If the data have high skewness (due to a "long" tail), what does that say about the sample mean and variance/sd ??_**]
+
+???
+
+- Look at just the x's distance from mean. Since they're cubed, the distances from mean retain their sign. Thus if one tail is "long" it will pull the skewness calc in that direction.
+
+- High skewness implies 
 
 ---
 # Calculating skewness in R
@@ -444,27 +534,32 @@ skewness(scale(x))
 `$$K = n*\frac{\sum_{i=1}^n{(x_i - \bar{x})^4}} {(\sum_{i=1}^n{(x_i - \bar{x})^2)^2}}$$`
 
 
-The basic idea of kurtosis is that it is the average 4th power of the z-scores
+- The basic idea of kurtosis is that it is the average 4th power of the z-scores
 Kurtosis of a distribution is typically expressed relative to that of a normal distribution.
 
 --
 
-The normal distribution has a kurtosis of 3. So, the most common measure of kurtosis is the average 4th power of the z-scores minus 3.
+- The normal distribution has a kurtosis of 3. So, the most common measure of kurtosis is the average 4th power of the z-scores minus 3.
 
 --
 
-This can be computed in a number of ways. The simplest version is biased for a normal distribution, but is reported by some programs.
+- This can be computed in a number of ways. The simplest version is biased for a normal distribution, but is reported by some programs.
 
 --
 
-?? If the data have high kurtosis (due to "heavy" tails), what does that say about the sample mean and variance/sd ??
+.center[**_?? If the data have high kurtosis (due to "heavy" tails), what does that say about the sample mean and variance/sd ??_**]
+
+???
+
+A little harder to see what's happening. Here the 4th power removes the signs, but adds great weight to data in the tails. Thus if the tails have a lot of data, the kurtosis will be large.
 
 ---
 
-# Calculating kurtosi4
+# Calculating kurtosis
 
 
 ```r
+#1)
 s4.x &lt;- sum((x-mean(x))^4) #using raw
 s2.x &lt;- sum((x-mean(x))^2) #using raw
 n &lt;- length(x)
@@ -476,6 +571,7 @@ n*s4.x/s2.x^2
 ```
 
 ```r
+#2) 
 z.x &lt;- (x - mean(x))/sd(x) #makes z-scores using x
 s4.z &lt;- sum((z.x-mean(z.x))^4) #using z
 s2.z &lt;- sum((z.x-mean(z.x))^2) #using z
@@ -487,6 +583,7 @@ n*s4.z/s2.z^2
 ```
 
 ```r
+#3) 
 kurtosis(x)
 ```
 
@@ -506,16 +603,15 @@ To the board!
 - Comparing samples
 
 ???
-Talk about clasical vs computer vs ML
 
-CI - what would happen if I sampled a bunch?
+CI - but your mean isn't special. What would happen if I sampled a bunch?
 
-Modeling
+Linear Modeling
   - whats a good model
     - indedendent vars (more? less? 2 have same effect)
-    - fit (sloped, flat close, messy)
+    - fit (sloped, flat, close, messy)
 
-Comparing  
+Comparing
   - need the same shape, thus why we worry about transformations
   - Most of what we'll do is based on the glm
   - z-test. t-test. anova, chi-square
