@@ -10,9 +10,6 @@ navbar:
   - text: Due Dates
     href: due.html
     icon: fa-calendar-check
-  - text: Syllabus
-    href: syllabus.html
-    icon: fa-key
   - text: DataCamp  
     href: https://www.datacamp.com/enterprise/probability-statistical-inference-for-scientists-and-engineers-42d49ab0-6bca-47c8-9067-9b4012dc7027
     icon: fa-user-ninja
@@ -23,9 +20,9 @@ navbar:
     icon: fa-glasses
     href: reference.html
   right:
-  - text: About
-    href: about.html
-    icon: fa-cogs
+  - text: Syllabus
+    href: syllabus.html
+    icon: fa-key
 output:
   html_document:
     theme: paper

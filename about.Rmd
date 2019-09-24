@@ -13,9 +13,7 @@ htmltools::tagList(rmarkdown::html_dependency_font_awesome())
 This is an [R Markdown website](http://rmarkdown.rstudio.com/rmarkdown_websites.html). 
 The source can be found [on GitHub <i class="fa fa-github"></i>](https://github.com/rebeccal/ohsu-math630).
 
-The rendered site link is:
-
-<https://ohsu-math630-fall-2019.netlify.com/>
+The rendered site link is: <https://ohsu-math630-fall-2019.netlify.com/>
 
 More about the course developer, Alison Hill:
 
