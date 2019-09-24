@@ -1,7 +1,7 @@
 Weekday,Month,Day,CM / Block,Reading,material,material_link,px,px_link,i_lab,i_lab_link,hw,hw_link,class_lab,cl_link,staged,,,,notes
 Tues,September,24,1.1: Summarizing data,"<a href='https://r4ds.had.co.nz/workflow-projects.html'>- R4DS: Workflow Projects</a> 
 <br><a href='https://r4ds.had.co.nz/r-markdown.html'>- R4DS: R Markdown</a>",,,,,Lab 00 - Plot Your Name,labs/lab00.html,,,,,,,,,
-Thurs,September,26,1.2: Visualizing distributions,"<a href='https://r4ds.had.co.nz/data-visualisation.html'>- [R4DS: Data Visualisation</a> 
+Thurs,September,26,1.2: Visualizing distributions,"<a href='https://r4ds.had.co.nz/data-visualisation.html'>- R4DS: Data Visualisation</a> 
 <br><a href='https://r4ds.had.co.nz/transform.html'>- R4DS: Data Transformation</a>
 <br><a href='https://r4ds.had.co.nz/tidy-data.html'>- R4DS: Tidy Data</a>", Communicating with Data in the Tidyverse,https://www.datacamp.com/courses/communicating-with-data-in-the-tidyverse,,,,,,,,,,,,,
 Tues,October,1,2.1: Simple linear regression,"<a href='https://moderndive.com/5-regression.html'>- MD Ch 5.1: Basic Regression</a>
