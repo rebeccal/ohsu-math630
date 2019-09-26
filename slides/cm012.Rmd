@@ -325,11 +325,7 @@ What are some ways we can measure "central tendency"?
 
 1. Mode (not terribly helpful)
 
---
 
-Measures of central tendency: The means
-
-https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3127352/
 
 ---
 ## Spread
