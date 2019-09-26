@@ -1,7 +1,6 @@
 ---
-title: "Lab1 - EDA Example"
-author: "Annie"
-date: "September 28, 2018"
+title: "MATH 530/630"
+subtitle: Integrative Lab 1 - Example Exploratory Data Analysis 
 output: html_document
 ---
 

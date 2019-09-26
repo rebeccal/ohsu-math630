@@ -327,7 +327,7 @@ What are some ways we can measure "central tendency"?
 
 --
 
-Measures of central tendency: The mean
+Measures of central tendency: The means
 
 https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3127352/
 

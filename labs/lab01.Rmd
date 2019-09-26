@@ -9,14 +9,18 @@ output:
     toc: yes
 ---
 
-```{r setup, include=FALSE}
+```{r set_options, include = FALSE}
 # leave this chunk alone
 options(knitr.table.format = "html") 
 knitr::opts_chunk$set(warning = FALSE, message = FALSE, comment = NA, dpi = 300)
-library(reprohealth)
+```
+
+```{r load_data, include=FALSE}
 library(tidyverse)
+library(reprohealth)
 wb_stats <- wb_reprohealth %>%
   mutate(year = parse_number(year)) 
+
 ```
 ## Overview
 
@@ -41,7 +45,7 @@ Your lab should serve as your own personal cheatsheet in the future for things t
 
 For all things, graphical and tabular, if you’re dissatisfied with a result, discuss the problem, what you’ve tried and move on (remember my 30-minute rule). You'll need this loaded at the top:
 
-```{r warning = FALSE, message = FALSE}
+```{r load_libraries}
 library(tidyverse) # all the good stuff
 library(readxl) # for reading in xlsx files
 library(here) # for here!
