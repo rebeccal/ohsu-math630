@@ -1556,7 +1556,7 @@ wb_stats &lt;- wb_reprohealth %&gt;% # save the data to your local environment
 <li>How many variables/columns?</li>
 <li>How many rows/observations?</li>
 <li>Which variables are numbers?</li>
-<li>Which are categorical variables (numeric or character variables with variables that have a fixed and known set of possible values; aka <a href="https://stats.idre.ucla.edu/r/modules/factor-variables/">factor</a> variables)?</li>
+<li>Which are categorical variables (numeric or character variables with variables that have a fixed and known set of possible values; aka factor variables)?</li>
 <li>Complete this sentence: “There is one row per…”</li>
 </ul>
 </div>
@@ -1564,10 +1564,16 @@ wb_stats &lt;- wb_reprohealth %&gt;% # save the data to your local environment
 <h2>Explore a new dataset</h2>
 <p>Go to the <a href="https://www.gapminder.org/data/">gapminder</a> site and find a new indicator that interests you.</p>
 <ul>
-<li><p>Download the data file to a folder in your <code>.Rproj</code> directory, and open the <code>.xlsx</code> file to see where the data is (i.e., which sheet).</p></li>
-<li><p>Read the data file into your EDA .Rmd document using the <a href="https://readxl.tidyverse.org"><code>readxl</code> package</a> (remember, it must be installed first). Use the <code>here</code> package, with the <code>here</code> function, to build up the relative file path (<a href="https://github.com/jennybc/here_here">example code-through</a>). Here is an example code chunk:</p></li>
+<li>Download the data file to a folder in your <code>.Rproj</code> directory, and open the <code>.xlsx</code> file to see where the data is (i.e., which sheet).<br />
+</li>
+<li>Read the data file into your EDA .Rmd document using the <a href="https://readxl.tidyverse.org"><code>readxl</code> package</a> (remember, it must be installed first). Use the <code>here</code> package, with the <code>here</code> function, to build up the relative file path. Below is example code using <code>here::here</code>.<br />
+</li>
+<li>Answer the same 5 questions as you did above for the <code>reprohealth</code> data.<br />
+</li>
+<li>Gather the data (most data from gapminder has columns in years).</li>
 </ul>
-<pre class="r"><code>internet &lt;- read_xlsx(here::here(&quot;data&quot;, &quot;Internet_user_per_100.xlsx&quot;),
+<pre class="r"><code># Reading in an example dataset using &#39;here&#39;
+internet &lt;- read_xlsx(here::here(&quot;data&quot;, &quot;Internet_user_per_100.xlsx&quot;),
                       sheet = 1) %&gt;% 
   clean_names() # highly recommended
 
@@ -1589,14 +1595,27 @@ internet</code></pre>
 #   x1999 &lt;dbl&gt;, x2000 &lt;dbl&gt;, x2001 &lt;dbl&gt;, x2002 &lt;dbl&gt;, x2003 &lt;dbl&gt;,
 #   x2004 &lt;dbl&gt;, x2005 &lt;dbl&gt;, x2006 &lt;dbl&gt;, x2007 &lt;dbl&gt;, x2008 &lt;dbl&gt;,
 #   x2009 &lt;dbl&gt;, x2010 &lt;dbl&gt;, x2011 &lt;dbl&gt;</code></pre>
-<ul>
-<li>Answer the same 5 questions as you did above for the <code>reprohealth</code> data.</li>
-<li>Gather the data (most data from gapminder has columns in years).</li>
-</ul>
-<pre class="r"><code>internet_tidy &lt;- internet %&gt;%
+<pre class="r"><code># Gathering the columns
+internet_tidy &lt;- internet %&gt;%
   rename(country = 1) %&gt;% 
   gather(year, users_per_100, -country) %&gt;% 
-  mutate(year = readr::parse_number(year)) </code></pre>
+  mutate(year = readr::parse_number(year)) 
+
+internet_tidy</code></pre>
+<pre><code># A tibble: 6,050 x 3
+   country                year users_per_100
+   &lt;chr&gt;                 &lt;dbl&gt;         &lt;dbl&gt;
+ 1 Abkhazia               1990            NA
+ 2 Afghanistan            1990             0
+ 3 Akrotiri and Dhekelia  1990            NA
+ 4 Albania                1990             0
+ 5 Algeria                1990             0
+ 6 American Samoa         1990             0
+ 7 Andorra                1990             0
+ 8 Angola                 1990             0
+ 9 Anguilla               1990            NA
+10 Antigua and Barbuda    1990             0
+# ... with 6,040 more rows</code></pre>
 <pre class="r"><code># another example dataset
 age_marriage &lt;- read_xlsx(here::here(&quot;data&quot;, &quot;indicator_age_of_marriage.xlsx&quot;),
                       sheet = 1) 
@@ -1699,7 +1718,7 @@ alc_tidy</code></pre>
 <ul>
 <li>Join this new data using <code>dplyr</code> with the <code>reprohealth</code> data you have been working with, and make some observations about the process and result. You may need:
 <ul>
-<li>This <a href="https://moderndive.netlify.com/3-wrangling.html#joins">ModernDive section on joins</a></li>
+<li>This <a href="https://moderndive.com/3-wrangling.html#joins">ModernDive section on joins</a></li>
 <li>This <a href="http://stat545.com/bit001_dplyr-cheatsheet.html">tutorial by Jenny Bryan</a></li>
 <li>This <a href="http://r4ds.had.co.nz/relational-data.html">chapter in R4DS</a></li>
 <li><strong>Hint!:</strong> you’ll probably need to use <code>tidyr::gather</code> on your new dataset first, before the join. Tread carefully here!</li>

@@ -85,32 +85,33 @@ You can name `wb_stats` anything else you want, this is just an example.
 - How many variables/columns?
 - How many rows/observations?
 - Which variables are numbers?
-- Which are categorical variables (numeric or character variables with variables that have a fixed and known set of possible values; aka [factor](https://stats.idre.ucla.edu/r/modules/factor-variables/) variables)?
+- Which are categorical variables (numeric or character variables with variables that have a fixed and known set of possible values; aka factor variables)?
 - Complete this sentence: "There is one row per..."
 
 ## Explore a new dataset
 
 Go to the [gapminder](https://www.gapminder.org/data/) site and find a new indicator that interests you. 
 
-- Download the data file to a folder in your `.Rproj` directory, and open the `.xlsx` file to see where the data is (i.e., which sheet).
-
-- Read the data file into your EDA .Rmd document using the [`readxl` package](https://readxl.tidyverse.org) (remember, it must be installed first). Use the `here` package, with the `here` function, to build up the relative file path ([example code-through](https://github.com/jennybc/here_here)). Here is an example code chunk:
+- Download the data file to a folder in your `.Rproj` directory, and open the `.xlsx` file to see where the data is (i.e., which sheet).  
+- Read the data file into your EDA .Rmd document using the [`readxl` package](https://readxl.tidyverse.org) (remember, it must be installed first). Use the `here` package, with the `here` function, to build up the relative file path. Below is example code using `here::here`.  
+- Answer the same 5 questions as you did above for the `reprohealth` data.  
+- Gather the data (most data from gapminder has columns in years).
 
 ```{r}
+# Reading in an example dataset using 'here'
 internet <- read_xlsx(here::here("data", "Internet_user_per_100.xlsx"),
                       sheet = 1) %>% 
   clean_names() # highly recommended
 
 internet
-```
 
-- Answer the same 5 questions as you did above for the `reprohealth` data.
-- Gather the data (most data from gapminder has columns in years).
-```{r}
+# Gathering the columns
 internet_tidy <- internet %>%
   rename(country = 1) %>% 
   gather(year, users_per_100, -country) %>% 
   mutate(year = readr::parse_number(year)) 
+
+internet_tidy
 ```
 
 ```{r}
@@ -143,7 +144,7 @@ alc_tidy
 ```
 
 - Join this new data using `dplyr` with the `reprohealth` data you have been working with, and make some observations about the process and result. You may need:
-    - This [ModernDive section on joins](https://moderndive.netlify.com/3-wrangling.html#joins)
+    - This [ModernDive section on joins](https://moderndive.com/3-wrangling.html#joins)
     - This [tutorial by Jenny Bryan](http://stat545.com/bit001_dplyr-cheatsheet.html)
     - This [chapter in R4DS](http://r4ds.had.co.nz/relational-data.html)
     - **Hint!:** you'll probably need to use `tidyr::gather` on your new dataset first, before the join. Tread carefully here! 
