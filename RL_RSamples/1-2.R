@@ -18,6 +18,10 @@ summarise(our_data, mean(x), sd(x), mean(y), sd(y))
 our_data %>%
   summarize_all(funs(mean, sd))
 
+# And...
+our_data %>% 
+  summarise_all(list(mean = mean, sd = sd)) 
+
 
 our_data %>% 
 ggplot() +

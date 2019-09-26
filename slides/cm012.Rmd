@@ -306,43 +306,43 @@ Generally index one of three:
 1. Spread
 1. Shape
 
-We'll focus on the first two, will return to the third.
+<!-- We'll focus on the first two, will return to the third. -->
 
----
-## Center
+<!-- --- -->
+<!-- ## Center -->
 
-What are some ways we can measure "central tendency"?
+<!-- What are some ways we can measure "central tendency"? -->
 
---
+<!-- -- -->
 
-1. Mean (`mean`)
+<!-- 1. Mean (`mean`) -->
 
---
+<!-- -- -->
 
-1. Median (`median`)
+<!-- 1. Median (`median`) -->
 
---
+<!-- -- -->
 
-1. Mode (not terribly helpful)
+<!-- 1. Mode (write your own) -->
 
 
 
----
-## Spread
+<!-- --- -->
+<!-- ## Spread -->
 
-What are some ways we can measure "variation"?
+<!-- What are some ways we can measure "variation"? -->
 
---
+<!-- -- -->
 
-- range (`range`), 
+<!-- - range (`range`),  -->
 
---
+<!-- -- -->
 
-- standard deviation (`sd`), 
+<!-- - standard deviation (`sd`),  -->
 
---
+<!-- -- -->
 
-- inter-quartile range (`IQR`)
+<!-- - inter-quartile range (`IQR`) -->
 
 
 ---
