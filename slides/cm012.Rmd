@@ -306,44 +306,14 @@ Generally index one of three:
 1. Spread
 1. Shape
 
-<!-- We'll focus on the first two, will return to the third. -->
+???
+- Just a quick review before the exercise
 
-<!-- --- -->
-<!-- ## Center -->
+- Recall - you can estimate additional information about a distribution, or compare two distributions based on center and spread, as long as the shape is known/common. 
 
-<!-- What are some ways we can measure "central tendency"? -->
+- In intro stats, we tend to focus on the "normal" distribution, and distributions that are "variants" of the normal distribution. 
 
-<!-- -- -->
-
-<!-- 1. Mean (`mean`) -->
-
-<!-- -- -->
-
-<!-- 1. Median (`median`) -->
-
-<!-- -- -->
-
-<!-- 1. Mode (write your own) -->
-
-
-
-<!-- --- -->
-<!-- ## Spread -->
-
-<!-- What are some ways we can measure "variation"? -->
-
-<!-- -- -->
-
-<!-- - range (`range`),  -->
-
-<!-- -- -->
-
-<!-- - standard deviation (`sd`),  -->
-
-<!-- -- -->
-
-<!-- - inter-quartile range (`IQR`) -->
-
+ - Mean and sd are relevant inre: the normal dist - other measures can/should be used to describe non-normal dists
 
 ---
 ## Datasets Exercise Part 1

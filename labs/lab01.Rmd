@@ -85,7 +85,7 @@ You can name `wb_stats` anything else you want, this is just an example.
 - How many variables/columns?
 - How many rows/observations?
 - Which variables are numbers?
-- Which are categorical variables (numeric or character variables with variables that have a fixed and known set of possible values; aka factor variables)?
+- Which are categorical variables (numeric or character variables that have a fixed and known set of possible values; aka factor variables)?
 - Complete this sentence: "There is one row per..."
 
 ## Explore a new dataset

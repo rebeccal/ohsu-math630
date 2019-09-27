@@ -1,8 +1,6 @@
 ---
 title: "CM 2.2 - Simple linear regression, continued"
 subtitle: "Math 530/630"
-#author: "Alison Hill"
-#date: "7/19/2018"
 output: 
   html_document:
     toc: true

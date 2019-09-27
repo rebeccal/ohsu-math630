@@ -6,7 +6,7 @@ crimenames <- c("county", "region_name", "region_code",
                 "criminals", "public_houses", "school_attendance",
                 "worship_attendance")
 
-crime <- read_table("https://ohsu-math630-fall-2018.netlify.com/data/beerhall.dat", col_names=crimenames)
+crime <- read_table("https://ohsu-math630-fall-2019.netlify.com/data/beerhall.dat", col_names=crimenames)
 
 # crime <- read_table(here::here("data", "beerhall.dat"), col_names = crimenames)
 
