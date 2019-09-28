@@ -1,7 +1,6 @@
 ---
 title: "Math 530/630 CM 2.3"
 subtitle: "Coding Style and Linear Models"
-#author: "Alison Hill"
 output:
   xaringan::moon_reader:
     css: ["default", "css/ohsu.css", "css/ohsu-fonts.css"]

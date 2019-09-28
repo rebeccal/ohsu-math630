@@ -10,7 +10,7 @@ crime <- read_table("https://ohsu-math630-fall-2019.netlify.com/data/beerhall.da
 
 # crime <- read_table(here::here("data", "beerhall.dat"), col_names = crimenames)
 
-#From Lab 2.1 = 2.2-2
+#From Lab 2.1 = 2.1-2
 
 #4.1
 glimpse(crime)

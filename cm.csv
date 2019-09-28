@@ -4,33 +4,32 @@ Tues,September,24,1.1: Summarizing Data,"Welcome & Introductions<br>(<a href='sy
 <br><a href='slides/cm011.html'>1.1 - Sample Data and Intuitive Statistics </a>",,,,,,,,,9/26/2017,Slide deck 01 from fall 2017 or (01-sample-data)
 Thurs,September,26,1.2: Visualizing distributions,"<a href='slides/cm012.html'> 1.2 - Visualizing Distributions</a> 
 <br> <a href = 'reference/SummariesAndDistributions.html'>Distributions and Summary Statistics</a>",,,,,,,,,NA,Conj  or DV?
-,Week ,Two-Four,2.0 Linear Regression,,,,,,,,,,,
-Tues,October,1,2.1: Simple linear regression,,Lab 2.1,,,Lab 2.1,slides/cm021_lab.html,,,,10/24/2017 (Slide deck 7),cm021 (in class lab)
-Thurs,October,3,2.2: Simple linear regression,,Lab 2.2,,,Lab 2.2,slides/cm022_lab.html,,,,10/19/2017(SLR:55:00),cm022 (in class lab)
+,Week ,Two-Five,2.0 Linear Regression,,,,,,,,,,,
+Tues,October,1,2.1-2: Simple linear regression,,Lab 2.1-2,slides/cm021-2_lab.html,,,,,,,10/24/2017 (Slide deck 7);10/19/2017(SLR:55:00),cm021& 022 (in class lab)
+Thurs,October,3,2.3: Linear models (general),,CM2.3 Code-along,,<a href='slides/cm023.html'>2.3  - Linear Models</a>,CM2.3 Code-along,slides/cm023-code_along.Rmd,,,,,cm023 (slide deck)
 Tues,October,8,NO CLASS,,,,,,,,,,,
-Thurs,October,10,2.3: Linear models (general),,CM2.3 Code-along,,<a href='slides/cm023.html'>2.3  - Linear Models</a>,CM2.3 Code-along,slides/cm023-code_along.Rmd,,,,,cm023 (slide deck)
-Tues,October,15,2.4: Multiple regression,,Lab 2.4,,,Lab 2.4,slides/cm024_lab.html,,,,,cm024 (in class lab)
-Thurs,October ,17,2.5: LM diagnostics/outliers,,,,<a href='slides/cm025.html'>2.5 - LM Diagnostics and Outliers</a>,,,,,,10/31/2017,Slide deck 09 from fall 2017 - cm025-026 slides and cm025 lab
-,Week ,Four-Five,3.0 Probability,,,,,,,,,,,
-Tues,October,22,3.1: Probability Review,,,,<a href='slides/cm031.pdf'>3.1 - Probability and Random Variables</a>,,,,,,9/28/2017,Slide deck 02 from fall 2017
-Thurs,October,24,3.2: Discrete Probability Functions,,,,<a href='slides/cm032.pdf'>3.2 - Discrete Random Variables</a>,,,,,,10/3/2017,Slide deck 03 from fall 2017
-Tues,October,29,3.3: Continuous Probability Functions,,,,<a href='slides/cm033.pdf'>3.3 - Continuous Random Variables</a> ,,,,,,10/5/2017,Slide deck 04 from fall 2017
+Thurs,October,10,2.4: Multiple regression,,Lab 2.4,,,Lab 2.4,slides/cm024_lab.html,,,,,cm024 (in class lab)
+Tues,October,15,2.5: LM diagnostics/outliers,,,,<a href='slides/cm025.html'>2.5 - LM Diagnostics and Outliers</a>,,,,,,10/31/2017,Slide deck 09 from fall 2017 - cm025-026 slides and cm025 lab
+,Week ,Five-Six,3.0 Probability,,,,,,,,,,,
+Thurs,October ,17,3.1: Probability Review,,,,<a href='slides/cm031.pdf'>3.1 - Probability and Random Variables</a>,,,,,,9/28/2017,Slide deck 02 from fall 2017
+Tues,October,22,3.2: Discrete Probability Functions,,,,<a href='slides/cm032.pdf'>3.2 - Discrete Random Variables</a>,,,,,,10/3/2017,Slide deck 03 from fall 2017
+Thurs,October,24,3.3: Continuous Probability Functions,,,,<a href='slides/cm033.pdf'>3.3 - Continuous Random Variables</a> ,,,,,,10/5/2017,Slide deck 04 from fall 2017
 ,Week ,Six-Eight,4.0 Inference,,,,,,,,,,,
-Thurs,October,31,4.1: Sampling distributions,,CM4.1 Code-along,,<a href='slides/cm041.pdf'>4.1 - Sampling</a>,CM4.1 Code-along,slides/cm041_code_along.html,,,,10/10&17/2017,Slide deck 05 from fall 2017 and Conj cm042
-Tues,November,5,4.2: Bootstrapping (confidence intervals),,CM4.2 Code-along,,<a href='slides/cm042.html'>4.2 - Bootstrapping</a>,CM4.2 Code-along,slides/cm042-code_along.html,,!! should have included deck 12 (confidence intervals?),,Skipped??,cm032 (slide deck)
-Thurs,November,7,4.3: Hypothesis testing (resampling),,Lab 4.3,,,Lab 4.3,slides/cm043_lab.html,,,,11/2/2017,cm034 (in class lab)
-Tues,November,12,4.4: Hypothesis testing (classical),,,,<a href='slides/cm044.pdf'>4.4 - Hypothesis Testing and Confidence Intervals</a>,,,,,,11/7/2017 & 11/16-58:21,slide deck 11&12 from fall 2017
-Thurs,November,14,"4.5: Errors, Effect Size, and Power",,CM4.5 Code-along,,"<a href='slides/cm045.pdf'>4.5 - Errors, Effect Size and Power</a>",CM4.5 Code-along,slides/cm045-code_along.R,,,,,
+Tues,October,29,4.1: Sampling distributions,,CM4.1 Code-along,,<a href='slides/cm041.pdf'>4.1 - Sampling</a>,CM4.1 Code-along,slides/cm041_code_along.html,,,,10/10&17/2017,Slide deck 05 from fall 2017 and Conj cm042
+Thurs,October,31,4.2: Bootstrapping (confidence intervals),,CM4.2 Code-along,,<a href='slides/cm042.html'>4.2 - Bootstrapping</a>,CM4.2 Code-along,slides/cm042-code_along.html,,!! should have included deck 12 (confidence intervals?),,Skipped??,cm032 (slide deck)
+Tues,November,5,4.3: Hypothesis testing (resampling),,Lab 4.3,,,Lab 4.3,slides/cm043_lab.html,,,,11/2/2017,cm034 (in class lab)
+Thurs,November,7,4.4: Hypothesis testing (classical),,,,<a href='slides/cm044.pdf'>4.4 - Hypothesis Testing and Confidence Intervals</a>,,,,,,11/7/2017 & 11/16-58:21,slide deck 11&12 from fall 2017
+Tues,November,12,"4.5: Errors, Effect Size, and Power",,CM4.5 Code-along,,"<a href='slides/cm045.pdf'>4.5 - Errors, Effect Size and Power</a>",CM4.5 Code-along,slides/cm045-code_along.R,,,,,
 ,Week ,Eight-Eleven,5.0 Comparing Groups,,,,,,,,,,,
-Tues,November,19,4.6 & 5.1: General Linear Model and Many Means,,,,"<a href='slides/cm046.html'>4.6 - The General Linear Model</a>
+Thurs,November,14,4.6 & 5.1: General Linear Model and Many Means,,,,"<a href='slides/cm046.html'>4.6 - The General Linear Model</a>
 <br><a href='slides/cm051.html'>5.1 - Many Means - ANOVA</a>",,,,,,11/16 & 11/21/2017,cm035 & cm041 (slide deck)
-Thurs,November,21,5.2: ANOVA by hand,,Lab 5.2,,,Lab 5.2,slides/cm052_lab.html,,,,,cm043 (in class lab)
-Tues,November,26,"5.3: Contrasts, post-hoc tests, and p-value adjustments",,,,<a href='slides/cm053.html'>5.3 - Contrasts and post-hoc tests</a>,,,,,,11/28-30/2017,CM045 (slide deck) slide deck 15-anova from 2017
-Thurs,November,28,NO CLASS,,,,Thanksgiving - Enjoy!,,,,,,,
-Tues,December,3,5.4: Two-way ANOVA/3-way ANOVA,,,,<a href='slides/cm054.pdf'>5.4 - 2-way and 3-way ANOVA</a>,,,,,,12/5/2017,slide deck 16 from fall 2017
-,Week ,Eleven-Twelve,,,,,,,,,,,,
-Thurs,December,5,Final presentations,,,,"Groups 4, 5, & 1 ",,,,,,,
-Tues,December,10,Final presentations,,,,"Groups 7, 2, & 6 ",,,,,,,
-Thurs,December,12,Final presentations,,,,"Groups 3, 9, & 8",,,,,,,
-,,,,,,,,,,,,,,
+Tues,November,19,5.2: ANOVA by hand,,Lab 5.2,,,Lab 5.2,slides/cm052_lab.html,,,,,cm043 (in class lab)
+Thurs,November,21,"5.3: Contrasts, post-hoc tests, and p-value adjustments",,,,<a href='slides/cm053.html'>5.3 - Contrasts and post-hoc tests</a>,,,,,,11/28-30/2017,CM045 (slide deck) slide deck 15-anova from 2017
+Tues,November,26,NO CLASS,,,,Thanksgiving - Enjoy!,,,,,,,
+Thurs,November,28,5.4: Two-way ANOVA/3-way ANOVA,,,,<a href='slides/cm054.pdf'>5.4 - 2-way and 3-way ANOVA</a>,,,,,,12/5/2017,slide deck 16 from fall 2017
+Tues,December,3,,,,,,,,,,,,
+,Week ,Eleven-Twelve,,,,,"Groups 4, 5, & 1 ",,,,,,,
+Thurs,December,5,Final presentations,,,,"Groups 7, 2, & 6 ",,,,,,,
+Tues,December,10,Final presentations,,,,"Groups 3, 9, & 8",,,,,,,
+Thurs,December,12,Final presentations,,,,,,,,,,,
 ,,,,,,,,Xtra Credit,slides/two-way-anova-cadds.html,,,,,
