@@ -1,13 +1,13 @@
 ---
-title: "CONJ620: CM 2.1 SOLUTIONS"
-subtitle: "Simple linear regression"
-author: "Alison Hill"
-date: "7/17/2018"
-output: 
+title: "CM 2.1 - Simple linear regression - SOLUTIONS"
+subtitle: Math 530/630
+output:
+  pdf_document:
+    toc: yes
   html_document:
-    toc: true
-    toc_float: true
-    number_sections: true
+    number_sections: yes
+    toc: yes
+    toc_float: yes
 ---
 
 
@@ -39,9 +39,10 @@ Journal of the Statistical Society of London, Vol. 20 #1, pp 22-32.
 
 In 1856, the Reverend John Clay felt that it was high time to figure out what societal factors were playing a role in the incidence of criminal behavior in Britain. He stated that:
 
-> "It is a mere truism to say that the progress of popular education, and the formation of religious habits, are fatally opposed by the temptations to animal pleasures, which abound wherever BEER-HOUSES and low ALE-HOUSES abound."
+> "It is a mere truism to say that the progress of popular education, and the formation of religious habits, are fatally opposed by the temptations to animal pleasures, which abound wherever BEER-HOUSES and low ALE-HOUSES abound."  
 
-![](http://4.bp.blogspot.com/-qdzqtghTzmU/UD_NNT9C46I/AAAAAAAABoQ/XycEe4wixVM/s1600/03.LesMiserables.US.MasteroftheHouse.jpg)
+![](../images/03.LesMiserables.US.MasteroftheHouse.jpg)
+
 
 <br>
 <br>
@@ -62,13 +63,15 @@ crime <- read_table(here::here("data", "beerhall.dat"),
 
 
 
-# Basics (⏰ 10 min)
+# Basics
 
 Note: you don't need to use R to answer these questions, but please create a section header using markdown format (`# Basics`) and type your answers there.
 
 - What is the dependent variable? `criminals`
 - What is the independent variable? `public_houses`
-- Copy and paste the provided equation that starts/ends with `$$` into your narrative (not an R code chunk), and replace `y` and `x` in this formula with meaningful variable names (you may wish to reference the `crimenames` object we made above): `$$\hat{y} = b_0 + b_1{x}$$`
+- Copy and paste the provided equation that starts/ends with `$$` into your narrative (not an R code chunk), and replace `y` and `x` in this formula with meaningful variable names (you may wish to reference the `crimenames` object we made above): 
+`$$\hat{y} = b_0 + b_1{x}$$`
+
 $$\hat{\textrm{criminals}} = b_0 + b_1{\textrm{public_houses}}$$
 
 - The “best-fitting” regression line is “best” in that it minimizes what?
@@ -98,7 +101,7 @@ glimpse(crime)
 ```
 
 
-## Look at summary statistics (⏰ 5 min)
+## Look at summary statistics
 
 Use `select` to select only the independent and dependent variables you identified above, then pipe those variables to the `skim` function from the `skimr` package (you should have loaded this package at the top) to see summary statistics for each. Use `dplyr::summarize` to calculate the correlation coefficient. 
 
@@ -114,11 +117,8 @@ crime %>%
   summarize(corr = cor(criminals, public_houses))
 ```
 
-You might notice that the output from `summarize` is rounded! Nice catch. I found this: https://github.com/tidyverse/dplyr/issues/3336
 
-> "The numbers should be accurate, they're only shown with three significant numbers (rounded)."
-
-## Visualize the data (⏰ 5 min)
+## Visualize the data
 
 
 Recreate the scatterplot below of ale/beer houses per 100K on the x-axis and criminals per 100K population on the y-axis. What can you say about the relationship between public houses and criminals based on this exploration?
@@ -133,4 +133,3 @@ ggplot(crime, aes(x = public_houses, y = criminals)) +
 > Do this in three sentences: 
 There seems to be a moderately strong relationship. The slope of the regresion line is positive, also the correlation coefficient of `r round(cor(crime$public_houses, crime$criminals),2)` is moderate. Meaning as public houses increase, there is an associated increase in criminal activity.
 
-![](`r knitr::fig_chunk('crime_scatterplot','png')`)

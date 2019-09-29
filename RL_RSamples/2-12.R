@@ -29,10 +29,12 @@ ggplot(crime, aes(x = public_houses, y = criminals)) +
 
 beerhall_lm <- crime %>%
   lm(criminals ~ public_houses, .)
+beerhall_lm #Okay, but not very informative
 
 get_regression_table(beerhall_lm)
 
-beerhall_lm_pts <- get_regression_points(beerhall_lm)
+
+(beerhall_lm_pts <- get_regression_points(beerhall_lm))
 
 beerhall_lm_pts %>%
   filter(ID == 20 | ID == 23) %>%
@@ -41,12 +43,15 @@ beerhall_lm_pts %>%
 beerhall_lm_pts %>%
   filter(criminals == min(criminals) | residual == min(residual))
 
+
 ggplot(beerhall_lm_pts, aes(x = public_houses, y = residual)) +
   geom_text(aes(label = ID)) +
   geom_hline(yintercept = 0, col = "blue")
 
-#SOOoo risky - need to check resulting df for dups/mismatches, because public_house+criminals is NOT a key
+
+#So, so risky - need to check resulting df for dups/mismatches, because public_house+criminals is NOT a key
 lm_join <- inner_join(beerhall_lm_pts, crime)
+
 
 ggplot(lm_join, aes(x = public_houses, y = residual)) +
   geom_text(aes(label = county)) +
@@ -56,3 +61,4 @@ ggplot(lm_join, aes(x = public_houses, y = residual)) +
 ggplot(beerhall_lm_pts, aes(residual)) +
   geom_density() +
   geom_vline(xintercept = 0, col = "red")
+
