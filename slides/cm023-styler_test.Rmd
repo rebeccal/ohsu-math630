@@ -11,18 +11,20 @@ editor_options:
 
 ```{r setup, include = FALSE}
 # set up global options here
-knitr::opts_chunk$set(fig.width = 4, fig.height = 8, fig.path = 'Figs/', 
-                      warning = FALSE, message = FALSE, eval = FALSE)
+knitr::opts_chunk$set(
+  fig.width = 4, fig.height = 8, fig.path = "Figs/",
+  warning = FALSE, message = FALSE, eval = FALSE
+)
 ```
 
 Install any of these packages if you don't have them.
 
 ```{r load_packages, include = TRUE}
-library(readr) #importing data
-library(janitor) #mainly clean_names function
-library(dplyr) #for manipulating data
-library(ggplot2) #for plotting
-library(broom) #for dealing with lm output
+library(readr) # importing data
+library(janitor) # mainly clean_names function
+library(dplyr) # for manipulating data
+library(ggplot2) # for plotting
+library(broom) # for dealing with lm output
 ```
 
 Your very own linear regression sampler:
@@ -51,8 +53,8 @@ NOTE: equations are auto numbered!
 # Read in the advertising data
 
 ```{r read_csv}
-ad <- read_csv("http://faculty.marshall.usc.edu/gareth-james/ISL/Advertising.csv") %>% 
-  clean_names() %>% 
+ad <- read_csv("http://faculty.marshall.usc.edu/gareth-james/ISL/Advertising.csv") %>%
+  clean_names() %>%
   select(-x1)
 # Look at the object in the Environment tab - Why the "cols()" output?
 ```
@@ -64,8 +66,8 @@ ad <- read_csv("http://faculty.marshall.usc.edu/gareth-james/ISL/Advertising.csv
 # SO many options
 glimpse(ad)
 head(ad)
-tail(ad, n=10)
-skimr::skim(ad) #What's with the '::'
+tail(ad, n = 10)
+skimr::skim(ad) # What's with the '::'
 ```
 
 
@@ -74,8 +76,8 @@ skimr::skim(ad) #What's with the '::'
 Traditionally, the response variable (Y) goes on the y-axis, and the predictor variable (X) goes on the x-axis.
 
 ```{r scatterplot}
-adplot <- ggplot(ad,aes(x=tv, y=sales)) +
-  geom_point() 
+adplot <- ggplot(ad, aes(x = tv, y = sales)) +
+  geom_point()
 adplot
 
 # What if I don't specifiy the variables in aes()? What if no "geom_?"
@@ -88,8 +90,8 @@ Is there a relationship between TV advertising budgets and sales?
 # Find the correlation
 
 ```{r correlation}
-ad %>% 
-  dplyr::summarize(pearson = cor(sales,tv))
+ad %>%
+  dplyr::summarize(pearson = cor(sales, tv))
 ```
 
 Would you quantify the value of correlation calculated above as being:
@@ -119,8 +121,8 @@ Note that the gray region shows the confidence interval around the line. Call th
 Now see what happens when you take away the `method = "lm"` argument (so there is nothing inside the parentheses).
 
 ```{r loess}
-adplot <- ggplot(ad,aes(x=tv, y=sales)) +
-  geom_point() + 
+adplot <- ggplot(ad, aes(x = tv, y = sales)) +
+  geom_point() +
   geom_smooth()
 adplot
 ```
@@ -199,8 +201,8 @@ Try piping this output to the `head()` function to see the first 6 rows.
 Now save the augmented dataframe to a new object called `admod_aug`
 
 ```{r}
-admod_aug <- admod %>%
-  # your code goes here
+admod_aug <- admod %>% 
+# your code goes here
 ```
 
 

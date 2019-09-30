@@ -11,6 +11,7 @@ code,cm041 - Sampling Distributions,slides/cm041_code_along.Rmd
 code,Perfect t-test,https://github.com/Lakens/perfect-t-test
 code,cm045 - Power for one-sample t-test,slides/cm045_code_along.R
 data,beerhall.dat,data/beerhall.dat
+data,Advertising.csv,data/Advertising.csv
 data,Superhero.csv,data/Superhero.csv
 data,fishermen_mercury.csv,data/fishermen_mercury.csv
 data,indicator_age_of_marriage.xlsx,data/indicator_age_of_marriage.xlsx

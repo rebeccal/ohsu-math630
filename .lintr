@@ -1,0 +1,25 @@
+linters: with_defaults(
+      trailing_whitespace_linter = NULL
+  )
+exclusions: list(
+    "data/bakers_dozen.csv",
+    "data/beerhall.dat",
+    "data/cadds.csv",
+    "data/fishermen_mercury.csv",
+    "data/fishermen_mercury_original.csv",
+    "data/indicator_age_of_marriage.xlsx",
+    "data/indicator_alcohol_consumption _20100830.xlsx",
+    "data/Internet_user_per_100.xlsx",
+    "data/life_expectancy_years.xlsx",
+    "data/male_heights.csv",
+    "data/Superhero.csv",
+    "images/00_final-screenshot.png",
+    "images/03.LesMiserables.US.MasteroftheHouse.jpg",
+    "images/2Groups.jpg",
+    "images/Sneetches.bmp",
+    "images/Sneetches2.bmp",
+    "reference/ConditionsofTests.pdf",
+    "reference/SummariesAndDistributions.html",
+    "reference/SummariesAndDistributions.Rmd",
+    "reference/Wasserman-all_of_stats.pdf"
+  )

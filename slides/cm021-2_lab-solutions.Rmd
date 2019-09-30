@@ -1,5 +1,5 @@
 ---
-title: "CM 2.1-2 - Simple linear regression Solutions"
+title: "CM 2.1-2 - Simple linear regression - Solutions"
 subtitle: Math 530/630
 output:
   html_document:
@@ -134,6 +134,9 @@ ggplot(crime, aes(x = public_houses, y = criminals)) +
   geom_smooth(method = "lm", se = FALSE)
 ```
 
+> Do this in three sentences: 
+There seems to be a moderately strong relationship. The slope of the regression line is positive, also the correlation coefficient of `r round(cor(crime$public_houses, crime$criminals),2)` is moderate. Meaning as public houses increase, there is an associated increase in criminal activity.
+
 
 # Simple linear regression: (see [here](https://moderndive.com/5-regression.html#model1table))
 
@@ -148,6 +151,7 @@ crime_lm <- lm(criminals ~ public_houses, data = crime)
 get_regression_table(crime_lm)
 ```
 
+> The intercept anchors the linear model, but is uninterprettable as there are no counties with 0 public house in the data. Both the slope coefficient and the correlation coefficient suggest a positive relationship beween the independent and dependent variable, with the slope showing the expected increase in criminals per 100K population (0.116) as the number of public houses per 100K population increases. Conceptually, the correlation cofficient shows the strength of the linear association between the variables, whereas the slope coefficient shows the expected, on average, magnitude of change in the dependent variable given a unit change in the independent variable.
 
 
 # Observed/fitted values: (see [here](http://moderndive.com/5-regression.html#model1points))
@@ -159,6 +163,8 @@ regression_points <- get_regression_points(crime_lm)
 regression_points %>% 
   filter(ID %in% c(20, 23))
 ```
+
+> The reverend would have used Cornwall as an example, as it has the least criminals and public houses per capita.
 
 **Part 2:** In fact, we could argue with the reverend about the happiest example of the infrequency of crime. There are two ways you could define this. The first way is that the county had the lowest criminals overall. The second is that the county had the lowest criminals *given their number of public houses*. This would mean that the region has the lowest observed criminals, compared to the fitted value based on predicting criminals from public houses. 
 
@@ -176,7 +182,6 @@ regression_points %>%
 ```
 
 
-
 # Residual analysis: (see [here](http://moderndive.com/5-regression.html#model1points))
 
 **Part 1:** Perform a residual analysis and look for any systematic patterns in the residuals. Ideally, there should be little to no pattern- why? Does it seem like there is no systematic pattern to the residuals? 
@@ -188,6 +193,8 @@ ggplot(regression_points, aes(x = public_houses, y = residual)) +
   geom_hline(yintercept = 0, col = "blue", size = 1)
 ```
 
+> A visible pattern in the residuals suggests that the model does not do a good job of explaining the relationship. For this linear model, there is no clear systematic pattern.
+
 **Part 2:** Recreate this density plot of the residuals. Recall that we would like the residuals to be normally distributed with mean 0 (hint: `?geom_vline()`). Use `dplyr` to calculate the mean of the residuals- is it (pretty close to) 0? Do you think you have more positive residuals than negative, or vice versa?
 
 ```{r crime_resid_density, include=TRUE, echo=FALSE}
@@ -197,9 +204,9 @@ ggplot(regression_points, aes(x = residual)) +
   geom_vline(aes(xintercept = 0), color = "red")
 ```
 
-<!-- ![](`r knitr::fig_chunk('crime_resid_density','png')`) -->
 
 ```{r}
 regression_points %>% 
   summarize(mean_resid = mean(residual))
 ```
+> The mean residual is very close to zero, and has more positive residuals than negative (slightly right skewed).
