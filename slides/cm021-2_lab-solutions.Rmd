@@ -77,9 +77,8 @@ Note: you don't need to use R to answer these questions, but please create a sec
 - Copy and paste the provided equation that starts/ends with `$$` into your narrative (not an R code chunk), and replace `y` and `x` in this formula with meaningful variable names (you may wish to reference the `crimenames` object we made above):
 `$$\hat{y} = b_0 + b_1{x}$$`
 
-<!-- The below \textrm doesn't work in pdf format -->
 
-$$\hat{\textrm{criminals}} = b_0 + b_1{\textrm{public_houses}}$$
+$$\hat{criminals} = b_0 + b_1{public\_houses}$$  
 - The “best-fitting” regression line is “best” in that it minimizes what?
 
 > The best-fitting regression is one that minimizes the sum of the squared residuals. Squared residuals are calculated by taking the difference between the observed y values (here, criminals) and the fitted or predicted y values (so y hat!), then squaring each of those differences. The differences are squared so that positive and negative deviations of the same amount are treated equally. 

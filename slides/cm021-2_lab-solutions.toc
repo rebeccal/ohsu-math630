@@ -1,0 +1,10 @@
+\contentsline {section}{Overview}{1}{section*.2}
+\contentsline {section}{The data}{1}{section*.3}
+\contentsline {section}{Basics}{2}{section*.4}
+\contentsline {section}{EDA}{3}{section*.5}
+\contentsline {subsection}{Look at the data}{3}{section*.6}
+\contentsline {subsection}{Look at summary statistics}{3}{section*.7}
+\contentsline {subsection}{Visualize the data}{4}{section*.8}
+\contentsline {section}{Simple linear regression: (see \href {https://moderndive.com/5-regression.html\#model1table}{here})}{5}{section*.9}
+\contentsline {section}{Observed/fitted values: (see \href {http://moderndive.com/5-regression.html\#model1points}{here})}{6}{section*.10}
+\contentsline {section}{Residual analysis: (see \href {http://moderndive.com/5-regression.html\#model1points}{here})}{7}{section*.11}
