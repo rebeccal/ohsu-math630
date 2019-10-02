@@ -45,7 +45,8 @@ comb_choices<- replace_na(comb_choices,list(Groups=0, Preference=0))
 
 
 
-```{r}
+```{r include=FALSE}
+# palce holder to produce a paper list when there are no groups formed
 options(knitr.kable.NA = '')
 paper_data_cleaned %>% 
   kable(format="html", escape=FALSE) %>% 
@@ -55,10 +56,10 @@ paper_data_cleaned %>%
 
 
 ```{r eval=TRUE}
-# Picks so far.... - move this outside the code chunk when ready
+# Picks so far.... - set eval = TRUE when there's data in the spreadsheet
 
 comb_table <- comb_choices %>%
-  group_by(Study, RepoLink, Preference) %>%
+  group_by("Paper" = PaperNum, Study, RepoLink, Preference) %>%
   summarise(n=n()) %>%
   spread(Preference, n)%>%
   select(-`0`)
@@ -66,13 +67,13 @@ comb_table <- comb_choices %>%
 #Should be tidied...
 options(knitr.kable.NA = '')
 kab_table <- kable(comb_table, format="html", escape = FALSE)
-add_header_above(kab_table, c(" " = 2,"Preference (counts)" = 3)) %>% 
+add_header_above(kab_table, c(" " = 3,"Preference (counts)" = 3)) %>% 
     kable_styling(bootstrap_options = c("hover", "condensed"))
 ```
 
 
 ```{r eval=TRUE}
-# Groups - move this outside the code chunk when ready
+# Groups - set eval to TRUE when there is data in the spreadsheet
 options(knitr.kable.NA = '')
 groups %>% 
   kable(align = c('l','c')) %>% 
