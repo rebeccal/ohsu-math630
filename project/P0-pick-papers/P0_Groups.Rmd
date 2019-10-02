@@ -3,8 +3,8 @@ title: "Final Project"
 author: "MATH 530/630"
 subtitle: 'Part 0: Pick Groups and a Paper'
 output:
-  pdf_document: default
   html_document: null
+  pdf_document: default
   code_folding: hide
 ---
 
@@ -15,7 +15,7 @@ output:
 The goal of this project piece is to choose your final project groups and to pick a paper you'll use for your final project. No overlap will be allowed - that is each paper can be used by only one group. Because of this, each group should submit their top 3 choices, and we'll do what we can to accomodate. 
 
 
-NOTE: If the link below does not have the full pdf, you can find the papers using the [OHSU Library](https://www.ohsu.edu/xd/education/library/) .
+NOTE: If the link below does not have the full pdf, you can find the papers using the [OHSU Library](https://www.ohsu.edu/xd/education/library/).
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
@@ -54,7 +54,7 @@ paper_data_cleaned %>%
 ```
 
 
-```{r eval=FALSE}
+```{r eval=TRUE}
 # Picks so far.... - move this outside the code chunk when ready
 
 comb_table <- comb_choices %>%
@@ -71,7 +71,7 @@ add_header_above(kab_table, c(" " = 2,"Preference (counts)" = 3)) %>%
 ```
 
 
-```{r eval=FALSE}
+```{r eval=TRUE}
 # Groups - move this outside the code chunk when ready
 options(knitr.kable.NA = '')
 groups %>% 

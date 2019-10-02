@@ -9,35 +9,7 @@ output:
 
 You are expected to come to each class meeting prepared, which means that you will have done the readings and DataCamp assignments that are due for that date *before* coming to class. 
 
-## Readings
-
-Readings will primarily be from two free, open-source, completely online textbooks:
-
-1. [**MODERN DIVE into Data with R (MD)**](http://moderndive.com) 
-1. [**R for Data Science (R4DS)**](http://r4ds.had.co.nz) 
-
-These books will be supplemented by blog posts, YouTube videos, and several open-access articles, including from:
-
-- A special PEERJ issue called ["Practical Data Science for Stats"](https://peerj.com/collections/50-practicaldatascistats/), and
-- [Nature: Points of Significance](https://www.nature.com/collections/qghhqm/pointsofsignificance)
-
-
-## Ramping Up
-The following tutorial, DataCamp courses, and readings are optional, but will help you come up to speed with the skills you'll need to complete this class. Unless you have strong, recent experience with R, RStudio, RMarkdown and the TidyVerse, I strongly suggest you complete, or at least review, them.
-
-- [Markdown Tutorial](https://www.markdowntutorial.com)
-
-DataCamp
-
-- [Intro the to Tidyverse](https://www.datacamp.com/courses/introduction-to-the-tidyverse)
-- [Working with data in the Tidyverse (long)](https://www.datacamp.com/courses/working-with-data-in-the-tidyverse)
-
-ModernDive
-
-- [MD Ch 1: Getting Started](https://moderndive.com/1-getting-started.html)
-- [MD Ch 2: Data Visualization](https://moderndive.com/2-viz.html)	
-- [MD Ch 3: Data Wrangling](https://moderndive.com/3-wrangling.html)	
-- [MD Ch 4: Tidy Data](https://moderndive.com/4-tidy.html)	
+**NOTE:** General _Readings_ info and _Ramping Up_ recommendations moved to the bottom of the page.
 
 
 ```{r echo = FALSE, message = FALSE, warning = FALSE}
@@ -93,3 +65,33 @@ mtcars$mpg <- paste0("[", mtcars$mpg, "](", urls, ")")
 # print the table, with hyperlinked text
 knitr::kable(head(mtcars))
 ```
+
+## Readings
+
+Readings will primarily be from two free, open-source, completely online textbooks:
+
+1. [**MODERN DIVE into Data with R (MD)**](http://moderndive.com) 
+1. [**R for Data Science (R4DS)**](http://r4ds.had.co.nz) 
+
+These books will be supplemented by blog posts, YouTube videos, and several open-access articles, including from:
+
+- A special PEERJ issue called ["Practical Data Science for Stats"](https://peerj.com/collections/50-practicaldatascistats/), and
+- [Nature: Points of Significance](https://www.nature.com/collections/qghhqm/pointsofsignificance)
+
+
+## Ramping Up
+The following tutorial, DataCamp courses, and readings are optional, but will help you come up to speed with the skills you'll need to complete this class. Unless you have strong, recent experience with R, RStudio, RMarkdown and the TidyVerse, I strongly suggest you complete, or at least review, them.
+
+- [Markdown Tutorial](https://www.markdowntutorial.com)
+
+DataCamp
+
+- [Intro the to Tidyverse](https://www.datacamp.com/courses/introduction-to-the-tidyverse)
+- [Working with data in the Tidyverse (long)](https://www.datacamp.com/courses/working-with-data-in-the-tidyverse)
+
+ModernDive
+
+- [MD Ch 1: Getting Started](https://moderndive.com/1-getting-started.html)
+- [MD Ch 2: Data Visualization](https://moderndive.com/2-viz.html)	
+- [MD Ch 3: Data Wrangling](https://moderndive.com/3-wrangling.html)	
+- [MD Ch 4: Tidy Data](https://moderndive.com/4-tidy.html)	
