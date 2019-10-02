@@ -1,27 +1,27 @@
 Weekday,Month,Day,CM / Block,Reading,material,material_link,px,px_link,i_lab,i_lab_link,hw,hw_link,class_lab,cl_link,staged,,,,notes
 Tues,September,24,1.1: Summarizing data,"<a href='https://r4ds.had.co.nz/workflow-projects.html'>- R4DS: Workflow Projects</a> 
-<br><a href='https://r4ds.had.co.nz/r-markdown.html'>- R4DS: R Markdown</a>",,,,,Lab 00 - Plot Your Name,labs/lab00.html,,,,,,,,,
+<br><a href='https://r4ds.had.co.nz/r-markdown.html'>- R4DS: R Markdown</a>",,,,,iLab 00 - Plot Your Name,labs/lab00.html,,,,,,,,,
 Thurs,September,26,1.2: Visualizing distributions,"<a href='https://r4ds.had.co.nz/data-visualisation.html'>- R4DS: Data Visualisation</a> 
 <br><a href='https://r4ds.had.co.nz/transform.html'>- R4DS: Data Transformation</a>
 <br><a href='https://r4ds.had.co.nz/tidy-data.html'>- R4DS: Tidy Data</a>", Communicating with Data in the Tidyverse,https://www.datacamp.com/courses/communicating-with-data-in-the-tidyverse,,,,,,,,,,,,,
 Tues,October,1,2.1-2: Simple linear regression,"<a href='https://moderndive.com/5-regression.html'>- MD Ch 5: Basic Regression</a>
-<br><a href = 'https://www.nature.com/articles/nmeth.3627'>- Nature POS: SLR</a>",Modeling with Data in the Tidyverse,https://www.datacamp.com/courses/modeling-with-data-in-the-tidyverse,,,Lab 01 - EDA,labs/lab01.html,,,,,,,,,
+<br><a href = 'https://www.nature.com/articles/nmeth.3627'>- Nature POS: SLR</a>",Modeling with Data in the Tidyverse,https://www.datacamp.com/courses/modeling-with-data-in-the-tidyverse,,,iLab 01 - EDA,labs/lab01.html,,,,,,,,,
 Thurs,October,3,2.3: Linear models (general),<a href='http://www.biostathandbook.com/linearregression.html'>- Handbook of Biostatistics: Correlation and Linear Regression</a>,,,,,,,,,2.1-2,slides/cm021-2_lab.html,,,,,
 Tues,October,8,NO CLASS,"<a href='https://www.nature.com/articles/nmeth.2613'>- Nature POS: Uncertainty</a>
 <br><a href='https://www.nature.com/articles/nmeth.2659'>- Nature POS: Error bars</a>
 <br><a href='https://peerj.com/preprints/3139/'>- PEERJ: Data for Collaboration</a>
-",Exploratory Data Analysis Case Study,https://www.datacamp.com/courses/exploratory-data-analysis-in-r-case-study,P0,final_project.html,Lab 01 - Self-assessment,,,,,,,labs/Lab01-example.html,,,
+",Exploratory Data Analysis Case Study,https://www.datacamp.com/courses/exploratory-data-analysis-in-r-case-study,P0,final_project.html,iLab 01 - Self-assessment,labs/Lab01-example.html,,,,,,,,,
 Thurs,October,10,2.4: Multiple regression,"<a href='https://moderndive.com/6-multiple-regression.html'>- MD Ch6: Multiple Regression</a>
 <br><a href = 'https://www.nature.com/articles/nmeth.3665'>- Nature POS: MLR</a>",Categorical Data in the Tidyverse,https://www.datacamp.com/courses/categorical-data-in-the-tidyverse,,,,,HW1,hw/HW1/HW1.pdf,,,,,,,
 Tues,October,15,2.5: LM diagnostics/outliers,"<a href = 'https://www.nature.com/articles/nmeth.3812'>- Nature POS: Outliers</a>
 <br><a href = 'https://www.nature.com/articles/nmeth.3854'>- Nature POS: Diagnostics</a>",Correlation and Regression,https://www.datacamp.com/courses/correlation-and-regression,,,,,,,2.4,,,,slides/cm024_lab.html,,
 Thurs,October ,17,3.1: Probability,<a href=reference/Wasserman-all_of_stats.pdf>- All of Statistics: Chapter 2</a>,Foundations of Probability in R ,https://www.datacamp.com/courses/foundations-of-probability-in-r,P1,final_project.html,,,,,,,,,,,
-Tues,October,22,3.2: Discrete Probability Functions,,,,,,Lab 02 - Linear Regression,,,,,,labs/lab02.html,,,,
+Tues,October,22,3.2: Discrete Probability Functions,,,,,,iLab 02 - Linear Regression,,,,,,labs/lab02.html,,,,
 Thurs,October,24,3.3: Continuous Probability Functions,<a href='https://moderndive.com/7-sampling.html'>- MD Ch 7: Sampling</a>,,,,,,,,,,,,,,,
 Tues,October,29,4.1: Sampling distributions,"<a href='https://moderndive.com/8-confidence-intervals'>- MD  Ch 8: Confidence Intervals</a>
 <br><a href='https://www.nature.com/articles/nmeth.3414'>- Nature POS: Bootstrapping</a>
 <br>Optional:
-<br><a href='https://youtu.be/BCMjVc9ncFo'>- The infer R package (video)</a>",Inference for Numerical Data (use this link),https://www.datacamp.com/courses/inference-for-numerical-data,,,Lab 02 - Self-assessment,,,,,,,labs/lab02-solutions.html,,,
+<br><a href='https://youtu.be/BCMjVc9ncFo'>- The infer R package (video)</a>",Inference for Numerical Data (use this link),https://www.datacamp.com/courses/inference-for-numerical-data,,,iLab 02 - Self-assessment,,,,,,,labs/lab02-solutions.html,,,
 Thurs,October,31,4.2: Bootstrapping (confidence intervals),,,,,,,,HW2,,,,,,,hw/HW2/HW2.pdf,
 Tues,November,5,4.3: Hypothesis testing (resampling),"<a href='https://moderndive.com/9-hypothesis-testing.html'>- MD Ch 9: Hypothesis Testing </a>
 <br><a href='http://moderndive.com/B-appendixB'>- MD Appendix B: Inference Examples</a>",Inference for Categorical Data (use this link),https://www.datacamp.com/courses/inference-for-categorical-data,,,,,,,,,,,,,
@@ -35,16 +35,16 @@ Tues,November,12,"4.5: Errors, Effect Size, and Power","<a  href='https://stats.
 ",Inference for Linear Regression,https://www.datacamp.com/courses/inference-for-linear-regression,,,,,HW3,,,,,,,hw/HW3/HW3.pdf,
 Thurs,November,14,4.6 & 5.1: General Linear Model and Many Means,"<a href='https://www.nature.com/articles/nmeth.3005'>- Nature POS: ANOVA</a>
 <br><a href = 'https://arxiv.org/pdf/1412.3416.pdf'>- ANOVA</a>
-<br><a href=https://www.discoveringstatistics.com/repository/onewayanova.pdf>- Discovering Statistics: One-way Independent ANOVA</a>",,,P2,final_project.html,Lab 03 - Comparing Means,,,,,,labs/lab03.html,,,,
+<br><a href=https://www.discoveringstatistics.com/repository/onewayanova.pdf>- Discovering Statistics: One-way Independent ANOVA</a>",,,P2,final_project.html,iLab 03 - Comparing Means,,,,,,labs/lab03.html,,,,
 Tues,November,19,5.2: ANOVA by hand,<a href='https://www.discoveringstatistics.com/repository/anovabyhand.pdf'>- Discovering Statistics: The Theory of ANOVA</a>,,,,,,,Midterm,,,,,,,,
 Thurs,November,21,"5.3: Contrasts, post-hoc tests, and p-value adjustments","<a href='https://rcompanion.org/rcompanion/h_01.html'>- Contrasts in Linear Models</a>
-<br><a href='https://www.nature.com/articles/nmeth.2900'>- Nature POS: multiple comparisons</a>",,,P3,final_project.html,Lab 03 - Self-assessment,,,,5.2,,,labs/lab03-solutions.html,slides/cm052_lab.html,,
+<br><a href='https://www.nature.com/articles/nmeth.2900'>- Nature POS: multiple comparisons</a>",,,P3,final_project.html,iLab 03 - Self-assessment,,,,5.2,,,labs/lab03-solutions.html,slides/cm052_lab.html,,
 Tues,November,26,5.4: Two-way ANOVA/3-way ANOVA,"<a href='https://www.nature.com/news/scientific-method-statistical-errors-1.14700'>- Nature: p-values</a>
 <br><a href = 'https://fivethirtyeight.com/features/science-isnt-broken/#part1'>- 538: Science Isn't Broken</a>
 <br><a href='https://simplystatistics.org/2012/01/06/p-values-and-hypothesis-testing-get-a-bad-rap-but-we/'>- Simply Statistics blog</a>
 <br><a href='http://daniellakens.blogspot.com/2017/12/understanding-common-misconceptions.html'>- Lakens blog</a>",,,,,,,HW4,,,,,,,hw/HW4/HW4.pdf,
 Thurs,November,28,NO CLASS,,,,,,,,,,,,,,,,
 Tues,December,3,,<a href='http://biostat.mc.vanderbilt.edu/wiki/Main/ManuscriptChecklist'>- Frank Harrell's Manuscript Checklist</a>,,,,,,,,,,,,,,,
-Thurs,December,5,Final presentations,,,,P5,final_project.html,Lab 04 - ANOVA,,,,,,labs/lab04.html,,slides/two-way-anova-cadds.html,,
+Thurs,December,5,Final presentations,,,,P5,final_project.html,iLab 04 - ANOVA,,,,,,labs/lab04.html,,slides/two-way-anova-cadds.html,,
 Tues,December,10,Final presentations,,,,,,,,,,,,,,,,
-Thurs,December,12,Final presentations,,,,P4,final_project.html,Lab 04 - Self-assessment,,,,,,,labs/lab04-solutions.html,,,
+Thurs,December,12,Final presentations,,,,P4,final_project.html,iLab 04 - Self-assessment,,,,,,,labs/lab04-solutions.html,,,

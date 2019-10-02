@@ -13,11 +13,6 @@ output:
       beforeInit: "https://platform.twitter.com/widgets.js"
 ---
 
-<!-- Remember to save 1st, and (uncomment the video) before using render -->
-<!-- rmarkdown::render("slides/cm012.Rmd") -->
-
-
-
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
 options(knitr.table.format = "html") 

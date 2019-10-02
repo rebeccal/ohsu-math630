@@ -1,8 +1,6 @@
 ---
 title: "CM 2.4 - Multiple linear regression"
 subtitle: "Math 530/630"
-#author: "Alison Hill, Chester Ismay, Albert Y. Kim"
-#date: "7/26/2018"
 output: 
   html_document:
     toc: true
@@ -338,6 +336,7 @@ dim_scatter
 
 ```{r include = FALSE}
 
+library(broom)
 #
 hate_model1 <- lm(avg_hatecrimes_per_100k_fbi ~ 
                    gini_index + 
