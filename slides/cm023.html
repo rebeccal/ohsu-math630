@@ -111,8 +111,7 @@ class: center, middle
 `$$\widehat{y} = b_0 + b_1 \cdot x$$`
 &lt;br&gt;
 --
-
-`$$\downarrow$$`
+.center[vs]
 &lt;br&gt;
 --
 
@@ -133,10 +132,13 @@ lm(y ~ x, data = dataframe)
 ???
 - But this only describes the points that are ON the line. 
 - To model data, we need to also explain the relationship of the line to the data points that are off the line  
+- var in y
+  - systematic - what I can predict from the model
+  - leftovers
 - often called `error`,and can be (e.g. measuerment), but is expected - examples??
 
 Notation
-- ~, think as explained by...  
+- ~, think as explained by... or in terms of...  
 - the b's are *least squares estimators* 
 
 ---
@@ -173,7 +175,8 @@ Notation
 
 
 ???
-So, let's see if it matches what we'd expect given our EDA
+- Can transform x or y (more on this later)
+- So, let's see if it matches what we'd expect given our EDA
 
 ---
 ## Interpreting `lm` in R
@@ -195,7 +198,6 @@ So, let's see if it matches what we'd expect given our EDA
 
 ??? 
  - Does the line describe what we see in the data? And match the correlation we saw in the lab?
- - What about at x=0? 
 
 ---
 ## Intercept
@@ -224,6 +226,11 @@ While the intercept has a mathematical interpretation (it situates the vertical 
 
 A solution we'll talk more about is ["centering" your variables](https://besjournals.onlinelibrary.wiley.com/doi/pdf/10.1111/j.2041-210X.2010.00012.x) before using `lm`.
 
+???
+- What about the intercept? 
+  - Needed for best fit to minimize residuals
+  - typically a throw-away. that is there are typically no hypotheses re: the intercept
+
 ---
 
 ## Properties of the least squares regression line
@@ -238,8 +245,14 @@ A solution we'll talk more about is ["centering" your variables](https://besjour
 
 - The sum of the residuals is zero: 
 `$$\sum_{i = 1}^n e_i = 0$$`
+???
+Conditions
+- The residuals and `\(x\)` (and `\(x_i\)`) values are uncorrelated (homoscedastic). 
+  - more specifically, there should be a linear relationship
+- The residuals should be normally distributed
+- iid
 
-&lt;!-- - The residuals and `\(x\)` values are uncorrelated. well, they should be--&gt;
+
 ---
 ## Fitted and residual values
 
@@ -280,6 +293,8 @@ What do you see?
 Caution: extrapolating...
 
 ![](cm023_files/figure-html/unnamed-chunk-6-1.png)&lt;!-- --&gt;
+
+
 ---
 class:center middle
 #[xkcd](https://xkcd.com/)
@@ -290,7 +305,6 @@ class:center middle
 ---
 class: center, middle
 ## Looking at regression another way ...
-
 
 
 `$$\overbrace{y_i}^{observed} = \overbrace{b_0 + b_1 \cdot x_i}^{fitted} + \overbrace{e_i}^{residual}$$`
@@ -325,6 +339,10 @@ class: middle, inverse, center
 --
 
 ## What are we looking for?
+
+???
+- Useful, as in what can it tell me about the relationship of my IV to my DV?
+- Is it a good model?
 
 ---
 
@@ -463,7 +481,9 @@ We are now going to answer this a different way...
 ![](cm023_files/figure-html/fitted_model-1.png)
 
 ???
-An exact association
+- How do we measure "fit"?
+
+
 ---
 ## Sums of Squares Residual
 
@@ -695,7 +715,7 @@ The __"Sums of Squares Model"__ is the total amount of error present when the fi
 total variation = "explained" variation + residual ("left over") variation
 
 ---
-## All of statistics
+## In terms of models...
 
 $$ \textrm{outcome}_i = \textrm{(Model}_i) + \textrm{error}_i$$
 

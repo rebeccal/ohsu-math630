@@ -12,7 +12,7 @@
 
 <meta name="author" content="Student Name" />
 
-<meta name="date" content="2019-09-29" />
+<meta name="date" content="2019-10-02" />
 
 <title>Linear Regression</title>
 
@@ -365,7 +365,7 @@ summary {
 
 <h1 class="title toc-ignore">Linear Regression</h1>
 <h4 class="author">Student Name</h4>
-<h4 class="date">2019-09-29</h4>
+<h4 class="date">2019-10-02</h4>
 
 </div>
 
@@ -452,7 +452,7 @@ adplot</code></pre>
 <p>Note that this output is not very “tidy”. What different “sections” of output do you see?</p>
 <p>[your answer goes here:]</p>
 <ol style="list-style-type: decimal">
-<li>formual</li>
+<li>formula</li>
 <li>Residuals</li>
 <li>Coefficients</li>
 <li>Model level statistics</li>
@@ -462,35 +462,37 @@ adplot</code></pre>
 <div id="examine-the-model-statistics" class="section level1">
 <h1>Examine the model statistics</h1>
 <p>Use <code>broom::glance</code> to examine the model statistics like <span class="math inline">\(R^2\)</span>, the F-statistic, etc. Here, there is one row for each model so it is <em>tidy</em>.</p>
-<pre class="r"><code>glance()</code></pre>
+<pre class="r"><code>glance(___)</code></pre>
 <p>Go back to the output from the <code>summary()</code> function: how does the output of <code>broom::glance()</code> differ from that of <code>summary()</code>?</p>
 <p>[your answer goes here]</p>
 </div>
 <div id="examine-the-model-components" class="section level1">
 <h1>Examine the model components</h1>
 <p>Use <code>broom::tidy</code> to examine the model components like coefficients and their p-values. Here, each row corresponds to a coefficient (the intercept term + predictors) so it is <em>tidy</em>.</p>
-<pre class="r"><code>tidy()</code></pre>
+<pre class="r"><code>tidy(___)</code></pre>
 <p>Go back to the output from the <code>summary()</code> function: how does the output of <code>broom::tidy()</code> differ from that of <code>summary()</code>?</p>
 <p>[your answer goes here]</p>
 </div>
 <div id="examine-the-observations" class="section level1">
 <h1>Examine the observations</h1>
 <p>Use <code>broom::augment</code> to examine the observation-level statistics like fitted values, residuals, etc. Here, each row is an observation in the original dataset so it is <em>tidy</em>.</p>
-<pre class="r"><code>augment()</code></pre>
+<pre class="r"><code>augment(___)</code></pre>
 <p>This probably printed something very long to your console.</p>
 <p>Try piping this output to the <code>head()</code> function to see the first 6 rows.</p>
 <pre class="r"><code># your code goes here</code></pre>
 <p>Now save the augmented dataframe to a new object called <code>admod_aug</code></p>
-<pre class="r"><code>admod %&gt;% 
-  # your code goes here</code></pre>
+<pre class="r"><code>admod_aug &lt;- admod %&gt;%
+    # your code goes here</code></pre>
 </div>
 <div id="plot-the-residuals" class="section level1">
 <h1>Plot the residuals</h1>
-<p>In general you’d like your residuals to looks symmetrically (e.g. approximately Normally) distributed but they aren’t here. Outliers in the residuals aren’t great either.</p>
-<pre class="r"><code>ggplot(admod_aug, aes(x = , y = ))</code></pre>
-<p>What do you think? Is this a good candidate for linear regression?</p>
+<p>In general you’d like your residuals to look symmetrically distributed (e.g. approximately Normally).</p>
+<pre class="r"><code>ggplot(admod_aug, aes(x = .fitted, y = .resid)) +
+  geom_point()</code></pre>
+<p>But they aren’t in this case. Outliers in the residuals aren’t great either. What do you think? Is this a good candidate for linear regression?</p>
 <p>Another way to see the relationship</p>
-<pre class="r"><code>autoplot(admod)</code></pre>
+<pre class="r"><code>library(ggfortify)
+autoplot(admod)</code></pre>
 </div>
 <div id="if-we-have-time" class="section level1">
 <h1>If we have time:</h1>
