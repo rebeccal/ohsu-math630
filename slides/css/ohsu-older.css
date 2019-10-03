@@ -1,14 +1,39 @@
 /*
-OHSU-themed CSS for xaringan slides - designed to work with robot
-Rebecca Lunsford
-Updated: 2019-10-01
+OHSU-themed CSS for xaringan slides 
+Author: Alison Presmanes Hill
+Updated: 2018-03-22
 */
 
 
 
+body {
+  color: #585E60;
+}
+
+h1, h2, h3 {
+  font-weight: normal;
+  color: #0054A6;
+}
+
+a, a > code {
+  color: #3498CC;
+  text-decoration: none;
+}
+
+.remark-code {
+  color: #3498CC;
+}
+
+.remark-inline-code { 
+  color: #3498CC;
+}
+
+.remark-code-line-highlighted { 
+  background-color: rgba(052, 152, 204, 0.4); 
+}
 
 .inverse {
-  background-color: #5E97C9;
+  background-color: #0054A6;
   color: #FFFFFF;
   /*text-shadow: 0 0 20px #333;*/
 }

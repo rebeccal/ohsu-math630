@@ -161,7 +161,7 @@ We'll come back to this topic later.
 Use `broom::glance` to examine the model statistics like $R^2$, the F-statistic, etc. Here, there is one row for each model so it is *tidy*.
 
 ```{r}
-glance()
+glance(___)
 ```
 
 Go back to the output from the `summary()` function: how does the output of `broom::glance()` differ from that of `summary()`?
@@ -173,7 +173,7 @@ Go back to the output from the `summary()` function: how does the output of `bro
 Use `broom::tidy` to examine the model components like coefficients and their p-values. Here, each row corresponds to a coefficient (the intercept term + predictors) so it is *tidy*.
 
 ```{r}
-tidy()
+tidy(___)
 ```
 
 Go back to the output from the `summary()` function: how does the output of `broom::tidy()` differ from that of `summary()`?
@@ -185,7 +185,7 @@ Go back to the output from the `summary()` function: how does the output of `bro
 Use `broom::augment` to examine the observation-level statistics like fitted values, residuals, etc. Here, each row is an observation in the original dataset so it is *tidy*.
 
 ```{r}
-augment()
+augment(___)
 ```
 
 This probably printed something very long to your console. 
@@ -200,7 +200,7 @@ Now save the augmented dataframe to a new object called `admod_aug`
 
 ```{r}
 admod_aug <- admod %>%
-  # your code goes here
+    # your code goes here
 ```
 
 
@@ -219,6 +219,7 @@ What do you think? Is this a good candidate for linear regression?
 
 Another way to see the relationship
 ```{r autoplot}
+library(ggfortify)
 autoplot(admod)
 ```
 

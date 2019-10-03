@@ -6,7 +6,7 @@ Thurs,September,26,1.2: Visualizing distributions,"<a href='slides/cm012.html'> 
 <br> <a href = 'reference/SummariesAndDistributions.html'>Distributions and Summary Statistics</a>",,,,,,,,,NA,Conj  or DV?
 ,Week ,Two-Five,2.0 Linear Regression,,,,,,,,,,,
 Tues,October,1,2.1-2: Simple linear regression,,Lab 2.1-2,slides/cm021-2_lab.html,,,,,,,10/24/2017 (Slide deck 7);10/19/2017(SLR:55:00),cm021& 022 (in class lab)
-Thurs,October,3,2.3: Linear models (general),,CM2.3 Code-along,,<a href='slides/cm023.html'>2.3  - Linear Models</a>,CM2.3 Code-along,slides/cm023-code_along.Rmd,,,,,cm023 (slide deck)
+Thurs,October,3,2.3: Linear models (general),<a href='slides/cm023.html'>2.3  - Linear Models</a>,CM2.3 Code-along,slides/cm023-code_along.Rmd,<a href='slides/cm023.html'>2.3  - Linear Models</a>,CM2.3 Code-along,slides/cm023-code_along.Rmd,,,,,cm023 (slide deck)
 Tues,October,8,NO CLASS,,,,,,,,,,,
 Thurs,October,10,2.4: Multiple regression,,Lab 2.4,,,Lab 2.4,slides/cm024_lab.html,,,,,cm024 (in class lab)
 Tues,October,15,2.5: LM diagnostics/outliers,,,,<a href='slides/cm025.html'>2.5 - LM Diagnostics and Outliers</a>,,,,,,10/31/2017,Slide deck 09 from fall 2017 - cm025-026 slides and cm025 lab

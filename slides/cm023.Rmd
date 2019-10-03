@@ -3,7 +3,7 @@ title: "Math 530/630 CM 2.3"
 subtitle: "Coding Style and Linear Models"
 output:
   xaringan::moon_reader:
-    css: ["default", "css/ohsu.css", "css/ohsu-fonts.css"]
+    css: ["default", "robot", "robot-fonts", "css/ohsu.css", "css/ohsu-fonts.css"]
     header-includes:
     - \usepackage[amsmath]{amsmath}
     lib_dir: libs
@@ -117,20 +117,17 @@ Where:
 * the intercept coefficient is $b_0$, or the value of $\widehat{y}$ when $x=0$, and 
 * the slope coefficient $b_1$, or the increase in $\widehat{y}$ for every increase of one in $x$.
 
----
-class: center, middle
-## Let's break down this formula
-
-$$\widehat{y} = b_0 + b_1 \cdot x$$
-
-<br>
---
 
 $$\downarrow$$
 <br>
 --
 
 $$\overbrace{\widehat{y}}^{fitted} = \overbrace{b_0}^{intercept} + \overbrace{b_1}^{slope} \cdot x$$
+
+???
+
+Notation:  
+  - hat means "fitted".
 
 ---
 class: center, middle
@@ -157,6 +154,15 @@ $$\downarrow$$
 lm(y ~ x, data = dataframe) 
 ```
 
+???
+- But this only describes the points that are ON the line. 
+- To model data, we need to also explain the relationship of the line to the data points that are off the line  
+- often called `error`,and can be (e.g. measuerment), but is expected - examples??
+
+Notation
+- ~, think as explained by...  
+- the b's are *least squares estimators* 
+
 ---
 ## `lm` in R
 
@@ -177,7 +183,10 @@ $$\widehat{\textrm{criminals}} = 109.34 + .12~\textrm{public_houses}$$
 --
 
 - **Intercept:** Counties with 0 public houses are expected to have crime rates at 109.34 per 100k people, on average.
-    - Does this make sense?
+
+
+???
+So, let's see if it matches what we'd expect given our EDA
 
 ---
 ## Interpreting `lm` in R
@@ -199,7 +208,12 @@ $$\widehat{\textrm{criminals}} = 109.34 + .12~\textrm{public_houses}$$
 
 - **Intercept:** Counties with 0 public houses are expected to have crime rates at 109.34 per 100k people, on average.
     - Does this make sense?
-    
+
+
+??? 
+ - Does the line describe what we see in the data? And match the correlation we saw in the lab?
+ - What about at x=0? 
+
 ---
 ## Intercept
 
@@ -213,6 +227,7 @@ crime %>%
 ```
 
 While the intercept has a mathematical interpretation (it situates the vertical location of the line), it may not always have a practical one.
+
 
 --
 
@@ -233,7 +248,7 @@ $$b_1 = r \frac{s_y}{s_x}$$
 - The sum of the residuals is zero: 
 $$\sum_{i = 1}^n e_i = 0$$
 
-- The residuals and $x$ values are uncorrelated.
+<!-- - The residuals and $x$ values are uncorrelated. well, they should be-->
 ---
 ## Fitted and residual values
 
@@ -269,54 +284,31 @@ ggplot(crime, aes(x = public_houses, y = criminals)) +
   coord_cartesian(xlim = c(0, 1000)) +
   scale_x_continuous(expand=c(0,0), limits=c(0,1000))
 ```
+---
+class:center middle
+#[xkcd](https://xkcd.com/)
+
+![](https://imgs.xkcd.com/comics/extrapolating.png)
+
 
 ---
 class: center, middle
-## Break the formula down once more...
+## Looking at regression another way ...
 
 
-$$y = b_0 + b_1 \cdot x + e$$
+
+$$\overbrace{y_i}^{observed} = \overbrace{b_0 + b_1 \cdot x_i}^{fitted} + \overbrace{e_i}^{residual}$$
 <br>
 --
-
 $$\downarrow$$
 <br>
 --
-
-$$\overbrace{y}^{observed} = \overbrace{b_0 + b_1 \cdot x}^{fitted} + \overbrace{e}^{residual}$$
-
+$$\overbrace{y_i}^{outcome} = \overbrace{b_0 + b_1 \cdot x_i}^{model} + \overbrace{e_i}^{error}$$
 <br>
 --
-
 $$\downarrow$$
-
-<br>
 --
-
-$$\overbrace{y}^{outcome} = \overbrace{b_0 + b_1 \cdot x}^{model} + \overbrace{e}^{error}$$
-
----
-class: center, middle
-## All of statistics
-
-
-$$\overbrace{y}^{outcome} = \overbrace{b_0 + b_1 \cdot x}^{model} + \overbrace{e}^{error}$$
-
-<br>
---
-
-$$\downarrow$$
-
-<br>
---
-
 $$\textrm{outcome}_i = \textrm{(Model}_i) + \textrm{error}_i$$
-<br>
---
-
-$$\downarrow$$
-
-<br>
 --
 
 > *"All models are wrong but some are useful"* -George Box
@@ -353,6 +345,7 @@ of country-to-county variability, or perhaps just that randomness plays a big ro
 - Adding more explanatory variables to a model can sometimes usefully reduce
 the size of the scatter around the model. (We'll talk more about this later.)
 
+
 ---
 ## Scatterplot of the residuals<sup>1</sup>
 
@@ -372,6 +365,10 @@ ggplot(crime_pts, aes(x = public_houses, y = residual)) +
 [1] From [ModernDive](http://moderndive.netlify.com/6-regression.html#model1residuals)
 
 ]
+
+???
+- Different scatter shapes (NOT heteroscedastic)
+- Skewed (need some big and some little) 
 
 
 ---
@@ -408,7 +405,7 @@ ggplot(crime_pts, aes(x = residual)) +
 
 ---
 class: center, middle
-## All of statistics
+## Modeling 
 
 
 $$\overbrace{y}^{outcome} = \overbrace{b_0 + b_1 \cdot x}^{model} + \overbrace{e}^{error}$$
@@ -432,6 +429,10 @@ $$\downarrow$$
 
 > *"All models are wrong but some are useful"* -George Box
 
+
+???
+- Another way of looking at the error 
+- how far off is your model from the actual data?
 ---
 class: middle, inverse, center
 
@@ -442,7 +443,7 @@ We are now going to answer this a different way...
 
 
 ---
-## Residuals
+## Model and Outcome
 
 $$\textrm{error}_i = \textrm{outcome}_i - \textrm{(Model}_i)$$
 
@@ -463,7 +464,7 @@ ggplot(crime, aes(public_houses, criminals)) +
 
 
 ---
-## Residuals
+## Model and Outcome
 
 $$\textrm{error}_i = \textrm{outcome}_i - \textrm{(Model}_i)$$
 
@@ -477,17 +478,19 @@ $$\textrm{error}_i = \textrm{outcome}_i - \textrm{(Model}_i)$$
 ---
 ## What is the "model" saying?
 
-"The bright blue points are what we would expect to see if there was `___` a `___` of `r round(cor(crime$criminals, crime$public_houses), 2)` between `public_houses` and `criminals`"
+- The correlation coeeficient between `public_houses` and `criminals` is `r round(cor(crime$criminals, crime$public_houses), 2)` 
+- What would r be using only the bright blue dots?
 
 ![](`r knitr::fig_chunk('fitted_model','png')`)
 
+???
+An exact association
 ---
 ## Sums of Squares Residual
 
 The total amount of error present when the best-fitting linear model is applied to the data. 
 
 $$SS_{residual} = \sum{e_i^2} = \sum{(y_i - \hat{y_i})^2}$$
---
 
 ```{r ss_resid, echo = FALSE, out.width='75%'}
 ss_resid <- ggplot(crime, aes(public_houses, criminals)) +
@@ -506,6 +509,9 @@ ss_resid <- ggplot(crime, aes(public_houses, criminals)) +
 ss_resid
 ```
 
+
+???
+Does this look familiar (kinda like variance)
 
 ---
 ## Least squares regression
@@ -528,7 +534,7 @@ If $e_i = y_i - \hat{y_i}$,
 then, the regression line minimizes $SS_{residual} = \sum_{i = 1}^n e_i^2$.
 
 ---
-class:middle, inverse, center
+class: middle, inverse, center
 
 ## The `SS Residual` compares the best-fitting linear model to the *true (unknown) data-generating model*
 
@@ -549,7 +555,7 @@ crime_scatter
 ---
 ## Hint
 
-I ask you to guess how many criminals are in county X, but I don't tell you how many public houses there are.
+How many criminals would you predict are in county X, if you don't know how many public houses there are?
 
 ![](`r knitr::fig_chunk('basic_lm','png')`)
 ---
@@ -598,14 +604,13 @@ $$\textrm{error}_i = \textrm{outcome}_i - \textrm{(Model}_i)$$
 1. What is the "outcome"? $y_i$ (dark blue dots)
 1. What is the "model"? $\bar{y}$ (turquoise dots)
 
---
 
 ![](`r knitr::fig_chunk('mean_model','png')`)
 
 ---
 ## What is this "model" saying?
 
-Ignore the regression line/predicted points
+_(Ignore the regression line for now)_
 
 What would the magnitude of the differences between the observed `criminals` values and the mean value tell us? *(remember what we said the mean line represented: `___` correlation between variables)*
 
@@ -628,6 +633,10 @@ ss_total <- ggplot(crime, aes(x = public_houses, y = criminals)) +
   labs(subtitle = NULL, title = NULL)
 ss_total
 ```
+
+???
+Define the SST equation together?
+
 ---
 ## What about spread?
 
@@ -687,7 +696,7 @@ $$SS_{total} = \sum{(y_i - \bar{y})^2}$$
 ## A thought experiment...3 "models"?
 
 1. Zero association between the variables (aka, the mean / null model)
-2. An exact association of `r round(cor(crime$criminals, crime$public_houses), 2)` between the variables
+2. An exact association (b_1 = 0.1162) of between the variables
 3. The true (but always unknown) data-generating model
 
 ```{r echo = FALSE}
@@ -710,6 +719,10 @@ ggplot(crime, aes(public_houses, criminals)) +
              shape = 21) +
   labs(subtitle = NULL, title = NULL)
 ```
+
+
+???
+What do I think y is based on each model?
 
 
 ---
