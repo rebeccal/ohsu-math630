@@ -11,8 +11,8 @@ editor_options:
 
 ```{r setup, include = FALSE}
 # set up global options here
-knitr::opts_chunk$set(fig.width = 4, fig.height = 8, fig.path = 'Figs/', 
-                      warning = FALSE, message = FALSE, eval = FALSE)
+knitr::opts_chunk$set(fig.width = 4, fig.height = 4, fig.path = 'Figs/', 
+                      warning = FALSE, message = FALSE, eval = TRUE)
 ```
 
 Install any of these packages if you don't have them.
@@ -221,7 +221,7 @@ But they aren’t in this case. Outliers in the residuals aren’t great either.
 What do you think? Is this a good candidate for linear regression? 
 
 Another way to see the relationship
-```{r autoplot}
+```{r autoplot, fig.width = 8, fig.height = 8}
 library(ggfortify)
 autoplot(admod)
 
@@ -245,12 +245,11 @@ admod_aug %>%
          SSM = sum((.fitted - mean(sales))^2),
          R2 = SSM/SST
          )
-glance()
+glance(admod)
 
 ```
 
 [your answer here]
-
 
 # Build an intercept-only model and compare models
 

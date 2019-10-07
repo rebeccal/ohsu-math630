@@ -8,6 +8,7 @@ cheatsheet,Base-R,https://github.com/rstudio/cheatsheets/raw/master/baser.pdf
 cheatsheet,Summaries and Distributions,reference/SummariesAndDistributions.html
 cheatsheet,Assumptions/Conditions for Hypothesis Tests and Confidence Intervals,reference/ConditionsofTests.pdf
 code,CM 2.1-2 - Linear Regression.R,slides/2-12.R
+code,CM 2.3 Code-along - Linear Regression and Sum of Squares,slides/cm023-code_along-done.Rmd
 code,Perfect t-test,https://github.com/Lakens/perfect-t-test
 data,beerhall.dat,data/beerhall.dat
 data,Advertising.csv,data/Advertising.csv
