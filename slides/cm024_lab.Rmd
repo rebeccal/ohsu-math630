@@ -12,26 +12,23 @@ output:
 ```{r setup, include=FALSE}
 # leave this chunk alone
 options(knitr.table.format = "html") 
-knitr::opts_chunk$set(warning = FALSE, message = FALSE, 
-  comment = NA, dpi = 300)
+knitr::opts_chunk$set(warning = FALSE, message = FALSE,
+  comment = NA, fig.width = 4, fig.height = 4)
 ```
 
 
 # Logistics
 
 - A complete knitted `html` file is due on Sakai by beginning of the next class. 
-- This lab is structured to be similar to this [Case Study on Seattle House Prices from ModernDive](https://moderndive.com/12-thinking-with-data.html#seattle-house-prices). Please open it and follow along with both datasets!
+- This lab is structured to be similar to this [Case Study on Seattle House Prices from ModernDive](https://moderndive.com/11-thinking-with-data.html#seattle-house-prices). Please open it and follow along with both datasets!
 - The structure of this lab is as follows:
-  - In class, we'll walk through the univariate EDA steps for 3 key variables:
-      - the outcome variable
-      - a numeric predictor variable
-  - In the lab, you'll do:
-      - First 20 min: interpret EDA Part I (univariate)
-      - Next 20 min: do EDA Part II (bivariate)
-      - Last 20 min: fit a regression model, obtain the regression table, and attempt to interpret the three values that define the regression plane
-  - In the next lab, you'll do: 
-      - Analysis of observed/fitted values and residuals following [ModernDive](http://moderndive.com/7-multiple-regression.html#model3points)
-      - Residual analysis following [ModernDive](http://moderndive.com/7-multiple-regression.html#model3residuals)
+  - In the lab, you'll:
+      - Complete and interpret EDA Part I (univariate)
+      - Complete and interpret EDA Part II (bivariate)
+      - Fit a regression model, obtain the regression table, and attempt to interpret the three values that define the regression plane
+  - In the next class, together we'll review the above models and: 
+      - Perform analysis of observed/fitted values and residuals following [ModernDive](https://moderndive.com/6-multiple-regression.html#model3points)
+      - Explore residual analysis following [ModernDive](https://moderndive.com/6-multiple-regression.html#model3residuals)
       
 
 # Overview
@@ -88,11 +85,11 @@ ggplot(filter(hate_crimes, !state == "District of Columbia"),
   geom_smooth(method = "lm")
 ```
 
-# EDA, Part I (⏰ 20 min)
+# EDA, Part I
 
-Recall that a [new exploratory data analysis](http://moderndive.com/6-regression.html#model1EDA) involves three things:
+Recall that a [new exploratory data analysis](https://moderndive.com/5-regression.html#model1EDA) involves three things:
 
-* Looking at the raw values.
+* Looking at the raw values and the structure of the data.
 * Computing summary statistics of the variables of interest.
 * Creating informative visualizations.
 
@@ -111,13 +108,13 @@ At this stage, you may also find your want to use `filter`, `mutate`, `arrange`,
 
 - How many states are here? Are they all "states"?
 
-```{r}
+```{r eval=FALSE}
 glimpse(hate_crimes)
 ```
 
 - How many rows do we have per state? Is there ever more than 1 row per state?
 
-```{r}
+```{r eval=FALSE}
 hate_crimes %>% 
   count(state, sort = TRUE)
 ```
@@ -133,9 +130,9 @@ hate_demo <- hate_crimes %>%
          share_vote_trump) 
 ```
 
-Following the narrative in [ModernDive](http://moderndive.com/7-multiple-regression.html#model3EDA), write a few sentences describing the output here.
+Following the narrative in [ModernDive](https://moderndive.com/6-multiple-regression.html#model3EDA), write a few sentences describing the output here.
 
-```{r}
+```{r eval=FALSE}
 skim(hate_demo)
 ```
 
@@ -143,16 +140,33 @@ skim(hate_demo)
 
 First let's look at the outcome variable:
 
-```{r}
+```{r eval=FALSE}
 # Density of hate crimes (DV):
 ggplot(hate_demo, aes(x = avg_hatecrimes_per_100k_fbi)) +
   geom_density() +
   labs(x = "", title = "Hate Crimes")
 ```
+```{r include=FALSE}
+ggplot(hate_demo, aes( y = avg_hatecrimes_per_100k_fbi, x=NA)) + 
+  geom_boxplot(outlier.shape = NA) + 
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank()) +
+  geom_dotplot(binaxis = 'y', 
+               stackdir = 'center', 
+               stackratio = 1.5, 
+               binwidth = .1,
+               dotsize = 2,
+               alpha = .75, 
+               fill = "lightseagreen", 
+               colour = "lightseagreen",
+               na.rm = TRUE) 
+```
+
 
 Next we'll look at our three explanatory variables as continuous:
 
-```{r}
+```{r eval=FALSE}
 # Histogram of share_pop_hs (IV):
 ggplot(hate_demo, aes(x = share_pop_hs)) +
   geom_density() +
@@ -182,13 +196,13 @@ hate_demo <- hate_demo %>%
   select(-share_vote_trump)
 ```
 
-> Following the narrative in [ModernDive](http://moderndive.com/12-thinking-with-data.html#house-prices-EDA-I), write a few sentences describing the output here.
+> Following the narrative in [ModernDive](https://moderndive.com/11-thinking-with-data.html#house-prices-EDA-I), write a few sentences describing the output here.
 
-# EDA, Part II (⏰ 20 min)
+# EDA, Part II
 
 Part I of this EDA was univariate in nature in that we only considered one variable at a time. The goal of modeling, however, is to explore relationships between variables. Specifically, we care about bivariate relationships between pairs of variables. But with 1 outcome and 3 explanatory variables, that means we have $3 \times 2 = 6$ correlations to compute. 
 
-For simple regression, we calculated correlation coefficients between the outcome and explanatory variables. For [multiple regression](http://moderndive.com/7-multiple-regression.html#model3EDA), your EDA should involve multiple correlation coefficients. We'll use the `cor()` function to do this. You'll want to first `select` only numeric variables first.
+For simple regression, we calculated correlation coefficients between the outcome and explanatory variables. For [multiple regression](https://moderndive.com/6-multiple-regression.html#model3EDA), your EDA should involve multiple correlation coefficients. We'll use the `cor()` function to do this. You'll want to first `select` only numeric variables first.
 
 Use this code as an example:
 
@@ -200,7 +214,7 @@ data %>%
 
 To produce this output:
 
-```{r echo = FALSE}
+```{r eval = TRUE, echo = FALSE}
 hate_demo %>% 
   select(-state, -cat_trump) %>% 
   cor()
@@ -236,7 +250,7 @@ data %>%
 
 We also want to create scatterplots to see the association between each pair of variables in the model (both between the explanatory and the outcome, but also between all explanatory variables with each other). Let's start with the `gini_index`:
 
-```{r echo = FALSE}
+```{r echo = FALSE, eval=TRUE}
 ggplot(hate_demo, aes(x = gini_index, y = avg_hatecrimes_per_100k_fbi)) +
   geom_point() +
   geom_text(data = filter(hate_demo, state == "District of Columbia"), 
@@ -244,7 +258,7 @@ ggplot(hate_demo, aes(x = gini_index, y = avg_hatecrimes_per_100k_fbi)) +
 ```
 
 
-We could actually do all of this with one function! We'll use `GGally::ggpairs()` to create a pairwise comparison of multivariate data. This includes what is known as a "Generalized Pairs Plot," which is an improved version of a [scatterplot matrix](https://www.rdocumentation.org/packages/graphics/versions/3.5.1/topics/pairs). This function provides two different comparisons of each pair of columns, and displays either the density (continuous numeric) or count (factors) of the respective variable along the diagonal. You can read more about the function and package [here](http://ggobi.github.io/ggally/#ggallyggpairs). 
+That's a lot of plots! However, we can actually do all of these comparisons with one function! We'll use `GGally::ggpairs()` to create a pairwise comparison of multivariate data. This includes what is known as a "Generalized Pairs Plot" which is an improved version of a [scatterplot matrix](https://www.rdocumentation.org/packages/graphics/versions/3.5.1/topics/pairs). This function provides two different comparisons of each pair of columns, and displays either the density (continuous numeric) or count (factors) of the respective variable along the diagonal. You can read more about the function and package [here](http://ggobi.github.io/ggally/#ggallyggpairs). 
 
 There are three pieces to the output: `lower`, `upper`, and `diag`. Read more about the sections of the [matrix here](http://ggobi.github.io/ggally/#matrix_sections).
 
@@ -265,7 +279,7 @@ hate_demo %>%
 
 And here is some demo output of how to use it using a dataset called `tips`:
 
-```{r}
+```{r include=TRUE}
 data(tips, package = "reshape")
 tips %>% 
   select(total_bill, time, tip) %>% 
@@ -274,7 +288,7 @@ tips %>%
 
 And it builds from `ggplot2`, so you can add aesthetic mappings for color, etc. Hurray!
 
-```{r}
+```{r include = TRUE}
 tips %>% 
   ggpairs(., aes(color = sex),
           columns = c("total_bill", "time", "tip"))
@@ -282,7 +296,7 @@ tips %>%
 
 > Calculate all the correlation coefficients.
 > Make a `ggpairs` plot between all explanatory and outcome variables.
-> Following this narrative in [ModernDive](http://moderndive.com/7-multiple-regression.html#model3EDA), write a few sentences describing the output here.
+> Following this narrative in [ModernDive](https://moderndive.com/6-multiple-regression.html#model3EDA), write a few sentences describing the output here.
 
 ```{r include = FALSE}
 hate_demo %>% 
@@ -296,7 +310,7 @@ hate_demo %>%
   ggpairs(., aes(color=cat_trump))
 ```
 
-# Multiple regression models  (⏰ 20 min)
+# Multiple regression models
 
 Do the following:
 
@@ -306,12 +320,12 @@ Do the following:
     1. One numerical / one categorical interaction model (`gini_index` and `cat_trump`)
     1. Two numerical predictors with a `*` (`gini_index` and `share_pop_hs`)
 - Sketch out the *modeling equation* for your model (not in your R Markdown)
-    - Parallel slopes example [here](http://moderndive.com/7-multiple-regression.html#model4table)
-    - Interaction model [here](http://moderndive.com/7-multiple-regression.html#model4interactiontable)
+    - Parallel slopes example [here](https://moderndive.com/6-multiple-regression.html#model4table)
+    - Interaction model [here](https://moderndive.com/6-multiple-regression.html#model4interactiontable)
 - Interpret the output from the regression table (in complete sentences, but you may use bullet points to organize)
-    - Parallel slopes example [here](http://moderndive.com/7-multiple-regression.html#model4table)
-    - Interaction model [here](http://moderndive.com/7-multiple-regression.html#model4interactiontable)
-- Compare the coefficients from your multiple regression model to the "simple" correlation coefficients for each variable. Recall that in a simple linear regression: 
+    - Parallel slopes example [here](https://moderndive.com/6-multiple-regression.html#model4table)
+    - Interaction model [here](https://moderndive.com/6-multiple-regression.html#model4interactiontable)
+- Compare the coefficients from your multiple regression model to the "simple" correlation coefficients for each explanatory variable. Recall that in a simple linear regression: 
 
 $$b_{x_1} = r_{x_1~y} ~\frac{s_y}{s_{x_1}}$$
 
