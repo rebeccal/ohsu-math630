@@ -1,11 +1,13 @@
 ---
 title: "CM 2.4 - Multiple linear regression"
-subtitle: "Math 530/630"
-output: 
+subtitle: Math 530/630
+output:
   html_document:
-    toc: true
-    toc_float: true
-    number_sections: true
+    number_sections: yes
+    toc: yes
+    toc_float: yes
+  pdf_document:
+    toc: yes
 ---
 
 
