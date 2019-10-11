@@ -149,8 +149,24 @@ ggplot(hate_demo, aes(x = avg_hatecrimes_per_100k_fbi)) +
   labs(x = "", title = "Hate Crimes")
 ```
 ```{r include=FALSE}
+#Boxplot with jittered green dots, and the x-axis text blanked
 ggplot(hate_demo, aes( y = avg_hatecrimes_per_100k_fbi, x=NA)) + 
   geom_boxplot(outlier.shape = NA) + 
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank()) +
+  geom_dotplot(binaxis = 'y', 
+               stackdir = 'center', 
+               stackratio = 1.5, 
+               binwidth = .1,
+               dotsize = 2,
+               alpha = .75, 
+               fill = "lightseagreen", 
+               colour = "lightseagreen",
+               na.rm = TRUE) 
+
+ggplot(hate_demo, aes( y = avg_hatecrimes_per_100k_fbi, x=NA)) + 
+  geom_violin(trim = FALSE) + 
   theme(axis.title.x=element_blank(),
         axis.text.x=element_blank(),
         axis.ticks.x=element_blank()) +

@@ -25,7 +25,7 @@ ggplot(swiss,aes(x=Examination, y=Agriculture)) +
   geom_text(aes(label=rownames(swiss)))
 
 
-lm_swiss <-lm(Agriculture ~Examination,swiss)
+lm_swiss <-lm(Agriculture ~ Examination,swiss)
 tidy(lm_swiss)
 glance(lm_swiss)
 
@@ -93,8 +93,8 @@ hat_ish <- lm_swiss_aug %>%
 hat_ish #matches!
 
 #Fitted
-betas <- ols_estimator%*%swiss$Fertility 
-lm_swiss_fitted <-hat_matrix %*% lm_swiss_aug$Fertility
+betas <- ols_estimator%*%swiss$Agriculture 
+lm_swiss_fitted <-hat_matrix %*% lm_swiss_aug$Agriculture
 
 
 #More Outliers - discrepancy via studentized residuals
@@ -130,5 +130,7 @@ residuals(fit)[1] # The residual when OLS includes data point.
 lev = 1 - (residuals(fit)[1]/(mtcars[1,'mpg'] -  y_hat_without)) # Leverage
 all.equal(diag(hat2_matrix)[1],lev) #TRUE
 
+# And, for all of the hat values
+hatvalues(fit) #Just the hats. ma'am.
 augment(fit)
 

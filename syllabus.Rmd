@@ -3,9 +3,9 @@ title: "Syllabus - Probability & Statistical Inference for Scientists and Engine
 author: 'Instructor: Rebecca Lunsford'
 date: "September 24, 2019"
 output:
+  pdf_document: default
   html_document:
     df_print: paged
-  pdf_document: default
 subtitle: MATH 530/630; Fall 2019
 always_allow_html: yes
 ---
@@ -92,7 +92,7 @@ iLabs grades will be based on:
 * 8 points for each initial solution being "in good faith""
 
     - 8: answer reflects strong independent problem solving, with clearly thought out attempts to approach the problem and a diligent and honest effort to find the solution.
-    - 6: answer reflects some attempt to approach the problem, but approach appears to be superficial and lacks depth of analysis.
+    - 4: answer reflects some attempt to approach the problem, but approach appears to be superficial and lacks depth of analysis.
 
 * 12 points for the quality of the final solution / discussion.
 

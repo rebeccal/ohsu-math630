@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
   <head>
     <title>Math 530/630: CM 2.5</title>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link rel="stylesheet" href="css\ohsu.css" type="text/css" />
     <link rel="stylesheet" href="css\ohsu-fonts.css" type="text/css" />
@@ -46,8 +46,9 @@ glimpse(hate_crimes)
 
 ```
 Observations: 51
-Variables: 12
+Variables: 13
 $ state                       &lt;chr&gt; "Alabama", "Alaska", "Arizona", "A...
+$ state_abbrev                &lt;chr&gt; "AL", "AK", "AZ", "AR", "CA", "CO"...
 $ median_house_inc            &lt;int&gt; 42278, 67629, 49254, 44922, 60487,...
 $ share_unemp_seas            &lt;dbl&gt; 0.060, 0.064, 0.063, 0.052, 0.059,...
 $ share_pop_metro             &lt;dbl&gt; 0.64, 0.63, 0.90, 0.69, 0.97, 0.80...
@@ -147,14 +148,14 @@ get_regression_table(hate_two_c)
 
 ```
 # A tibble: 3 x 7
-  term              estimate std_error statistic p_value lower_ci upper_ci
-  &lt;chr&gt;                &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
-1 intercept             2.36     0.187     12.7        0     1.99     2.74
-2 I(gini_index - m~    64.3     11.1        5.79       0    42.0     86.7 
-3 I(share_pop_hs -~    31.3      6.81       4.59       0    17.6     45.0 
+  term               estimate std_error statistic p_value lower_ci upper_ci
+  &lt;chr&gt;                 &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+1 intercept              2.36     0.187     12.7        0     1.99     2.74
+2 I(gini_index - me~    64.3     11.1        5.79       0    42.0     86.7 
+3 I(share_pop_hs - ~    31.3      6.81       4.59       0    17.6     45.0 
 ```
 
-Centered: `\(\widehat{\textrm{avg_crimes}} = 2.36 + 64.3*\textrm{centred(gini_index)} + 31.3*\textrm{centered(share_pop_hs)}\)`
+Centered: `\(\widehat{\textrm{avg_crimes}} = 2.36 + 64.3*\textrm{centered(gini_index)} + 31.3*\textrm{centered(share_pop_hs)}\)`
 
 Raw: `\(\widehat{\textrm{avg_crimes}} = -54 + 64.3*\textrm{gini_index} + 31.3*\textrm{share_pop_hs}\)`
 
@@ -173,15 +174,15 @@ get_regression_table(hate_two_z)
 
 ```
 # A tibble: 3 x 7
-  term              estimate std_error statistic p_value lower_ci upper_ci
-  &lt;chr&gt;                &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
-1 intercept             2.36     0.187     12.7        0    1.99      2.74
-2 scale(gini_index)     1.34     0.232      5.79       0    0.877     1.81
-3 scale(share_pop_~     1.07     0.232      4.59       0    0.599     1.53
+  term               estimate std_error statistic p_value lower_ci upper_ci
+  &lt;chr&gt;                 &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+1 intercept              2.36     0.187     12.7        0    1.99      2.74
+2 scale(gini_index)      1.34     0.232      5.79       0    0.877     1.81
+3 scale(share_pop_h~     1.07     0.232      4.59       0    0.599     1.53
 ```
 z-scored: `\(\widehat{\textrm{avg_crimes}} = 2.36 + 1.34*\textrm{scaled(gini_index)} + 1.07*\textrm{scaled(share_pop_hs)}\)`
 
-Centered: `\(\widehat{\textrm{avg_crimes}} = 2.36 + 64.3*\textrm{centred(gini_index)} + 31.3*\textrm{centered(share_pop_hs)}\)`
+Centered: `\(\widehat{\textrm{avg_crimes}} = 2.36 + 64.3*\textrm{centered(gini_index)} + 31.3*\textrm{centered(share_pop_hs)}\)`
 
 Raw: `\(\widehat{\textrm{avg_crimes}} = -54 + 64.3*\textrm{gini_index} + 31.3*\textrm{share_pop_hs}\)`
 
@@ -191,7 +192,7 @@ Raw: `\(\widehat{\textrm{avg_crimes}} = -54 + 64.3*\textrm{gini_index} + 31.3*\t
 ## Model 1: Two numerical predictors
 &lt;!-- Raw: `\(\widehat{\textrm{avg_crimes}} = -54 + 64.3~ \textrm{gini_index} + 31.3~\textrm{share_pop_hs}\)` --&gt;
 
-&lt;!-- Centered: `\(\widehat{\textrm{avg_crimes}} = 2.36 + 64.3~ \textrm{centred(gini_index)} + 31.3~\textrm{centered(share_pop_hs)}\)` --&gt;
+&lt;!-- Centered: `\(\widehat{\textrm{avg_crimes}} = 2.36 + 64.3~ \textrm{centered(gini_index)} + 31.3~\textrm{centered(share_pop_hs)}\)` --&gt;
 
 &lt;!-- z-score: `\(\widehat{\textrm{avg_crimes}} = 2.36 + 1.34~ \textrm{scaled(gini_index)} + 1.07~\textrm{scaled(share_pop_hs)}\)` --&gt;
 
@@ -203,7 +204,7 @@ broom::glance(hate_two)
 ```
 # A tibble: 1 x 11
   r.squared adj.r.squared sigma statistic p.value    df logLik   AIC   BIC
-*     &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 1     0.432         0.408  1.32      17.9 1.67e-6     3  -83.2  174.  182.
 # ... with 2 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;
 ```
@@ -215,7 +216,7 @@ broom::glance(hate_two_c)
 ```
 # A tibble: 1 x 11
   r.squared adj.r.squared sigma statistic p.value    df logLik   AIC   BIC
-*     &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 1     0.432         0.408  1.32      17.9 1.67e-6     3  -83.2  174.  182.
 # ... with 2 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;
 ```
@@ -227,7 +228,7 @@ broom::glance(hate_two_z)
 ```
 # A tibble: 1 x 11
   r.squared adj.r.squared sigma statistic p.value    df logLik   AIC   BIC
-*     &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 1     0.432         0.408  1.32      17.9 1.67e-6     3  -83.2  174.  182.
 # ... with 2 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;
 ```
@@ -247,11 +248,11 @@ get_regression_table(hate_para)
 
 ```
 # A tibble: 3 x 7
-  term              estimate std_error statistic p_value lower_ci upper_ci
-  &lt;chr&gt;                &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
-1 intercept          -12.1       4.98      -2.44   0.019   -22.2    -2.12 
-2 gini_index          32.5      10.9        2.99   0.004    10.7    54.4  
-3 cat_trumpmore th~   -0.511     0.449     -1.14   0.261    -1.42    0.393
+  term               estimate std_error statistic p_value lower_ci upper_ci
+  &lt;chr&gt;                 &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+1 intercept           -12.1       4.98      -2.44   0.019   -22.2    -2.12 
+2 gini_index           32.5      10.9        2.99   0.004    10.7    54.4  
+3 cat_trumpmore tha~   -0.511     0.449     -1.14   0.261    -1.42    0.393
 ```
 
 
@@ -264,14 +265,14 @@ get_regression_table(hate_para)
 `$$\widehat{\textrm{avg_crimes}} = -12.1 + 32.5*\textrm{gini_index} - 0.51*\textrm{cat_trump}$$`
 
 
-&lt;img src="images/lm-whiteboard-process.jpg" width="60%" /&gt;
+&lt;img src="images/lm-whiteboard-process.jpg" height="90%" /&gt;
 
 
 
 ---
 ## Model 2: Parallel slopes
 
-&lt;img src="cm025_files/figure-html/unnamed-chunk-9-1.png" width="60%" /&gt;
+&lt;img src="cm025_files/figure-html/unnamed-chunk-9-1.png" height="90%" /&gt;
 
 ---
 ## Model 3: Interaction model
@@ -288,12 +289,12 @@ get_regression_table(hate_int)
 
 ```
 # A tibble: 4 x 7
-  term              estimate std_error statistic p_value lower_ci upper_ci
-  &lt;chr&gt;                &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
-1 intercept            -20.4      5.66     -3.61   0.001   -31.8     -9.02
-2 gini_index            50.6     12.4       4.10   0        25.7     75.5 
-3 cat_trumpmore th~     25.7     10.0       2.56   0.014     5.53    45.9 
-4 gini_index:cat_t~    -57.9     22.1      -2.62   0.012  -102.     -13.4 
+  term               estimate std_error statistic p_value lower_ci upper_ci
+  &lt;chr&gt;                 &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+1 intercept             -20.4      5.66     -3.61   0.001   -31.8     -9.02
+2 gini_index             50.6     12.4       4.10   0        25.7     75.5 
+3 cat_trumpmore tha~     25.7     10.0       2.56   0.014     5.53    45.9 
+4 gini_index:cat_tr~    -57.9     22.1      -2.62   0.012  -102.     -13.4 
 ```
 
 ---
@@ -301,7 +302,7 @@ get_regression_table(hate_int)
 ## Model 3: Interaction model
 
 `$$\widehat{\textrm{avg_crimes}} = -20.4 + 50.6*\textrm{gini_index} + 25.7*\textrm{cat_trump} -57.9*\textrm{(gini_index)(cat_trump)}$$`
-&lt;img src="images/lm-whiteboard-3models.jpg" width="60%" /&gt;
+&lt;img src="images/lm-whiteboard-3models.jpg" height="90%" /&gt;
 
 ---
 ## Model 3: Interaction model
@@ -310,14 +311,14 @@ get_regression_table(hate_int)
 
 `$$\widehat{\textrm{avg_crimes}_{trump=0}} = -20.4 + 50.6*\textrm{gini_index}$$`
 
-&lt;img src="images/lm-whiteboard-3models.jpg" width="60%" /&gt;
+&lt;img src="images/lm-whiteboard-3models.jpg" height="90%" /&gt;
 
 ---
 
 ## Visualize interaction model
 
 
-&lt;img src="cm025_files/figure-html/unnamed-chunk-13-1.png" width="60%" /&gt;
+&lt;img src="cm025_files/figure-html/unnamed-chunk-13-1.png" height="90%" /&gt;
 
 
 ---
@@ -325,19 +326,19 @@ get_regression_table(hate_int)
 
 Would this be easier to interpret after centering the predictor `gini_index`?
 
-`$$\widehat{\textrm{avg_crimes}_{trump=1}} = 2.54 - 7.3*\textrm{gini_index}$$`
+`$$\widehat{\textrm{avg_crimes}_{trump=1}} = 1.98 - 7.3*\textrm{gini_index}$$`
 
-`$$\widehat{\textrm{avg_crimes}_{trump=0}} = 1.98 + 50.6*\textrm{gini_index}$$`
+`$$\widehat{\textrm{avg_crimes}_{trump=0}} = 2.54 + 50.6*\textrm{gini_index}$$`
 
 
 ```
 # A tibble: 4 x 7
-  term              estimate std_error statistic p_value lower_ci upper_ci
-  &lt;chr&gt;                &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
-1 intercept            2.54      0.299      8.49   0         1.94    3.14 
-2 I(gini_index - m~   50.6      12.4        4.10   0        25.7    75.5  
-3 cat_trumpmore th~   -0.562     0.424     -1.32   0.192    -1.42    0.292
-4 I(gini_index - m~  -57.9      22.1       -2.62   0.012  -102.    -13.4  
+  term               estimate std_error statistic p_value lower_ci upper_ci
+  &lt;chr&gt;                 &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+1 intercept             2.54      0.299      8.49   0         1.94    3.14 
+2 I(gini_index - me~   50.6      12.4        4.10   0        25.7    75.5  
+3 cat_trumpmore tha~   -0.562     0.424     -1.32   0.192    -1.42    0.292
+4 I(gini_index - me~  -57.9      22.1       -2.62   0.012  -102.    -13.4  
 ```
 
 
@@ -345,7 +346,7 @@ Would this be easier to interpret after centering the predictor `gini_index`?
 ---
 ## Model 3: Center predictors
 
-&lt;img src="cm025_files/figure-html/unnamed-chunk-15-1.png" width="60%" /&gt;
+&lt;img src="cm025_files/figure-html/unnamed-chunk-15-1.png" height="90%" /&gt;
 
 ---
 ## Model 4: Continuous interaction
@@ -362,12 +363,12 @@ get_regression_table(hate_cont)
 
 ```
 # A tibble: 4 x 7
-  term              estimate std_error statistic p_value lower_ci upper_ci
-  &lt;chr&gt;                &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
-1 intercept             42.9      171.     0.25    0.803    -302.     387.
-2 gini_index          -147.       374.    -0.395   0.695    -900.     605.
-3 share_pop_hs         -78.6      194.    -0.405   0.687    -469.     312.
-4 gini_index:share~    241.       424.     0.567   0.573    -613.    1094.
+  term               estimate std_error statistic p_value lower_ci upper_ci
+  &lt;chr&gt;                 &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+1 intercept              42.9      171.     0.25    0.803    -302.     387.
+2 gini_index           -147.       374.    -0.395   0.695    -900.     605.
+3 share_pop_hs          -78.6      194.    -0.405   0.687    -469.     312.
+4 gini_index:share_~    241.       424.     0.567   0.573    -613.    1094.
 ```
 
 &lt;br&gt;
@@ -384,12 +385,12 @@ get_regression_table(hate_cont)
 
 ```
 # A tibble: 4 x 7
-  term              estimate std_error statistic p_value lower_ci upper_ci
-  &lt;chr&gt;                &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
-1 intercept             42.9      171.     0.25    0.803    -302.     387.
-2 gini_index          -147.       374.    -0.395   0.695    -900.     605.
-3 share_pop_hs         -78.6      194.    -0.405   0.687    -469.     312.
-4 gini_index:share~    241.       424.     0.567   0.573    -613.    1094.
+  term               estimate std_error statistic p_value lower_ci upper_ci
+  &lt;chr&gt;                 &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+1 intercept              42.9      171.     0.25    0.803    -302.     387.
+2 gini_index           -147.       374.    -0.395   0.695    -900.     605.
+3 share_pop_hs          -78.6      194.    -0.405   0.687    -469.     312.
+4 gini_index:share_~    241.       424.     0.567   0.573    -613.    1094.
 ```
 
 ```r
@@ -399,7 +400,7 @@ broom::glance(hate_cont)
 ```
 # A tibble: 1 x 11
   r.squared adj.r.squared sigma statistic p.value    df logLik   AIC   BIC
-*     &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 1     0.436         0.399  1.33      11.9 7.05e-6     4  -83.1  176.  186.
 # ... with 2 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;
 ```
@@ -419,6 +420,24 @@ broom::glance(hate_cont)
 --
 Confused variance!
 
+---
+# An unreliable check
+
+```r
+cor(hate_demo$gini_index, hate_demo$share_pop_hs)
+```
+
+```
+[1] -0.5920518
+```
+
+```r
+ggplot(hate_demo, aes(y=gini_index, x=share_pop_hs)) +
+         geom_point()
+```
+
+&lt;img src="cm025_files/figure-html/unnamed-chunk-18-1.png" height="90%" /&gt;
+
 
 ---
 ## Model 4: Continuous interaction - Collinearity
@@ -435,18 +454,18 @@ hate_cont_z &lt;- lm(avg_hatecrimes_per_100k_fbi ~
 
 ```
 # A tibble: 4 x 7
-  term              estimate std_error statistic p_value lower_ci upper_ci
-  &lt;chr&gt;                &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
-1 intercept            2.46      0.256     9.62    0        1.95     2.98 
-2 scale(gini_index)    1.29      0.254     5.06    0        0.775    1.80 
-3 scale(share_pop_~    1.04      0.238     4.36    0        0.56     1.52 
-4 scale(gini_index~    0.171     0.302     0.567   0.573   -0.437    0.779
+  term               estimate std_error statistic p_value lower_ci upper_ci
+  &lt;chr&gt;                 &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+1 intercept             2.46      0.256     9.62    0        1.95     2.98 
+2 scale(gini_index)     1.29      0.254     5.06    0        0.775    1.80 
+3 scale(share_pop_h~    1.04      0.238     4.36    0        0.56     1.52 
+4 scale(gini_index)~    0.171     0.302     0.567   0.573   -0.437    0.779
 ```
 
 ```
 # A tibble: 1 x 11
   r.squared adj.r.squared sigma statistic p.value    df logLik   AIC   BIC
-*     &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 1     0.436         0.399  1.33      11.9 7.05e-6     4  -83.1  176.  186.
 # ... with 2 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;
 ```
@@ -577,11 +596,11 @@ get_regression_table(hate_mod)
 
 ```
 # A tibble: 3 x 7
-  term              estimate std_error statistic p_value lower_ci upper_ci
-  &lt;chr&gt;                &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
-1 intercept          -12.1       4.98      -2.44   0.019   -22.2    -2.12 
-2 gini_index          32.5      10.9        2.99   0.004    10.7    54.4  
-3 cat_trumpmore th~   -0.511     0.449     -1.14   0.261    -1.42    0.393
+  term               estimate std_error statistic p_value lower_ci upper_ci
+  &lt;chr&gt;                 &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+1 intercept           -12.1       4.98      -2.44   0.019   -22.2    -2.12 
+2 gini_index           32.5      10.9        2.99   0.004    10.7    54.4  
+3 cat_trumpmore tha~   -0.511     0.449     -1.14   0.261    -1.42    0.393
 ```
 
 ---
@@ -685,12 +704,12 @@ hate_diag %&gt;%
 ---
 ## Plot leverage against `x`
 
-&lt;img src="cm025_files/figure-html/unnamed-chunk-26-1.png" width="70%" /&gt;
+&lt;img src="cm025_files/figure-html/unnamed-chunk-27-1.png" width="70%" height="90%" /&gt;
 
 ---
 ## Plot leverage against `x`
 
-&lt;img src="cm025_files/figure-html/unnamed-chunk-27-1.png" width="70%" /&gt;
+&lt;img src="cm025_files/figure-html/unnamed-chunk-28-1.png" width="70%" height="90%" /&gt;
 
 ---
 class: middle, inverse, center
@@ -837,7 +856,7 @@ Do you have any observations with both high leverage and high discrepancy?
 ---
 ###Leverage and Discrepancy
 
-&lt;img src="cm025_files/figure-html/plot_leverageXdiscrepancy-1.png" width="60%" /&gt;
+&lt;img src="cm025_files/figure-html/plot_leverageXdiscrepancy-1.png" height="90%" /&gt;
 
 ---
 class: middle, inverse, center
@@ -887,21 +906,21 @@ hate_diag %&gt;%
 ---
 ## Plot leverage versus Cook's D
 
-&lt;img src="cm025_files/figure-html/unnamed-chunk-34-1.png" width="60%" /&gt;
+&lt;img src="cm025_files/figure-html/unnamed-chunk-35-1.png" height="90%" /&gt;
 
 ---
 ## Plot leverage versus discrepancy, and Cook's D
 
-&lt;img src="cm025_files/figure-html/unnamed-chunk-35-1.png" width="60%" /&gt;
+&lt;img src="cm025_files/figure-html/unnamed-chunk-36-1.png" height="90%" /&gt;
 ---
 ## Parallel slopes with and without DC
 
-&lt;img src="cm025_files/figure-html/unnamed-chunk-36-1.png" width="60%" /&gt;
+&lt;img src="cm025_files/figure-html/unnamed-chunk-37-1.png" height="90%" /&gt;
 
 ---
 ## Interaction model with and without DC
 
-&lt;img src="cm025_files/figure-html/unnamed-chunk-37-1.png" width="60%" /&gt;
+&lt;img src="cm025_files/figure-html/unnamed-chunk-38-1.png" height="90%" /&gt;
 
 ---
 ## Specific measures of influence - DFBETAS
@@ -968,7 +987,7 @@ library(ggfortify)
 autoplot(hate_mod, label.size = 3)
 ```
 
-&lt;img src="cm025_files/figure-html/unnamed-chunk-41-1.png" width="60%" /&gt;
+&lt;img src="cm025_files/figure-html/unnamed-chunk-42-1.png" height="90%" /&gt;
 
 ---
 ##How to read autoplot
@@ -1057,6 +1076,7 @@ line, about 95% of then will be within 2 RMSE of the regression line.
   * The advantage of RMSE metric is that it is more "normalized". Specifically, SSE will increase depending on the amount of the data. 
   * The MSE would not depend on the amount of the data, but the RMSE also expresses the error in the same units as y.
     </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script src="https://platform.twitter.com/widgets.js"></script>
 <script>var slideshow = remark.create({
@@ -1067,16 +1087,74 @@ line, about 95% of then will be within 2 RMSE of the regression line.
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));
 });
-(function() {
-  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
   if (!r) return;
   s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
   d.head.appendChild(s);
-})();</script>
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
 
 <script>
 (function() {
-  var i, text, code, codes = document.getElementsByTagName('code');
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
   for (i = 0; i < codes.length;) {
     code = codes[i];
     if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
@@ -1090,14 +1168,15 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     }
     i++;
   }
-})();
+};
+slideshow._releaseMath(document);
 </script>
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
 (function () {
   var script = document.createElement('script');
   script.type = 'text/javascript';
-  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
   if (location.protocol !== 'file:' && /^https?:/.test(script.src))
     script.src  = script.src.replace(/^https?:/, '');
   document.getElementsByTagName('head')[0].appendChild(script);

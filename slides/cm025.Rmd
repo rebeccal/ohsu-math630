@@ -13,15 +13,15 @@ output:
       beforeInit: "https://platform.twitter.com/widgets.js"
 ---
 ```{r notes, include=FALSE}
-#This slide deck combines CONJ cm025, cm026 (not ont the CONJ CM page), and the cm025 in-class lab.
+#This slide deck combines CONJ cm025, cm026 (not on the CONJ CM page), and the cm025 in-class lab.
 ```
 
 
-```{r setup, include=FALSE}
+```{r setup, echo=FALSE}
 # leave this chunk alone
 options(knitr.table.format = "html") 
 knitr::opts_chunk$set(warning = FALSE, message = FALSE, 
-  comment = NA, dpi = 300, out.width = '60%')
+  comment = NA, dpi = 600, out.height = '90%')
 ```
 
 ```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
@@ -128,7 +128,7 @@ hate_two_c <- lm(avg_hatecrimes_per_100k_fbi ~
 get_regression_table(hate_two_c)
 ```
 
-Centered: $\widehat{\textrm{avg_crimes}} = 2.36 + 64.3*\textrm{centred(gini_index)} + 31.3*\textrm{centered(share_pop_hs)}$
+Centered: $\widehat{\textrm{avg_crimes}} = 2.36 + 64.3*\textrm{centered(gini_index)} + 31.3*\textrm{centered(share_pop_hs)}$
 
 Raw: $\widehat{\textrm{avg_crimes}} = -54 + 64.3*\textrm{gini_index} + 31.3*\textrm{share_pop_hs}$
 
@@ -145,7 +145,7 @@ get_regression_table(hate_two_z)
 ```
 z-scored: $\widehat{\textrm{avg_crimes}} = 2.36 + 1.34*\textrm{scaled(gini_index)} + 1.07*\textrm{scaled(share_pop_hs)}$
 
-Centered: $\widehat{\textrm{avg_crimes}} = 2.36 + 64.3*\textrm{centred(gini_index)} + 31.3*\textrm{centered(share_pop_hs)}$
+Centered: $\widehat{\textrm{avg_crimes}} = 2.36 + 64.3*\textrm{centered(gini_index)} + 31.3*\textrm{centered(share_pop_hs)}$
 
 Raw: $\widehat{\textrm{avg_crimes}} = -54 + 64.3*\textrm{gini_index} + 31.3*\textrm{share_pop_hs}$
 
@@ -155,7 +155,7 @@ Raw: $\widehat{\textrm{avg_crimes}} = -54 + 64.3*\textrm{gini_index} + 31.3*\tex
 ## Model 1: Two numerical predictors
 <!-- Raw: $\widehat{\textrm{avg_crimes}} = -54 + 64.3~ \textrm{gini_index} + 31.3~\textrm{share_pop_hs}$ -->
 
-<!-- Centered: $\widehat{\textrm{avg_crimes}} = 2.36 + 64.3~ \textrm{centred(gini_index)} + 31.3~\textrm{centered(share_pop_hs)}$ -->
+<!-- Centered: $\widehat{\textrm{avg_crimes}} = 2.36 + 64.3~ \textrm{centered(gini_index)} + 31.3~\textrm{centered(share_pop_hs)}$ -->
 
 <!-- z-score: $\widehat{\textrm{avg_crimes}} = 2.36 + 1.34~ \textrm{scaled(gini_index)} + 1.07~\textrm{scaled(share_pop_hs)}$ -->
 
@@ -271,7 +271,7 @@ knitr::include_graphics("images/lm-whiteboard-3models.jpg")
 ## Visualize interaction model
 
 
-```{r echo = FALSE}
+```{r echo = FALSE, fig.width = 8, fig.height = 6}
 ggplot(hate_demo, aes(x = gini_index, 
                       y = avg_hatecrimes_per_100k_fbi,
                       color = cat_trump)) +
@@ -306,7 +306,7 @@ get_regression_table(hate_int)
 ---
 ## Model 3: Center predictors
 
-```{r echo = FALSE}
+```{r echo = FALSE, fig.width = 8, fig.height = 6}
 ggplot(hate_demo, aes(x = (gini_index - mean(gini_index)), 
                       y = avg_hatecrimes_per_100k_fbi,
                       color = cat_trump)) +
@@ -355,6 +355,14 @@ broom::glance(hate_cont)
 
 --
 Confused variance!
+
+---
+# An unreliable check
+```{r include=TRUE}
+cor(hate_demo$gini_index, hate_demo$share_pop_hs)
+ggplot(hate_demo, aes(y=gini_index, x=share_pop_hs)) +
+         geom_point()
+```
 
 
 ---
