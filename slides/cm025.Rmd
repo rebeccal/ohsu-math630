@@ -1,6 +1,6 @@
 ---
 title: "Math 530/630: CM 2.5"
-subtitle: "Outliers & Diagnostics"
+subtitle: "LM Interpretation, Outliers & Diagnostics"
 #author: "Alison Hill"
 output:
   xaringan::moon_reader:
@@ -16,15 +16,13 @@ output:
 #This slide deck combines CONJ cm025, cm026 (not on the CONJ CM page), and the cm025 in-class lab.
 ```
 
-
 ```{r setup, echo=FALSE}
-# leave this chunk alone
 options(knitr.table.format = "html") 
 knitr::opts_chunk$set(warning = FALSE, message = FALSE, 
-  comment = NA, dpi = 600, out.height = '90%')
+  comment = NA, dpi = 300, out.width = '60%')
 ```
 
-```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+```{r packages, echo=FALSE}
 library(tidyverse)
 library(moderndive)
 library(extrafont)
@@ -35,20 +33,7 @@ library(fivethirtyeight)
 library(ggfortify)
 ```
 
-
-## Packages
-
-```{r load_packages, eval = FALSE}
-library(fivethirtyeight) 
-library(moderndive)
-library(skimr)
-library(tidyverse)
-library(GGally) 
-library(broom)
-```
-
----
-## Data
+## Starting with the lab from last class...
 
 ```{r}
 glimpse(hate_crimes)
@@ -58,8 +43,9 @@ glimpse(hate_crimes)
 ---
 ## Pre-processing
 
-```{r}
-hate_demo <- hate_crimes %>%
+```{r out.width = '50%'}
+# Pare it down to just what we need
+hate_demo <- hate_crimes %>% 
   select(state, avg_hatecrimes_per_100k_fbi, share_pop_hs, gini_index, share_vote_trump) %>%
   mutate(
     cat_trump = case_when(
@@ -69,18 +55,6 @@ hate_demo <- hate_crimes %>%
   mutate(cat_trump = as.factor(cat_trump)) %>% 
   select(-share_vote_trump)
 ```
-
----
-class: middle, center, inverse
-
-## Your turn
-
-As groups, discuss your model output: 
-
-(1) look at the regression table, and 
-
-(2) attempt to interpret the three values that define the regression plane
-
 
 ---
 ## Model 1: Two numerical predictors
@@ -143,7 +117,7 @@ hate_two_z <- lm(avg_hatecrimes_per_100k_fbi ~
 
 get_regression_table(hate_two_z)
 ```
-z-scored: $\widehat{\textrm{avg_crimes}} = 2.36 + 1.34*\textrm{scaled(gini_index)} + 1.07*\textrm{scaled(share_pop_hs)}$
+z-scores: $\widehat{\textrm{avg_crimes}} = 2.36 + 1.34*\textrm{scaled(gini_index)} + 1.07*\textrm{scaled(share_pop_hs)}$
 
 Centered: $\widehat{\textrm{avg_crimes}} = 2.36 + 64.3*\textrm{centered(gini_index)} + 31.3*\textrm{centered(share_pop_hs)}$
 
@@ -206,8 +180,10 @@ $$\widehat{\textrm{avg_crimes}} = -12.1 + 32.5*\textrm{gini_index} - 0.51*\textr
 knitr::include_graphics("images/lm-whiteboard-process.jpg")
 ```
 
+--
 
-
+$$\widehat{\textrm{avg_crimes}}_{cat\_trump_0} = -12.1 + 32.5*\textrm{gini_index}$$
+$$\widehat{\textrm{avg_crimes}}_{cat\_trump_1} = -12.61 + 32.5*\textrm{gini_index}$$
 ---
 ## Model 2: Parallel slopes
 
@@ -237,7 +213,7 @@ ggplot(hate_demo, aes(x = gini_index, y = avg_hatecrimes_per_100k_fbi, col = cat
 ---
 ## Model 3: Interaction model
 
-```{r}
+```{r out.width = '50%'}
 hate_int <- lm(avg_hatecrimes_per_100k_fbi ~ 
                    gini_index* 
                    cat_trump,
@@ -250,28 +226,22 @@ get_regression_table(hate_int)
 
 ## Model 3: Interaction model
 
-$$\widehat{\textrm{avg_crimes}} = -20.4 + 50.6*\textrm{gini_index} + 25.7*\textrm{cat_trump} -57.9*\textrm{(gini_index)(cat_trump)}$$
+$$\widehat{avg\_crimes} = -20.4 + 50.6*gini\_index + 25.7*cat\_trump \\- 57.9*gini\_index*cat\_trump$$
 ```{r echo = FALSE}
 knitr::include_graphics("images/lm-whiteboard-3models.jpg")
 ```
 
----
-## Model 3: Interaction model
+--
 
-$$\widehat{\textrm{avg_crimes}_{trump=1}} = 5.3 - 7.3*\textrm{gini_index}$$
+$$\widehat{avg\_crimes_{cat\_trump=0}} = -20.4 + 50.6*gini\_index$$
+$$\widehat{avg\_crimes_{cat\_trump=1}} = 5.3 - 7.3*gini\_index$$
 
-$$\widehat{\textrm{avg_crimes}_{trump=0}} = -20.4 + 50.6*\textrm{gini_index}$$
-
-```{r echo = FALSE}
-knitr::include_graphics("images/lm-whiteboard-3models.jpg")
-```
 
 ---
 
 ## Visualize interaction model
 
-
-```{r echo = FALSE, fig.width = 8, fig.height = 6}
+```{r echo = FALSE, out.width = '60%'}
 ggplot(hate_demo, aes(x = gini_index, 
                       y = avg_hatecrimes_per_100k_fbi,
                       color = cat_trump)) +
@@ -306,7 +276,7 @@ get_regression_table(hate_int)
 ---
 ## Model 3: Center predictors
 
-```{r echo = FALSE, fig.width = 8, fig.height = 6}
+```{r echo = FALSE, out.width = '60%'}
 ggplot(hate_demo, aes(x = (gini_index - mean(gini_index)), 
                       y = avg_hatecrimes_per_100k_fbi,
                       color = cat_trump)) +
@@ -357,15 +327,6 @@ broom::glance(hate_cont)
 Confused variance!
 
 ---
-# An unreliable check
-```{r include=TRUE}
-cor(hate_demo$gini_index, hate_demo$share_pop_hs)
-ggplot(hate_demo, aes(y=gini_index, x=share_pop_hs)) +
-         geom_point()
-```
-
-
----
 ## Model 4: Continuous interaction - Collinearity
 
 
@@ -414,8 +375,7 @@ class: middle, inverse, center
     * Data entry error.
     * Error in calculating a measure.
     * Non-attentive or distracted participants.
-* The outlier may simply be an **extremely rare case**. For example, a college freshman might be 12 years old and have an 800
-SAT in math. Such an individual is extremely rare, but data is valid.
+* The outlier may simply be an **extremely rare case**. For example, a college freshman might be 12 years old and have an 800 SAT in math. Such an individual is extremely rare, but data is valid.
 
 ---
 class: middle, inverse, center
@@ -497,8 +457,8 @@ get_regression_table(hate_mod)
 ---
 ## Diagnostic data frame
 
-Use `data` argument to merge original data with diagnostics!
-From [https://github.com/tidymodels/broom/issues/91](https://github.com/tidymodels/broom/issues/91)
+Use `data` argument to merge original data with diagnostics
+
 
 ```{r}
 hate_mod <- lm(avg_hatecrimes_per_100k_fbi ~ 
@@ -521,12 +481,14 @@ hate_diag %>%
 ---
 ## Leverage 
 
-[Rules of thumb from John Fox](https://socialsciences.mcmaster.ca/jfox/Courses/Brazil-2009/slides-handout.pdf)
-
 ```{r}
-k <- 2 # Number of predictors
-mean_hat <- (k + 1)/nrow(hate_demo)
-# "large" samples
+k <- 3 # Number of predictors, including the Intercept!
+# OR
+k <- hate_diag %>% 
+  summarize(sum(.hat)) %>% 
+  pull() # Numerical property of the hat matrix
+mean_hat <- (k)/nrow(hate_demo)
+# "large" samples 
 hate_diag %>% 
   select(state, .hat) %>%
   filter(.hat > (2*mean_hat))
@@ -542,7 +504,7 @@ hate_diag %>%
 ---
 ## Plot leverage against `x`
 
-```{r out.width= '70%', echo = FALSE}
+```{r echo = FALSE, out.width= '70%'}
 ggplot(hate_diag, aes(x = gini_index, y = .hat)) +
   geom_point() +
   geom_line(aes(y = 2*mean_hat), colour = "red", lty = "dashed") +
@@ -645,14 +607,15 @@ hate_diag %>%
 3.9% of observations with ESR considered to be relatively large
 (expected ≈ 2 or 3 observations)
 
-<!-- --- -->
-<!-- class: middle, inverse, center -->
-<!-- ## Your turn -->
-
-<!-- With your model, find observations with high externally studentized residuals (and thus high discrepancy), and compare to the raw residual value, and the internally studentized residual value. What do you notice? -->
-
 ---
-class: middle, inverse, center
+class: middle, center
+## Your turn
+
+With your model, find observations with high externally studentized residuals (and thus high discrepancy), and compare to the raw residual value, and the internally studentized residual value. What do you notice?
+
+???
+---
+class: middle, center
 ## Your turn 
 
 A common heuristic: 
@@ -676,7 +639,7 @@ ggplot(hate_diag, aes(x=.hat, y=.ext.resid)) +
 ```
 
 ---
-class: middle, inverse, center
+class: middle, center
 
 ## Influence on regression estimates
 
@@ -695,8 +658,8 @@ Global influence
 
 ```{r}
 n <- nrow(hate_demo)
-k <- 2 # predictors (not including intercept)
-d <- 4/(n - k - 1)
+k <- 3 # predictors (including intercept)
+d <- 4/(n - k)
 d
 ```
 
@@ -721,7 +684,7 @@ ggplot(hate_diag, aes(x = .hat, y = .cooksd)) +
 
 ```{r echo=FALSE}
 ggplot(hate_diag, aes(x = .hat, y=.ext.resid, size = .cooksd)) + 
-  geom_point() +
+  geom_point(alpha = 0.7) +
   geom_text(aes(label = state), size = 3, vjust = 2)
 ```
 ---

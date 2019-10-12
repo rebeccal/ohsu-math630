@@ -12,7 +12,7 @@
 class: center, middle, inverse, title-slide
 
 # Math 530/630: CM 2.5
-## Outliers &amp; Diagnostics
+## LM Interpretation, Outliers &amp; Diagnostics
 
 ---
 
@@ -22,22 +22,7 @@ class: center, middle, inverse, title-slide
 
 
 
-
-
-## Packages
-
-
-```r
-library(fivethirtyeight) 
-library(moderndive)
-library(skimr)
-library(tidyverse)
-library(GGally) 
-library(broom)
-```
-
----
-## Data
+## Starting with the lab from last class...
 
 
 ```r
@@ -68,7 +53,8 @@ $ avg_hatecrimes_per_100k_fbi &lt;dbl&gt; 1.8064105, 1.6567001, 3.4139280, 0...
 
 
 ```r
-hate_demo &lt;- hate_crimes %&gt;%
+# Pare it down to just what we need
+hate_demo &lt;- hate_crimes %&gt;% 
   select(state, avg_hatecrimes_per_100k_fbi, share_pop_hs, gini_index, share_vote_trump) %&gt;%
   mutate(
     cat_trump = case_when(
@@ -78,18 +64,6 @@ hate_demo &lt;- hate_crimes %&gt;%
   mutate(cat_trump = as.factor(cat_trump)) %&gt;% 
   select(-share_vote_trump)
 ```
-
----
-class: middle, center, inverse
-
-## Your turn
-
-As groups, discuss your model output: 
-
-(1) look at the regression table, and 
-
-(2) attempt to interpret the three values that define the regression plane
-
 
 ---
 ## Model 1: Two numerical predictors
@@ -180,7 +154,7 @@ get_regression_table(hate_two_z)
 2 scale(gini_index)      1.34     0.232      5.79       0    0.877     1.81
 3 scale(share_pop_h~     1.07     0.232      4.59       0    0.599     1.53
 ```
-z-scored: `\(\widehat{\textrm{avg_crimes}} = 2.36 + 1.34*\textrm{scaled(gini_index)} + 1.07*\textrm{scaled(share_pop_hs)}\)`
+z-scores: `\(\widehat{\textrm{avg_crimes}} = 2.36 + 1.34*\textrm{scaled(gini_index)} + 1.07*\textrm{scaled(share_pop_hs)}\)`
 
 Centered: `\(\widehat{\textrm{avg_crimes}} = 2.36 + 64.3*\textrm{centered(gini_index)} + 31.3*\textrm{centered(share_pop_hs)}\)`
 
@@ -265,14 +239,16 @@ get_regression_table(hate_para)
 `$$\widehat{\textrm{avg_crimes}} = -12.1 + 32.5*\textrm{gini_index} - 0.51*\textrm{cat_trump}$$`
 
 
-&lt;img src="images/lm-whiteboard-process.jpg" height="90%" /&gt;
+&lt;img src="images/lm-whiteboard-process.jpg" width="60%" /&gt;
 
+--
 
-
+`$$\widehat{\textrm{avg_crimes}}_{cat\_trump_0} = -12.1 + 32.5*\textrm{gini_index}$$`
+`$$\widehat{\textrm{avg_crimes}}_{cat\_trump_1} = -12.61 + 32.5*\textrm{gini_index}$$`
 ---
 ## Model 2: Parallel slopes
 
-&lt;img src="cm025_files/figure-html/unnamed-chunk-9-1.png" height="90%" /&gt;
+&lt;img src="cm025_files/figure-html/unnamed-chunk-9-1.png" width="60%" /&gt;
 
 ---
 ## Model 3: Interaction model
@@ -301,24 +277,20 @@ get_regression_table(hate_int)
 
 ## Model 3: Interaction model
 
-`$$\widehat{\textrm{avg_crimes}} = -20.4 + 50.6*\textrm{gini_index} + 25.7*\textrm{cat_trump} -57.9*\textrm{(gini_index)(cat_trump)}$$`
-&lt;img src="images/lm-whiteboard-3models.jpg" height="90%" /&gt;
+`$$\widehat{avg\_crimes} = -20.4 + 50.6*gini\_index + 25.7*cat\_trump \\- 57.9*gini\_index*cat\_trump$$`
+&lt;img src="images/lm-whiteboard-3models.jpg" width="60%" /&gt;
 
----
-## Model 3: Interaction model
+--
 
-`$$\widehat{\textrm{avg_crimes}_{trump=1}} = 5.3 - 7.3*\textrm{gini_index}$$`
+`$$\widehat{avg\_crimes_{cat\_trump=0}} = -20.4 + 50.6*gini\_index$$`
+`$$\widehat{avg\_crimes_{cat\_trump=1}} = 5.3 - 7.3*gini\_index$$`
 
-`$$\widehat{\textrm{avg_crimes}_{trump=0}} = -20.4 + 50.6*\textrm{gini_index}$$`
-
-&lt;img src="images/lm-whiteboard-3models.jpg" height="90%" /&gt;
 
 ---
 
 ## Visualize interaction model
 
-
-&lt;img src="cm025_files/figure-html/unnamed-chunk-13-1.png" height="90%" /&gt;
+&lt;img src="cm025_files/figure-html/unnamed-chunk-12-1.png" width="60%" /&gt;
 
 
 ---
@@ -346,7 +318,7 @@ Would this be easier to interpret after centering the predictor `gini_index`?
 ---
 ## Model 3: Center predictors
 
-&lt;img src="cm025_files/figure-html/unnamed-chunk-15-1.png" height="90%" /&gt;
+&lt;img src="cm025_files/figure-html/unnamed-chunk-14-1.png" width="60%" /&gt;
 
 ---
 ## Model 4: Continuous interaction
@@ -421,25 +393,6 @@ broom::glance(hate_cont)
 Confused variance!
 
 ---
-# An unreliable check
-
-```r
-cor(hate_demo$gini_index, hate_demo$share_pop_hs)
-```
-
-```
-[1] -0.5920518
-```
-
-```r
-ggplot(hate_demo, aes(y=gini_index, x=share_pop_hs)) +
-         geom_point()
-```
-
-&lt;img src="cm025_files/figure-html/unnamed-chunk-18-1.png" height="90%" /&gt;
-
-
----
 ## Model 4: Continuous interaction - Collinearity
 
 
@@ -512,8 +465,7 @@ class: middle, inverse, center
     * Data entry error.
     * Error in calculating a measure.
     * Non-attentive or distracted participants.
-* The outlier may simply be an **extremely rare case**. For example, a college freshman might be 12 years old and have an 800
-SAT in math. Such an individual is extremely rare, but data is valid.
+* The outlier may simply be an **extremely rare case**. For example, a college freshman might be 12 years old and have an 800 SAT in math. Such an individual is extremely rare, but data is valid.
 
 ---
 class: middle, inverse, center
@@ -606,8 +558,8 @@ get_regression_table(hate_mod)
 ---
 ## Diagnostic data frame
 
-Use `data` argument to merge original data with diagnostics!
-From [https://github.com/tidymodels/broom/issues/91](https://github.com/tidymodels/broom/issues/91)
+Use `data` argument to merge original data with diagnostics
+
 
 
 ```r
@@ -666,13 +618,15 @@ hate_diag %&gt;%
 ---
 ## Leverage 
 
-[Rules of thumb from John Fox](https://socialsciences.mcmaster.ca/jfox/Courses/Brazil-2009/slides-handout.pdf)
-
 
 ```r
-k &lt;- 2 # Number of predictors
-mean_hat &lt;- (k + 1)/nrow(hate_demo)
-# "large" samples
+k &lt;- 3 # Number of predictors, including the Intercept!
+# OR
+k &lt;- hate_diag %&gt;% 
+  summarize(sum(.hat)) %&gt;% 
+  pull() # Numerical property of the hat matrix
+mean_hat &lt;- (k)/nrow(hate_demo)
+# "large" samples 
 hate_diag %&gt;% 
   select(state, .hat) %&gt;%
   filter(.hat &gt; (2*mean_hat))
@@ -704,12 +658,12 @@ hate_diag %&gt;%
 ---
 ## Plot leverage against `x`
 
-&lt;img src="cm025_files/figure-html/unnamed-chunk-27-1.png" width="70%" height="90%" /&gt;
+&lt;img src="cm025_files/figure-html/unnamed-chunk-25-1.png" width="70%" /&gt;
 
 ---
 ## Plot leverage against `x`
 
-&lt;img src="cm025_files/figure-html/unnamed-chunk-28-1.png" width="70%" height="90%" /&gt;
+&lt;img src="cm025_files/figure-html/unnamed-chunk-26-1.png" width="70%" /&gt;
 
 ---
 class: middle, inverse, center
@@ -837,14 +791,15 @@ hate_diag %&gt;%
 3.9% of observations with ESR considered to be relatively large
 (expected ≈ 2 or 3 observations)
 
-&lt;!-- --- --&gt;
-&lt;!-- class: middle, inverse, center --&gt;
-&lt;!-- ## Your turn --&gt;
-
-&lt;!-- With your model, find observations with high externally studentized residuals (and thus high discrepancy), and compare to the raw residual value, and the internally studentized residual value. What do you notice? --&gt;
-
 ---
-class: middle, inverse, center
+class: middle, center
+## Your turn
+
+With your model, find observations with high externally studentized residuals (and thus high discrepancy), and compare to the raw residual value, and the internally studentized residual value. What do you notice?
+
+???
+---
+class: middle, center
 ## Your turn 
 
 A common heuristic: 
@@ -856,10 +811,10 @@ Do you have any observations with both high leverage and high discrepancy?
 ---
 ###Leverage and Discrepancy
 
-&lt;img src="cm025_files/figure-html/plot_leverageXdiscrepancy-1.png" height="90%" /&gt;
+&lt;img src="cm025_files/figure-html/plot_leverageXdiscrepancy-1.png" width="60%" /&gt;
 
 ---
-class: middle, inverse, center
+class: middle, center
 
 ## Influence on regression estimates
 
@@ -879,8 +834,8 @@ Global influence
 
 ```r
 n &lt;- nrow(hate_demo)
-k &lt;- 2 # predictors (not including intercept)
-d &lt;- 4/(n - k - 1)
+k &lt;- 3 # predictors (including intercept)
+d &lt;- 4/(n - k)
 d
 ```
 
@@ -906,21 +861,21 @@ hate_diag %&gt;%
 ---
 ## Plot leverage versus Cook's D
 
-&lt;img src="cm025_files/figure-html/unnamed-chunk-35-1.png" height="90%" /&gt;
+&lt;img src="cm025_files/figure-html/unnamed-chunk-33-1.png" width="60%" /&gt;
 
 ---
 ## Plot leverage versus discrepancy, and Cook's D
 
-&lt;img src="cm025_files/figure-html/unnamed-chunk-36-1.png" height="90%" /&gt;
+&lt;img src="cm025_files/figure-html/unnamed-chunk-34-1.png" width="60%" /&gt;
 ---
 ## Parallel slopes with and without DC
 
-&lt;img src="cm025_files/figure-html/unnamed-chunk-37-1.png" height="90%" /&gt;
+&lt;img src="cm025_files/figure-html/unnamed-chunk-35-1.png" width="60%" /&gt;
 
 ---
 ## Interaction model with and without DC
 
-&lt;img src="cm025_files/figure-html/unnamed-chunk-38-1.png" height="90%" /&gt;
+&lt;img src="cm025_files/figure-html/unnamed-chunk-36-1.png" width="60%" /&gt;
 
 ---
 ## Specific measures of influence - DFBETAS
@@ -987,7 +942,7 @@ library(ggfortify)
 autoplot(hate_mod, label.size = 3)
 ```
 
-&lt;img src="cm025_files/figure-html/unnamed-chunk-42-1.png" height="90%" /&gt;
+&lt;img src="cm025_files/figure-html/unnamed-chunk-40-1.png" width="60%" /&gt;
 
 ---
 ##How to read autoplot
