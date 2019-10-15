@@ -16,7 +16,7 @@ Thurs,October,10,2.4: Multiple regression,"<a href='https://moderndive.com/6-mul
 Tues,October,15,2.5: LM diagnostics/outliers,"<a href = 'https://www.nature.com/articles/nmeth.3812'>- Nature POS: Outliers</a>
 <br><a href = 'https://www.nature.com/articles/nmeth.3854'>- Nature POS: Diagnostics</a>",Correlation and Regression,https://www.datacamp.com/courses/correlation-and-regression,,,,,,,2.4,slides/cm024_lab.html,,,,,
 Thurs,October ,17,3.1: Probability,<a href=reference/Wasserman-all_of_stats.pdf>- All of Statistics: Chapter 2</a>,Foundations of Probability in R ,https://www.datacamp.com/courses/foundations-of-probability-in-r,P1,final_project.html,,,,,,,,,,,
-Tues,October,22,3.2: Discrete Probability Functions,,,,,,iLab 02 - Linear Regression,,,,,,labs/lab02.html,,,,
+Tues,October,22,3.2: Discrete Probability Functions,,,,,,iLab 02 - Linear Regression,labs/lab02.html,,,,,,,,,
 Thurs,October,24,3.3: Continuous Probability Functions,<a href='https://moderndive.com/7-sampling.html'>- MD Ch 7: Sampling</a>,,,,,,,,,,,,,,,
 Tues,October,29,4.1: Sampling distributions,"<a href='https://moderndive.com/8-confidence-intervals'>- MD  Ch 8: Confidence Intervals</a>
 <br><a href='https://www.nature.com/articles/nmeth.3414'>- Nature POS: Bootstrapping</a>
