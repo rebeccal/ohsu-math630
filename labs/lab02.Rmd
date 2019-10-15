@@ -1,10 +1,12 @@
 ---
 title: "MATH 530/630"
-subtitle: "Integrative Lab 2 - Linear Regression"
-output: 
+subtitle: Integrative Lab 2 - Linear Regression
+output:
   html_document:
-    toc: TRUE
-    toc_float: TRUE
+    toc: yes
+    toc_float: yes
+  pdf_document:
+    toc: yes
 ---
 
 ```{r setup, include=FALSE}
@@ -16,7 +18,7 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE,
 
 # Overview
 
-The goal of this lab is to carefully, thoroughly, and thoughtfully conduct an linear regression analysis. You are also asked to communicate clearly about the steps in your analysis process with others, by sharing your R code, output, and narrative. As such, your code cannot "stand alone"- it is meant to complement / enhance / support your narrative. This lab will be due in two stages:
+The goal of this lab is to carefully, thoroughly, and thoughtfully conduct a linear regression analysis. You are also asked to communicate clearly about the steps in your analysis process with others, by sharing your R code, output, and narrative. As such, your code cannot "stand alone"- it is meant to complement / enhance / support your narrative. This lab will be due in two stages:
 
 1. A complete knitted `html` file submitted on Sakai. 
 2. A follow-up self assessment. 
@@ -51,21 +53,14 @@ library(broom) # for pulling out model results
 You will work with an open access dataset from a publication in PLOS ONE titled:
 [_Vitamin D Status among Thai School Children and the Association with 1,25-Dihydroxyvitamin D and Parathyroid Hormone Levels_](https://dx.doi.org/10.1371%2Fjournal.pone.0104825). The data is available as an excel file on [Data Dryad](https://datadryad.org/resource/doi:10.5061/dryad.7763s/1), where you can download the `.xlsx` file.
 
-You could also access the data through a package called [`rdryad`](https://github.com/ropensci/rdryad), from [ROpenSci](https://ropensci.org), which allows you to access the DataDryad Application Programming Interface (API) from within R. To go this route, follow my code:
-
-
 ```{r}
-# install.packages("rdryad")
-# install.packages("purrr")
-library(rdryad) # to access the API
-library(readxl) # to read in the xlsx file
-library(purrr) # for 1 function: pluck!
-path_to_xlsx <- dryad_fetch(dryad_files(doi = '10.5061/dryad.7763s/1')) %>% 
-  pluck(1)
+library(readxl)
+path_to_xlsx <- here::here("data","Thai_vitamin D dataset.xlsx")
 vitd <- read_xlsx(path_to_xlsx, sheet = 1)
+codebook <- read_xlsx(path_to_xlsx, sheet = 2) #The 2nd sheet has the codebook
 ```
 
-I'm also going to recommend you use the `janitor::clean_names` function, because some of these variable names start with an underscore and therefore will always need to be referenced surrounded by backticks.
+I recommend you use the `janitor::clean_names` function, because some of these variable names start with an underscore and therefore will always need to be referenced surrounded by backticks.
 
 ```{r}
 library(janitor)
@@ -78,11 +73,7 @@ That is better! You are ready to start exploring the `vitd` data.
 
 # Your Mission
 
-We'll conduct a linear regression analysis to examine the impact of age, and its interaction with sex, along with height-for-age Z score on serum 25(OH)D concentrations (a measure of vitamin D levels). If you read in the data using `rdryad`, you can also download the codebook like this:
-
-```{r}
-codebook <- read_xlsx(path_to_xlsx, sheet = 2)
-```
+We'll conduct a linear regression analysis to examine the impact of age, and its interaction with sex, along with height-for-age Z score on serum 25(OH)D concentrations (a measure of vitamin D levels). 
 
 
 The relevant variables you will need are:
@@ -100,7 +91,7 @@ Please note that the variable names in the codebook won't exactly match those in
 
 # Exploratory Data Analysis
 
-Conduct a thorough EDA of the four variables defined above in the vitamin D dataset. Recall that a [new exploratory data analysis](http://moderndive.netlify.com/6-regression.html#model1EDA) involves three things:
+Conduct a thorough EDA of the four variables defined above in the vitamin D dataset. Recall that a [new exploratory data analysis](http://moderndive.com/5-regression.html#model1EDA) involves three things:
 
 * Looking at the raw values.
     * `dplyr::glimpse()`
@@ -114,12 +105,12 @@ Conduct a thorough EDA of the four variables defined above in the vitamin D data
     * `GGally::ggpairs()`
         * Note that you can add transparency to points/density plots in the `aes` call, for example: `aes(colour = sex, alpha = 0.7)`
 
-You may wish to have a level 1 header (`#`) for your EDA, then use level 2 sub-headers (`##`) to make sure you cover all three EDA bases. Remember from our previous [EDA for regression lab](cm024.html), **at a minimum** you should answer these questions:
+You may wish to have a level 1 header (`#`) for your EDA, then use level 2 sub-headers (`##`) to make sure you cover all three EDA bases. **At a minimum** you should answer these questions:
 
 - How many variables/columns?
 - How many rows/observations?
 - Which variables are numbers?
-- Which are categorical variables (numeric or character variables with variables that have a fixed and known set of possible values; aka [factor](https://stats.idre.ucla.edu/r/modules/factor-variables/) variables)?
+- Which are categorical variables (numeric or character variables with variables that have a fixed and known set of possible values; aka factor variables)?
 - Complete this sentence: "There is one row/observation per..."
 - What are the correlations between variables? Does each scatterplot support a linear relationship between variables? Do any of the correlations appear to be conditional on the value of a categorical variable (like `sex`)?
 
@@ -148,8 +139,8 @@ Interpret the output from the regression table (in complete sentences, but you m
 
 Some examples:
 
-- Parallel slopes example [here](http://moderndive.netlify.com/7-multiple-regression.html#model4table)
-- Interaction model [here](http://moderndive.netlify.com/7-multiple-regression.html#model4interactiontable)
+- Parallel slopes example [here](http://moderndive.com/6-multiple-regression.html#model4table)
+- Interaction model [here](http://moderndive.com/6-multiple-regression.html#model4interactiontable)
     
 The authors state: "Specifically, serum 25(OH)D concentrations were 19% higher in males at the mean age (9.9 years)." They also state: "females experienced a...4% decline in serum 25(OH)D levels for each increasing year of age; no decline was seen in male participants with increasing age". In your narrative, walk through how you would use the numbers in the regression table to arrive at these numbers- are they accurate based on your regression model output?
 
@@ -173,8 +164,8 @@ Explain (a) what you are looking for in the plots, and (b) what you see in the c
 
 Some examples:
 
-- Parallel slopes example [here](http://moderndive.netlify.com/7-multiple-regression.html#model3residuals)
-- Interaction model [here](http://moderndive.netlify.com/7-multiple-regression.html#model4residuals)
+- Parallel slopes example [here](http://moderndive.com/6-multiple-regression.html#model3residuals)
+- Interaction model [here](http://moderndive.com/6-multiple-regression.html#model4residuals)
 
 ```{r include = FALSE}
 ggplot(d_pts, aes(x = residual)) +
@@ -266,15 +257,15 @@ Using `dplyr`, show that:
 
 * The total sums of squares is equal to the residual plus the model sums of squares
 
-$$\textrm{total_ss} = \textrm{resid_ss} + \textrm{model_ss}$$
+$$total\_ss = resid\_ss + model\_ss$$
 
 * The total sums of squares divided by $(n-1)$ is equal to the variance of the `y` outcome variable (*hint:* you may need to look at how many observations actually contributed to the model- not the same as the original $n$ due to missing values!)
 
-$$var_y = \frac{\textrm{total_ss}}{n-1}$$
+$$var_y = \frac{total\_ss}{n-1}$$
 
 * The $R^2$ value in your model output is the model sums of squares divided by the total sums of squares (*hint:* `broom::glance(my_model)`).
 
-$$R^2 = \frac{\textrm{model_ss}}{\textrm{total_ss}}$$
+$$R^2 = \frac{model\_ss}{total\_ss}$$
 
 ```{r include = FALSE}
 vitd_ss <- d_diag %>% 
@@ -320,8 +311,9 @@ Use the code above to use the `anova` function to compare the intercept-only mod
 # Replicate a Plot
 
 In the [original paper](https://dx.doi.org/10.1371%2Fjournal.pone.0104825), they presented this figure:
+<!-- ![](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4128742/bin/pone.0104825.g001.jpg) -->
+![](../images/pone.0104825.g001.jpg)
 
-![](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4128742/bin/pone.0104825.g001.jpg)
 <br>
 Figure 1
 Relation between age in years and serum 25-hydroxyvitamin D (nmol/L) concentrations stratified by gender.
@@ -332,7 +324,7 @@ Look at the published figure carefully:
 * What appears to be the max?
 * Do those match your EDA?
 * Recreate this figure in `ggplot2` using the observed data (ignore height-for-age z-scores at this point). 
-* Make the same plot where the y-axis should now be mapped to the fitted value for the outcome variable (using the full model with height-for-age z-scores in it). Discuss the differences you see between this plot and the previous. Were you able to recreate the published figure? It is helpful in understanding the researchers' findings? Was it misleading at all?
+* Make the same plot where the y-axis should now be mapped to the fitted value for the outcome variable (using the full model with height-for-age z-scores in it). Discuss the differences you see between this plot and the previous. Were you able to recreate the published figure? Is it helpful in understanding the researchers' findings? Was it misleading at all?
 
 ```{r include = FALSE}
 ggplot(d_pts, aes(x = age_ctr, 
