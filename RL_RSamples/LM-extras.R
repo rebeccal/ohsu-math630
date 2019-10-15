@@ -78,6 +78,8 @@ swiss_ss$rsq #and they match
 
 lm_swiss_aug # Using augment for direct comparison of hat
 
+
+
 #Hat
 X <- design_matrix
 ols_estimator <- ginv(t(X)%*%X)%*%t(X) #derivable, but yuck!
@@ -85,21 +87,25 @@ hat_matrix <- X%*%ols_estimator
 #hat_matrix <- X%*%ginv(crossprod(X))%*%t(X) #Same
 #hat_matrix <- X%*%solve(crossprod(X))%*%t(X) #Same
 hat <- diag(hat_matrix)
-n_parameters <- sum(hat) #Including the intercept
+n_parameters <- sum(hat) #Including the intercept - only for intercept models??
+#Add all.equal() to the below...
+sum(hat_matrix[1,]) # Another cool property - each row sums to 1
+sum(hat_matrix[1,]^2) # And another,  hat_ii == sum (hat_ij^2)
 
 SS_ex <- sum((swiss$Examination-mean(swiss$Examination))^2)
 hat_ish <- lm_swiss_aug %>% 
   mutate(.hatish = (1/n()+(Examination-mean(Examination))^2/SS_ex))
-hat_ish #matches!
+hat_ish #matches .hat from augment!
 
-#Fitted
+
+#Betas and Fitted 
 betas <- ols_estimator%*%swiss$Agriculture 
 lm_swiss_fitted <-hat_matrix %*% lm_swiss_aug$Agriculture
 
 
 #More Outliers - discrepancy via studentized residuals
 
-SE <- glance(lm_swiss)$sigma #SE of the residuals
+SE <- glance(lm_swiss)$sigma #SE of the residuals aka ressidual standard error
 hat_ish <- hat_ish %>%
   mutate(isr = .resid/(SE*sqrt(1-.hat))) # Internalized student residual - matches augment's .std.resid
 
@@ -128,7 +134,7 @@ y_hat_without = predict(fitwithout1, newdata=new) # ... here it is.
 
 residuals(fit)[1] # The residual when OLS includes data point.
 lev = 1 - (residuals(fit)[1]/(mtcars[1,'mpg'] -  y_hat_without)) # Leverage
-all.equal(diag(hat2_matrix)[1],lev) #TRUE
+all.equal(diag(hat2_matrix)[1], lev) #TRUE
 
 # And, for all of the hat values
 hatvalues(fit) #Just the hats. ma'am.

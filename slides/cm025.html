@@ -4,6 +4,14 @@
     <title>Math 530/630: CM 2.5</title>
     <meta charset="utf-8" />
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+    <script src="libs/plotly-binding-4.9.0.9000/plotly.js"></script>
+    <script src="libs/typedarray-0.1/typedarray.min.js"></script>
+    <script src="libs/jquery-1.11.3/jquery.min.js"></script>
+    <link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+    <script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+    <link href="libs/plotly-htmlwidgets-css-1.49.4/plotly-htmlwidgets.css" rel="stylesheet" />
+    <script src="libs/plotly-main-1.49.4/plotly-latest.min.js"></script>
     <link rel="stylesheet" href="css\ohsu.css" type="text/css" />
     <link rel="stylesheet" href="css\ohsu-fonts.css" type="text/css" />
   </head>
@@ -91,18 +99,16 @@ get_regression_table(hate_two)
 ---
 class: center, middle
 ## Model 1: Two numerical predictors
-
+&lt;img src="images/lm-whiteboard-process.jpg" width="60%" /&gt;
+--
 `$$\widehat{\textrm{avg_crimes}} = -54 + 64.3*\textrm{gini_index} + 31.3*\textrm{share_pop_hs}$$`
 &lt;br&gt;
 --
 Is this interpretable? 
 
-
-
 &lt;br&gt;
 --
 Intuitive?
-
 
 
 
@@ -129,9 +135,10 @@ get_regression_table(hate_two_c)
 3 I(share_pop_hs - ~    31.3      6.81       4.59       0    17.6     45.0 
 ```
 
-Centered: `\(\widehat{\textrm{avg_crimes}} = 2.36 + 64.3*\textrm{centered(gini_index)} + 31.3*\textrm{centered(share_pop_hs)}\)`
 
 Raw: `\(\widehat{\textrm{avg_crimes}} = -54 + 64.3*\textrm{gini_index} + 31.3*\textrm{share_pop_hs}\)`
+
+Centered: `\(\widehat{\textrm{avg_crimes}} = 2.36 + 64.3*\textrm{centered(gini_index)} + 31.3*\textrm{centered(share_pop_hs)}\)`
 
 ---
 ## Model 1: Two numerical predictors: z-scores
@@ -154,12 +161,13 @@ get_regression_table(hate_two_z)
 2 scale(gini_index)      1.34     0.232      5.79       0    0.877     1.81
 3 scale(share_pop_h~     1.07     0.232      4.59       0    0.599     1.53
 ```
-z-scores: `\(\widehat{\textrm{avg_crimes}} = 2.36 + 1.34*\textrm{scaled(gini_index)} + 1.07*\textrm{scaled(share_pop_hs)}\)`
 
-Centered: `\(\widehat{\textrm{avg_crimes}} = 2.36 + 64.3*\textrm{centered(gini_index)} + 31.3*\textrm{centered(share_pop_hs)}\)`
 
 Raw: `\(\widehat{\textrm{avg_crimes}} = -54 + 64.3*\textrm{gini_index} + 31.3*\textrm{share_pop_hs}\)`
 
+Centered: `\(\widehat{\textrm{avg_crimes}} = 2.36 + 64.3*\textrm{centered(gini_index)} + 31.3*\textrm{centered(share_pop_hs)}\)`
+
+z-scores: `\(\widehat{\textrm{avg_crimes}} = 2.36 + 1.34*\textrm{scaled(gini_index)} + 1.07*\textrm{scaled(share_pop_hs)}\)`
 
 
 ---
@@ -207,6 +215,13 @@ broom::glance(hate_two_z)
 # ... with 2 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;
 ```
 
+???
+- Compare Model level statistics
+- Recall data transformations from 1st class - change location and spread, but not shape
+
+- Or use get_regression_summaries() - need to create the vars rather than scaling on the fly
+
+
 ---
 ## Model 2: Parallel slopes
 
@@ -236,15 +251,21 @@ get_regression_table(hate_para)
 ---
 ## Model 2: Parallel slopes
 
-`$$\widehat{\textrm{avg_crimes}} = -12.1 + 32.5*\textrm{gini_index} - 0.51*\textrm{cat_trump}$$`
 
 
 &lt;img src="images/lm-whiteboard-process.jpg" width="60%" /&gt;
+--
+`$$\widehat{\textrm{avg_crimes}} = -12.1 + 32.5*\textrm{gini_index} - 0.51*\textrm{cat_trump}$$`
 
 --
 
 `$$\widehat{\textrm{avg_crimes}}_{cat\_trump_0} = -12.1 + 32.5*\textrm{gini_index}$$`
 `$$\widehat{\textrm{avg_crimes}}_{cat\_trump_1} = -12.61 + 32.5*\textrm{gini_index}$$`
+
+???
+- Important to notice that cat_trump is either 0 or 1, so it breaks down into two equations
+- However, don't model it that way. Model level statistics will be incorrect
+
 ---
 ## Model 2: Parallel slopes
 
@@ -277,8 +298,10 @@ get_regression_table(hate_int)
 
 ## Model 3: Interaction model
 
-`$$\widehat{avg\_crimes} = -20.4 + 50.6*gini\_index + 25.7*cat\_trump \\- 57.9*gini\_index*cat\_trump$$`
 &lt;img src="images/lm-whiteboard-3models.jpg" width="60%" /&gt;
+--
+
+`$$\widehat{avg\_crimes} = -20.4 + 50.6*gini\_index + 25.7*cat\_trump \\- 57.9*gini\_index*cat\_trump$$`
 
 --
 
@@ -298,9 +321,9 @@ get_regression_table(hate_int)
 
 Would this be easier to interpret after centering the predictor `gini_index`?
 
-`$$\widehat{\textrm{avg_crimes}_{trump=1}} = 1.98 - 7.3*\textrm{gini_index}$$`
+`$$\widehat{avg\_crimes_{trump=1}} = 1.98 - 7.3*centered(gini\_index)$$`
 
-`$$\widehat{\textrm{avg_crimes}_{trump=0}} = 2.54 + 50.6*\textrm{gini_index}$$`
+`$$\widehat{avg\_crimes_{trump=0}} = 2.54 + 50.6*centered(gini\_index)$$`
 
 
 ```
@@ -308,9 +331,9 @@ Would this be easier to interpret after centering the predictor `gini_index`?
   term               estimate std_error statistic p_value lower_ci upper_ci
   &lt;chr&gt;                 &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 1 intercept             2.54      0.299      8.49   0         1.94    3.14 
-2 I(gini_index - me~   50.6      12.4        4.10   0        25.7    75.5  
+2 gini_centered        50.6      12.4        4.10   0        25.7    75.5  
 3 cat_trumpmore tha~   -0.562     0.424     -1.32   0.192    -1.42    0.292
-4 I(gini_index - me~  -57.9      22.1       -2.62   0.012  -102.    -13.4  
+4 gini_centered:cat~  -57.9      22.1       -2.62   0.012  -102.    -13.4  
 ```
 
 
@@ -347,6 +370,13 @@ get_regression_table(hate_cont)
 --
 **What??**
 
+??? 
+- Coefficients are weird 
+- SD is huge 
+- P's aren't significant
+- CI contains 0
+- BUT, we added the ability to vary??
+
 ---
 ## Model 4: Continuous interaction
 
@@ -380,17 +410,20 @@ broom::glance(hate_cont)
 --
   Collinearity?
 --
-
   - Overall model works "well", but the predictors do not.
 
 --
   - SE's are large.
 
 --
-  - We put it there!
 
---
-Confused variance!
+- Confused variance! Gini_index and share_pop_hs are correlated = -0.5920518
+
+???
+- Looking at the model level statistics, the model as a whole seems fine
+- Problem is that it doesn't know which predictor to assign the variance too, since they are correlated
+- Almost always there a bit when there are multiple predictors - especially risky with interactions
+- Centering or scaling might help - might need to remove or combine predictors
 
 ---
 ## Model 4: Continuous interaction - Collinearity
@@ -489,17 +522,16 @@ class: middle, inverse, center
 from [John Fox](https://socialsciences.mcmaster.ca/jfox/Courses/Brazil-2009/slides-handout.pdf)
 
 ---
-
-![](images/fox-outliers.png)
----
 ## Types of influence
-
 
 * Extremity on the x’s (leverage)
 * Extremity on y (discrepancy)
 * Influence on the regression estimates 
     * Global
     * Specific coefficients
+--
+
+![](images/fox-outliers.png)
     
 ---
 ## Extremity on the `x`: leverage
@@ -516,7 +548,7 @@ from [John Fox](https://socialsciences.mcmaster.ca/jfox/Courses/Brazil-2009/slid
 * If `\(h_{i}\)` is large then the `\(i\)`th observation has considerable impact on the fitted value
 
 SLR:
-`$$h_{i} = \frac{1}{n} + \frac{{\left(x_{i} - \bar{x}\right)}^2}{\sum_{i=1}^{n}x_i^2}$$`
+`$$h_{i} = \frac{1}{n} + \frac{{\left(x_{i} - \bar{x}\right)}^2}{\sum_{j=1}^{n}(x_j - \bar{x})^2}$$`
 MLR:
 
 ```r
@@ -526,7 +558,8 @@ X &lt;- design_matrix
 OLS_estimator &lt;- MASS::ginv(t(X) %*% X) %*% t(X) 
 hat_matrix &lt;- X %*% OLS_estimator 
 
-hat &lt;- diag(hat_matrix)    # The hat matrix
+#Assuming an intercept model...
+hat &lt;- diag(hat_matrix)    # diagonal of the hat matrix
 num_parameters &lt;- sum(hat) # Number of parameters, including the intercept
 y_hat &lt;- hat_matrix %*% swiss$Agriculture
 ```
@@ -573,12 +606,13 @@ glimpse(hate_diag)
 
 ```
 Observations: 50
-Variables: 12
+Variables: 13
 $ state                       &lt;chr&gt; "Alabama", "Alaska", "Arizona", "A...
 $ avg_hatecrimes_per_100k_fbi &lt;dbl&gt; 1.8064105, 1.6567001, 3.4139280, 0...
 $ share_pop_hs                &lt;dbl&gt; 0.821, 0.914, 0.842, 0.824, 0.806,...
 $ gini_index                  &lt;dbl&gt; 0.472, 0.422, 0.455, 0.458, 0.471,...
 $ cat_trump                   &lt;fct&gt; more than half, more than half, mo...
+$ gini_centered               &lt;dbl[,1]&gt; &lt;matrix[25 x 1]&gt;
 $ .fitted                     &lt;dbl&gt; 2.691360, 1.066151, 2.138789, 2.23...
 $ .se.fit                     &lt;dbl&gt; 0.3892770, 0.4420798, 0.3166400, 0...
 $ .resid                      &lt;dbl&gt; -0.88494927, 0.59054912, 1.2751392...
@@ -661,11 +695,6 @@ hate_diag %&gt;%
 &lt;img src="cm025_files/figure-html/unnamed-chunk-25-1.png" width="70%" /&gt;
 
 ---
-## Plot leverage against `x`
-
-&lt;img src="cm025_files/figure-html/unnamed-chunk-26-1.png" width="70%" /&gt;
-
----
 class: middle, inverse, center
 ## Your turn
 
@@ -675,16 +704,16 @@ With your model, use `broom::augment()` to find observations with high leverage
 ---
 ## Extremity on `y`: discrepancy
 
-* The discrepancy (or `\(distance^2\)`) between each predicted and observed value of `\(y_{i}\)`
-* A studentized residual is an observed residual divided by its standard error; two types:
-    * Internally studentized (`rstandard`): re-normalize the residuals to have unit variance, using a measure of the error variance.
-    * Also `broom::.std.resid`
-* Externally studentized (`rstudent`): re-normalize the residuals to have unit variance, using a leave-one-out measure of the error variance. This is a measure of the size of the residual, standardized by the estimated standard deviation of residuals based on all the data `but that observation`. Sometimes called jackknifed residuals.
+* The discrepancy (or `\(distance^2\)`) between each predicted and observed value
+* A studentized residual is an observed residual divided by its standard error 
+* Two types:
+  * Internally studentized (`rstandard` or `broom::.std.resid`): re-normalize the residuals to have unit variance, using a measure of the error variance
+  * Externally studentized (`rstudent`): re-normalize the residuals to have unit variance, using a leave-one-out measure of the error variance. This is a measure of the size of the residual, standardized by the estimated standard deviation of residuals based on all the data `but that observation`. Sometimes called jackknifed residuals.
 ---
 
 ###Additional notes on discrepancy:
 
-* High-leverage observations tend to have small residuals, because these observations can coerce the regression surface to be close to them.
+* High-leverage observations can have small residuals, because these observations can coerce the regression surface to be close to them.
 * The formula for the studentized residual is:
 
 `$$t_{i}={\widehat {\varepsilon }_{i} \over \widehat {\sigma }{\sqrt  {1-h_{{ii}}\ }}}$$`
@@ -791,6 +820,8 @@ hate_diag %&gt;%
 3.9% of observations with ESR considered to be relatively large
 (expected ≈ 2 or 3 observations)
 
+???
+Positive or negative
 ---
 class: middle, center
 ## Your turn
@@ -798,6 +829,8 @@ class: middle, center
 With your model, find observations with high externally studentized residuals (and thus high discrepancy), and compare to the raw residual value, and the internally studentized residual value. What do you notice?
 
 ???
+Might pull out unexpected points with low residuals and low internally studentized residual
+
 ---
 class: middle, center
 ## Your turn 
@@ -806,7 +839,7 @@ A common heuristic:
 
 Influence on Coefficients = Leverage × Discrepancy
 
-Do you have any observations with both high leverage and high discrepancy?
+Do you have any observations with both high leverage and high discrepancy? 
 
 ---
 ###Leverage and Discrepancy
@@ -861,21 +894,21 @@ hate_diag %&gt;%
 ---
 ## Plot leverage versus Cook's D
 
-&lt;img src="cm025_files/figure-html/unnamed-chunk-33-1.png" width="60%" /&gt;
+&lt;img src="cm025_files/figure-html/unnamed-chunk-32-1.png" width="60%" /&gt;
 
 ---
 ## Plot leverage versus discrepancy, and Cook's D
 
-&lt;img src="cm025_files/figure-html/unnamed-chunk-34-1.png" width="60%" /&gt;
+&lt;img src="cm025_files/figure-html/unnamed-chunk-33-1.png" width="60%" /&gt;
 ---
 ## Parallel slopes with and without DC
 
-&lt;img src="cm025_files/figure-html/unnamed-chunk-35-1.png" width="60%" /&gt;
+&lt;img src="cm025_files/figure-html/unnamed-chunk-34-1.png" width="60%" /&gt;
 
 ---
 ## Interaction model with and without DC
 
-&lt;img src="cm025_files/figure-html/unnamed-chunk-36-1.png" width="60%" /&gt;
+&lt;img src="cm025_files/figure-html/unnamed-chunk-35-1.png" width="60%" /&gt;
 
 ---
 ## Specific measures of influence - DFBETAS
@@ -883,7 +916,7 @@ hate_diag %&gt;%
 * How each individual regression coefficient is changed by deleting each case from the dataset
 * Number of DFBETAS is the number of predictors in your model
 * Also for the intercept- generally not interesting one bit!
-* Recommendation: I would look at DFBETAS after Cook’s to isolate which explantory variables might be unduly influencing your overall regression equation
+* Recommendation: Look at DFBETAS after Cook’s to isolate which _explanatory_ variables might be unduly influencing your overall regression equation
 
 
 ```r
@@ -942,7 +975,7 @@ library(ggfortify)
 autoplot(hate_mod, label.size = 3)
 ```
 
-&lt;img src="cm025_files/figure-html/unnamed-chunk-40-1.png" width="60%" /&gt;
+&lt;img src="cm025_files/figure-html/unnamed-chunk-39-1.png" width="60%" /&gt;
 
 ---
 ##How to read autoplot
@@ -1022,6 +1055,17 @@ Again, there should be no obvious trend in this plot.
 
 ---
 # RMSE
+
+```r
+get_regression_summaries(hate_mod)
+```
+
+```
+# A tibble: 1 x 8
+  r_squared adj_r_squared   mse  rmse sigma statistic p_value    df
+      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;
+1     0.199         0.165  2.31  1.52  1.57      5.86   0.005     3
+```
 
   * The root mean square error for regression says how far typical points are above or below the regression line. 
   * The RMSE is to the regression line as the SD is to the average. 
