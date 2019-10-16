@@ -5,6 +5,7 @@ library(broom)
 library(moderndive)
 
 
+#Explore correlations
 GGally::ggpairs(swiss)
 
 swiss %>%
@@ -19,25 +20,35 @@ swiss %>%
   corrr::correlate()
 
 
+# Look at it
 ggplot(swiss,aes(x=Examination, y=Agriculture)) +
-  geom_smooth(method="lm") +
+  geom_point()
+
+#Again, with more info
+ggplot(swiss,aes(x=Examination, y=Agriculture)) +
+  geom_smooth(method="lm", se=FALSE) +
   geom_point() +
   geom_text(aes(label=rownames(swiss)))
 
 
-lm_swiss <-lm(Agriculture ~ Examination,swiss)
-tidy(lm_swiss)
-glance(lm_swiss)
+#Model it
+lm_swiss <-lm(Agriculture ~ Examination, swiss)
+
+# get the dets
+tidy(lm_swiss) # Model spec and coefficient statistics
+glance(lm_swiss) # Model level statistics
+augment(lm_swiss) # Fitted and diagnostic values
 
 
 # Residual standard error and standard error of the coefficients
 design_matrix <- model.matrix(lm_swiss)
 rse2 <- sum((swiss$Agriculture - fitted(lm_swiss))^2) / (nrow(design_matrix) - ncol(design_matrix))
-sqrt(rse2)
-sqrt(diag(solve(crossprod(design_matrix))) * rse2)
+sqrt(rse2) # matched sigma - sorta
+sqrt(diag(solve(crossprod(design_matrix))) * rse2) # SE of the coeficients
 
 
 # Pretty much all of the below could be done with EITHER augment or get_regression_points
+# get_regression points is more concise, but more fragile to in-line calculations
 lm_swiss_aug <- augment(lm_swiss)
 lm_swiss_pts <- moderndive::get_regression_points(lm_swiss)
 
