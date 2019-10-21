@@ -366,16 +366,14 @@ get_regression_table(hate_cont)
 4 gini_index:share_~    241.       424.     0.567   0.573    -613.    1094.
 ```
 
-&lt;br&gt;
 --
-**What??**
+*_What??_*
 
-??? 
 - Coefficients are weird 
-- SD is huge 
-- P's aren't significant
+- SEs are huge 
+- p's aren't significant
 - CI contains 0
-- BUT, we added the ability to vary??
+- But, we added the ability to vary??
 
 ---
 ## Model 4: Continuous interaction
@@ -407,22 +405,20 @@ broom::glance(hate_cont)
 # ... with 2 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;
 ```
 
---
-  Collinearity?
---
-  - Overall model works "well", but the predictors do not.
-
---
-  - SE's are large.
 
 --
 
-- Confused variance! Gini_index and share_pop_hs are correlated = -0.5920518
+- (Multi) collinearity?
+- Overall model works "well", but the predictors do not.
+- Confused variance! 
+
+
+
 
 ???
 - Looking at the model level statistics, the model as a whole seems fine
 - Problem is that it doesn't know which predictor to assign the variance too, since they are correlated
-- Almost always there a bit when there are multiple predictors - especially risky with interactions
+- Almost always there's a bit when there are multiple predictors - especially risky with interactions
 - Centering or scaling might help - might need to remove or combine predictors
 
 ---
@@ -599,6 +595,7 @@ Use `data` argument to merge original data with diagnostics
 hate_mod &lt;- lm(avg_hatecrimes_per_100k_fbi ~ 
                    gini_index + cat_trump, data = hate_demo)
 
+#hate_mod &lt;- hate_cont_z #or use the centered interaction model
 hate_diag &lt;- broom::augment(hate_mod, data = hate_demo) 
 
 glimpse(hate_diag)
@@ -692,7 +689,7 @@ hate_diag %&gt;%
 ---
 ## Plot leverage against `x`
 
-&lt;img src="cm025_files/figure-html/unnamed-chunk-25-1.png" width="70%" /&gt;
+&lt;img src="cm025_files/figure-html/unnamed-chunk-26-1.png" width="70%" /&gt;
 
 ---
 class: middle, inverse, center
@@ -894,21 +891,21 @@ hate_diag %&gt;%
 ---
 ## Plot leverage versus Cook's D
 
-&lt;img src="cm025_files/figure-html/unnamed-chunk-32-1.png" width="60%" /&gt;
+&lt;img src="cm025_files/figure-html/unnamed-chunk-33-1.png" width="60%" /&gt;
 
 ---
 ## Plot leverage versus discrepancy, and Cook's D
 
-&lt;img src="cm025_files/figure-html/unnamed-chunk-33-1.png" width="60%" /&gt;
+&lt;img src="cm025_files/figure-html/unnamed-chunk-34-1.png" width="60%" /&gt;
 ---
 ## Parallel slopes with and without DC
 
-&lt;img src="cm025_files/figure-html/unnamed-chunk-34-1.png" width="60%" /&gt;
+&lt;img src="cm025_files/figure-html/unnamed-chunk-35-1.png" width="60%" /&gt;
 
 ---
 ## Interaction model with and without DC
 
-&lt;img src="cm025_files/figure-html/unnamed-chunk-35-1.png" width="60%" /&gt;
+&lt;img src="cm025_files/figure-html/unnamed-chunk-36-1.png" width="60%" /&gt;
 
 ---
 ## Specific measures of influence - DFBETAS
@@ -975,7 +972,7 @@ library(ggfortify)
 autoplot(hate_mod, label.size = 3)
 ```
 
-&lt;img src="cm025_files/figure-html/unnamed-chunk-39-1.png" width="60%" /&gt;
+&lt;img src="cm025_files/figure-html/unnamed-chunk-40-1.png" width="60%" /&gt;
 
 ---
 ##How to read autoplot

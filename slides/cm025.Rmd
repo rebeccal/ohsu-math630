@@ -318,16 +318,14 @@ hate_cont <- lm(avg_hatecrimes_per_100k_fbi ~
 get_regression_table(hate_cont)
 ```
 
-<br>
 --
-**What??**
+*_What??_*
 
-??? 
 - Coefficients are weird 
-- SD is huge 
-- P's aren't significant
+- SEs are huge 
+- p's aren't significant
 - CI contains 0
-- BUT, we added the ability to vary??
+- But, we added the ability to vary??
 
 ---
 ## Model 4: Continuous interaction
@@ -337,22 +335,42 @@ get_regression_table(hate_cont)
 broom::glance(hate_cont)
 ```
 
---
-  Collinearity?
---
-  - Overall model works "well", but the predictors do not.
-
---
-  - SE's are large.
 
 --
 
-- Confused variance! Gini_index and share_pop_hs are correlated = `r cor(hate_demo$gini_index, hate_demo$share_pop_hs)`
+- (Multi) collinearity?
+- Overall model works "well", but the predictors do not.
+- Confused variance! 
+
+```{r include = FALSE}
+# Exploring why centering works
+# BTW - if one is a multiplier of the other, 
+# then b0 and b1 are both modifying the same var, 
+# so all they have to do is counteract each other, and can be HUGE!!
+
+cor(hate_demo$gini_index, hate_demo$share_pop_hs)
+cor(hate_demo$gini_index, hate_demo$gini_index*hate_demo$share_pop_hs)
+cor(hate_demo$share_pop_hs, hate_demo$gini_index*hate_demo$share_pop_hs)
+
+cor(scale(hate_demo$gini_index), scale(hate_demo$share_pop_hs))
+cor(scale(hate_demo$gini_index), scale(hate_demo$gini_index)*scale(hate_demo$share_pop_hs))
+cor(scale(hate_demo$share_pop_hs), scale(hate_demo$gini_index)*scale(hate_demo$share_pop_hs))
+
+ggplot(hate_demo, aes(x=gini_index, y=gini_index*share_pop_hs)) +
+  geom_point() +
+  geom_smooth(method = lm, se = FALSE)
+  
+ggplot(hate_demo, aes(x=scale(gini_index), y=scale(gini_index)*scale(share_pop_hs))) +
+  geom_point() +
+  geom_smooth(method = lm, se = FALSE)
+
+```
+
 
 ???
 - Looking at the model level statistics, the model as a whole seems fine
 - Problem is that it doesn't know which predictor to assign the variance too, since they are correlated
-- Almost always there a bit when there are multiple predictors - especially risky with interactions
+- Almost always there's a bit when there are multiple predictors - especially risky with interactions
 - Centering or scaling might help - might need to remove or combine predictors
 
 ---
@@ -493,9 +511,11 @@ Use `data` argument to merge original data with diagnostics
 hate_mod <- lm(avg_hatecrimes_per_100k_fbi ~ 
                    gini_index + cat_trump, data = hate_demo)
 
+#hate_mod <- hate_cont_z #or use the centered interaction model
 hate_diag <- broom::augment(hate_mod, data = hate_demo) 
 
 glimpse(hate_diag)
+
 ```
 
 ---
