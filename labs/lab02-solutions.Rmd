@@ -2,11 +2,11 @@
 title: "MATH 530/630"
 subtitle: 'Integrative Lab 2 - Linear Regression: Self Assessment'
 output:
-  pdf_document:
-    toc: yes
   html_document:
     toc: yes
     toc_float: yes
+  pdf_document:
+    toc: yes
 ---
 
 ```{r setup, include=FALSE}
@@ -265,7 +265,7 @@ ggplot(d_pts, aes(x = age_ctr, y = residual)) +
 ```{r include = TRUE}
 ggplot(d_pts, aes(x = zhfa, y = residual)) +
   geom_point() +
-  labs(x = "age", y = "Residual") +
+  labs(x = "zhfa", y = "Residual") +
   geom_hline(yintercept = 0, col = "blue", size = 1) +
   facet_wrap(~ sex)
 ```
@@ -290,10 +290,12 @@ d_diag <- augment(dmod, data = vitd) %>%
   mutate(.ext.resid = rstudent(dmod))
 
 # leverage
-k <- 4 # Number of predictors/coeeficients excluding the intercept, i.e. age, sex, age*sex, z_score
-# OR,  k <- sum(d_diag$.hat)-1 # The sum of the .hat scores is the number of coefficients, including the intercept
+k <- 5 # Number of predictors/coefficients, i.e. intercept, age, sex, age*sex, z_score
+# Or, the sum of the .hat scores is the number of coefficients, including the intercept
+# k <- sum(d_diag$.hat) 
 
-mean_hat <- (k + 1)/nrow(d_diag) # Or, mean(d_diag$.hat)
+mean_hat <- k/nrow(d_diag)
+# Or, mean(d_diag$.hat)
 d_diag %>% 
   select(id, .hat) %>%
   filter(.hat > (3*mean_hat))
@@ -317,8 +319,8 @@ d_diag %>%
 
 ```{r include = TRUE}
 n <- nrow(d_diag)
-k <- 4 # predictors (not including intercept)
-d <- 4/(n - k - 1)
+k <- 5 # predictors (including intercept)
+d <- 4/(n - k)
 d
 
 d_diag %>%
@@ -442,7 +444,7 @@ Use the code above to use the `anova` function to compare the intercept-only mod
     - `lm` compares the model I entered (model 2) to an intercept-only model (model 1)- it estimates the fit of model 2 in minimizing the residual sums of squares, and compares that to what is left over or residual after using the mean vitamin d level across all children to predict individual vitamin d levels for each child (model 1). The $R^2$ for my model was `r glance(dmod) %>% pull(1)`, which is the ratio of the model sums of squares to the total sums of squares. That is the same as calculating:
     
 $$1 - \frac{RSS_{Model2}}{RSS_{Model1}} = 1 - \frac{95561}{125063} = .236$$
-    - added intrepretation not needed but provided here: if the two models were equivalent this number would be $1-1 = 0$. Model 2 always has to perform as least as well as Model 1 (it is not possible to be worse!). You can think of the ratio as 1 minus the proportion of variation "left over" by the null model (model 1) that can be explained by model 2.
+    - added intrepretation not needed but provided here: if the two models were equivalent this number would be $1-1 = 0$. Model 2 always has to perform as least as well as Model 1. You can think of the ratio as 1 minus the proportion of variation "left over" by the null model (Model 1) that can be explained by model 2.
 </ul>
 
 # Replicate a Plot
