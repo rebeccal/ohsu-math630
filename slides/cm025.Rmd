@@ -517,12 +517,26 @@ hate_diag <- broom::augment(hate_mod, data = hate_demo)
 glimpse(hate_diag)
 
 ```
+```{r include = FALSE}
+# Used for comparing scaled and unscaled model diagnostics
+
+hate_diag_z <- broom::augment(hate_cont_z, data = hate_demo) 
+
+glimpse(hate_diag_z)
+
+```
 
 ---
 ## Leverage
 
 ```{r}
 hate_diag %>% 
+  select(state, .hat) %>%
+  arrange(desc(.hat))
+```
+```{r include = FALSE}
+# Scaled
+hate_diag_z %>% 
   select(state, .hat) %>%
   arrange(desc(.hat))
 ```
@@ -542,12 +556,31 @@ hate_diag %>%
   select(state, .hat) %>%
   filter(.hat > (2*mean_hat))
 ```
+```{r include=FALSE}
+k <- 3 # Number of predictors, including the Intercept!
+# OR
+k <- hate_diag_z %>% 
+  summarize(sum(.hat)) %>% 
+  pull() # Numerical property of the hat matrix
+mean_hat_z <- (k)/nrow(hate_demo)
+# "large" samples 
+hate_diag_z %>% 
+  select(state, .hat) %>%
+  filter(.hat > (2*mean_hat_z))
+```
 
 ```{r}
 # "small" samples
 hate_diag %>% 
   select(state, .hat) %>%
   filter(.hat > (3*mean_hat))
+```
+
+```{r include=FALSE}
+# "small" samples
+hate_diag_z %>% 
+  select(state, .hat) %>%
+  filter(.hat > (3*mean_hat_z))
 ```
 
 ---
@@ -558,6 +591,15 @@ ggplot(hate_diag, aes(x = gini_index, y = .hat)) +
   geom_point() +
   geom_line(aes(y = 2*mean_hat), colour = "red", lty = "dashed") +
   geom_line(aes(y = 3*mean_hat), colour = "slateblue", lty = "dashed") +
+  geom_text(aes(label = state), size = 2, vjust = 2) +
+  theme_minimal()
+```
+
+```{r include = FALSE, out.width= '70%'}
+ggplot(hate_diag_z, aes(x = gini_index, y = .hat)) +
+  geom_point() +
+  geom_line(aes(y = 2*mean_hat_z), colour = "red", lty = "dashed") +
+  geom_line(aes(y = 3*mean_hat_z), colour = "slateblue", lty = "dashed") +
   geom_text(aes(label = state), size = 2, vjust = 2) +
   theme_minimal()
 ```
@@ -629,12 +671,27 @@ hate_diag %>%
   arrange(desc(.ext.resid)) %>% 
   slice(1:5)
 ```
+```{r include = FALSE}
+hate_diag_z <- hate_diag_z %>% 
+  mutate(.ext.resid = rstudent(hate_cont_z)) # add 
+
+hate_diag_z %>% 
+  select(state, .std.resid, .ext.resid) %>% 
+  arrange(desc(.ext.resid)) %>% 
+  slice(1:5)
+```
 
 ---
 ## Expect 5% are 2+
 
 ```{r}
 hate_diag %>%
+  filter(abs(.ext.resid) >= 2) %>%
+  select(state, gini_index, .resid, .std.resid, .ext.resid)
+```
+
+```{r include = FALSE}
+hate_diag_z %>%
   filter(abs(.ext.resid) >= 2) %>%
   select(state, gini_index, .resid, .std.resid, .ext.resid)
 ```
@@ -709,11 +766,25 @@ hate_diag %>%
   select(state, avg_hatecrimes_per_100k_fbi, .cooksd)
 ```
 
+```{r include = FALSE}
+# Scaled
+hate_diag_z %>%
+  filter(.cooksd > d) %>% 
+  select(state, avg_hatecrimes_per_100k_fbi, .cooksd)
+```
+
 ---
 ## Plot leverage versus Cook's D
 
 ```{r echo=FALSE}
 ggplot(hate_diag, aes(x = .hat, y = .cooksd)) + 
+  geom_point() +
+  geom_text(aes(label = state), size = 3, vjust = 2) + 
+  geom_line(aes(y = d), colour = "red", lty = "dashed")
+```
+
+```{r include=FALSE}
+ggplot(hate_diag_z, aes(x = .hat, y = .cooksd)) + 
   geom_point() +
   geom_text(aes(label = state), size = 3, vjust = 2) + 
   geom_line(aes(y = d), colour = "red", lty = "dashed")
@@ -727,6 +798,13 @@ ggplot(hate_diag, aes(x = .hat, y=.ext.resid, size = .cooksd)) +
   geom_point(alpha = 0.7) +
   geom_text(aes(label = state), size = 3, vjust = 2)
 ```
+
+```{r include=FALSE}
+ggplot(hate_diag_z, aes(x = .hat, y=.ext.resid, size = .cooksd)) + 
+  geom_point(alpha = 0.7) +
+  geom_text(aes(label = state), size = 3, vjust = 2)
+```
+
 ---
 ## Parallel slopes with and without DC
 
