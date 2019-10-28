@@ -1,5 +1,5 @@
 ---
-title: "Math 530/630 CM 4.1 - lab"
+title: "Math 530/630 CM 4.1 - in-class lab"
 subtitle: 'Sampling Distributions' 
 #author: "Student Name"
 #date: "`r Sys.Date()`"
@@ -195,7 +195,7 @@ omega_n2
 _Question 3:_ How many unique sample means are possible? To answer, we can use `dplyr::distinct`.
 
 ```{r distinct_xbars_n2}
-omega_n2 %>% 
+omega_n2 %>%
   select(xbar_i) %>%
   distinct()
 ```
@@ -256,29 +256,35 @@ n2_plot
 
 
 # Our Third Sampling Distribution: 10 rolls
-1. It turns out that the distribution of one die roll follows a uniform distribution, which is obviously quite different looking from a "normal" bell-shaped distribution. The question is: what is the sampling distribution of the sample mean for a uniformly distributed variable? Use the following code to simulate 10 experiments where a die is rolled 10 times and we take the mean pips for each experiment. 
+Up until now, we've exhaustively enumerated all possible combinations before computing our sample means. But now we want to do 10 rolls!! 
+
+1. How many combinations would there be, if we enumerated all possible combinations? (HINT: don't really do it!) 
+1. Can we instead just draw random samples? Why or why not?
+1. What is the sampling distribution of the sample mean for a uniformly distributed variable? Use the following code to simulate 10 experiments where a die is rolled 10 times and we take the mean pips for each experiment. 
+1. What is the mean of the sample means? 
+1. What is the standard error of the mean? (it is just the `sd()` of the sampling distribution of the sample means)
+
 
 
 ```{r}
 set.seed(12345)
 unif_means_tenten <- numeric(10) # space for big results (vector of Os)
-for (i in 1:10){
-  y <- runif(10, min = 1, max = 6) # draw random sample with 10 observations each
+for (i in 1:10) {
+  y <- runif(10, min = 1, max = 6) # draw 10 random samples from the unif dist
   unif_means_tenten[i] <- mean(y) # compute mean for each ith sample
 }
 my_sim <- unif_means_tenten %>% tibble(sample_mean = .)
 ```
 
-What is the mean of the sample means? What is the standard error of the mean? (it is just the `sd()` of the sampling distribution of the sample means)
 
 ```{r}
 mm10 <- mean(my_sim$sample_mean) # mean of the sampling distribution of means
-sem10 <- sd(my_sim$sample_mean) # sem
+sem10 <- sd(my_sim$sample_mean) # standard error of the mean
 n10_var = sum((my_sim$sample_mean)^2)/length(my_sim$sample_mean) - (mean(my_sim$sample_mean))^2
 check_sem10 <- sqrt(n10_var)
 ```
 
-2. Use the code above to run this simulation for 100,000 (or 10,000) experiments, and make a plot of the sampling distribution of the sample means. What do you see?
+2. Use the code above to run this simulation for 100,000 (or 10,000) experiments, and make a plot of the sampling distribution of the sample means. (HINT: You may need to erase some objects before runnning 100,000. Use 'rm(object_name)'.) What do you see?
 
 ```{r include=FALSE}
 set.seed(12345)
@@ -313,8 +319,8 @@ bstrap <- rep_sample_n(population,size=200,reps=10000)
 names(bstrap) = c("replicate","stat")
 
 bstrap_means <- bstrap %>%
-group_by(replicate) %>%
-summarize(means = mean(stat))
+  group_by(replicate) %>%
+  summarize(means = mean(stat))
 
 ggplot(bstrap_means, aes(means)) +
 geom_histogram()

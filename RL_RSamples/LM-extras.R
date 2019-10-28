@@ -49,13 +49,12 @@ MSE <- sum((swiss$Agriculture - fitted(lm_swiss))^2) / (nrow(design_matrix) - nc
 RSE <- sqrt(MSE) # matches sigma and RSE above
 sd(augment(lm_swiss)$.resid) # Doh! Standard error <> standard deviation!
 #Another way - a little different
-k   <- length(lm_swiss$coefficients)
+k   <- length(lm_swiss$coefficients) # Number of coefficients
 n   <- length(lm_swiss$residuals) # Number of rows
 SSE <- sum(lm_swiss$residuals**2)
-RSE <- sqrt(SSE/(n-k)) #Residual Standard Error!! It's about sampling distributions and degrees of freedom.
+RSE <- sqrt(SSE/(n-k)) # Residual Standard Error!! It's about sampling distributions and degrees of freedom.
 
 #SE of the coefficients and the coefficients (betas)
-
 sqrt(diag(solve(crossprod(design_matrix))) * RSE) # SE of the coefficients
 ols_estimator <- solve(crossprod(design_matrix)) %*% t(design_matrix)
 betas <- ols_estimator%*%swiss$Agriculture 
