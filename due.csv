@@ -22,7 +22,7 @@ Tues,October,29,4.1: Sampling distributions,"<a href='https://moderndive.com/8-c
 <br><a href='https://www.nature.com/articles/nmeth.3414'>- Nature POS: Bootstrapping</a>
 <br>Optional:
 <br><a href='https://youtu.be/BCMjVc9ncFo'>- The infer R package (video)</a>",Inference for Numerical Data (use this link),https://www.datacamp.com/courses/inference-for-numerical-data,,,,,,,,,,,,,
-Thurs,October,31,4.2: Bootstrapping (confidence intervals),,,,,,iLab 02 - Self-assessment (new date!),labs/lab02-solutions.html,HW2,hw/HW2/HW2.pdf,,,,,,,
+Thurs,October,31,4.2: Bootstrapping (confidence intervals),<a href='https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1255808/'>- Standard Deviation and Standard Error</a>,,,,,iLab 02 - Self-assessment (new date!),labs/lab02-solutions.html,HW2,hw/HW2/HW2.pdf,,,,,,,
 Tues,November,5,4.3: Hypothesis testing (resampling),"<a href='https://moderndive.com/9-hypothesis-testing.html'>- MD Ch 9: Hypothesis Testing </a>
 <br><a href='http://moderndive.com/B-appendixB'>- MD Appendix B: Inference Examples</a>",Inference for Categorical Data (use this link),https://www.datacamp.com/courses/inference-for-categorical-data,,,,,,,,,,,,,
 Thurs,November,7,4.4: Hypothesis testing (classical),"<a href='https://www.nature.com/articles/nmeth.2698'>- Nature POS: t-tests</a>

@@ -34,7 +34,8 @@ reference,Measures of central tendency: The mean,https://www.ncbi.nlm.nih.gov/pm
 reference,Same Stats - Different Graphs,https://www.autodeskresearch.com/publications/samestats
 reference,Happy Git and GitHub for the useR, https://happygitwithr.com/rstudio-git-github.html
 reference,The Quartz guide to bad data,https://github.com/Quartz/bad-data-guide
-cheatsheet,Common Distributions,http://www.stat.tamu.edu/~twehrly/611/distab.pdf
-
+reference,Standard Deviations and Standard Errors,https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1255808/
+reference,Common Distributions,http://www.stat.tamu.edu/~twehrly/611/distab.pdf
+,,
 stagedcode,cm041 - Sampling Distributions,slides/cm041_code_along.Rmd
 stagedcode,cm045 - Power for one-sample t-test,slides/cm045_code_along.R

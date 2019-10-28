@@ -9,8 +9,6 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-
-
 **Self-Assessment**
 
 <ul style="color:cadetblue">
@@ -120,6 +118,7 @@ Life_expectancy <- read_xlsx(here::here("data", "life_expectancy_years.xlsx"),
                       
 
 ```
+
 ###Answer the same 5 questions as you did above for the reprohealth data.
 NOTE: Not using skim here - try it and you'll see why!
 
