@@ -1,7 +1,6 @@
 ---
 title: "Math 530/630 CM 4.2"
 subtitle: "Sampling, Simulation, & Bootstrapping"
-#author: "Alison Hill"
 output:
   xaringan::moon_reader:
     css: ["default", "css/ohsu.css", "css/ohsu-fonts.css"]
@@ -453,7 +452,8 @@ ch_means %>%
 
 "the bootstrap distribution is centered at the original sample mean"
 
-https://arxiv.org/pdf/1411.5279.pdf
+[What Teachers Should Know about the Bootstrap: Reseampling in the Undergraduate Statistics Curriculum - Hesterberg] https://arxiv.org/pdf/1411.5279.pdf
+
 
 ---
 ```{r}
@@ -489,7 +489,7 @@ ch_means %>%
   summarize(se = sd(stat))
 ```
 
-Remember that the standard deviation of the sampling distribution is the standard error, frequently denoted as `se`.
+Remember that the standard deviation of the sampling distribution is the standard error, frequently denoted as `SE`.
 
 ---
 ## The classical way
@@ -509,20 +509,21 @@ celeb_heights %>%
             mean_height = mean(Height),
             se_height = sd_height/sqrt(n()))
 ```
+---
 
-
-```{r include = FALSE, eval = FALSE}
+```{r include = FALSE, results = "asis"}
 mydir <- here::here("slides", "images", "bootstrap-slides")
-plot_files <- list.files(paste0(mydir, pattern = "*.png"))
-for (i in 1:length(plot_files)) {
-  cat('![](', paste0(dir, "/plots/", plot_files[i]), '){width=900px}\n\n', sep = '')
-}
 
 library(fs)
 file_nums <- str_pad(seq(1:16), 3, pad = "0")
 my_files <- str_c("bootstrap-slides.", file_nums)
 # dir_ls(here::here("slides", "images", "bootstrap-slides"), recursive = TRUE, glob = "*.png")
-path("slides", "images", "bootstrap-slides", my_files, ext = "png")
+#path("slides", "images", "bootstrap-slides", my_files, ext = "png")
+for (i in 1:length(my_files)) {
+    pathy <- path("slides", "images", "bootstrap-slides", my_files[i], ext = "png")
+    #cat('![](', path), '){width=900px}\n\n', sep = '')
+    cat("![](", toString(pathy), ")\n\n")
+}
 #https://stackoverflow.com/questions/48176518/looping-through-images-in-directory-ioslides
 ```
 

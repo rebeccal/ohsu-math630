@@ -15,7 +15,7 @@ Thurs,October ,17,3.1: Probability Review,<a href='slides/cm031.pdf'>3.1 - Proba
 Tues,October,22,3.2: Discrete Probability Functions,<a href='slides/cm032.pdf'>3.2 - Discrete Random Variables</a>,,,,,,,,,10/3/2017,Slide deck 03 from fall 2017
 Thurs,October,24,3.3: Continuous Probability Functions,<a href='slides/cm033.pdf'>3.3 - Continuous Random Variables</a> ,,,,,,,,,10/5/2017,Slide deck 04 from fall 2017
 ,Week ,Six-Eight,4.0 Inference,,,,,,,,,,,
-Tues,October,29,4.1: Sampling distributions,,CM4.1 Code-along,,<a href='slides/cm041.pdf'>4.1 - Sampling</a>,CM4.1 Code-along,slides/cm041_code_along.html,,,,10/10&17/2017,Slide deck 05 from fall 2017 and Conj cm042
+Tues,October,29,4.1: Sampling distributions,<a href='slides/cm041.pdf'>4.1 - Sampling Distributions</a>,CM4.1 Code-along,slides/cm041_code_along.html,,,,,,,10/10&17/2017,Slide deck 05 from fall 2017 and Conj cm042
 Thurs,October,31,4.2: Bootstrapping (confidence intervals),,CM4.2 Code-along,,<a href='slides/cm042.html'>4.2 - Bootstrapping</a>,CM4.2 Code-along,slides/cm042-code_along.html,,!! should have included deck 12 (confidence intervals?),,Skipped??,cm032 (slide deck)
 Tues,November,5,4.3: Hypothesis testing (resampling),,Lab 4.3,,,Lab 4.3,slides/cm043_lab.html,,,,11/2/2017,cm034 (in class lab)
 Thurs,November,7,4.4: Hypothesis testing (classical),,,,<a href='slides/cm044.pdf'>4.4 - Hypothesis Testing and Confidence Intervals</a>,,,,,,11/7/2017 & 11/16-58:21,slide deck 11&12 from fall 2017

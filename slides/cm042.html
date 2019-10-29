@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
   <head>
     <title>Math 530/630 CM 4.2</title>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link rel="stylesheet" href="css\ohsu.css" type="text/css" />
     <link rel="stylesheet" href="css\ohsu-fonts.css" type="text/css" />
@@ -114,11 +114,11 @@ Skim summary statistics
  n obs: 12 
  n variables: 2 
 
--- Variable type:character -----------------------------------------------------------------------------------------------------------
+-- Variable type:character -----------------------------------------------------------------------------------------------------
  variable missing complete  n min max empty n_unique
      Name       0       12 12   9  16     0       12
 
--- Variable type:integer -------------------------------------------------------------------------------------------------------------
+-- Variable type:integer -------------------------------------------------------------------------------------------------------
  variable missing complete  n   mean   sd  p0    p25 p50   p75 p100
    Height       0       12 12 173.92 8.89 157 168.75 175 178.5  189
      hist
@@ -235,18 +235,18 @@ set.seed(0)
 # A tibble: 12 x 2
    Name          Height
    &lt;chr&gt;          &lt;int&gt;
- 1 Brad Pitt        180
+ 1 Bruno Mars       165
  2 Harry Styles     178
- 3 Kanye West       173
- 4 Rob Riches       175
- 5 Brad Pitt        180
- 6 Kim Jong Un      175
+ 3 Rob Riches       175
+ 4 Justin Bieber    170
+ 5 Zayn Malik       175
+ 6 Rob Riches       175
  7 Brad Pitt        180
- 8 Kevin Hart       157
- 9 Barack Obama     185
-10 Barack Obama     185
+ 8 Zayn Malik       175
+ 9 Brad Pitt        180
+10 Kim Jong Un      175
 11 Justin Bieber    170
-12 Kim Jong Un      175
+12 Kanye West       173
 ```
 
 ]
@@ -255,7 +255,7 @@ set.seed(0)
 
 &lt;img src="cm042_files/figure-html/unnamed-chunk-8-1.png" width="60%" /&gt;
 
-The mean is 176.08
+The mean is 174.25
 ]
 
 
@@ -283,18 +283,18 @@ three %&gt;% pluck(2)
 # A tibble: 12 x 2
    Name             Height
    &lt;chr&gt;             &lt;int&gt;
- 1 Kim Jong Un         175
- 2 Bruno Mars          165
- 3 Kanye West          173
+ 1 Kanye West          173
+ 2 Daniel Radcliffe    165
+ 3 Bashar al-Assad     189
  4 Daniel Radcliffe    165
- 5 Bashar al-Assad     189
+ 5 Rob Riches          175
  6 Bruno Mars          165
- 7 Kevin Hart          157
+ 7 Kanye West          173
  8 Kanye West          173
- 9 Daniel Radcliffe    165
-10 Kevin Hart          157
-11 Kim Jong Un         175
-12 Barack Obama        185
+ 9 Bruno Mars          165
+10 Bruno Mars          165
+11 Kanye West          173
+12 Kanye West          173
 ```
 ]
 
@@ -309,17 +309,17 @@ three %&gt;% pluck(3)
    Name             Height
    &lt;chr&gt;             &lt;int&gt;
  1 Zayn Malik          175
- 2 Harry Styles        178
- 3 Kanye West          173
- 4 Justin Bieber       170
- 5 Kanye West          173
- 6 Brad Pitt           180
- 7 Kanye West          173
+ 2 Daniel Radcliffe    165
+ 3 Bruno Mars          165
+ 4 Kevin Hart          157
+ 5 Justin Bieber       170
+ 6 Harry Styles        178
+ 7 Kim Jong Un         175
  8 Bashar al-Assad     189
- 9 Barack Obama        185
-10 Bashar al-Assad     189
-11 Kim Jong Un         175
-12 Daniel Radcliffe    165
+ 9 Daniel Radcliffe    165
+10 Daniel Radcliffe    165
+11 Bashar al-Assad     189
+12 Harry Styles        178
 ```
 ]
 
@@ -330,13 +330,13 @@ class:middle
 .pull-left[
 &lt;img src="cm042_files/figure-html/unnamed-chunk-12-1.png" width="60%" /&gt;
 
-The mean is 170.33
+The mean is 171.17
 ]
 
 .pull-left[
 &lt;img src="cm042_files/figure-html/unnamed-chunk-13-1.png" width="60%" /&gt;
 
-The mean is 177.08
+The mean is 172.58
 ]
 
 ---
@@ -385,18 +385,18 @@ set.seed(0)
 # A tibble: 12 x 2
    Name          Height
    &lt;chr&gt;          &lt;int&gt;
- 1 Brad Pitt        180
+ 1 Bruno Mars       165
  2 Harry Styles     178
- 3 Kanye West       173
- 4 Rob Riches       175
- 5 Brad Pitt        180
- 6 Kim Jong Un      175
+ 3 Rob Riches       175
+ 4 Justin Bieber    170
+ 5 Zayn Malik       175
+ 6 Rob Riches       175
  7 Brad Pitt        180
- 8 Kevin Hart       157
- 9 Barack Obama     185
-10 Barack Obama     185
+ 8 Zayn Malik       175
+ 9 Brad Pitt        180
+10 Kim Jong Un      175
 11 Justin Bieber    170
-12 Kim Jong Un      175
+12 Kanye West       173
 ```
 
 ]
@@ -419,18 +419,18 @@ Response: Height (integer)
 # Groups:   replicate [1]
    replicate Height
        &lt;int&gt;  &lt;int&gt;
- 1         1    180
+ 1         1    165
  2         1    178
- 3         1    173
- 4         1    175
- 5         1    180
+ 3         1    175
+ 4         1    170
+ 5         1    175
  6         1    175
  7         1    180
- 8         1    157
- 9         1    185
-10         1    185
+ 8         1    175
+ 9         1    180
+10         1    175
 11         1    170
-12         1    175
+12         1    173
 ```
 
 ]
@@ -481,9 +481,9 @@ resamp_heights %&gt;%
 # A tibble: 3 x 2
   replicate   xbar
       &lt;int&gt;  &lt;dbl&gt;
-1         1 176.08
-2         2 170.33
-3         3 177.08
+1         1 174.25
+2         2 171.17
+3         3 172.58
 ```
 ]
 ---
@@ -539,16 +539,16 @@ resamp_heights %&gt;%
 # A tibble: 1,000 x 2
    replicate   xbar
        &lt;int&gt;  &lt;dbl&gt;
- 1         1 176.08
- 2         2 170.33
- 3         3 177.08
- 4         4 170.25
- 5         5 177.92
- 6         6 178.58
- 7         7 174.75
- 8         8 173.58
- 9         9 175.42
-10        10 174.08
+ 1         1 174.25
+ 2         2 171.17
+ 3         3 172.58
+ 4         4 169.42
+ 5         5 179.67
+ 6         6 177.08
+ 7         7 170.92
+ 8         8 174.67
+ 9         9 171.42
+10        10 173.25
 # ... with 990 more rows
 ```
 ]
@@ -599,7 +599,8 @@ ch_means %&gt;%
 
 "the bootstrap distribution is centered at the original sample mean"
 
-https://arxiv.org/pdf/1411.5279.pdf
+[What Teachers Should Know about the Bootstrap: Reseampling in the Undergraduate Statistics Curriculum - Hesterberg] https://arxiv.org/pdf/1411.5279.pdf
+
 
 ---
 
@@ -612,7 +613,7 @@ https://arxiv.org/pdf/1411.5279.pdf
 # A tibble: 1 x 2
   `2.5%` `97.5%`
    &lt;dbl&gt;   &lt;dbl&gt;
-1    169  178.67
+1    169  178.42
 ```
 
 
@@ -624,7 +625,7 @@ ch_means %&gt;%
 &lt;img src="cm042_files/figure-html/unnamed-chunk-24-1.png" width="50%" /&gt;
 
 ---
-Using the percentile method, our range of plausible values for the mean height of male celebrities is 169 to 178.67 centimeters.
+Using the percentile method, our range of plausible values for the mean height of male celebrities is 169 to 178.42 centimeters.
 
 You can see that 95% of the data stored in the `stat` variable in `ch_means` falls between the two endpoints with 2.5% to the left outside of the shading and 2.5% to the right outside of the shading. 
 
@@ -651,7 +652,7 @@ standard_error_ci
 # A tibble: 1 x 2
    lower  upper
    &lt;dbl&gt;  &lt;dbl&gt;
-1 169.13 178.70
+1 169.18 178.65
 ```
 
 ```r
@@ -663,10 +664,10 @@ ch_means %&gt;%
 # A tibble: 1 x 1
       se
    &lt;dbl&gt;
-1 2.4402
+1 2.4153
 ```
 
-Remember that the standard deviation of the sampling distribution is the standard error, frequently denoted as `se`.
+Remember that the standard deviation of the sampling distribution is the standard error, frequently denoted as `SE`.
 
 ---
 ## The classical way
@@ -682,7 +683,7 @@ ch_means %&gt;%
 # A tibble: 1 x 1
       se
    &lt;dbl&gt;
-1 2.4402
+1 2.4153
 ```
 
 --
@@ -702,7 +703,41 @@ celeb_heights %&gt;%
       &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;
 1    8.8878      173.92    2.5657
 ```
+---
+
+![]( slides/images/bootstrap-slides/bootstrap-slides.001.png )
+
+![]( slides/images/bootstrap-slides/bootstrap-slides.002.png )
+
+![]( slides/images/bootstrap-slides/bootstrap-slides.003.png )
+
+![]( slides/images/bootstrap-slides/bootstrap-slides.004.png )
+
+![]( slides/images/bootstrap-slides/bootstrap-slides.005.png )
+
+![]( slides/images/bootstrap-slides/bootstrap-slides.006.png )
+
+![]( slides/images/bootstrap-slides/bootstrap-slides.007.png )
+
+![]( slides/images/bootstrap-slides/bootstrap-slides.008.png )
+
+![]( slides/images/bootstrap-slides/bootstrap-slides.009.png )
+
+![]( slides/images/bootstrap-slides/bootstrap-slides.010.png )
+
+![]( slides/images/bootstrap-slides/bootstrap-slides.011.png )
+
+![]( slides/images/bootstrap-slides/bootstrap-slides.012.png )
+
+![]( slides/images/bootstrap-slides/bootstrap-slides.013.png )
+
+![]( slides/images/bootstrap-slides/bootstrap-slides.014.png )
+
+![]( slides/images/bootstrap-slides/bootstrap-slides.015.png )
+
+![]( slides/images/bootstrap-slides/bootstrap-slides.016.png )
     </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script src="https://platform.twitter.com/widgets.js"></script>
 <script>var slideshow = remark.create({
@@ -713,16 +748,74 @@ celeb_heights %&gt;%
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));
 });
-(function() {
-  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
   if (!r) return;
   s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
   d.head.appendChild(s);
-})();</script>
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
 
 <script>
 (function() {
-  var i, text, code, codes = document.getElementsByTagName('code');
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
   for (i = 0; i < codes.length;) {
     code = codes[i];
     if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
@@ -736,14 +829,15 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     }
     i++;
   }
-})();
+};
+slideshow._releaseMath(document);
 </script>
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
 (function () {
   var script = document.createElement('script');
   script.type = 'text/javascript';
-  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
   if (location.protocol !== 'file:' && /^https?:/.test(script.src))
     script.src  = script.src.replace(/^https?:/, '');
   document.getElementsByTagName('head')[0].appendChild(script);

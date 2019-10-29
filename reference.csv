@@ -36,6 +36,6 @@ reference,Happy Git and GitHub for the useR, https://happygitwithr.com/rstudio-g
 reference,The Quartz guide to bad data,https://github.com/Quartz/bad-data-guide
 reference,Standard Deviations and Standard Errors,https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1255808/
 reference,Common Distributions,http://www.stat.tamu.edu/~twehrly/611/distab.pdf
-,,
+reference,Tidy Chi-square,https://richpauloo.github.io/2018-02-03-Tidy-Chi-Squared-stats-in-infer/
 stagedcode,cm041 - Sampling Distributions,slides/cm041_code_along.Rmd
 stagedcode,cm045 - Power for one-sample t-test,slides/cm045_code_along.R
