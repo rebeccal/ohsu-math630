@@ -187,7 +187,7 @@ First, let's create a data frame that defines our sample space. Remember, our sa
 * x = number of pips on our n = 2 die rolls
 
 ```{r sample_space_n2}
-(omega_n2 <- crossing(roll1 = x, roll2 = x))
+(omega_n2 <- crossing(roll1 = 1:6, roll2 = 1:6))
 ```
 
 How many different possible combinations of pips from die1 and die2 are possible? 
@@ -299,7 +299,7 @@ Up until now, we've exhaustively enumerated all possible combinations before com
 set.seed(12345)
 unif_means_tenten <- numeric(10) # space for big results (vector of Os)
 for (i in 1:10) {
-  y <- runif(10, min = 1, max = 6) # draw 10 random samples from the unif dist
+  y <- rdunif(10, 1, 6) # draw 10 random samples from the discrete unif dist
   unif_means_tenten[i] <- mean(y) # compute mean for each ith sample
 }
 my_sim <- unif_means_tenten %>% tibble(sample_mean = .)
@@ -307,10 +307,18 @@ my_sim <- unif_means_tenten %>% tibble(sample_mean = .)
 
 
 ```{r}
-mm10 <- mean(my_sim$sample_mean) # mean of the sampling distribution of means
-sem10 <- sd(my_sim$sample_mean) # standard error of the mean
-n10_var = sum((my_sim$sample_mean)^2)/length(my_sim$sample_mean) - (mean(my_sim$sample_mean))^2
-check_sem10 <- sqrt(n10_var)
+(mm10 <- mean(my_sim$sample_mean)) # mean of the sampling distribution of means
+(sem10 <- sd(my_sim$sample_mean)) # standard error of the mean
+(n10_var = sum((my_sim$sample_mean)^2)/length(my_sim$sample_mean) - (mean(my_sim$sample_mean))^2)
+(check_sem10 <- sqrt(n10_var))
+```
+
+```{r match_plots10, include=FALSE}
+# need to set the y aes so both the histogram and the normal line are on the same scale
+ggplot(my_sim, aes(x = sample_mean)) +
+  geom_histogram(binwidth = 0.5,(aes(y=..density..))) +
+  stat_function(fun = dnorm, args = list(mean = mm10, sd = sem10), color = "green") +
+  xlim(1,6)
 ```
 
 Use the code above to run this simulation for 100,000 (or 10,000) experiments, and make a plot of the sampling distribution of the sample means. (HINT: You may need to erase some objects before runnning 100,000. Use 'rm(object_name)'.) 
@@ -320,8 +328,8 @@ What do you see?
 ```{r include=FALSE}
 set.seed(12345)
 unif_means_ten <- numeric(10) # space for big results (vector of Os)
-for (i in 1:10000){
-  y <- runif(10, min = 1, max = 6) # draw random sample with 10 observations each
+for (i in 1:100000){
+  y <- rdunif(10, 1, 6) # draw random sample with 10 observations each
   unif_means_ten[i] <- mean(y) # compute mean for each ith sample
 }
 my_sim2 <- unif_means_ten %>% tibble(sample_mean = .)
@@ -336,8 +344,8 @@ my_sim2 <- unif_means_ten %>% tibble(sample_mean = .)
 
 ```{r match_plots, include=FALSE}
 ggplot(my_sim2, aes(x = sample_mean)) +
-  geom_density(color = "dodgerblue") +
-  stat_function(fun = dnorm, args = list(mean = mm2, sd = sem2), color = "red") 
+  geom_histogram(binwidth = 0.5,(aes(y=..density..))) +
+  stat_function(fun = dnorm, args = list(mean = mm2, sd = sem2), color = "green") 
 ```
 
 ```{r include = FALSE}

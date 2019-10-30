@@ -12,11 +12,9 @@
 class: center, middle, inverse, title-slide
 
 # Math 530/630 CM 4.2
-## Sampling, Simulation, &amp; Bootstrapping
+## Bootstrapping &amp; Confidence Intervals
 
 ---
-
-
 
 
 
@@ -114,11 +112,11 @@ Skim summary statistics
  n obs: 12 
  n variables: 2 
 
--- Variable type:character -----------------------------------------------------------------------------------------------------
+-- Variable type:character ------------------------------------------------------------------------------------------
  variable missing complete  n min max empty n_unique
      Name       0       12 12   9  16     0       12
 
--- Variable type:integer -------------------------------------------------------------------------------------------------------
+-- Variable type:integer --------------------------------------------------------------------------------------------
  variable missing complete  n   mean   sd  p0    p25 p50   p75 p100
    Height       0       12 12 173.92 8.89 157 168.75 175 178.5  189
      hist
@@ -582,7 +580,8 @@ ch_means %&gt;%
 
 ```r
 ch_means %&gt;% 
-  visualize(obs_stat = x_bar)
+  visualize() +
+  shade_p_value(obs_stat = x_bar, direction = NULL)
 ```
 
 &lt;img src="cm042_files/figure-html/unnamed-chunk-21-1.png" width="50%" /&gt;
@@ -591,15 +590,15 @@ ch_means %&gt;%
 
 ```r
 ch_means %&gt;% 
-  visualize(obs_stat = x_bar) +
-  geom_vline(aes(xintercept = mean(stat)), lty = 3, lwd = 3, colour = "green")
+  visualize() +
+  shade_p_value(obs_stat = x_bar, direction = NULL)
 ```
 
 &lt;img src="cm042_files/figure-html/unnamed-chunk-22-1.png" width="50%" /&gt;
 
 "the bootstrap distribution is centered at the original sample mean"
 
-[What Teachers Should Know about the Bootstrap: Reseampling in the Undergraduate Statistics Curriculum - Hesterberg] https://arxiv.org/pdf/1411.5279.pdf
+[What Teachers Should Know about the Bootstrap - Hesterberg](https://arxiv.org/pdf/1411.5279.pdf)
 
 
 ---
@@ -704,38 +703,6 @@ celeb_heights %&gt;%
 1    8.8878      173.92    2.5657
 ```
 ---
-
-![]( slides/images/bootstrap-slides/bootstrap-slides.001.png )
-
-![]( slides/images/bootstrap-slides/bootstrap-slides.002.png )
-
-![]( slides/images/bootstrap-slides/bootstrap-slides.003.png )
-
-![]( slides/images/bootstrap-slides/bootstrap-slides.004.png )
-
-![]( slides/images/bootstrap-slides/bootstrap-slides.005.png )
-
-![]( slides/images/bootstrap-slides/bootstrap-slides.006.png )
-
-![]( slides/images/bootstrap-slides/bootstrap-slides.007.png )
-
-![]( slides/images/bootstrap-slides/bootstrap-slides.008.png )
-
-![]( slides/images/bootstrap-slides/bootstrap-slides.009.png )
-
-![]( slides/images/bootstrap-slides/bootstrap-slides.010.png )
-
-![]( slides/images/bootstrap-slides/bootstrap-slides.011.png )
-
-![]( slides/images/bootstrap-slides/bootstrap-slides.012.png )
-
-![]( slides/images/bootstrap-slides/bootstrap-slides.013.png )
-
-![]( slides/images/bootstrap-slides/bootstrap-slides.014.png )
-
-![]( slides/images/bootstrap-slides/bootstrap-slides.015.png )
-
-![]( slides/images/bootstrap-slides/bootstrap-slides.016.png )
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

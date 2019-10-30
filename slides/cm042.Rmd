@@ -1,6 +1,6 @@
 ---
 title: "Math 530/630 CM 4.2"
-subtitle: "Sampling, Simulation, & Bootstrapping"
+subtitle: "Bootstrapping & Confidence Intervals"
 output:
   xaringan::moon_reader:
     css: ["default", "css/ohsu.css", "css/ohsu-fonts.css"]
@@ -11,14 +11,6 @@ output:
       countIncrementalSlides: false
       beforeInit: "https://platform.twitter.com/widgets.js"
 ---
-
-```{r setup, include=FALSE}
-#options(htmltools.dir.version = FALSE)
-#options(knitr.table.format = "html") 
-#knitr::opts_chunk$set(warning = FALSE, message = FALSE, 
-#  comment = NA, dpi = 300,
-#  fig.align = "center", out.width = "65%", cache = FALSE)
-```
 
 ```{r setup_new, include=FALSE}
 # leave this chunk alone
@@ -440,19 +432,20 @@ ch_means %>%
 ---
 ```{r out.width = '50%'}
 ch_means %>% 
-  visualize(obs_stat = x_bar)
+  visualize() +
+  shade_p_value(obs_stat = x_bar, direction = NULL)
 ```
 
 ---
 ```{r out.width = '50%'}
 ch_means %>% 
-  visualize(obs_stat = x_bar) +
-  geom_vline(aes(xintercept = mean(stat)), lty = 3, lwd = 3, colour = "green")
+  visualize() +
+  shade_p_value(obs_stat = x_bar, direction = NULL)
 ```
 
 "the bootstrap distribution is centered at the original sample mean"
 
-[What Teachers Should Know about the Bootstrap: Reseampling in the Undergraduate Statistics Curriculum - Hesterberg] https://arxiv.org/pdf/1411.5279.pdf
+[What Teachers Should Know about the Bootstrap - Hesterberg](https://arxiv.org/pdf/1411.5279.pdf)
 
 
 ---
@@ -463,7 +456,8 @@ ch_means %>%
 
 ```{r out.width='50%'}
 ch_means %>% 
-  visualize(endpoints = percentile_ci, direction = "between")
+  visualize() + 
+  shade_confidence_interval(endpoints = percentile_ci)
 ```
 
 ---
@@ -502,13 +496,15 @@ ch_means %>%
 
 --
 
-The `SE` is the standard deviation dividing by square root of the sample size.
+The `SE` is the standard deviation of the sampling distribution divided by the square root of the sample size.
 ```{r}
 celeb_heights %>% 
   summarize(sd_height = sd(Height),
             mean_height = mean(Height),
             se_height = sd_height/sqrt(n()))
 ```
+
+
 ---
 
 ```{r include = FALSE, results = "asis"}

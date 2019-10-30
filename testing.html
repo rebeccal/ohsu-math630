@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Math 530/630 CM 4.2 - lab</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 64px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h2 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h3 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h4 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h5 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h6 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">MATH 530/630</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="cm.html">
+    <span class="fa fa-chalkboard-teacher"></span>
+     
+    Class Meetings
+  </a>
+</li>
+<li>
+  <a href="due.html">
+    <span class="fa fa-calendar-check"></span>
+     
+    Due Dates
+  </a>
+</li>
+<li>
+  <a href="https://www.datacamp.com/enterprise/probability-statistical-inference-for-scientists-and-engineers-42d49ab0-6bca-47c8-9067-9b4012dc7027">
+    <span class="fa fa-user-ninja"></span>
+     
+    DataCamp
+  </a>
+</li>
+<li>
+  <a href="https://sakai.ohsu.edu/portal/site/MATH-530-1-BH-F19">
+    <span class="fa fa-university"></span>
+     
+    Sakai
+  </a>
+</li>
+<li>
+  <a href="reference.html">
+    <span class="fa fa-glasses"></span>
+     
+    Reference Plus
+  </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="syllabus.html">
+    <span class="fa fa-key"></span>
+     
+    Syllabus
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Math 530/630 CM 4.2 - lab</h1>
+<h3 class="subtitle">Bootstrapping and Confidence Intervals</h3>
+
+</div>
+
+
+<div id="estimation-of-us-male-height" class="section level1">
+<h1><span class="header-section-number">1</span> Estimation of US male height</h1>
+<p>Suppose we want to estimate the average height of men in the U.S.</p>
+<p>We can use data from the <a href="https://www.cdc.gov/brfss/annual_data/annual_2016.html">BRFSS (2016)</a>:</p>
+<p>“The Behavioral Risk Factor Surveillance System (BRFSS) is the nation’s premier system of health-related telephone surveys that collect state data about U.S. residents regarding their health-related risk behaviors, chronic health conditions, and use of preventive services.”</p>
+<pre class="r"><code>library(tidyverse)
+library(skimr)
+library(haven)
+library(infer)</code></pre>
+<pre class="r"><code># the data set is available on the course website, under References Plus
+male_heights &lt;- read_csv(here::here(&quot;data&quot;, &quot;male_heights.csv&quot;))</code></pre>
+<pre><code>## Parsed with column specification:
+## cols(
+##   HTM4 = col_double(),
+##   id_num = col_double()
+## )</code></pre>
+<div id="eda" class="section level2">
+<h2><span class="header-section-number">1.1</span> EDA</h2>
+<p>Height is in self-reported height in centimeters.</p>
+<ul>
+<li>How many unique heights are there?</li>
+<li>How many men were 103 cm?</li>
+<li>How about 231 cm?</li>
+</ul>
+<pre class="r"><code>male_heights %&gt;% 
+  count(HTM4) %&gt;% 
+  arrange(desc(HTM4))</code></pre>
+<pre><code>## # A tibble: 88 x 2
+##     HTM4     n
+##    &lt;dbl&gt; &lt;int&gt;
+##  1   231     1
+##  2   229     3
+##  3   226     2
+##  4   224     1
+##  5   221     3
+##  6   218     4
+##  7   216     6
+##  8   213    15
+##  9   211    27
+## 10   208    42
+## # ... with 78 more rows</code></pre>
+</div>
+<div id="estimate" class="section level2">
+<h2><span class="header-section-number">1.2</span> Estimate</h2>
+<p>What is the <code>mean</code> and <code>sd</code> of male heights?</p>
+<pre class="r"><code>library(skimr)
+skim(male_heights)</code></pre>
+<pre><code>## Skim summary statistics
+##  n obs: 204509 
+##  n variables: 2 
+## 
+## -- Variable type:numeric -------------------------------------------------------------------------------------------------------
+##  variable missing complete      n     mean       sd p0   p25   p50    p75
+##      HTM4       0   204509 204509   178.06     7.79 91   173   178    183
+##    id_num       0   204509 204509 1e+05    59036.81  1 51128 1e+05 153382
+##   p100     hist
+##    231 &lt;U+2581&gt;&lt;U+2581&gt;&lt;U+2581&gt;&lt;U+2581&gt;&lt;U+2587&gt;&lt;U+2587&gt;&lt;U+2581&gt;&lt;U+2581&gt;
+##  2e+05 &lt;U+2587&gt;&lt;U+2587&gt;&lt;U+2587&gt;&lt;U+2587&gt;&lt;U+2587&gt;&lt;U+2587&gt;&lt;U+2587&gt;&lt;U+2587&gt;</code></pre>
+</div>
+<div id="quantify-precision" class="section level2">
+<h2><span class="header-section-number">1.3</span> Quantify precision</h2>
+<p>At this point we have an estimate of the average adult male height. We’d like to know how accurate this estimate is, and how precise. In the context of estimation, these words have a technical distinction:</p>
+<p>“Given a set of data points from repeated measurements of the same quantity, the set can be said to be precise if the values are close to each other, while the set can be said to be accurate if their average is close to the true value of the quantity being measured.”</p>
+<p>Usually accuracy is what we really care about, but it’s hard to measure accuracy unless you know the true value. And if you knew the true value, you wouldn’t have to estimate it in the first place.</p>
+<p>Quantifying precision is not as useful, but it is much easier. Here’s one way to do it:</p>
+<ol style="list-style-type: decimal">
+<li><p>Use the data you have to make a model of the population.</p></li>
+<li><p>Use the model to simulate the <strong>random</strong> data collection process.</p></li>
+<li><p>Use the simulated data to compute an estimate.</p></li>
+<li><p>Repeat steps 1-3 and collect the results.</p></li>
+</ol>
+<p>To model the population, we’ll use resampling; that is, we will treat the observed measurements as if they were taken from the entire population, and we will draw random samples from them.</p>
+<p>We sample with replacement, which means that some measurements might be chosen more than once, and some might not be chosen at all. (If we sample without replacement, the resampled data is always identical to the original, so that’s no good.) let’s do 3 resamplings and comare them.</p>
+<pre class="r"><code># First, get the n (number of observations)
+males_n &lt;- male_heights %&gt;% 
+  tally() %&gt;% 
+  pull()</code></pre>
+<pre class="r"><code>set.seed(2051)
+mh_resample1 &lt;- male_heights %&gt;% 
+  sample_n(size = males_n, replace = TRUE)</code></pre>
+<p>In <code>mh_resample1</code>:</p>
+<ul>
+<li>How many men were 103 cm?</li>
+<li>How about 231 cm?</li>
+<li>Try setting seed to <code>1903</code> and create <code>mh_resample2</code>, answer the two questions again.</li>
+<li>Try setting seed to <code>1701</code> and create <code>mh_resample3</code>, answer the two questions again.</li>
+</ul>
+<pre class="r"><code>mh_resample1 %&gt;% 
+  count(HTM4 == 103)</code></pre>
+<pre><code>## # A tibble: 2 x 2
+##   `HTM4 == 103`      n
+##   &lt;lgl&gt;          &lt;int&gt;
+## 1 FALSE         204508
+## 2 TRUE               1</code></pre>
+<pre class="r"><code>mh_resample1 %&gt;% 
+  count(HTM4 == 231)</code></pre>
+<pre><code>## # A tibble: 2 x 2
+##   `HTM4 == 231`      n
+##   &lt;lgl&gt;          &lt;int&gt;
+## 1 FALSE         204508
+## 2 TRUE               1</code></pre>
+<pre class="r"><code>set.seed(1903)
+mh_resample2 &lt;- male_heights %&gt;% 
+  sample_n(size = males_n, replace = TRUE)</code></pre>
+<pre class="r"><code>mh_resample2 %&gt;% 
+  count(HTM4 == 103)</code></pre>
+<pre><code>## # A tibble: 2 x 2
+##   `HTM4 == 103`      n
+##   &lt;lgl&gt;          &lt;int&gt;
+## 1 FALSE         204508
+## 2 TRUE               1</code></pre>
+<pre class="r"><code>mh_resample2 %&gt;% 
+  count(HTM4 == 231)</code></pre>
+<pre><code>## # A tibble: 2 x 2
+##   `HTM4 == 231`      n
+##   &lt;lgl&gt;          &lt;int&gt;
+## 1 FALSE         204508
+## 2 TRUE               1</code></pre>
+<pre class="r"><code>set.seed(1701)
+mh_resample3 &lt;- male_heights %&gt;% 
+  sample_n(size = males_n, replace = TRUE)</code></pre>
+<pre class="r"><code>mh_resample3 %&gt;% 
+  count(HTM4 == 103)</code></pre>
+<pre><code>## # A tibble: 2 x 2
+##   `HTM4 == 103`      n
+##   &lt;lgl&gt;          &lt;int&gt;
+## 1 FALSE         204508
+## 2 TRUE               1</code></pre>
+<pre class="r"><code>mh_resample3 %&gt;% 
+  count(HTM4 == 231)</code></pre>
+<pre><code>## # A tibble: 2 x 2
+##   `HTM4 == 231`      n
+##   &lt;lgl&gt;          &lt;int&gt;
+## 1 FALSE         204507
+## 2 TRUE               2</code></pre>
+<pre class="r"><code>fix_windows_histograms() # If you&#39;re using windows, allows the histograms to show in the HTML output</code></pre>
+<pre><code>## This function will change your system locale. It may have other unintended effects.</code></pre>
+<pre><code>## Continue? (Y/n)</code></pre>
+<pre class="r"><code>skim(mh_resample1, HTM4)</code></pre>
+<pre><code>## Skim summary statistics
+##  n obs: 204509 
+##  n variables: 2 
+## 
+## -- Variable type:numeric -------------------------------------------------------------------------------------------------------
+##  variable missing complete      n   mean  sd p0 p25 p50 p75 p100     hist
+##      HTM4       0   204509 204509 178.05 7.8 94 173 178 183  231 ▁▁▁▁▇▇▁▁</code></pre>
+<pre class="r"><code>skim(mh_resample2, HTM4)</code></pre>
+<pre><code>## Skim summary statistics
+##  n obs: 204509 
+##  n variables: 2 
+## 
+## -- Variable type:numeric -------------------------------------------------------------------------------------------------------
+##  variable missing complete      n   mean   sd p0 p25 p50 p75 p100     hist
+##      HTM4       0   204509 204509 178.07 7.78 91 173 178 183  231 ▁▁▁▁▇▇▁▁</code></pre>
+<pre class="r"><code>skim(mh_resample3, HTM4)</code></pre>
+<pre><code>## Skim summary statistics
+##  n obs: 204509 
+##  n variables: 2 
+## 
+## -- Variable type:numeric -------------------------------------------------------------------------------------------------------
+##  variable missing complete      n   mean  sd p0 p25 p50 p75 p100     hist
+##      HTM4       0   204509 204509 178.07 7.8 91 173 178 183  231 ▁▁▁▁▇▇▁▁</code></pre>
+<pre class="r"><code># Make some space
+remove(mh_resample1,mh_resample2,mh_resample3)</code></pre>
+<p>If we wanted to use <code>infer</code> instead to generate a SINGLE replicate or resample, we would use:</p>
+<pre class="r"><code>set.seed(1701)
+mh_resample3 &lt;- male_heights %&gt;% 
+  specify(response = HTM4) %&gt;% 
+  generate(reps = 1, type = &quot;bootstrap&quot;)</code></pre>
+<p>Now that we know how to create a single resample, let’s generate 100 resamples, calculate the mean for each resample, and make a histogram to show the distribution of all the calculated means.</p>
+<pre class="r"><code>set.seed(1701)
+mh_means100 &lt;- male_heights %&gt;% 
+  specify(response = HTM4) %&gt;% 
+  generate(reps = 100, type = &quot;bootstrap&quot;) %&gt;% 
+  calculate(stat = &quot;mean&quot;)
+
+mh_means100 %&gt;% 
+  visualize()</code></pre>
+<p><img src="testing_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<pre class="r"><code># Removing as I go to make sure I don&#39;t run out of memory
+rm(mh_means100)</code></pre>
+<p>And 300…</p>
+<pre class="r"><code>set.seed(1701)
+mh_means300 &lt;- male_heights %&gt;% 
+  specify(response = HTM4) %&gt;% 
+  generate(reps = 300, type = &quot;bootstrap&quot;) %&gt;% 
+  calculate(stat = &quot;mean&quot;)
+
+mh_means300 %&gt;% 
+  visualize()</code></pre>
+<p><img src="testing_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p>Feel free to try more! <strong>Warning</strong> you might run run out of memory :0</p>
+</div>
+<div id="sem" class="section level2">
+<h2><span class="header-section-number">1.4</span> SEM</h2>
+<p>The width of the above distributions show how much the means vary from one resampling to the next.</p>
+<p>We can quantify this variability by computing the standard error (e.g., the standard deviation of the sampling distribution), in this case the standard error of the mean (SEM).</p>
+<pre class="r"><code>options(pillar.sigfig = 6) # Sets the number of significant digits that will display
+
+mh_means300 %&gt;% 
+  summarize(mean_of_means = mean(stat),
+            sd_of_means = sd(stat)) # this is the SE!</code></pre>
+<pre><code>## # A tibble: 1 x 2
+##   mean_of_means sd_of_means
+##           &lt;dbl&gt;       &lt;dbl&gt;
+## 1       178.060   0.0167367</code></pre>
+<p><strong>Question:</strong> Why is the standard error so small?</p>
+<p><strong>Question:</strong> Can you estimate the SEM using the standard deviations for the first few resamples?</p>
+</div>
+</div>
+<div id="confidence-intervals" class="section level1">
+<h1><span class="header-section-number">2</span> Confidence Intervals</h1>
+<p>We can also summarize the sampling distribution with a “confidence interval”, which is a range that contains a specified fraction, like 95% (the confidence level), of the values in <code>mh_means</code>. Alternatively, we can ask for the confidence interval calculated using the standard error.</p>
+<p>The central 95% confidence interval is between the 2.5th and 97.5th percentiles of the sampling distribution.</p>
+<pre class="r"><code># get_ci() default &quot;confidence level&quot; is 0.95
+
+# Percentile method
+(percentile_ci &lt;- mh_means300 %&gt;% 
+  get_ci())</code></pre>
+<pre><code>## # A tibble: 1 x 2
+##    `2.5%` `97.5%`
+##     &lt;dbl&gt;   &lt;dbl&gt;
+## 1 178.026 178.093</code></pre>
+<pre class="r"><code># SE method. This needs the point_estimate passed in - here that&#39;s the mean of means
+mean_of_means &lt;- mh_means300 %&gt;% 
+  summarize (mean = mean(stat))
+
+(ci_se &lt;- mh_means300 %&gt;% 
+  get_ci(type = &quot;se&quot;, point_estimate = mean_of_means))</code></pre>
+<pre><code>## # A tibble: 1 x 2
+##     lower   upper
+##     &lt;dbl&gt;   &lt;dbl&gt;
+## 1 178.028 178.093</code></pre>
+<p><strong>Question:</strong> Why are they (ever so slightly) different?</p>
+<p><strong>Question:</strong> How would you recreate these two calculations by “hand” with the help of R?</p>
+<div id="visualizing-the-ci" class="section level2">
+<h2><span class="header-section-number">2.1</span> Visualizing the CI</h2>
+<p>You can also use <code>infer</code> to plot a histogram and shade the 95% confidence interval. Here’s the confidence intervals calculated using both the percentile and SE methods.</p>
+<pre class="r"><code>means_plot &lt;- mh_means300 %&gt;% 
+  visualize() 
+
+means_plot + 
+  shade_confidence_interval(percentile_ci) +
+  shade_p_value(obs_stat = mean_of_means, direction = NULL)</code></pre>
+<p><img src="testing_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p>Here, 95% of the data stored in the <code>stat</code> variable in <code>mh_means</code> falls between the two endpoints with 2.5% to the left outside of the shading and 2.5% to the right outside of the shading. The cut-off points that provide our confidence interval are shown with the darker lines.</p>
+<pre class="r"><code>means_plot + 
+  shade_confidence_interval(ci_se) +
+  shade_p_value(obs_stat = mean_of_means, direction = NULL)</code></pre>
+<p><img src="testing_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p>Here, the end points are calculated using the SEM.</p>
+<p><strong>Question:</strong> What are the conditions for using the SE method?</p>
+</div>
+<div id="amd-more" class="section level2">
+<h2><span class="header-section-number">2.2</span> Amd more…</h2>
+<p><strong>Think about:</strong> How would the above calculations change if we used a subset of the data?</p>
+<p>Let’s try it using a subset with 2000 data elements, but resample 1000 times.</p>
+<pre class="r"><code>set.seed(1701)
+mh_means_samp &lt;- sample_n(male_heights, 2000) %&gt;% 
+  specify(response = HTM4) %&gt;% 
+  generate(reps = 1000, type = &quot;bootstrap&quot;) %&gt;% 
+  calculate(stat = &quot;mean&quot;)
+
+mh_means_samp %&gt;% 
+  summarize(mean_of_means = mean(stat),
+            sd_of_means = sd(stat)) # this is the SE!</code></pre>
+<pre><code>## # A tibble: 1 x 2
+##   mean_of_means sd_of_means
+##           &lt;dbl&gt;       &lt;dbl&gt;
+## 1       178.256    0.189102</code></pre>
+<pre class="r"><code># Percentile method
+(percentile_ci &lt;- mh_means_samp %&gt;% 
+  get_ci())</code></pre>
+<pre><code>## # A tibble: 1 x 2
+##    `2.5%` `97.5%`
+##     &lt;dbl&gt;   &lt;dbl&gt;
+## 1 177.883 178.618</code></pre>
+<pre class="r"><code>mean_means_samp &lt;- mh_means_samp %&gt;% 
+  summarize(mean(stat))
+
+means_plot &lt;- mh_means_samp %&gt;% 
+  visualize() 
+
+means_plot + 
+  shade_confidence_interval(percentile_ci) +
+  shade_p_value(obs_stat = mean_means_samp, direction = NULL)</code></pre>
+<p><img src="testing_files/figure-html/unnamed-chunk-22-1.png" width="672" /> <strong>Question:</strong> What did we gain? What did we lose?</p>
+</div>
+</div>
+
+<p>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">
+<img alt="Creative Commons License" style="border-width:0" src="by-nc.png" height="10" width="75"/></a>
+</p>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
