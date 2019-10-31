@@ -39,6 +39,6 @@ reference,Common Distributions,http://www.stat.tamu.edu/~twehrly/611/distab.pdf
 reference,Tidy Chi-square,https://richpauloo.github.io/2018-02-03-Tidy-Chi-Squared-stats-in-infer/
 code,CM 4.1 - Sampling Distributions,slides/cm041_code_along.Rmd
 stagedcode,cm045 - Power for one-sample t-test,slides/cm045_code_along.R
-code,CM 4.2 - Bootstrapping and Confidence Intervals,slides/cm042_code_along.Rmd
+code,CM 4.2 - Bootstrapping and Confidence Intervals,slides/cm042-code_along.Rmd
 reference, Sampling Distributions Simulator,http://onlinestatbook.com/stat_sim/sampling_dist/
 reference,What Teacher Should Know about Bootstrapping,https://arxiv.org/pdf/1411.5279.pdf
