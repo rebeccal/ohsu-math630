@@ -1527,11 +1527,7 @@ male_heights &lt;- read_csv(here::here(&quot;data&quot;, &quot;male_heights.csv&
 <div id="eda" class="section level2">
 <h2><span class="header-section-number">1.1</span> EDA</h2>
 <p>Height is in self-reported height in centimeters.</p>
-<ul>
-<li>How many unique heights are there?</li>
-<li>How many men were 103 cm?</li>
-<li>How about 231 cm?</li>
-</ul>
+<p><strong>Questions:</strong> * How many unique heights are there? * How many men were 103 cm? * How about 231 cm?</p>
 <pre class="r"><code>male_heights %&gt;% 
   count(HTM4) %&gt;% 
   arrange(desc(HTM4))</code></pre>
@@ -1553,13 +1549,12 @@ male_heights &lt;- read_csv(here::here(&quot;data&quot;, &quot;male_heights.csv&
 <div id="estimate" class="section level2">
 <h2><span class="header-section-number">1.2</span> Estimate</h2>
 <p>What is the <code>mean</code> and <code>sd</code> of male heights?</p>
-<pre class="r"><code>library(skimr)
-skim(male_heights)</code></pre>
+<pre class="r"><code>skim(male_heights)</code></pre>
 <pre><code>## Skim summary statistics
 ##  n obs: 204509 
 ##  n variables: 2 
 ## 
-## -- Variable type:numeric --------------------------------------------------------------------------------------------
+## -- Variable type:numeric ------------------------------------------------------------------------------------------------------
 ##  variable missing complete      n     mean       sd p0   p25   p50    p75
 ##      HTM4       0   204509 204509   178.06     7.79 91   173   178    183
 ##    id_num       0   204509 204509 1e+05    59036.81  1 51128 1e+05 153382
@@ -1580,7 +1575,8 @@ skim(male_heights)</code></pre>
 <li><p>Repeat steps 1-3 and collect the results.</p></li>
 </ol>
 <p>To model the population, we’ll use resampling; that is, we will treat the observed measurements as if they were taken from the entire population, and we will draw random samples from them.</p>
-<p>We sample with replacement, which means that some measurements might be chosen more than once, and some might not be chosen at all. (If we sample without replacement, the resampled data is always identical to the original, so that’s no good.) let’s do 3 resamplings and comare them.</p>
+<p>We sample with replacement, which means that some measurements might be chosen more than once, and some might not be chosen at all. (If we sample without replacement, the resampled data is always identical to the original, so that’s no good.)</p>
+<p>Let’s do 3 resamplings and compare them.</p>
 <pre class="r"><code># First, get the n (number of observations)
 males_n &lt;- male_heights %&gt;% 
   tally() %&gt;% 
@@ -1588,7 +1584,7 @@ males_n &lt;- male_heights %&gt;%
 <pre class="r"><code>set.seed(2051)
 mh_resample1 &lt;- male_heights %&gt;% 
   sample_n(size = males_n, replace = TRUE)</code></pre>
-<p>In <code>mh_resample1</code>:</p>
+<p><strong>Questions:</strong> In <code>mh_resample1</code>:</p>
 <ul>
 <li>How many men were 103 cm?</li>
 <li>How about 231 cm?</li>
@@ -1643,33 +1639,30 @@ mh_resample3 &lt;- male_heights %&gt;%
 ##   &lt;lgl&gt;          &lt;int&gt;
 ## 1 FALSE         204507
 ## 2 TRUE               2</code></pre>
-<pre class="r"><code>fix_windows_histograms() # If you&#39;re using windows, allows the histograms to show in the HTML output</code></pre>
-<pre><code>## This function will change your system locale. It may have other unintended effects.</code></pre>
-<pre><code>## Continue? (Y/n)</code></pre>
 <pre class="r"><code>skim(mh_resample1, HTM4)</code></pre>
 <pre><code>## Skim summary statistics
 ##  n obs: 204509 
 ##  n variables: 2 
 ## 
-## -- Variable type:numeric --------------------------------------------------------------------------------------------
+## -- Variable type:numeric ------------------------------------------------------------------------------------------------------
 ##  variable missing complete      n   mean  sd p0 p25 p50 p75 p100     hist
-##      HTM4       0   204509 204509 178.05 7.8 94 173 178 183  231 ▁▁▁▁▇▇▁▁</code></pre>
+##      HTM4       0   204509 204509 178.05 7.8 94 173 178 183  231 &lt;U+2581&gt;&lt;U+2581&gt;&lt;U+2581&gt;&lt;U+2581&gt;&lt;U+2587&gt;&lt;U+2587&gt;&lt;U+2581&gt;&lt;U+2581&gt;</code></pre>
 <pre class="r"><code>skim(mh_resample2, HTM4)</code></pre>
 <pre><code>## Skim summary statistics
 ##  n obs: 204509 
 ##  n variables: 2 
 ## 
-## -- Variable type:numeric --------------------------------------------------------------------------------------------
+## -- Variable type:numeric ------------------------------------------------------------------------------------------------------
 ##  variable missing complete      n   mean   sd p0 p25 p50 p75 p100     hist
-##      HTM4       0   204509 204509 178.07 7.78 91 173 178 183  231 ▁▁▁▁▇▇▁▁</code></pre>
+##      HTM4       0   204509 204509 178.07 7.78 91 173 178 183  231 &lt;U+2581&gt;&lt;U+2581&gt;&lt;U+2581&gt;&lt;U+2581&gt;&lt;U+2587&gt;&lt;U+2587&gt;&lt;U+2581&gt;&lt;U+2581&gt;</code></pre>
 <pre class="r"><code>skim(mh_resample3, HTM4)</code></pre>
 <pre><code>## Skim summary statistics
 ##  n obs: 204509 
 ##  n variables: 2 
 ## 
-## -- Variable type:numeric --------------------------------------------------------------------------------------------
+## -- Variable type:numeric ------------------------------------------------------------------------------------------------------
 ##  variable missing complete      n   mean  sd p0 p25 p50 p75 p100     hist
-##      HTM4       0   204509 204509 178.07 7.8 91 173 178 183  231 ▁▁▁▁▇▇▁▁</code></pre>
+##      HTM4       0   204509 204509 178.07 7.8 91 173 178 183  231 &lt;U+2581&gt;&lt;U+2581&gt;&lt;U+2581&gt;&lt;U+2581&gt;&lt;U+2587&gt;&lt;U+2587&gt;&lt;U+2581&gt;&lt;U+2581&gt;</code></pre>
 <pre class="r"><code># Make some space
 remove(mh_resample1,mh_resample2,mh_resample3)</code></pre>
 <p>If we wanted to use <code>infer</code> instead to generate a SINGLE replicate or resample, we would use:</p>

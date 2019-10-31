@@ -39,6 +39,7 @@ male_heights <- read_csv(here::here("data", "male_heights.csv"))
 
 Height is in self-reported height in centimeters.
 
+__Questions:__
 * How many unique heights are there?
 * How many men were 103 cm? 
 * How about 231 cm?
@@ -55,7 +56,6 @@ male_heights %>%
 What is the `mean` and `sd` of male heights?
 
 ```{r}
-library(skimr)
 skim(male_heights)
 ```
 
@@ -79,7 +79,10 @@ Quantifying precision is not as useful, but it is much easier. Here's one way to
 
 To model the population, we'll use resampling; that is, we will treat the observed measurements as if they were taken from the entire population, and we will draw random samples from them.
 
-We sample with replacement, which means that some measurements might be chosen more than once, and some might not be chosen at all. (If we sample without replacement, the resampled data is always identical to the original, so that's no good.) let's do 3 resamplings and comare them.
+We sample with replacement, which means that some measurements might be chosen more than once, and some might not be chosen at all. (If we sample without replacement, the resampled data is always identical to the original, so that's no good.) 
+
+
+Let's do 3 resamplings and compare them.
 
 ```{r include = TRUE}
 # First, get the n (number of observations)
@@ -94,7 +97,7 @@ mh_resample1 <- male_heights %>%
   sample_n(size = males_n, replace = TRUE)
 ```
 
-In `mh_resample1`:
+__Questions:__ In `mh_resample1`:
 
 * How many men were 103 cm? 
 * How about 231 cm?
@@ -151,8 +154,6 @@ mh_resample3 %>%
 
 
 ```{r}
-fix_windows_histograms() # If you're using windows, allows the histograms to show in the HTML output
-
 skim(mh_resample1, HTM4)
 skim(mh_resample2, HTM4)
 skim(mh_resample3, HTM4)
