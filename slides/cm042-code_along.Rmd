@@ -180,7 +180,6 @@ mh_means100 <- male_heights %>%
   generate(reps = 100, type = "bootstrap") %>% 
   calculate(stat = "mean")
 
-range(mh_means100$stat)
 mh_means100 %>% 
   visualize() 
 ```
@@ -195,10 +194,8 @@ mh_means300 <- male_heights %>%
   generate(reps = 300, type = "bootstrap") %>% 
   calculate(stat = "mean")
 
-range(mh_means300$stat)
 mh_means300 %>% 
-  visualize() +
-  xlim(177.6, 178.9)
+  visualize()
 ```
 
 Feel free to try more! **Warning** you might run run out of memory :0
@@ -286,7 +283,7 @@ mh_means_samp <- sample_n(male_heights, 2000) %>%
   generate(reps = 1000, type = "bootstrap") %>% 
   calculate(stat = "mean")
 
-#range(mh_means_samp$stat)
+
 mh_means_samp %>% 
   summarize(mean_of_means = mean(stat),
             sd_of_means = sd(stat)) # this is the SE!
@@ -303,12 +300,30 @@ means_plot <- mh_means_samp %>%
 
 means_plot + 
   shade_confidence_interval(percentile_ci) +
-  shade_p_value(obs_stat = mean_means_samp, direction = NULL) +
-  xlim(177.6, 178.9)
+  shade_p_value(obs_stat = mean_means_samp, direction = NULL)
 ```
-__Question:__ What did we gain? What did we lose? What if we used a smaller sample?
+__Question:__ What did we gain by using a subset? What did we lose? What if we used an even smaller sample?
 
 
+
+```{r misc, include=FALSE}
+# Using the last distribution to determine the CI "by hand"
+
+# Percentile method
+sorted_means <- mh_means_samp %>%
+  arrange(stat)
+sorted_means$stat[26] # Because there's 25 points below 26, 
+sorted_means$stat[975] # and 25 points above 975
+
+# SE method
+# This works because we know that 95% of the probability is between qnorm(0.25) and qnorm(.975) SEs of the mean.
+# In theory, we shouldn't be using qnorm, but qt instead. However, at n=2000, they are functionally similar.
+mh_means_samp %>% 
+  summarize(mean_of_means = mean(stat),
+            sd_of_means = sd(stat),
+            ci_lower = mean_of_means + sd_of_means*qnorm(.025),
+            ci_upper = mean_of_means + sd_of_means*qnorm(.975))
+```
 
 
 
