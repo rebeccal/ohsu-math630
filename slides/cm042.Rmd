@@ -449,6 +449,8 @@ ch_means %>%
 
 
 ---
+**Confidence Interval - percentile method**
+
 ```{r}
 (percentile_ci <- ch_means %>% 
   get_ci())
@@ -461,18 +463,23 @@ ch_means %>%
 ```
 
 ---
+**Confidence Interval - percentile method**
+
 Using the percentile method, our range of plausible values for the mean height of male celebrities is `r round(percentile_ci[["2.5%"]], 2)` to `r round(percentile_ci[["97.5%"]], 2)` centimeters.
 
 You can see that 95% of the data stored in the `stat` variable in `ch_means` falls between the two endpoints with 2.5% to the left outside of the shading and 2.5% to the right outside of the shading. 
 
 ```{r out.width='50%'}
 ch_means %>% 
-  visualize(endpoints = percentile_ci, direction = "between")
+  visualize() + 
+  shade_confidence_interval(endpoints = percentile_ci)
 ```
+???
 
+The confidence interval is the middle [confidence level] of the distribution, calculated either as a percentage of the sample means, or using the SEM.
 
 ---
-## The standard error method
+**Confidence Interval - standard error method**
 
 ```{r}
 standard_error_ci <- ch_means %>% 
@@ -483,12 +490,13 @@ ch_means %>%
   summarize(se = sd(stat))
 ```
 
-Remember that the standard deviation of the sampling distribution is the standard error, frequently denoted as `SE`.
+__? About how many SEs are in the confidence interval?__
+
 
 ---
 ## The classical way
 
-
+SE using the sampling distribution
 ```{r}
 ch_means %>% 
   summarize(se = sd(stat))
@@ -496,7 +504,7 @@ ch_means %>%
 
 --
 
-The `SE` is the standard deviation of the sampling distribution divided by the square root of the sample size.
+Remember - The `SE` is the standard deviation of the population divided by the square root of the sample size.
 ```{r}
 celeb_heights %>% 
   summarize(sd_height = sd(Height),
@@ -504,8 +512,48 @@ celeb_heights %>%
             se_height = sd_height/sqrt(n()))
 ```
 
+???
+* Using the sampling dist as a way to infer the population sd
+* Using the mean of the sample as an approximation of the population mean
+* close enough
+
+To the board...
+
 
 ---
+## The classical way
+
+How can we use the SE, and what we know about the normal distribution, to find the confidence interval?
+
+![](images/StandardNormal.png)
+
+--
+* Pick a confidence level (typically 95%)
+
+--
+* Find the Z-score that correlates to that interval
+
+--
+* Compute the confidence interval using your SE
+
+
+--
+** Here we've focused on sampling means and the normal distribution
+  * Bit of a cheat (you'll know more about this later)
+  * NOT always the case 
+  
+???
+*n is too small
+*its an estimate!!
+
+???
+
+mean +- "Margin of error"
+mean +- SE* (number of sds)
+
+---
+
+# To the lab...
 
 ```{r include = FALSE, results = "asis"}
 mydir <- here::here("slides", "images", "bootstrap-slides")

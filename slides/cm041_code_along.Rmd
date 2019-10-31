@@ -316,7 +316,7 @@ my_sim <- unif_means_tenten %>% tibble(sample_mean = .)
 ```{r match_plots10, include=FALSE}
 # need to set the y aes so both the histogram and the normal line are on the same scale
 ggplot(my_sim, aes(x = sample_mean)) +
-  geom_histogram(binwidth = 0.5,(aes(y=..density..))) +
+  geom_histogram(binwidth = 0.1,(aes(y=..density..))) +
   stat_function(fun = dnorm, args = list(mean = mm10, sd = sem10), color = "green") +
   xlim(1,6)
 ```
@@ -344,7 +344,7 @@ my_sim2 <- unif_means_ten %>% tibble(sample_mean = .)
 
 ```{r match_plots, include=FALSE}
 ggplot(my_sim2, aes(x = sample_mean)) +
-  geom_histogram(binwidth = 0.5,(aes(y=..density..))) +
+  geom_histogram(binwidth = 0.1,(aes(y=..density..))) +
   stat_function(fun = dnorm, args = list(mean = mm2, sd = sem2), color = "green") 
 ```
 
