@@ -390,6 +390,7 @@ null_distn %>%
 ![](cm043_lab_files/figure-html/unnamed-chunk-16-1.png)<!-- -->
 
 __Question:__ Is 0 inside the 95% confidence interval for the bootstrapped distribution? What does that imply? 
+
 __Question:__ Is the original mean difference outside the 95% confidence interval for the null distribution? What does that imply? 
 
 
