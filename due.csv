@@ -27,12 +27,12 @@ Tues,November,5,4.3: Hypothesis testing (resampling),"<a href='https://moderndiv
 <br><a href='http://moderndive.com/B-appendixB'>- MD Appendix B: Inference Examples</a>",Inference for Categorical Data (use this link),https://www.datacamp.com/courses/inference-for-categorical-data,,,,,,,,,,,,,
 Thurs,November,7,4.4: Hypothesis testing (classical),"<a href='https://www.nature.com/articles/nmeth.2698'>- Nature POS: t-tests</a>
 <br><a href='https://www.nature.com/articles/nmeth.2858'>- Nature POS: comparing samples</a>
-<br><a href=reference/Wasserman-all_of_stats.pdf>- All of Statistics: pp. 92-94</a>",,,,,,,,,4.3,,,,slides/cm043_lab.html,,
+<br><a href=reference/Wasserman-all_of_stats.pdf>- All of Statistics: pp. 92-94</a>",,,,,,,,,4.3,slides/cm043_lab.html,,,,,
 Tues,November,12,"4.5: Errors, Effect Size, and Power","<a  href='https://stats.idre.ucla.edu/other/mult-pkg/faq/general/effect-size-power/faqhow-is-effect-size-used-in-power-analysis/'>- How is effect size used in power analysis?</a>
 <br><a  href='https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3444174/'>- Using Effect Size</a>
 <br><a href='https://www.leeds.ac.uk/educol/documents/00002182.htm'>-It's the effect size, stupid</a>
 <br><a href='https://moderndive.com/10-inference-for-regression.html'>- MD Ch 10: Inference for Regression</a>
-",Inference for Linear Regression,https://www.datacamp.com/courses/inference-for-linear-regression,,,,,HW3,,,,,,,hw/HW3/HW3.pdf,
+",Inference for Linear Regression,https://www.datacamp.com/courses/inference-for-linear-regression,,,,,HW3,hw/HW3/HW3.pdf,,,,,,,
 Thurs,November,14,4.6 & 5.1: General Linear Model and Many Means,"<a href='https://www.nature.com/articles/nmeth.3005'>- Nature POS: ANOVA</a>
 <br><a href = 'https://arxiv.org/pdf/1412.3416.pdf'>- ANOVA</a>
 <br><a href=https://www.discoveringstatistics.com/repository/onewayanova.pdf>- Discovering Statistics: One-way Independent ANOVA</a>",,,P2,final_project.html,iLab 03 - Comparing Means,,,,,,labs/lab03.html,,,,

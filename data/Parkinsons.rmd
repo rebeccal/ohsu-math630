@@ -1,0 +1,35 @@
+---
+title: "Parkinson's Data"
+---
+```{r libraries, message=FALSE}
+library(foreign)
+library(skimr)
+library(tidyr)
+library(dplyr)
+```
+
+```{r read_data, message=FALSE}
+PD_Group_Only = read.spss(here::here("data", "All_Data_PD_GroupPatientStudy.sav"), to.data.frame=TRUE)
+AllFinal = read.spss(here::here("data", "All_Data_PatientStudy.sav"), to.data.frame=TRUE)
+```
+
+```{r summary}
+# you could do much of the below in one pass, but I break it up to make it easier to understand
+
+# capture the skim data
+summary_PD <- skim_to_wide(PD_Group_Only)
+summary_All <- skim_to_wide(AllFinal)
+
+# Now select out the data you need from the skim output.
+# You could create differenct versions of the below, based on the type (e.g., numeric vs factor)
+filter_PD <-summary_PD %>% 
+  select(type, variable, n, missing, mean, sd, p0, p100)
+
+filter_All <-summary_All %>% 
+  select(type, variable, n, missing, mean, sd, p0, p100)
+
+# Look at the descriptive stats, and match to paper stats
+kable(filter_PD)
+kable(filter_All)
+
+```
