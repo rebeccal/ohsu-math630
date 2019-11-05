@@ -42,3 +42,4 @@ stagedcode,cm045 - Power for one-sample t-test,slides/cm045_code_along.R
 code,CM 4.2 - Bootstrapping and Confidence Intervals,slides/cm042-code_along.Rmd
 reference, Sampling Distributions Simulator,http://onlinestatbook.com/stat_sim/sampling_dist/
 reference,What Teacher Should Know about Bootstrapping,https://arxiv.org/pdf/1411.5279.pdf
+code,CM 4.5 - Permutation Tests,slides/cm043_lab.Rmd
