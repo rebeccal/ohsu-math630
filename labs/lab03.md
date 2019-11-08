@@ -11,9 +11,6 @@ output:
     toc_float: yes
 ---
 
-<!-- NOTE: need to update the "resampling lab" url -->
-
-
 
 
 # Overview
@@ -31,9 +28,9 @@ Using the key, your self-assessment should include even **more** narrative; wher
 
 # Headnotes
 
-- This lab is based on the assigned reading that includes [ModernDive Chapter 10.8 on t-tests for comparing two independent samples](http://moderndive.netlify.com/10-hypothesis-testing.html#theory-hypo). Please open and follow closely! 
-- Also see [ModernDive Appendix B](http://moderndive.netlify.com/b-appendixb) for examples (search for: `B.5.5 Traditional methods`)
-- Parts of this lab are adapted from Ted Laderas' and Jessica Minnier's [R Bootcamp](https://www.datacamp.com/courses/rbootcamp) on DataCamp.com
+- This lab is based on the assigned reading that includes [Modern Chapter 9.5](https://moderndive.com/9-hypothesis-testing.html#ht-case-study) and  [9.6](http://moderndive.com/9-hypothesis-testing.html#theory-hypo). 
+- Also see [ModernDive Appendix B](https://moderndive.com/B-appendixB.html#traditional-methods-3).
+- Parts of this lab are adapted from Ted Laderas' and Jessica Minnier's [R Bootcamp](https://www.datacamp.com/courses/rbootcamp) on DataCamp.com.
 
 
 <!-- # Packages -->
@@ -56,7 +53,7 @@ library(broom)
 # Data
 
 
-We are going to work with a dataset called [`fishermen_mercury.csv`](https://raw.githubusercontent.com/apreshill/ohsu-basic-stats/master/data/fishermen_mercury.csv), which consists of factors related to mercury levels among fishermen and a control group of non-fishermen. The data are published within the paper available [online](https://www.sciencedirect.com/science/article/pii/S0269749199002614?via%3Dihub#TBL2). Here is the citation for the peer-reviewed publication:
+We are going to work with a dataset called `fishermen_mercury.csv` (available on the course web site under [Reference Plus](https://ohsu-math630-fall-2019.netlify.com/reference.html)), which consists of factors related to mercury levels among fishermen and a control group of non-fishermen. The data are published within the paper available [online](https://www.sciencedirect.com/science/article/pii/S0269749199002614?via%3Dihub#TBL2). Here is the citation for the peer-reviewed publication:
 
 > N.B. Al-Majed and M.R. Preston (2000). "Factors Influencing the Total Mercury and Methyl Mercury in the Hair of Fishermen in Kuwait," Environmental Pollution, Vol. 109, pp. 239-250.
 
@@ -95,7 +92,7 @@ Do fishermen have different levels of total mercury than non-fishermen?
 
 # Exploratory data analysis
 
-Explore the `fisherman` and `total_mercury` variables. Recall that a [new exploratory data analysis](http://moderndive.netlify.com/6-regression.html#model1EDA) involves three things:
+Explore the `fisherman` and `total_mercury` variables. Recall that a new EDA involves three things:
 
 * Looking at the raw values.
 * Computing summary statistics of the variables of interest.
@@ -185,21 +182,18 @@ Given the above formulas, answer the following questions using R code plus narra
 
 
 
-* Use the following code to plot these critical t-values.
+* Use the following code to plot these critical t-values on the ("theoretical") standard normal distribution. 
 
 
 ```r
-upper_tcrit <- # fill in here
-mercury %>% 
+mercury %>%
   specify(total_mercury ~ fisherman) %>% 
   hypothesize(null = "independence") %>% 
   calculate(stat = "t", order = c(1,0)) %>%
-  visualize(method = "theoretical", 
-            obs_stat = upper_tcrit, 
-            direction = "both") # gives us shading
+  visualize(method = "theoretical") + 
+            shade_p_value(tcrits, 
+            direction = "two_sided")
 ```
-
-
 
 * Now we know the minimum $t$-statistic value we need to beat, what is the minimum absolute value for the mean difference we need to detect significance with $\alpha = .05$ (2-tailed)? (big hint: realize that the rearranged formula below may be helpful!)
 
@@ -253,7 +247,7 @@ ggplot(data.frame(x = c(-4, 4)), aes(x)) +
 ```
 
 
-* Save your observed $t$-statistic, and use `infer` to make a plot of the null t-distribution with a red line for your `obs_stat`, shading in both directions. Try adding `geom_vline()` to this object so you can add vertical lines where your two "critical t-values" are. 
+* Save your observed $t$-statistic, and use `infer` to make a plot of the null t-distribution, using shade_p_value (shading in both directions) to show the critical values and regions of rejection. Try adding `geom_vline()` to see where your observed t-value falls. 
 
 
 
@@ -291,7 +285,7 @@ You should already have variables for the mean difference and the $t$-statistic 
 
 # Compare t-test results to permutation test
 
-Using [ModernDive 10.7](http://moderndive.netlify.com/10-hypothesis-testing.html#example-comparing-two-means) as an example, as well as our previous [resampling lab](https://ohsu-math630-fall-2018.netlify.com/slides/cm043_lab.html), conduct a permutation test to evaluate whether there is a mean difference in total mercury between fishermen and non-fishermen. What do you conclude, and how do these results compare to those based on the classical hypothesis test? What, if any, assumptions of each method are comfortable or uncomfortable with?
+Using [ModernDive 9.5](https://moderndive.com/9-hypothesis-testing.html#ht-case-study) as an example, as well as our previous [resampling lab](../slides/cm043_lab.html), conduct a permutation test to evaluate whether there is a mean difference in total mercury between fishermen and non-fishermen. What do you conclude, and how do these results compare to those based on the classical hypothesis test? What, if any, assumptions of each method are comfortable or uncomfortable with?
 
 # Compare t-test results to linear regression
 

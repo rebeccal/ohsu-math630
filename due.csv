@@ -35,7 +35,7 @@ Tues,November,12,"4.5: Errors, Effect Size, and Power","<a  href='https://stats.
 ",Inference for Linear Regression,https://www.datacamp.com/courses/inference-for-linear-regression,,,,,HW3,hw/HW3/HW3.pdf,,,,,,,
 Thurs,November,14,4.6 & 5.1: General Linear Model and Many Means,"<a href='https://www.nature.com/articles/nmeth.3005'>- Nature POS: ANOVA</a>
 <br><a href = 'https://arxiv.org/pdf/1412.3416.pdf'>- ANOVA</a>
-<br><a href=https://www.discoveringstatistics.com/repository/onewayanova.pdf>- Discovering Statistics: One-way Independent ANOVA</a>",,,P2,final_project.html,iLab 03 - Comparing Means,,,,,,labs/lab03.html,,,,
+<br><a href=https://www.discoveringstatistics.com/repository/onewayanova.pdf>- Discovering Statistics: One-way Independent ANOVA</a>",,,P2,final_project.html,iLab 03 - Comparing Means,labs/lab03.html,,,,,,,,,
 Tues,November,19,5.2: ANOVA by hand,<a href='https://www.discoveringstatistics.com/repository/anovabyhand.pdf'>- Discovering Statistics: The Theory of ANOVA</a>,,,,,,,Midterm,,,,,,,,
 Thurs,November,21,"5.3: Contrasts, post-hoc tests, and p-value adjustments","<a href='https://rcompanion.org/rcompanion/h_01.html'>- Contrasts in Linear Models</a>
 <br><a href='https://www.nature.com/articles/nmeth.2900'>- Nature POS: multiple comparisons</a>",,,P3,final_project.html,iLab 03 - Self-assessment,,,,5.2,,,labs/lab03-solutions.html,slides/cm052_lab.html,,
