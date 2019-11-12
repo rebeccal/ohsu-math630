@@ -53,15 +53,6 @@ Using the key, your self-assessment should include even **more** narrative; wher
 
 
 <!-- # Packages -->
-
-<!-- Please install a new version of `infer` first: -->
-
-```{r new_package, echo=FALSE, eval = FALSE}
-remotes::install_github("tidymodels/infer", ref = "develop")
-```
-
-
-
 ```{r}
 library(tidyverse)
 library(infer)
@@ -247,32 +238,20 @@ denom_sp <- n_f + n_nf - 2
 * What are the minimum $t$-statistic values we need to conclude that there is a significant difference at $\alpha = .05$ (2-tailed)? (hint: degrees of freedom for a two-sample t-test are $N$ - 2)
 
 ```{r}
-nsamp <- 135
+nsamp <- n_f + n_nf
 (tcrits <- qt(c(.025, .975), df = nsamp - 2))
 ```
 
-* Use the following code to plot these critical t-values.
-
-```{r eval = FALSE}
-upper_tcrit <- # fill in here
-mercury %>% 
-  specify(total_mercury ~ fisherman) %>% 
-  hypothesize(null = "independence") %>% 
-  calculate(stat = "t", order = c(1,0)) %>%
-  visualize(method = "theoretical", 
-            obs_stat = upper_tcrit, 
-            direction = "both") # gives us shading
-```
+* Use the following code to plot these critical t-values on the ("theoretical") standard normal distribution. 
 
 ```{r}
-upper_tcrit <- tcrits[2] # fill in here
-mercury %>% 
+mercury %>%
   specify(total_mercury ~ fisherman) %>% 
   hypothesize(null = "independence") %>% 
   calculate(stat = "t", order = c(1,0)) %>%
-  visualize(method = "theoretical", 
-            obs_stat = upper_tcrit, 
-            direction = "both")
+  visualize(method = "theoretical") + 
+            shade_p_value(tcrits, 
+            direction = "two_sided")
 ```
 
 * Now we know the minimum $t$-statistic value we need to beat, what is the minimum absolute value for the mean difference we need to detect significance with $\alpha = .05$ (2-tailed)? (big hint: realize that the rearranged formula below may be helpful!)
@@ -341,9 +320,7 @@ ggplot(data.frame(x = c(-4, 4)), aes(x)) +
   stat_function(fun = dt, args = list(df = df)) + # t dist
   stat_function(fun = dnorm, lty = 3, color = "red") # normal dist in red
 ```
-
-
-* Save your observed $t$-statistic, and use `infer` to make a plot of the null t-distribution with a red line for your `obs_stat`, shading in both directions. Try adding `geom_vline()` to this object so you can add vertical lines where your two "critical t-values" are. 
+* Save your observed $t$-statistic, and use `infer` to make a plot of the null t-distribution, using shade_p_value (shading in both directions) to show the critical values and regions of rejection. Try adding `geom_vline()` to see where your observed t-value falls. 
 ```{r}
 obs_t <- mercury %>% 
   t_test(total_mercury ~ fisherman, order = c(1, 0), var.equal = TRUE) %>% 
@@ -354,12 +331,13 @@ obs_t <- mercury %>%
 mercury %>% 
   specify(total_mercury ~ fisherman) %>% 
   hypothesize(null = "independence") %>% 
-  calculate(stat = "t", order = c(1,0), var.equal = TRUE) %>%
-  visualize(method = "theoretical", 
-            obs_stat = obs_t, 
-            direction = "both") +
-  geom_vline(aes(xintercept = tcrits), color = "dodgerblue")
+  calculate(stat = "t", order = c(1,0)) %>%
+  visualize(method = "theoretical") +
+            shade_p_value(tcrits,
+            direction="both") +
+  geom_vline(aes(xintercept = obs_t), color = "dodgerblue")
 ```
+
 
 </ul>
 
@@ -557,7 +535,7 @@ But, how can we calculate the p-value from this? Well the easy way is with your 
 ```{r}
 upper <- pt(obs_t, df = nsamp - 2)
 lower <- 1-pt(obs_t, df = nsamp - 2)
-2*min(upper,lower)
+(pval <- 2*min(upper,lower))
 ```
 
 </ul>
@@ -594,7 +572,7 @@ Using [ModernDive 9.5](https://moderndive.com/9-hypothesis-testing.html#ht-case-
 ## Permutation test solution
 
 ```{r}
-set.seed(0)
+set.seed(2019)
 mercury_diff <- mercury %>% 
   specify(total_mercury ~ fisherman) %>%  
   calculate(stat = "diff in means", order = c(1, 0))
@@ -606,7 +584,8 @@ null_fish <- mercury %>%
   calculate(stat = "diff in means", order = c(1, 0))
 
 null_fish %>% 
-  visualize(obs_stat = mercury_diff, direction = "two_sided")
+  visualize() +
+  shade_p_value(obs_stat = mercury_diff, direction = "two_sided")
 
 (pdiff <- null_fish %>%
   get_pvalue(obs_stat = mercury_diff, direction = "two_sided"))
@@ -614,7 +593,7 @@ null_fish %>%
 
 <span style="color:cadetblue">
 
-The permutation test of the difference in means compares my observed difference in means, `r mercury_diff %>% pull() %>% round(2)`, to the permuted null distribution of the differences in means based on 1000 replicates (sampling without replacement; i.e., shuffling the 0/1 values in the `fisherman` variable). The permutation p-value is `r pdiff %>% pull() %>% round(2)`, indicating that- given the random variation present in `total_mercury` values- a difference in means as or more extreme than `r mercury_diff %>% pull() %>% round(2)` would only be expected with `r pdiff %>% pull() * 100`% probability.
+The permutation test of the difference in means compares my observed difference in means, `r mercury_diff %>% pull() %>% round(2)`, to the permuted null distribution of the differences in means based on 1000 replicates (sampling without replacement; i.e., shuffling the 0/1 values in the `fisherman` variable). The permutation p-value is `r pdiff %>% pull() %>% round(3)`, indicating that- given the random variation present in `total_mercury` values- a difference in means as or more extreme than `r mercury_diff %>% pull() %>% round(2)` would only be expected with `r pdiff %>% pull() * 100`% probability.
 
 I could also permute a t-statistic, and interpret the p-value based on the permutation null distribution, instead of using the theoretical t-distribution to calculate the formula p-value.
 
@@ -628,14 +607,15 @@ null_fish_t <- mercury %>%
 # note the method here to overlay theoretical t dist
 # changing the colors so it is clear
 null_fish_t %>% 
-  visualize(obs_stat = obs_t, direction = "two_sided", method = "both", 
-            obs_stat_color = "blue", pvalue_fill = "dodgerblue")
+  visualize(method = "both") +
+  shade_p_value(obs_stat = obs_t, direction = "two_sided", 
+            color = "blue", fill = "dodgerblue")
 
 (tdiff <- null_fish_t %>%
   get_pvalue(obs_stat = obs_t, direction = "two_sided"))
 ```
 
-The permutation test of the t-statistic compares my observed t-statistic, `r obs_t %>% round(2)`, to the permuted null distribution of the t-statistic based on 1000 replicates (sampling without replacement; i.e., shuffling the 0/1 values in the `fisherman` variable). The permutation p-value is `r tdiff %>% pull() %>% round(2)`, indicating that- given the random variation present in `total_mercury` values- a t-statistic as or more extreme than `r obs_t %>% round(2)` would only be expected with `r tdiff %>% pull() * 100`% probability. This lines up pretty well with my results based on the theoretical t-distribution, which gave a p-value of `r 2*min(upper,lower) %>% round(3)`.
+The permutation test of the t-statistic compares my observed t-statistic, `r obs_t %>% round(2)`, to the permuted null distribution of the t-statistic based on 1000 replicates (sampling without replacement; i.e., shuffling the 0/1 values in the `fisherman` variable). The permutation p-value is `r tdiff %>% pull() %>% round(2)`, indicating that- given the random variation present in `total_mercury` values- a t-statistic as or more extreme than `r obs_t %>% round(2)` would only be expected with `r tdiff %>% pull() * 100`% probability. This lines up relatively well with my results based on the theoretical t-distribution, which gave a p-value of `r 2*min(upper,lower) %>% round(3)`.
 
 </span>
 

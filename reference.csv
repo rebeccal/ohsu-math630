@@ -43,4 +43,5 @@ code,CM 4.2 - Bootstrapping and Confidence Intervals,slides/cm042-code_along.Rmd
 reference,Sampling Distributions Simulator,http://onlinestatbook.com/stat_sim/sampling_dist/
 reference,What Teacher Should Know about Bootstrapping,https://arxiv.org/pdf/1411.5279.pdf
 code,CM 4.3 - Permutation Tests,slides/cm043_lab.Rmd
+code,CM 4.5 - Power - One sample t-test,slides/cm045-code_along.R
 reference,Tidy Chi-square,https://richpauloo.github.io/2018-02-03-Tidy-Chi-Squared-stats-in-infer/

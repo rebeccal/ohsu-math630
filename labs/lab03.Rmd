@@ -37,15 +37,6 @@ Using the key, your self-assessment should include even **more** narrative; wher
 
 
 <!-- # Packages -->
-
-<!-- Please install a new version of `infer` first: -->
-
-```{r new_package, echo = FALSE, eval = FALSE}
-remotes::install_github("tidymodels/infer", ref = "develop")
-```
-
-
-
 ```{r}
 library(tidyverse)
 library(infer)
