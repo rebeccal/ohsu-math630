@@ -73,8 +73,7 @@ power_2 <- 1 - (pt(t,df=n-1,ncp=ncp)-pt(-t,df=n-1,ncp=ncp)) #Power
 #power.t.test(n=n, delta=diff, sd=s, type="one.sample", alternative = "one.sided")
 (power_3easy <- power.t.test(n=n, delta=diff, sd=s, type="one.sample", alternative = "two.sided"))
 
-power_3 <- power_3easy %>% 
-  select(power)
+power_3 <- power_3easy$power
 
 
 ################################################################
