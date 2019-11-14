@@ -1,6 +1,7 @@
 ---
 title: "Math 530/630 CM 4.6"
 subtitle: "The General Linear Model"
+
 output:
   xaringan::moon_reader:
     css: ["default", "css/ohsu.css", "css/ohsu-fonts.css"]
@@ -42,8 +43,9 @@ library(broom)
 - Independent samples *t*-test
 
 ???
-Already spent time on one-sample
-And paired vs independent in the homework
+
+* Already spent time on one-sample
+* And paired vs independent in the homework
 
 
 ---
@@ -65,14 +67,15 @@ We want to compare two things- mean 1 and mean 2!
   * Classical music versus silence - which is more conducive to writing?
 * Collect data before and after some "treatment" 
   * Aromatherapy - do people react more quickly after being exposed to lavendar scent?
-  * Drug Trial - do Beta BLockers reduce blood pressure?
+  * Drug Trial - do Beta Blockers reduce blood pressure?
   
   
 ???
 
-Paired - Careful of causation 
-- Conditions - balance!!
-- Treatment - causation
+* Paired - Careful of causation 
+* Conditions - balance design!!
+  
+* Treatment - causation
 
 ---
 ##Formulae for the paired _t-test_
@@ -84,9 +87,10 @@ $$\bar{d}=\frac{1}{n}\sum_{i=1}^n x_{i}-y_{i}$$
 
 $${SE_d}=\frac{sd(\bar{d})}{\sqrt{n}}$$
 ???
-Why is it considered theoretically more powerful than the independent t-test?
-What happens to the distribution? 
-To the t-statistic?
+* Why is it considered theoretically more powerful than the independent t-test?
+* Each acts as it's own "control".
+* What happens to the distribution? Narrower, just diffs, not raw
+* To the t-statistic? Smaller SE means a larger t
 
 
 ---
@@ -102,18 +106,55 @@ To the t-statistic?
 ## Formulae for the independent samples *t*-test
 
 $$t=\frac{(\bar{y}_1-\bar{y}_2)-(\mu_1-\mu_2)}{SE}$$
-
-Generally, 
 > $H_0: \mu_1-\mu_2=0$ and $H_1: \mu_1-\mu_2\neq0$
 
-So $\mu_1-\mu_2$ is often excluded from the formula. Since we now have two sample means and therefore two sample variances, we need some way to combine these two variances in a logical way. The answer is to __pool__ the variances to estimate the SE of the difference, $(\bar{y}_1-\bar{y}_2)$:
+So $\mu_1-\mu_2$ is often excluded from the formula. As we now have two samples and therefore two sample variances, we need some way to combine these two variances. The answer is to __pool__ the variances to estimate the SE of the difference, $(\bar{y}_1-\bar{y}_2)$:
 $$s_{\bar{y}_1-\bar{y}_2}=s_{pooled}\times{\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}}$$
 and $s_{pooled}$ is:
 $$s_{pooled}=\sqrt{\frac{(n_1-1)s_{y_1}^2+(n_2-1)s_{y_2}^2}{n_1+n_2-2}}$$
 
 ???
-Assumes ~equal variances
-R - default is NOT pooled
+* Student's t assumes the ns and vars are ~equal
+  * Thus they can be "pooled" without one taking over
+  * Dangerous with wildly different n's
+* R t.test() assumes unequal variances
+* Many suggest to always use Welch's - 
+
+---
+
+# Welch's *t*-test: Dealing with unequal variances
+
+Again, the formula for the independent groups *t*-test:
+
+$$t=\frac{(\bar{x}_1-\bar{x}_2)-(\mu_1-\mu_2)}{SE}$$
+
+In Welch's formula, we calculate the SE differently:
+$$SE'=\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}$$
+
+So the formula for Welch's $t'$: 
+$$t'=\frac{(\bar{x}_1-\bar{x}_2)-(\mu_1-\mu_2)}{\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}}$$
+
+???
+* Weighted combination of each groups sd 
+* Thus no "swamping"
+
+---
+
+# Welch's *t*-test: Modified degrees of freedom
+
+Recall the degrees of freedom for the independent groups *t*-test:
+
+$$\nu=n_1+n_2-1$$
+
+
+The degrees of freedom are modified for Welch's $t'$: 
+
+$$\nu'=\frac{(\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2})^2}{\frac{s_1^4}{n_1^2(n_1-1)}+\frac{s_2^4}{n_2^2(n_2-1)}}$$
+
+???
+* Yuck!
+* Remember, if you see a decimal df, it used the Welch's formulae
+
 
 
 ---
@@ -187,7 +228,8 @@ In simple linear regression, the vector *X* can take on any value. In the indepe
 
 
 ???
-All this happens under the covers in R when it conducts a t-test
+* Notice the 0's and 1's used to denote the 2 factors
+* All this happens under the covers in R when it conducts a t-test (or a linear regression with factors ;)
 ---
 
 ## Dummy variables
@@ -227,7 +269,12 @@ table(Prestige$type)
 
 
 ```{r}
-Prestige$group <- ifelse(Prestige$type=="bc",0, ifelse(Prestige$type=="wc",1,NA))
+Prestige <- Prestige %>% 
+  mutate( group = 
+      case_when(type == "bc" ~ 0,
+                type == "wc" ~ 1
+  ))
+
 table(Prestige$type, Prestige$group)
 ```
 
@@ -238,8 +285,9 @@ table(Prestige$type, Prestige$group)
 # Cleaning up the new dataset
 
 ```{r}
-Prestige.2 <- subset(Prestige, group %in% c(0,1))
-Prestige.2$type <- droplevels(Prestige.2$type) #get rid of type=prof
+Prestige.2 <- Prestige %>% 
+  filter(!is.na(group)) %>% 
+  droplevels()
 ```
 
 ---
@@ -272,9 +320,9 @@ ggplot(Prestige.2, aes(x=factor(group.l),y=prestige)) + geom_dotplot(stackdir = 
 ```
 
 ???
-Means are different
-Spread is okay-ish - not worried
-44 vs 23 data points - okay
+* Means are different
+* Spread is okay-ish - not worried
+* 44 vs 23 data points - okay, close enough
 ---
 
 # But are the two groups different?
@@ -287,11 +335,11 @@ t.test(prestige~group,data=Prestige.2, var.equal=T)
 ```
 
 ???
-Significant, note t-value
-df - not a decimal
-  Decimal always indicates a non-pooled variance
-Is 0 in the CI?
-Sample means
+* Significant, note t-value on board
+* df - not a decimal!
+  * Decimal always indicates a non-pooled variance
+* Is 0 in the CI?
+* Sample means
 
 
 ---
@@ -313,10 +361,12 @@ summary(fit)
 
 
 ???
-Positive t is okay, symmetric
-Same p, same t on group
-Intercept = mean blue collar
-F = t-squared
+* Positive t here is okay, dist is symmetric
+* Same p, same t on group
+* Intercept = mean blue collar
+* Intercept plus group = mean whilte collar
+* F = t-squared! 
+* ??What would happen if we used "type" instead of "group??
 ---
 
 # But what does it MEAN?
@@ -437,14 +487,15 @@ Think of it this way: the regression line must pass through these two points:
 
 
 ```{r}
-y_bc <- mean(Prestige.2$prestige[Prestige.2$group==0])
-y_wc <- mean(Prestige.2$prestige[Prestige.2$group==1])
-diff <- y_wc-y_bc
-cbind(y_bc,y_wc, diff)
+Prestige.2 %>%
+  group_by(type) %>% 
+  summarize(mean = mean(prestige)) %>% 
+  mutate(diff_means = mean - dplyr::lag(mean))
+
 ```
 
 
-So, y_bc is $b_0$ and diff is $b_1$...right?
+So, bc is $b_0$ and diff is $b_1$...right?
 
 
 ```{r}
@@ -463,39 +514,6 @@ A number of different statistical models are extensions of this same idea of a G
 - *t*-test: a *t*-test is basically a regression model where the 1 predictor is a factor with exactly 2 levels
 - Analysis of Variance/Covariance (ANOVA/ANCOVA): an ANOVA is basically a regression model where the 1+ predictors are factors
 - Multivariate Analysis of Variance/Covariance (MANOVA/MANCOVA): a MANOVA is basically a regression model with 2+ DVs where the 1+ predictors are factors
-
----
-
-# Welch's *t*-test: Dealing with unequal variances
-
-Recall the formula for the independent groups *t*-test:
-
-$$t=\frac{(\bar{x}_1-\bar{x}_2)-(\mu_1-\mu_2)}{SE}$$
-
-In Welch's formula, we calculate the SE differently:
-$$SE'=\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}$$
-
-So the formula for Welch's $t'$: 
-$$t'=\frac{(\bar{x}_1-\bar{x}_2)-(\mu_1-\mu_2)}{\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}}$$
-???
-Weighted combination of each groups sd
----
-
-# Welch's *t*-test: Modified degrees of freedom
-
-Recall the degrees of freedom for the independent groups *t*-test:
-
-$$\nu=n_1+n_2-1$$
-
-
-The degrees of freedom are modified for Welch's $t'$: 
-
-$$\nu'=\frac{(\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2})^2}{\frac{s_1^4}{n_1^2(n_1-1)}+\frac{s_2^4}{n_2^2(n_2-1)}}$$
-
-???
-Yuck
-Remember, if you see a decimal df, it used and un-pooled variance
-
 
 ---
 
@@ -556,7 +574,7 @@ coefs_conf %>%
 
 ```{r}
 summary(fit)
-(t <- coefs_conf$statistic[2]^2)
+(f <- coefs_conf$statistic[2]^2)
 ```
 
 

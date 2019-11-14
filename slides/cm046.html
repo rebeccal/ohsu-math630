@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
   <head>
     <title>Math 530/630 CM 4.6</title>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <link href="libs/remark-css/default.css" rel="stylesheet" />
     <link rel="stylesheet" href="css\ohsu.css" type="text/css" />
     <link rel="stylesheet" href="css\ohsu-fonts.css" type="text/css" />
@@ -30,8 +30,9 @@ class: center, middle, inverse, title-slide
 - Independent samples *t*-test
 
 ???
-Already spent time on one-sample
-And paired vs independent in the homework
+
+* Already spent time on one-sample
+* And paired vs independent in the homework
 
 
 ---
@@ -53,14 +54,15 @@ We want to compare two things- mean 1 and mean 2!
   * Classical music versus silence - which is more conducive to writing?
 * Collect data before and after some "treatment" 
   * Aromatherapy - do people react more quickly after being exposed to lavendar scent?
-  * Drug Trial - do Beta BLockers reduce blood pressure?
+  * Drug Trial - do Beta Blockers reduce blood pressure?
   
   
 ???
 
-Paired - Careful of causation 
-- Conditions - balance!!
-- Treatment - causation
+* Paired - Careful of causation 
+* Conditions - balance design!!
+  
+* Treatment - causation
 
 ---
 ##Formulae for the paired _t-test_
@@ -72,9 +74,10 @@ Paired - Careful of causation
 
 `$${SE_d}=\frac{sd(\bar{d})}{\sqrt{n}}$$`
 ???
-Why is it considered theoretically more powerful than the independent t-test?
-What happens to the distribution? 
-To the t-statistic?
+* Why is it considered theoretically more powerful than the independent t-test?
+* Each acts as it's own "control".
+* What happens to the distribution? Narrower, just diffs, not raw
+* To the t-statistic? Smaller SE means a larger t
 
 
 ---
@@ -90,18 +93,55 @@ To the t-statistic?
 ## Formulae for the independent samples *t*-test
 
 `$$t=\frac{(\bar{y}_1-\bar{y}_2)-(\mu_1-\mu_2)}{SE}$$`
-
-Generally, 
 &gt; `\(H_0: \mu_1-\mu_2=0\)` and `\(H_1: \mu_1-\mu_2\neq0\)`
 
-So `\(\mu_1-\mu_2\)` is often excluded from the formula. Since we now have two sample means and therefore two sample variances, we need some way to combine these two variances in a logical way. The answer is to __pool__ the variances to estimate the SE of the difference, `\((\bar{y}_1-\bar{y}_2)\)`:
+So `\(\mu_1-\mu_2\)` is often excluded from the formula. As we now have two samples and therefore two sample variances, we need some way to combine these two variances. The answer is to __pool__ the variances to estimate the SE of the difference, `\((\bar{y}_1-\bar{y}_2)\)`:
 `$$s_{\bar{y}_1-\bar{y}_2}=s_{pooled}\times{\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}}$$`
 and `\(s_{pooled}\)` is:
 `$$s_{pooled}=\sqrt{\frac{(n_1-1)s_{y_1}^2+(n_2-1)s_{y_2}^2}{n_1+n_2-2}}$$`
 
 ???
-Assumes ~equal variances
-R - default is NOT pooled
+* Student's t assumes the ns and vars are ~equal
+  * Thus they can be "pooled" without one taking over
+  * Dangerous with wildly different n's
+* R t.test() assumes unequal variances
+* Many suggest to always use Welch's - 
+
+---
+
+# Welch's *t*-test: Dealing with unequal variances
+
+Again, the formula for the independent groups *t*-test:
+
+`$$t=\frac{(\bar{x}_1-\bar{x}_2)-(\mu_1-\mu_2)}{SE}$$`
+
+In Welch's formula, we calculate the SE differently:
+`$$SE'=\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}$$`
+
+So the formula for Welch's `\(t'\)`: 
+`$$t'=\frac{(\bar{x}_1-\bar{x}_2)-(\mu_1-\mu_2)}{\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}}$$`
+
+???
+* Weighted combination of each groups sd 
+* Thus no "swamping"
+
+---
+
+# Welch's *t*-test: Modified degrees of freedom
+
+Recall the degrees of freedom for the independent groups *t*-test:
+
+`$$\nu=n_1+n_2-1$$`
+
+
+The degrees of freedom are modified for Welch's `\(t'\)`: 
+
+`$$\nu'=\frac{(\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2})^2}{\frac{s_1^4}{n_1^2(n_1-1)}+\frac{s_2^4}{n_2^2(n_2-1)}}$$`
+
+???
+* Yuck!
+* Remember, if you see a decimal df, it used the Welch's formulae
+
 
 
 ---
@@ -175,7 +215,8 @@ In simple linear regression, the vector *X* can take on any value. In the indepe
 
 
 ???
-All this happens under the covers in R when it conducts a t-test
+* Notice the 0's and 1's used to denote the 2 factors
+* All this happens under the covers in R when it conducts a t-test (or a linear regression with factors ;)
 ---
 
 ## Dummy variables
@@ -223,7 +264,12 @@ table(Prestige$type)
 
 
 ```r
-Prestige$group &lt;- ifelse(Prestige$type=="bc",0, ifelse(Prestige$type=="wc",1,NA))
+Prestige &lt;- Prestige %&gt;% 
+  mutate( group = 
+      case_when(type == "bc" ~ 0,
+                type == "wc" ~ 1
+  ))
+
 table(Prestige$type, Prestige$group)
 ```
 
@@ -243,8 +289,9 @@ table(Prestige$type, Prestige$group)
 
 
 ```r
-Prestige.2 &lt;- subset(Prestige, group %in% c(0,1))
-Prestige.2$type &lt;- droplevels(Prestige.2$type) #get rid of type=prof
+Prestige.2 &lt;- Prestige %&gt;% 
+  filter(!is.na(group)) %&gt;% 
+  droplevels()
 ```
 
 ---
@@ -271,13 +318,13 @@ head(Prestige.2)
 ```
 
 ```
-                    education income women prestige census type group
-nursing.aides            9.45   3485 76.14     34.9   3135   bc     0
-medical.technicians     12.79   5180 76.04     67.5   3156   wc     1
-radio.tv.announcers     12.71   7562 11.15     57.6   3337   wc     1
-secretaries             11.59   4036 97.51     46.0   4111   wc     1
-typists                 11.49   3148 95.97     41.9   4113   wc     1
-bookkeepers             11.32   4348 68.24     49.4   4131   wc     1
+  education income women prestige census type group
+1      9.45   3485 76.14     34.9   3135   bc     0
+2     12.79   5180 76.04     67.5   3156   wc     1
+3     12.71   7562 11.15     57.6   3337   wc     1
+4     11.59   4036 97.51     46.0   4111   wc     1
+5     11.49   3148 95.97     41.9   4113   wc     1
+6     11.32   4348 68.24     49.4   4131   wc     1
 ```
 
 
@@ -291,9 +338,9 @@ Not surprisingly, mean prestige ratings appear to be higher among white collar w
 &lt;img src="cm046_files/figure-html/unnamed-chunk-6-1.png" width="60%" /&gt;
 
 ???
-Means are different
-Spread is okay-ish - not worried
-44 vs 23 data points - okay
+* Means are different
+* Spread is okay-ish - not worried
+* 44 vs 23 data points - okay, close enough
 ---
 
 # But are the two groups different?
@@ -321,11 +368,11 @@ mean in group 0 mean in group 1
 ```
 
 ???
-Significant, note t-value
-df - not a decimal
-  Decimal always indicates a non-pooled variance
-Is 0 in the CI?
-Sample means
+* Significant, note t-value on board
+* df - not a decimal!
+  * Decimal always indicates a non-pooled variance
+* Is 0 in the CI?
+* Sample means
 
 
 ---
@@ -369,10 +416,12 @@ F-statistic: 7.016 on 1 and 65 DF,  p-value: 0.01013
 
 
 ???
-Positive t is okay, symmetric
-Same p, same t on group
-Intercept = mean blue collar
-F = t-squared
+* Positive t here is okay, dist is symmetric
+* Same p, same t on group
+* Intercept = mean blue collar
+* Intercept plus group = mean whilte collar
+* F = t-squared! 
+* ??What would happen if we used "type" instead of "group??
 ---
 
 # But what does it MEAN?
@@ -494,19 +543,22 @@ Think of it this way: the regression line must pass through these two points:
 
 
 ```r
-y_bc &lt;- mean(Prestige.2$prestige[Prestige.2$group==0])
-y_wc &lt;- mean(Prestige.2$prestige[Prestige.2$group==1])
-diff &lt;- y_wc-y_bc
-cbind(y_bc,y_wc, diff)
+Prestige.2 %&gt;%
+  group_by(type) %&gt;% 
+  summarize(mean = mean(prestige)) %&gt;% 
+  mutate(diff_means = mean - dplyr::lag(mean))
 ```
 
 ```
-         y_bc     y_wc     diff
-[1,] 35.52727 42.24348 6.716206
+# A tibble: 2 x 3
+  type   mean diff_means
+  &lt;fct&gt; &lt;dbl&gt;      &lt;dbl&gt;
+1 bc     35.5      NA   
+2 wc     42.2       6.72
 ```
 
 
-So, y_bc is `\(b_0\)` and diff is `\(b_1\)`...right?
+So, bc is `\(b_0\)` and diff is `\(b_1\)`...right?
 
 
 
@@ -531,39 +583,6 @@ A number of different statistical models are extensions of this same idea of a G
 - *t*-test: a *t*-test is basically a regression model where the 1 predictor is a factor with exactly 2 levels
 - Analysis of Variance/Covariance (ANOVA/ANCOVA): an ANOVA is basically a regression model where the 1+ predictors are factors
 - Multivariate Analysis of Variance/Covariance (MANOVA/MANCOVA): a MANOVA is basically a regression model with 2+ DVs where the 1+ predictors are factors
-
----
-
-# Welch's *t*-test: Dealing with unequal variances
-
-Recall the formula for the independent groups *t*-test:
-
-`$$t=\frac{(\bar{x}_1-\bar{x}_2)-(\mu_1-\mu_2)}{SE}$$`
-
-In Welch's formula, we calculate the SE differently:
-`$$SE'=\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}$$`
-
-So the formula for Welch's `\(t'\)`: 
-`$$t'=\frac{(\bar{x}_1-\bar{x}_2)-(\mu_1-\mu_2)}{\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}}$$`
-???
-Weighted combination of each groups sd
----
-
-# Welch's *t*-test: Modified degrees of freedom
-
-Recall the degrees of freedom for the independent groups *t*-test:
-
-`$$\nu=n_1+n_2-1$$`
-
-
-The degrees of freedom are modified for Welch's `\(t'\)`: 
-
-`$$\nu'=\frac{(\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2})^2}{\frac{s_1^4}{n_1^2(n_1-1)}+\frac{s_2^4}{n_2^2(n_2-1)}}$$`
-
-???
-Yuck
-Remember, if you see a decimal df, it used and un-pooled variance
-
 
 ---
 
@@ -715,6 +734,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 &gt; "Equally, the statistician knows, for example, that in nature there never was a normal distribution. There never was a straight line, yet with normal and linear assumptions, known to be false, he can often derive results which match, to a useful approximation, those found in the real world." -*Journal of the American Statistical Association, 71*(356), pp. 791-799.
     </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script src="https://platform.twitter.com/widgets.js"></script>
 <script>var slideshow = remark.create({
@@ -725,16 +745,74 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));
 });
-(function() {
-  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
   if (!r) return;
   s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
   d.head.appendChild(s);
-})();</script>
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
 
 <script>
 (function() {
-  var i, text, code, codes = document.getElementsByTagName('code');
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
   for (i = 0; i < codes.length;) {
     code = codes[i];
     if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
@@ -748,14 +826,15 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     }
     i++;
   }
-})();
+};
+slideshow._releaseMath(document);
 </script>
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
 (function () {
   var script = document.createElement('script');
   script.type = 'text/javascript';
-  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
   if (location.protocol !== 'file:' && /^https?:/.test(script.src))
     script.src  = script.src.replace(/^https?:/, '');
   document.getElementsByTagName('head')[0].appendChild(script);

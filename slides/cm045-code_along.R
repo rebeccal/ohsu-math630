@@ -75,7 +75,6 @@ power_2 <- 1 - (pt(t,df=n-1,ncp=ncp)-pt(-t,df=n-1,ncp=ncp)) #Power
 
 power_3 <- power_3easy$power
 
-
 ################################################################
 # Potentially helpful plot
 library(ggfortify)

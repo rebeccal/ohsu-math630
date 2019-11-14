@@ -1,6 +1,6 @@
 ---
 title: "Math 530/630 CM 5.1"
-subtitle: "Comparing More Than Two Sample Means"
+subtitle: "ANOVA: Comparing More Than Two Sample Means"
 #author: "Alison Hill"
 output:
   xaringan::moon_reader:
@@ -32,8 +32,8 @@ class:center
 ![](https://media.giphy.com/media/KmTnUKop0AfFm/giphy.gif)
 
 ???
-Ex 1: Beethoven,Stones, None
-Ex 2: 1) Beethoven, Stones 2) Male, Female
+* Ex 1: Beethoven,Stones, None
+* Ex 2: 1) Beethoven, Stones 2) Male, Female
 
 t-test: special case. One predictor, two levels, one outcome
 
@@ -90,7 +90,7 @@ class:center
 
 ???
 j = groups/conditions
-i = subjects
+i = observations (NOT same subject/person)
 
 . = means, summary across
 .. = Grand Mean
@@ -106,19 +106,15 @@ Null Hypothesis: j's don't matter!!
 |OLS regression| $$\sum_{i = 1}^n(y_i-\bar{y})^2$$ | $$\sum_{i = 1}^n(\hat{y_i}-\bar{y})^2$$ | $$\sum_{i = 1}^n(y_i-\hat{y_i})^2$$ |
 |ANOVA| $$\sum_{j = 1}^k\sum_{i = 1}^n(y_{ij}-\bar{y_{\bullet\bullet}})^2$$ | $$n\sum_{j = 1}^k(\bar{y_{\bullet{j}}}-\bar{y_{\bullet\bullet}})^2$$ | $$\sum_{j = 1}^k\sum_{i = 1}^n(y_{ij}-\bar{y_{\bullet{j}}})^2$$ |
 
-
-### From regression to ANOVA, what do you change?
-
+### From regression to ANOVA -->
 > 1. $y_i \longrightarrow y_{ij}$
 > 2. $\bar{y} \longrightarrow \bar{y_{\bullet\bullet}}$
 > 3. $\hat{y_i} \longrightarrow \bar{y_{\bullet{j}}}$
 > 4. $\sum_{i = 1}^n \longrightarrow \sum_{j = 1}^k\sum_{i = 1}^n$
 
 ???
-Observed - expected if the groups didn't matter
-$\bar{y}$ instead of $\hat{y}$ = group means instead of fitted values
-
-
+* Observed - expected if the groups didn't matter
+* $\bar{y}$ instead of $\hat{y}$ = group means instead of fitted values
 ---
 ## Total Sums of Squares
 
@@ -155,9 +151,9 @@ In words, this means the sum of the squared differences between each observed $y
 ]
 
 ???
-Group agnostic - no j's
-Deviation of the observed values from the grand mean
-Dots vs the dotted line
+* Group agnostic - no j's
+* Deviation of the observed values from the grand mean
+* Dots vs the dotted line
 
 ---
 ## Total Degrees of Freedom
@@ -270,8 +266,8 @@ $$SS_{model} = n\sum_{j = 1}^k(\bar{y_{\bullet{j}}}-\bar{y_{\bullet\bullet}})^2$
 * Generally: $df_{model} = k-1$
 ]
 ???
-Lines vs dotted line
-Group means vs grand mean
+* Lines vs dotted line
+* Group means vs grand mean
 ---
 
 ## Model Mean Squares
@@ -287,10 +283,10 @@ $$MS_{model} = \frac{n\sum_{j = 1}^k(\bar{y_{\bullet{j}}}-\bar{y_{\bullet\bullet
 Also known as: 
 $$MS_{model} = MS_{treatment} = MS_{between} = MS_{method}$$
 ???
-Total = just the variance in y (outcome)
-Here = how much do the group means vary from each other
-  ? n*var(group means - columnwise)
-Many names - I like between
+* Total = just the variance in y (outcome)
+* Here = how much do the group means vary from each other
+  * ? n*var(group means - columnwise)
+* Many names - I like between
 
 
 ---
@@ -318,8 +314,8 @@ $$SS_{residual} = \sum_{j = 1}^k\sum_{i = 1}^n(y_{ij}-\bar{y_{\bullet{j}}})^2$$
 In words, this means the sum of the squared differences between each observed $y_{ij}$ value and its group mean $\bar{y_{\bullet{j}}}$. That is, it is the deviation of the $y_{ij}$s from the predicted score based on group.
 ]
 ???
-Dots vs lines
-No grand mean
+* Dots vs lines
+* No grand mean
 
 
 ---
@@ -484,10 +480,11 @@ For ANOVA:
 > where *k* is the number of groups and *n* is the sample size per group (balanced design)
 
 ???
-              Observed    Model
-$MS_{total}$  Values      Grand Means
-$Ms_{model}$  Group Means Grand Means
-$Ms_{Resid}$  Values      Group Means
+*               
+* $MS_{total}$  Values      vs Grand Means
+* $Ms_{model}$  Group Means vs Grand Means
+* $Ms_{Resid}$  Values      vs Group Means
+
 Draw a triangle
 What does F mean?
 
@@ -813,15 +810,18 @@ superhero$hero <- as.factor(superhero$hero)
 anova(lm(injury~hero,data = superhero))
 ```
 
----
+<!-- --- -->
 
-## Next class: where does the difference lie?
+<!-- ## Next lecture: where does the difference lie? -->
 
-```{r echo = FALSE}
-library(ggplot2)
-heroplot <- ggplot(data = superhero, aes(factor(hero), injury))+geom_boxplot(aes(fill = factor(hero)))+ theme(axis.title.x = element_blank())+ scale_x_discrete(labels = c("Spiderman", "Superman", "Hulk", "TMNT"))+ theme(legend.position = "none")
-heroplot
-```
+<!-- ```{r echo = FALSE, fig.width=2.75, fig.height=1.75, dpi = 300} -->
+<!-- library(ggplot2) -->
+<!-- heroplot <- ggplot(data = superhero, aes(factor(hero), injury)) + -->
+<!--   geom_boxplot(aes(fill = factor(hero))) + -->
+<!--   theme(axis.title.x = element_blank()) + -->
+<!--   theme(legend.position = "right") -->
+<!-- heroplot -->
+<!-- ``` -->
 
 
 

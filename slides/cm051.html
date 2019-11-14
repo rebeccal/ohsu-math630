@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
   <head>
     <title>Math 530/630 CM 5.1</title>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <link href="libs/remark-css/default.css" rel="stylesheet" />
     <link rel="stylesheet" href="css\ohsu.css" type="text/css" />
     <link rel="stylesheet" href="css\ohsu-fonts.css" type="text/css" />
@@ -12,7 +12,7 @@
 class: center, middle, inverse, title-slide
 
 # Math 530/630 CM 5.1
-## Comparing More Than Two Sample Means
+## ANOVA: Comparing More Than Two Sample Means
 
 ---
 
@@ -28,8 +28,8 @@ class:center
 ![](https://media.giphy.com/media/KmTnUKop0AfFm/giphy.gif)
 
 ???
-Ex 1: Beethoven,Stones, None
-Ex 2: 1) Beethoven, Stones 2) Male, Female
+* Ex 1: Beethoven,Stones, None
+* Ex 2: 1) Beethoven, Stones 2) Male, Female
 
 t-test: special case. One predictor, two levels, one outcome
 
@@ -86,7 +86,7 @@ class:center
 
 ???
 j = groups/conditions
-i = subjects
+i = observations (NOT same subject/person)
 
 . = means, summary across
 .. = Grand Mean
@@ -102,19 +102,15 @@ Null Hypothesis: j's don't matter!!
 |OLS regression| `$$\sum_{i = 1}^n(y_i-\bar{y})^2$$` | `$$\sum_{i = 1}^n(\hat{y_i}-\bar{y})^2$$` | `$$\sum_{i = 1}^n(y_i-\hat{y_i})^2$$` |
 |ANOVA| `$$\sum_{j = 1}^k\sum_{i = 1}^n(y_{ij}-\bar{y_{\bullet\bullet}})^2$$` | `$$n\sum_{j = 1}^k(\bar{y_{\bullet{j}}}-\bar{y_{\bullet\bullet}})^2$$` | `$$\sum_{j = 1}^k\sum_{i = 1}^n(y_{ij}-\bar{y_{\bullet{j}}})^2$$` |
 
-
-### From regression to ANOVA, what do you change?
-
+### From regression to ANOVA --&gt;
 &gt; 1. `\(y_i \longrightarrow y_{ij}\)`
 &gt; 2. `\(\bar{y} \longrightarrow \bar{y_{\bullet\bullet}}\)`
 &gt; 3. `\(\hat{y_i} \longrightarrow \bar{y_{\bullet{j}}}\)`
 &gt; 4. `\(\sum_{i = 1}^n \longrightarrow \sum_{j = 1}^k\sum_{i = 1}^n\)`
 
 ???
-Observed - expected if the groups didn't matter
-`\(\bar{y}\)` instead of `\(\hat{y}\)` = group means instead of fitted values
-
-
+* Observed - expected if the groups didn't matter
+* `\(\bar{y}\)` instead of `\(\hat{y}\)` = group means instead of fitted values
 ---
 ## Total Sums of Squares
 
@@ -134,9 +130,9 @@ In words, this means the sum of the squared differences between each observed `\
 ]
 
 ???
-Group agnostic - no j's
-Deviation of the observed values from the grand mean
-Dots vs the dotted line
+* Group agnostic - no j's
+* Deviation of the observed values from the grand mean
+* Dots vs the dotted line
 
 ---
 ## Total Degrees of Freedom
@@ -213,8 +209,8 @@ In words, this means the sum of the squared differences between each *group* mea
 * Generally: `\(df_{model} = k-1\)`
 ]
 ???
-Lines vs dotted line
-Group means vs grand mean
+* Lines vs dotted line
+* Group means vs grand mean
 ---
 
 ## Model Mean Squares
@@ -230,10 +226,10 @@ Group means vs grand mean
 Also known as: 
 `$$MS_{model} = MS_{treatment} = MS_{between} = MS_{method}$$`
 ???
-Total = just the variance in y (outcome)
-Here = how much do the group means vary from each other
-  ? n*var(group means - columnwise)
-Many names - I like between
+* Total = just the variance in y (outcome)
+* Here = how much do the group means vary from each other
+  * ? n*var(group means - columnwise)
+* Many names - I like between
 
 
 ---
@@ -253,8 +249,8 @@ Many names - I like between
 In words, this means the sum of the squared differences between each observed `\(y_{ij}\)` value and its group mean `\(\bar{y_{\bullet{j}}}\)`. That is, it is the deviation of the `\(y_{ij}\)`s from the predicted score based on group.
 ]
 ???
-Dots vs lines
-No grand mean
+* Dots vs lines
+* No grand mean
 
 
 ---
@@ -387,10 +383,11 @@ For ANOVA:
 &gt; where *k* is the number of groups and *n* is the sample size per group (balanced design)
 
 ???
-              Observed    Model
-`\(MS_{total}\)`  Values      Grand Means
-`\(Ms_{model}\)`  Group Means Grand Means
-`\(Ms_{Resid}\)`  Values      Group Means
+*               
+* `\(MS_{total}\)`  Values      vs Grand Means
+* `\(Ms_{model}\)`  Group Means vs Grand Means
+* `\(Ms_{Resid}\)`  Values      vs Group Means
+
 Draw a triangle
 What does F mean?
 
@@ -662,12 +659,20 @@ Residuals 20 3777.0  188.85
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
----
+&lt;!-- --- --&gt;
 
-## Next class: where does the difference lie?
+&lt;!-- ## Next lecture: where does the difference lie? --&gt;
 
-&lt;img src="cm051_files/figure-html/unnamed-chunk-24-1.png" style="display: block; margin: auto;" /&gt;
+&lt;!-- ```{r echo = FALSE, fig.width=2.75, fig.height=1.75, dpi = 300} --&gt;
+&lt;!-- library(ggplot2) --&gt;
+&lt;!-- heroplot &lt;- ggplot(data = superhero, aes(factor(hero), injury)) + --&gt;
+&lt;!--   geom_boxplot(aes(fill = factor(hero))) + --&gt;
+&lt;!--   theme(axis.title.x = element_blank()) + --&gt;
+&lt;!--   theme(legend.position = "right") --&gt;
+&lt;!-- heroplot --&gt;
+&lt;!-- ``` --&gt;
     </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
 "highlightStyle": "atelier-lakeside-light",
@@ -677,16 +682,74 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));
 });
-(function() {
-  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
   if (!r) return;
   s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
   d.head.appendChild(s);
-})();</script>
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
 
 <script>
 (function() {
-  var i, text, code, codes = document.getElementsByTagName('code');
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
   for (i = 0; i < codes.length;) {
     code = codes[i];
     if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
@@ -700,14 +763,15 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     }
     i++;
   }
-})();
+};
+slideshow._releaseMath(document);
 </script>
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
 (function () {
   var script = document.createElement('script');
   script.type = 'text/javascript';
-  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
   if (location.protocol !== 'file:' && /^https?:/.test(script.src))
     script.src  = script.src.replace(/^https?:/, '');
   document.getElementsByTagName('head')[0].appendChild(script);
