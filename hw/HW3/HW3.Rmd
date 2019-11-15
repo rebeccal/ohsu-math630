@@ -56,27 +56,29 @@ c.   Running the appropriate test, we now have a p-value of 0.01815, which is le
 <b>Answers</b>
   
     * Null hypothesis: The sample mean is the same as the population mean of 0.
-    * Alternate hypothesis: $\mu$ is not equal to 0.
+    * Alternate hypothesis: The sample mean is not equal to 0.
 
 ```
 
 ```{r, include=params$key }
 #First, let's look at some important numbers.
 
-pop_mean <- 0 #population mean
-n <- 50
+mu <- 0 #population mean
+n <- 50 
 df <- n-1 #degrees of freedom
-critical_value <- qt(.975, 49) #critical value in b.
-mu <- sum(8.979 + 10.349)/2 # sample mean
-sd <- (10.339-8.979)/1.96 # sample standard deviation 
-t_statistic <-  (mu-pop_mean)/(sd/sqrt(50))
+critical_value <- qt(.975, 49) #critical value.
+mean <- sum(8.979 + 10.349)/2 # sample mean
+sd <- (10.349 - mean) * (sqrt(n) / critical_value) # sample standard deviation
+se <- sd/sqrt(n) # We could have computed the se directly, by leaving the sqrt(n) out of the above
+t_statistic <-  (mean-mu)/(se)
 p_value <- 2*pt(t_statistic, df, lower=FALSE)
 ```
 
 ```{r, eval=params$key, echo=FALSE}
 paste("critical value: ", critical_value)
-paste("sample mean: ", mu)
+paste("sample mean: ", mean)
 paste("sample standard deviation: ", sd)
+paste("standard error: ", se)
 paste("t statistic: ", t_statistic)
 paste("p_value: ",p_value)
 ```
