@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
   <head>
     <title>Math 530/630 CM 5.3</title>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link rel="stylesheet" href="css\ohsu.css" type="text/css" />
     <link rel="stylesheet" href="css\ohsu-fonts.css" type="text/css" />
@@ -12,7 +12,7 @@
 class: center, middle, inverse, title-slide
 
 # Math 530/630 CM 5.3
-## Post-hoc tests &amp; p-value adjustment
+## Contrasts, post-hoc tests &amp; p-value adjustments
 
 ---
 
@@ -211,8 +211,10 @@ P value adjustment method: none
 
 ```r
 library(multcomp)
-mcp &lt;- glht(heroaov,linfct=mcp(hero="Tukey"))
-summary(mcp,test=univariate())
+mcp &lt;- glht(heroaov,linfct=mcp(hero="Tukey")) # "Tukey" sets up the pairwise comparisons (computes the estimate and SE, but not the correction. see "test" below) 
+#summary(mcp) # Tukeys with single-step adjusted p-value
+#summary(mcp, test=univariate()) #like a set of paired-ts (pooled sd 2 groups), but with pooled sd from all groups) - same as pairwise.t.test() above
+summary(mcp,test=adjusted("none")) #Same as pairwise.t.test() above 
 ```
 
 You get:
@@ -249,7 +251,7 @@ TMNT - Superman == 0       -32.500      7.934  -4.096 0.000562 ***
 TMNT - Hulk == 0            -3.667      7.934  -0.462 0.648969    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-(Univariate p values reported)
+(Adjusted p values reported -- none method)
 ```
 
 ---
@@ -283,18 +285,13 @@ Which is usually just written as:
 We base the *c* terms off of your hypotheses. Let's take a look at the superhero data:
 
 ```
-Spiderman  Superman      Hulk      TMNT 
- 40.66667  60.33333  31.50000  27.83333 
-```
-
-```
-Spiderman  Superman      Hulk      TMNT 
-14.009521 17.851237 12.817956  8.727352 
-```
-
-```
-Spiderman  Superman      Hulk      TMNT 
-        6         6         6         6 
+# A tibble: 4 x 4
+  hero       mean    sd     n
+  &lt;fct&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;
+1 Spiderman  40.7 14.0      6
+2 Superman   60.3 17.9      6
+3 Hulk       31.5 12.8      6
+4 TMNT       27.8  8.73     6
 ```
 
 
@@ -408,12 +405,12 @@ Fit: aov(formula = injury ~ hero, data = superhero)
 
 Linear Hypotheses:
                           Estimate Std. Error t value Pr(&gt;|t|)   
-Superman - Spiderman == 0   19.667      7.934   2.479  0.09415 . 
-Hulk - Spiderman == 0       -9.167      7.934  -1.155  0.66067   
-TMNT - Spiderman == 0      -12.833      7.934  -1.617  0.39178   
-Hulk - Superman == 0       -28.833      7.934  -3.634  0.00820 **
-TMNT - Superman == 0       -32.500      7.934  -4.096  0.00291 **
-TMNT - Hulk == 0            -3.667      7.934  -0.462  0.96643   
+Superman - Spiderman == 0   19.667      7.934   2.479  0.09417 . 
+Hulk - Spiderman == 0       -9.167      7.934  -1.155  0.66073   
+TMNT - Spiderman == 0      -12.833      7.934  -1.617  0.39183   
+Hulk - Superman == 0       -28.833      7.934  -3.634  0.00817 **
+TMNT - Superman == 0       -32.500      7.934  -4.096  0.00290 **
+TMNT - Hulk == 0            -3.667      7.934  -0.462  0.96644   
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 (Adjusted p values reported -- single-step method)
@@ -441,9 +438,9 @@ New `\(p\)`'s...
 
 ```
 Superman - Spiderman     Hulk - Spiderman     TMNT - Spiderman 
-         0.094523420          0.660697823          0.391785798 
+         0.093931100          0.660697206          0.391843953 
      Hulk - Superman      TMNT - Superman          TMNT - Hulk 
-         0.008420621          0.002979585          0.966427743 
+         0.008121732          0.003014060          0.966428897 
 ```
 
 
@@ -537,9 +534,9 @@ New `\(p\)`'s based on Tukey Studentized Range statistic ( `\(q_{contrast}\)` ).
 
 ```
 Superman - Spiderman     Hulk - Spiderman     TMNT - Spiderman 
-         0.094149854          0.660751184          0.391790048 
+         0.094396173          0.660736939          0.391799285 
      Hulk - Superman      TMNT - Superman          TMNT - Hulk 
-         0.008345431          0.002881687          0.966434599 
+         0.008342815          0.002900001          0.966431538 
 ```
 
 ---
@@ -660,9 +657,9 @@ Unadjusted `\(p\)`'s based on Tukey's HSD...
 
 ```
 Superman - Spiderman     Hulk - Spiderman     TMNT - Spiderman 
-         0.094149854          0.660751184          0.391790048 
+         0.094396173          0.660736939          0.391799285 
      Hulk - Superman      TMNT - Superman          TMNT - Hulk 
-         0.008345431          0.002881687          0.966434599 
+         0.008342815          0.002900001          0.966431538 
 ```
 
 
@@ -1115,6 +1112,7 @@ NNT           "-4"                 "-3.2654824476779"
 
 ---
     </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
 "highlightStyle": "atelier-lakeside-light",
@@ -1124,16 +1122,74 @@ NNT           "-4"                 "-3.2654824476779"
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));
 });
-(function() {
-  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
   if (!r) return;
   s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
   d.head.appendChild(s);
-})();</script>
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
 
 <script>
 (function() {
-  var i, text, code, codes = document.getElementsByTagName('code');
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
   for (i = 0; i < codes.length;) {
     code = codes[i];
     if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
@@ -1147,14 +1203,15 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     }
     i++;
   }
-})();
+};
+slideshow._releaseMath(document);
 </script>
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
 (function () {
   var script = document.createElement('script');
   script.type = 'text/javascript';
-  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
   if (location.protocol !== 'file:' && /^https?:/.test(script.src))
     script.src  = script.src.replace(/^https?:/, '');
   document.getElementsByTagName('head')[0].appendChild(script);

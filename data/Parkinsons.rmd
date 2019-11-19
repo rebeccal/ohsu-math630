@@ -36,4 +36,18 @@ filter_All <-summary_All %>%
 kable(filter_PD)
 kable(filter_All)
 
+#Sum the Norm vars to find the vars in Table 9
+sum_disfl_norm <- AllFinal %>%  
+  filter(Group == "PD Group") %>% 
+  select_at(vars(contains("Norm"), contains("NRM"),-contains("Pct"))) %>% 
+  summarize_all(list(sum=sum))
+
+#Sum the Noise vars to find the vars in Table 9
+sum_disfl_noise <- AllFinal %>%  
+  filter(Group == "PD Group") %>% 
+  select_at(vars(contains("Nois"),-contains("Pct"))) %>% 
+  summarize_all(list(sum=sum))
+
+
+
 ```

@@ -42,22 +42,26 @@ summary(lm_swiss) # most of the above, not tidy
 
 
 # Residual standard error and standard error of the coefficients
-design_matrix <- model.matrix(lm_swiss) # Essential the X matrix - here it's 1 for the intercept and the value of the explanatory variable
+#####################################################################
 
-#Residual Standard Error (Almost the Standard Deviation, but not quite - different denominator)
+design_matrix <- model.matrix(lm_swiss) # Essentially the X matrix - here it's 1 for the intercept and the value of the explanatory variable
+
+# Residual Standard Error (Almost the Standard Deviation, but not quite - different denominator)
 MSE <- sum((swiss$Agriculture - fitted(lm_swiss))^2) / (nrow(design_matrix) - ncol(design_matrix))
 RSE <- sqrt(MSE) # matches sigma and RSE above
 sd(augment(lm_swiss)$.resid) # Doh! Standard error <> standard deviation!
-#Another way - a little different
+
+# Another way - a little different
 k   <- length(lm_swiss$coefficients) # Number of coefficients
 n   <- length(lm_swiss$residuals) # Number of rows
 SSE <- sum(lm_swiss$residuals**2)
 RSE <- sqrt(SSE/(n-k)) # Residual Standard Error!! It's about sampling distributions and degrees of freedom.
 
-#SE of the coefficients and the coefficients (betas)
-sqrt(diag(solve(crossprod(design_matrix))) * RSE) # SE of the coefficients
+# SE of the coefficients and the coefficients (betas)
+var_covar_matrix <- solve(crossprod(design_matrix)) * RSE # Variance-covariance matrix of the betas
+(beta_SEs <- sqrt(diag(var_covar_matrix))) # SEs of the coefficients
 ols_estimator <- solve(crossprod(design_matrix)) %*% t(design_matrix)
-betas <- ols_estimator%*%swiss$Agriculture 
+(betas <- ols_estimator%*%swiss$Agriculture) 
 
 
 # Pretty much all of the below could be done with EITHER augment or get_regression_points

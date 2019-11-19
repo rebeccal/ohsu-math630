@@ -227,9 +227,10 @@ pairwise.t.test(superhero$injury,superhero$hero,p.adjust.method="none")
 
 ```{r comment=NA, warning=FALSE, message=FALSE, results="hide"}
 library(multcomp)
-mcp <- glht(heroaov,linfct=mcp(hero="Tukey"))
-#summary(mcp) # Tukeys with stepwise adjusted p-value
-summary(mcp,test=univariate()) # Fisher's LSD (like a set of paired-ts (pooled sd 2 groups), but with pooled sd from all groups)
+mcp <- glht(heroaov,linfct=mcp(hero="Tukey")) # "Tukey" sets up the pairwise comparisons (computes the estimate and SE, but not the correction. see "test" below) 
+#summary(mcp) # Tukeys with single-step adjusted p-value
+#summary(mcp, test=univariate()) #like a set of paired-ts (pooled sd 2 groups), but with pooled sd from all groups) - same as pairwise.t.test() above
+summary(mcp,test=adjusted("none")) #Same as pairwise.t.test() above 
 ```
 
 You get:
@@ -249,7 +250,7 @@ You get:
 ```{r comment=NA, warning=FALSE, message=FALSE, echo=FALSE}
 library(multcomp)
 mcp <- glht(heroaov,linfct=mcp(hero="Tukey"))
-summary(mcp,test=univariate())
+summary(mcp,test=adjusted("none"))
 ```
 
 ---
@@ -282,12 +283,9 @@ $$t=\frac{(\bar{y}_1-\bar{y}_2)}{\sqrt{\frac{(n_1-1)s_{y_1}^2+(n_2-1)s_{y_2}^2}{
 
 We base the *c* terms off of your hypotheses. Let's take a look at the superhero data:
 ```{r comment=NA, echo=FALSE}
-ms <- tapply(superhero$injury,superhero$hero, mean)
-sds <- tapply(superhero$injury,superhero$hero, sd)
-ns <- tapply(superhero$injury,superhero$hero, length)
-ms 
-sds
-ns
+superhero %>% 
+  group_by(hero) %>% 
+  summarise(mean = mean(injury),sd = sd(injury), n = n())
 ```
 
 

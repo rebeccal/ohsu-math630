@@ -111,7 +111,7 @@ cadds %>%
             n = n())
 ```
 
-As far as data visualizations go, a boxplot and line graph of the means are helpful at this stage (I'll include the code to produce these at the end). I might be worried about heterogeneity of variances based on the boxplots and the standard deviations in each group as well, but I going to keep trucking forward at this point.
+As far as data visualizations go, a boxplot and line graph of the means are helpful at this stage. I might be worried about heterogeneity of variances based on the boxplots and the standard deviations in each group as well, but I'm going to keep trucking forward at this point.
 
 ```{r}
 ethbox <- ggplot(cadds, aes(eth3, exp,fill=eth3))+
@@ -230,7 +230,7 @@ The easiest way to conduct a Type II/III sums of squares ANOVA is to use the car
 
 ### Setting Contrasts
 
-Another issue is that the default contrasts in R. You can easily check the default contrasts for any factor variable:
+Another issue is the default contrasts in R. You can easily check the default contrasts for any factor variable:
 
 ```{r comment=NA}
 contrasts(cadds$eth3)
@@ -247,7 +247,7 @@ temp
 solve(temp)
 ```
 
-Now the rows of *this* matrix tells you the actual contrast weights (with the exception of $\beta_0$, which is not a contrast; note it is the only one that does not sum to zero). Thus, by default, the coefficients $\beta_0$, $\beta_2$, and $\beta_3$ in our linear model are contrasts:
+Now the rows of *this* matrix tells you the actual contrast weights (with the exception of $\beta_0$, which is not a contrast; note it is the only one that does not sum to zero). Thus, by default, the coefficients $\beta_0$, $\beta_1$, and $\beta_2$ in our linear model are contrasts:
 $$\beta_0=+1\mu_1+0\mu_2+0\mu_3$$
 $$\beta_1=-1\mu_1+1\mu_2+0\mu_3$$
 $$\beta_2=-1\mu_1+0\mu_2+1\mu_3$$
@@ -309,7 +309,7 @@ All of these converge to the same conclusion: expenditures among White non-Hispa
 
 ## Unequal Variances
 
-With unequal variances with just one IV factor, we could run Welch's *F* test (oneway.test), which is the alternative to Welch's *t* test (t.test with var.equal=F) when we have a factor with more than two levels. Unfortunately, there are not many options for unequal variances when we have more than one IV. The *car* package does offer this "white.adjust" option, which if set to true will use a heteroscedasticity-corrected coefficient covariance matrix (see White, 1980, "A heteroskedastic consistent covariance matrix estimator and a direct rest of heteroskedasticity"). For now, I will introduce this as an option for the omnibus ANOVA, although there may be better ([non-NHST](http://doingbayesiandataanalysis.blogspot.mx/2011/04/anova-with-non-homogeneous-variances.html)) options for such a scenario.
+With unequal variances with just one IV factor, we could run Welch's *F* test (oneway.test), which is the alternative to Welch's *t* test (t.test with var.equal=F) when we have a factor with more than two levels. Unfortunately, there are not many options for unequal variances when we have more than one IV. The *car* package does offer this "white.adjust" option, which if set to true will use a heteroscedasticity-corrected coefficient covariance matrix (see White, 1980, "A heteroskedastic consistent covariance matrix estimator and a direct rest of heteroskedasticity"). For now, I will introduce this as an option for the omnibus ANOVA, although there may be better non-NHST (e.g., Bayesian or mixed models) options for such a scenario.
 
 ```{r comment=NA,eval=FALSE}
 Anova(ca_aov2,type=c("II"), white.adjust=T)
