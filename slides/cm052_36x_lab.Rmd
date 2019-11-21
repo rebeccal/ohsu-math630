@@ -101,6 +101,7 @@ You may use R as a calculator to get you through this section, but you may also 
 Use the following code to create a mini version of the `stickers_clean` data with only 5 observations in each age group to create a balanced design, and decrease the math!
 
 ```{r}
+#RNGkind(sample.kind = "Rounding") #This allows the set.seed in 3.6.x to produce the same output as 3.5.x
 set.seed(1990)
 givers <- stickers_clean %>% 
   filter(giveornot == 1) %>% 
@@ -130,10 +131,10 @@ mini_lm <- lm(prop_given ~ age_groups, data = mini_givers)
 (anova_mini_lm <- anova(mini_lm))
 ```
 
-```{r echo = FALSE, include = FALSE}
-library(multcomp)
-glht(mini_lm)
-glht(mini_lm, linfct = mcp(age_groups = "Tukey"))
+```{r glht_mini,  eval = FALSE}
+#library(multcomp) #Avoiding loading multcomp as it masks dplyr::select
+multcomp::glht(mini_lm)
+summary(multcomp::glht(mini_lm, linfct = multcomp::mcp(age_groups = "Tukey")))
 ```
 
 

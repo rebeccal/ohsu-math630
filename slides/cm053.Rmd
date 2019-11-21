@@ -77,7 +77,11 @@ $$DV_i=(model)+error_i$$
 "Essentially, all models are wrong, but some are useful"-George E. P. Box (1987)
 
 $$deviation=\sum{(observed-model)^2}$$
-
+???
+* A couple minutes on linear models
+* Not residuals, but expected error "in the world"
+* Every statistic procedure we've looked at could be described by this function
+* Let's look...
 ---
 
 # The sample mean
@@ -92,6 +96,8 @@ Coefficient=1 is implied.
 $DV_i=(model)+error_i$
 ]
 
+???
+The simplest model - the mean of the IV (no DV)
 ---
 
 # Correlation
@@ -106,6 +112,9 @@ $DV_i=(bIV_i)+error_i$
 $DV_i=(model)+error_i$
 ]
 
+???
+* Here the IV is some multiplier of the DV
+* Still just a model
 ---
 
 # Simple linear regression
@@ -123,6 +132,9 @@ Where:
 $DV_i=(model)+error_i$
 ]
 
+???
+* Simple - meaning one IV
+* Still just a model
 ---
 
 # *t* test
@@ -141,6 +153,8 @@ Where:
 $DV_i=(model)+error_i$
 ]
 
+???
+Now it's a linear model with dummy coded categories
 ---
 
 # Analysis of Variance
@@ -153,6 +167,11 @@ $DV_i=(b_0+b_1IV1_i+b_2IV2_i)+error_i$
 
  $DV_i=(model)+error_i$
 ]
+
+???
+* Same as the t, but now may need more "dummy" codes
+
+
 ---
 
 # GLM logic
@@ -164,6 +183,8 @@ $DV_i=(b_0+b_1IV1_i+b_2IV2_i)+error_i$
 
 > __N.B.__ What is *not* present in these equations?
 
+???
+In the simples model, the Dependent Variable does not matter
 ---
 
 ## Superhero ANOVA 
@@ -174,18 +195,31 @@ superhero$hero <- factor(superhero$hero,labels=c("Spiderman", "Superman", "Hulk"
 heroaov <- aov(injury~hero,data=superhero)
 summary(heroaov)
 ```
-
-
+???
+* Let's look at an example
+* an anova(lm()) would give the same output
+* What does this tell us?
+  * A significant effect of the DV
 ---
 
 ## Now what?
 
 ```{r echo=FALSE}
+GM <- mean(superhero$injury)
 library(ggplot2)
-heroplot <- ggplot(data=superhero, aes(factor(hero), injury))+geom_boxplot(aes(fill=factor(hero)))+ theme(axis.title.x = element_blank())+ scale_x_discrete(labels=c("Spiderman", "Superman", "Hulk", "TMNT"))+ theme(legend.position="none")
+heroplot <- ggplot(data=superhero, aes(factor(hero), injury)) +
+  geom_boxplot(aes(fill=factor(hero))) + 
+  theme(axis.title.x = element_blank()) + 
+  scale_x_discrete(labels=c("Spiderman", "Superman", "Hulk", "TMNT")) + 
+  theme(legend.position="none") +
+  geom_hline(yintercept = GM, size = 1, linetype = 2, color = "chocolate4")
 heroplot
 ```
 
+???
+* Maybe do nothing - well, put a chart
+* Maybe drill down - doing post-hoc analyses
+  * Important - anova and the post-hoc analyses answer two differenct questions
 ---
 
 ## Contrasts!
@@ -201,6 +235,11 @@ These say:
 $$+1\mu_{spiderman}-1\mu_{superman}+0\mu_{hulk}+0\mu_{TNMT}$$
 $$+1\mu_{spiderman}+0\mu_{superman}-1\mu_{hulk}+0\mu_{TNMT}$$
 $$0\mu_{spiderman}+0\mu_{superman}+1\mu_{hulk}-1\mu_{TNMT}$$
+???
+* Contrasts are how R determines what to compare to what
+* Matrix format
+* Think back to linear models - each was an offset from the Intercept
+* Model coefficients represent the differences specified by the contrasts
 
 ---
 
@@ -209,7 +248,8 @@ $$0\mu_{spiderman}+0\mu_{superman}+1\mu_{hulk}-1\mu_{TNMT}$$
 $$+1\mu_{spiderman}-1\mu_{superman}+0\mu_{hulk}+0\mu_{TNMT}\rightarrow\mu_{spiderman}-\mu_{superman}=0$$
 $$+1\mu_{spiderman}+0\mu_{superman}-1\mu_{hulk}+0\mu_{TNMT}\rightarrow\mu_{spiderman}-\mu_{hulk}=0$$
 $$0\mu_{spiderman}+0\mu_{superman}+1\mu_{hulk}-1\mu_{TNMT}\rightarrow\mu_{hulk}-\mu_{TNMT}=0$$
-
+???
+* More importantly, we're asking that R compute which of these means are significantly different
 
 ---
 
@@ -219,7 +259,14 @@ $$0\mu_{spiderman}+0\mu_{superman}+1\mu_{hulk}-1\mu_{TNMT}\rightarrow\mu_{hulk}-
 pairwise.t.test(superhero$injury,superhero$hero,p.adjust.method="none")
 ```
 
-> Base R's output=just the *p*'s, please!
+**Base R's output=just the *p*'s, please!**
+
+
+???
+
+* Here's a full pairwise comparison
+* Using pooled SD across all the observations
+
 
 ---
 
@@ -227,9 +274,7 @@ pairwise.t.test(superhero$injury,superhero$hero,p.adjust.method="none")
 
 ```{r comment=NA, warning=FALSE, message=FALSE, results="hide"}
 library(multcomp)
-mcp <- glht(heroaov,linfct=mcp(hero="Tukey")) # "Tukey" sets up the pairwise comparisons (computes the estimate and SE, but not the correction. see "test" below) 
-#summary(mcp) # Tukeys with single-step adjusted p-value
-#summary(mcp, test=univariate()) #like a set of paired-ts (pooled sd 2 groups), but with pooled sd from all groups) - same as pairwise.t.test() above
+mcp <- glht(heroaov,linfct=mcp(hero="Tukey")) # "Tukey" sets up the pairwise comparisons 
 summary(mcp,test=adjusted("none")) #Same as pairwise.t.test() above 
 ```
 
@@ -241,7 +286,8 @@ You get:
 * the $SE_{\psi}$'s
 * oh my!
 
-
+???
+Tukey is not adjusting
 
 ---
 
@@ -257,17 +303,21 @@ summary(mcp,test=adjusted("none"))
 
 ## Where are these numbers coming from?
 
-$$estimate=\psi=\frac{\sum_{j=1}^kc_j\bar{y_j}}{\hat{\sigma_{\psi}}}$$
+$$estimate=\psi={\sum_{j=1}^kc_j\bar{y_j}}$$
 
 where...
 $$SE_{est}=\hat{\sigma_{\psi}}=\sqrt{MS_{error}\times{(\frac{1}{n_1}+\frac{1}{n_2})}}$$
 
 And the *c* terms are contrast coefficients. Thus a more general formula is:
 
-$$t_{contrast}=\frac{estimate}{SE_{est}}=\frac{\psi}{\hat{\sigma_{\psi}}}=\frac{\sum_{j=1}^kc_j\bar{y_j}}{\sqrt{MS_{error}\times{\frac{\sum_{j=1}^kc_j^2}{n_j}}}}$$
-
-
+$$t_{contrast}=\frac{estimate}{SE_{est}}=\frac{\psi}{\hat{\sigma_{\psi}}}=\frac{\sum_{j=1}^kc_j\bar{y_j}}{\sqrt{MS_{error}\times{\sum_{j=1}^k\frac{c_j^2}{n_j}}}}$$
+???
+* c is the contrast
+* Estimate is just the difference of the means
+* SE is a weight adjusted MS error
+* Higher n (in SE) -> smaller denominator -> larger t!
 ---
+
 
 ## This is different from the independent samples *t* test
 
@@ -276,18 +326,62 @@ $$t=\frac{(\bar{y}_1-\bar{y}_2)-(\mu_1-\mu_2)}{\sqrt{\frac{(n_1-1)s_{y_1}^2+(n_2
 
 Which is usually just written as:
 $$t=\frac{(\bar{y}_1-\bar{y}_2)}{\sqrt{\frac{(n_1-1)s_{y_1}^2+(n_2-1)s_{y_2}^2}{n_1+n_2-2}}}$$
+???
+*SE is just across two groups
+
+
+---
+
+## Contrast degrees of freedom
+
+For the pairwise *t* tests ( $t_{contrast}$ ), the degrees of freedom for __each__ contrast are the same: *N-k* (where *N*= total participants and *k*=number of groups)
+
+If we were to conduct an independent samples *t* test, what would the degrees of freedom be? 
+* The answer is: $n_1+n_2-2$
+* This is the same as *N-k*, where *k* must always be 2 for the independent samples *t*-test.
+* In our example contrast, this is the difference between 20 and 10 degrees of freedom
+
+```{r include=FALSE}
+hero2 <- subset(superhero,hero=="Spiderman"|hero=="Superman")
+t.test(injury~hero,data=hero2,paired=F, var.equal=T)
+```
+
+???
+What happens when your df are higher?
+
+---
+
+## Increased degrees of freedom
+
+
+|Degrees of Freedom| $\alpha=.05,\:2-tailed$ |
+|:-------:|:----------:|
+|10|__2.228__|
+|11|2.201|
+|12|2.179|
+|13|2.160|
+|14|2.145|
+|15|2.131|
+|16|2.120|
+|17|2.110|
+|18|2.101|
+|19|2.093|
+|20|__2.086__|
 
 ---
 
 ## Defining contrast coefficients
 
-We base the *c* terms off of your hypotheses. Let's take a look at the superhero data:
+We base the *c* terms off of the hypotheses. Let's take a look at the superhero data:
 ```{r comment=NA, echo=FALSE}
 superhero %>% 
   group_by(hero) %>% 
   summarise(mean = mean(injury),sd = sd(injury), n = n())
 ```
 
+???
+* Order matters
+* matix size is dependent on the number of comparisons
 
 ---
 
@@ -314,41 +408,9 @@ $$t_{contrast}=\frac{\psi}{\hat{\sigma_{\psi}}}=\frac{-19.667}{7.934}=-2.479$$
 2*(1-pt(2.479,20)) #unadjusted 2-tailed p-value; note the df!
 ```
 
----
-
-## Contrast degrees of freedom
-
-For the pairwise *t* tests ( $t_{contrast}$ ), the degrees of freedom for __each__ contrast are the same: *N-k* (where *N*= total participants and *k*=number of groups)
-
-If we were to conduct an independent samples *t* test, what would the degrees of freedom be? 
-* The answer is: $n_1+n_2-2$
-* This is the same as *N-k*, where *k* must always be 2 for the independent samples *t*-test.
-* In our example contrast, this is the difference between 20 and 10 degrees of freedom
-
-```{r include=FALSE}
-hero2 <- subset(superhero,hero=="Spiderman"|hero=="Superman")
-t.test(injury~hero,data=hero2,paired=F, var.equal=T)
-```
-
-
----
-
-## Increased degrees of freedom
-
-
-|Degrees of Freedom| $\alpha=.05,\:2-tailed$ |
-|:-------:|:----------:|
-|10|__2.228__|
-|11|2.201|
-|12|2.179|
-|13|2.160|
-|14|2.145|
-|15|2.131|
-|16|2.120|
-|17|2.110|
-|18|2.101|
-|19|2.093|
-|20|__2.086__|
+???
+* Walk through 1
+* Compare spiderman to superman
 
 ---
 
@@ -359,7 +421,9 @@ The Tukey Honestly Significant Difference (HSD) is a single-step procedure that 
 Instead of a *t* statistic ( $t_{contrast}$ ), now we have:
 * The HSD value for a family of contrasts
 * The Tukey statistic, $q_{contrast}$, for each individual contrast within the family
-* Both will lead you to the same conclusion
+
+???
+* More conservative statitic
 
 ---
 
@@ -368,7 +432,8 @@ Instead of a *t* statistic ( $t_{contrast}$ ), now we have:
 $$HSD=q_{tukey}\sqrt{\frac{MSE}{2}({\frac{1}{n_1}+\frac{1}{n_2}})}$$
 
 ```{r comment=NA, warning=FALSE, message=FALSE}
-mse <- 188.85
+#mse <- 188.85
+mse <- summary(heroaov)[[1]]$"Mean Sq"[2] #I know, ugly!
 ngroups <- 4 #4 groups, so 4 means
 dfmse <- 20 #see ANOVA source table
 q_tuk <- qtukey(.95,ngroups,dfmse)
@@ -380,12 +445,19 @@ $$HSD=3.958\times\sqrt{\frac{188.85}{2}({\frac{1}{6}+\frac{1}{6}})}=22.36$$
 So, any mean difference larger than 22.36 we will consider significant according to Tukey HSD. 
 
 ---
+##Studentized Range Distribution - _q_
+
+![](images/StudentizedRangePDF.jpg)
+
+---
 
 ## Which differences are > than our HSD of 22.36?
 
 ```{r comment=NA, warning=FALSE, message=FALSE, echo=FALSE}
 summary(mcp)
 ```
+???
+*Apparently Spiderman and superman aren't "honestly" different
 
 ---
 
@@ -462,6 +534,10 @@ So in our example contrast between Spiderman and Superman:
 |Student *t* Distribution|2.479|7.93|.022|2 (can be 1)|
 |Tukey Studentized Range Distribution|3.506|5.61|.094|always 1|
 
+
+???
+* True across glht in general??
+
 ---
 
 ## To sum up...
@@ -495,7 +571,9 @@ tukeyp
 
 * But, each individual pairwise contrast is designed to control the probability of false rejection at $\alpha$. Unfortunately, if our data analysis involves many hypothesis tests (and thus many contrasts), the probability of at least one Type I error increases rather sharply with the number of contrasts.
 
-
+???
+* Tukey handles this somewhat - thus the changed p-values.
+* Let's look at this more closely
 ---
 
 ## Probability(at least one error)
@@ -507,7 +585,11 @@ For example:
 * All alternative hypotheses are __true__
 * What is the probability of at least one Type I error?
 
-
+???
+Example
+* multiple tests cholesterol
+* one treatment
+* leads to a multiple comparison problem
 ---
 
 ## Probability refresher
@@ -568,7 +650,7 @@ class: middle, center
 ## Doing all pairwise contrasts in R better*
 
 ```{r comment=NA, warning=FALSE, message=FALSE}
-summary(mcp, test = adjusted("BH")) #Tukey HSD + BH p-adjustment!
+summary(mcp, test = adjusted("BH")) #Tukey pairwise comparison + BH p-adjustment!
 ```
 
 ---
@@ -577,14 +659,14 @@ summary(mcp, test = adjusted("BH")) #Tukey HSD + BH p-adjustment!
 
 ### You changed the *p*-values again! Yes I did.
 
-Unadjusted $p$'s based on Tukey's HSD...
+$p$'s based on Tukey's HSD...
 
 ```{r comment=NA, warning=FALSE, message=FALSE, echo=FALSE}
 tukeyp
 ```
 
 
-Tukey HSD $p$'s with Benjamini-Hochberg adjustment...
+$p$'s with Benjamini-Hochberg adjustment...
 
 ```{r comment=NA, warning=FALSE, message=FALSE, echo=FALSE}
 tukeybhp <- summary(mcp, test = adjusted("BH"))[[10]][[6]][1:6]
@@ -633,6 +715,10 @@ $$FDR=\frac{number\:of\:falsely\:rejected\:H_0s}{total\:number\:of\:rejected\:H_
 
 Benjamini-Hochberg proposed to keep the latter less than $\alpha$ such that the maximum FDR is capped at $q<\alpha$.
 
+???
+* How often, when the null was true, did I think I had an effect?
+* Of all the times I thought I had an effect, how often was I wrong?
+  * e.g. what proportion my "discoveries" are wrong? 
 ---
 
 ## The FDR Method
@@ -655,6 +741,10 @@ names(bhnew)<-names(tukeypvals)
 bhnew
 ```
 
+???
+
+.008 = .05/6
+.017 = .05/3
 ---
 
 ## The Benjamini-Hochberg False Discovery Rate
@@ -669,7 +759,8 @@ The previous table can be summarized more generally as:
 
 Where the $p_{BH}^*$ threshold for each individual contrast is:
 $$\frac{j}{m}\times{\alpha}$$
-
+???
+m is the number of groups
 
 ---
 
@@ -699,7 +790,10 @@ __The downside:__ comes at a cost of decreasing statisical power (increasing Typ
 
 In our current example, we conduct *m*=6 contrasts total, so our nominal per contrast *p* is:
 $$p_{Bonferroni}^*=\frac{.05}{6}=.008$$
-
+???
+* Really conservative
+* Good for small n
+* Other methods much better for large sets!!
 ---
 
 ## False Positives 
@@ -831,51 +925,72 @@ round(bh.wisc,2)
 round(bh.rt,2)
 ```
 
-
 ---
+##Effect Size...
 
-## (Briefly) Non-parametric omnibus
-
-If we wanted to analyze this data using the extension of the Wilcoxon Mann Whitney Rank Sum Test, we would do a Kruskal-Wallis Rank Sum Test.
-
-```{r comment=NA}
-kruskal.test(injury~hero,data=superhero)
+```{r}
+# Pulling just the F-statistic out of the summary on the lm() model
+summary(lm(injury~hero, superhero))$fstatistic
+# Or from the aov model - a little tougher
+#summary(heroaov)[[1]]$"F value"[1]
+#summary(heroaov)[[1]]$"Df"
 ```
 
----
-
-## (Briefly) Non-parametric contrasts
-
-```{r comment=NA, warning=FALSE,message=FALSE}
-pairwise.wilcox.test(superhero$injury,superhero$hero,p.adj=c('BH'))
+```{r}
+# All the below params (except alpha) are from the above summary(s)
+library(MOTE)
+eta.F(3, 20, 6.716, a = .05)$eta
+summary(lm(injury~hero, superhero))$r.squared
 ```
+--
+##It's R-squared! 
 
----
 
-## (Briefly) Non-parametric omnibus + contrasts (way better)
 
-```{r comment=NA, warning=FALSE,message=FALSE}
-library(agricolae)
-k1 <- kruskal(superhero$injury,superhero$hero,alpha=.05,group=F,p.adj=c('BH'))
-```
+<!-- --- -->
 
----
+<!-- ## (Briefly) Non-parametric omnibus -->
 
-## (Briefly) Non-parametric omnibus + contrasts (way better)
+<!-- If we wanted to analyze this data using the extension of the Wilcoxon Mann Whitney Rank Sum Test, we would do a Kruskal-Wallis Rank Sum Test. -->
 
-```{r comment=NA, warning=FALSE,message=FALSE}
-k1
-```
+<!-- ```{r comment=NA} -->
+<!-- kruskal.test(injury~hero,data=superhero) -->
+<!-- ``` -->
 
----
+<!-- --- -->
 
-## (Briefly) Effect size
+<!-- ## (Briefly) Non-parametric contrasts -->
 
-```{r comment=NA, warning=FALSE,message=FALSE}
-library(orddom)
-hulk <- subset(superhero,select=("injury"),hero=="Hulk")
-tnmt <- subset(superhero,select=("injury"),hero=="TMNT")
-orddom(hulk, tnmt,alpha=.05,paired=FALSE)
-```
+<!-- ```{r comment=NA, warning=FALSE,message=FALSE} -->
+<!-- pairwise.wilcox.test(superhero$injury,superhero$hero,p.adj=c('BH')) -->
+<!-- ``` -->
 
----
+<!-- --- -->
+
+<!-- ## (Briefly) Non-parametric omnibus + contrasts (way better) -->
+
+<!-- ```{r comment=NA, warning=FALSE,message=FALSE} -->
+<!-- library(agricolae) -->
+<!-- k1 <- kruskal(superhero$injury,superhero$hero,alpha=.05,group=F,p.adj=c('BH')) -->
+<!-- ``` -->
+
+<!-- --- -->
+
+<!-- ## (Briefly) Non-parametric omnibus + contrasts (way better) -->
+
+<!-- ```{r comment=NA, warning=FALSE,message=FALSE} -->
+<!-- k1 -->
+<!-- ``` -->
+
+<!-- --- -->
+
+<!-- ## (Briefly) Effect size -->
+
+<!-- ```{r comment=NA, warning=FALSE,message=FALSE} -->
+<!-- library(orddom) -->
+<!-- hulk <- subset(superhero,select=("injury"),hero=="Hulk") -->
+<!-- tnmt <- subset(superhero,select=("injury"),hero=="TMNT") -->
+<!-- orddom(hulk, tnmt,alpha=.05,paired=FALSE) -->
+<!-- ``` -->
+
+<!-- --- -->
