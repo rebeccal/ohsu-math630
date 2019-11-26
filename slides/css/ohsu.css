@@ -55,6 +55,31 @@ Updated: 2019-10-01
   clear: both;
 }
 
+.left-code {
+  color: #777;
+  width: 38%;
+  height: 92%;
+  float: left;
+}
+.right-plot {
+  width: 60%;
+  float: right;
+  padding-left: 1%;
+}
+
+.left-plot {
+  width: 60%;
+  float: left;
+  padding-right: 1%;
+}
+
+.right-text {
+  color: #777;
+  width: 38%;
+  height: 92%;
+  float: right;
+}
+
 img, video, iframe {
   max-width: 100%;
 }
@@ -130,3 +155,6 @@ a:hover {
     color: #EC008C;
 }
 
+.large { font-size: 130% }
+.small { font-size: 70% }
+.tiny  { font-size: 4-% }

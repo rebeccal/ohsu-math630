@@ -144,7 +144,7 @@ $$t'=\frac{(\bar{x}_1-\bar{x}_2)-(\mu_1-\mu_2)}{\sqrt{\frac{s_1^2}{n_1}+\frac{s_
 
 Recall the degrees of freedom for the independent groups *t*-test:
 
-$$\nu=n_1+n_2-1$$
+$$\nu=(n_1-1)+(n_2-1)$$
 
 
 The degrees of freedom are modified for Welch's $t'$: 

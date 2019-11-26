@@ -38,8 +38,8 @@ Using the key, your self-assessment should include even **more** narrative; wher
 
 - Also this slide deck on [the general linear model](../slides/cm046.html) may be helpful.
 - Also this slide deck on [comparing multiple sample means](../slides/cm051.html).
-- This slide deck on [post-hoc tests and p-value adjustment ](../slides/cm054.pdf).
-
+- This slide deck on [post-hoc tests and p-value adjustment](../slides/cm053.pdf).
+- This [code-along](../slides/cm053-code_along.R).  
 
 # Logistics
 
@@ -80,7 +80,7 @@ or_vitd <- read_csv("http://bit.ly/conj620-orvitdcsv",
 
 # EDA
 
-Explore the `patient_type`, `season`, and `vitamin_d` variables. Recall that a [new exploratory data analysis](http://moderndive.netlify.com/6-regression.html#model1EDA) involves three things:
+Explore the `patient_type`, `season`, and `vitamin_d` variables. Recall that a [new exploratory data analysis](http://moderndive.com/6-regression.html#model1EDA) involves three things:
 
 * Looking at the raw values.
 * Computing summary statistics of the variables of interest.
@@ -169,9 +169,9 @@ get_regression_table(vitd_mod)
 get_regression_summaries(vitd_mod)
 ```
 
-# Two-way ANCOVA
+# Two-way ANOVA
 
-Let's start with two predictors in our ANOVA model, using addition first (i.e., `+`). Variables as covariates are typically added (`+`), and their effects are assumed to be additive, so this is called an analysis of covariance (ANCOVA). No interaction term is estimated, meaning we are not allowing for estimated non-parallel lines. 
+Let's start with two predictors in our ANOVA model, using addition first (i.e., `+`). No interaction term is estimated, meaning we are not allowing for estimated non-parallel lines. 
 
 Our two predictors will be: 
 
@@ -212,7 +212,7 @@ anova(vitd_season, vitd_pluspatient)
 
 # Types of sums of squares
 
-The majority of the time, if you are interested in doing an ANOVA, it is unlikely that you want output where the order of the predictors in your model formula matters. This type of output is called sequential sums of squares, also known as a Type I ANOVA. Here is [more information](https://mcfromnz.wordpress.com/2011/03/02/anova-type-iiiiii-ss-explained/) on the 3 types of sums of squares in the context of an ANOVA:
+The majority of the time, if you are interested in doing an ANOVA, it is unlikely that you want output where the order of the predictors in your model formula matters. This type of output is called sequential sums of squares, also known ANOVA with Type I sum of squares. Here is [more information](https://mcfromnz.wordpress.com/2011/03/02/anova-type-iiiiii-ss-explained/) on the 3 types of sums of squares in the context of an ANOVA: 
 
 * Type I: sequential (order matters) 
     * This is the default in R when you use `anova`.
@@ -220,17 +220,17 @@ The majority of the time, if you are interested in doing an ANOVA, it is unlikel
 * Type II: 
     * This type tests for each main effect after the other main effect. Note that no significant interaction is assumed (in other words, you should test for interaction first) and only if AB is not significant, continue with the analysis for main effects).
 * Type III:
-    * This type tests for the presence of a main effect after the other main effect and interaction. However, it is often not interesting to interpret a main effect if interactions are present (generally speaking, if a significant interaction is present, the main effects should not be further analysed). If the interactions are not significant, type II gives a more powerful test.
-    
+    * This type tests for the presence of a main effect after the other main effect and any interaction. However, it is often not interesting to interpret a main effect if interactions are present (generally speaking, if a significant interaction is present, the main effects should not be further analysed). If the interactions are not significant, type II gives a more powerful test.
+
 In this ANOVA predicting `vitamind_d`, the separate partial effects, or main effects, of `patient_type` and `season` would be marginal to the `patient_type:season` interaction. In general, we neither test nor interpret main effects of explanatory variables that interact. If we can rule out interaction either on theoretical or empirical grounds, then we can proceed to test, estimate, and interpret main effects. It does not generally make sense to specify and fit models that include interaction regressors but that delete main effects that are marginal to them. Such models — which violate the principle of marginality — are interpretable, but they are not broadly applicable. 
 
 The bottom line is that for anything beyond a one-way ANOVA (so anything with more than 1 predictor or independent variable), I recommend using `car::Anova` (capital "A" Anova, not lower case "a" anova) setting the `type` argument explicitly; from `?Anova`: 
 
 > “Type-II tests are calculated according to the principle of marginality, testing each term after all others, except ignoring the term's higher-order relatives; so-called type-III tests violate marginality, testing each term in the model after all of the others.”
 
-More [reading on this topic here](https://stats.stackexchange.com/questions/60362/choice-between-type-i-type-ii-or-type-iii-anova).
+More [reading on this topic here](https://stats.stackexchange.com/a/20455).
 
-# Two-way ANCOVA with Type II SS
+# Two-way ANOVA with Type II SS
 
 Now, we'll perform an ANOVA using the Type II SS. The way to do this is with the `car` package, using the `Anova` function with the `type = 2` argument. Try using this code:
 
@@ -248,20 +248,20 @@ Anova(vitd_add_switch, type = 2)
 
 * Interpret the output here. Keep in mind that any F value where the factor has only two levels can actually be interpreted without doing post-hoc testing.
 
-* Often with ANOVA, you want to plot the *adjusted means*, which are the fitted/predicted values from the ANOVA model (just as were created with linear regression models we have worked with before). Use this code to use the `phia` package to calculate the fitted group means and plot them. Read the [vignette](https://cran.r-project.org/web/packages/phia/vignettes/phia.pdf). Write a few sentences here about the model output and this figure, making sure to note *why* the plots that contain two colors show lines that are parallel ([hint](https://moderndive.com/7-multiple-regression.html#model4table)). 
+* Often with ANOVA, you want to plot the *adjusted means*, which are the fitted/predicted values from the ANOVA model (just as were created with linear regression models we have worked with before). Use this code to use the `phia` package to calculate the fitted group means and plot them. Read the [vignette](https://cran.r-project.org/web/packages/phia/vignettes/phia.pdf). Write a few sentences here about the model output and this figure, making sure to note *why* the plots that contain two colors show lines that are parallel ([hint](https://moderndive.com/6-multiple-regression.html#model4table)). 
 
 ```{r include = TRUE, results = "hide", fig.show = "hide"}
 vitd_add_means <- interactionMeans(vitd_add)
 plot(vitd_add_means)
 ```
 
-# Two-way ANOVA with Type II SS
+# Two-way ANOVA with Type II SS - Interaction
 
 Now run the same ANOVA analysis, this time allowing your two predictors to interact.
 
 * Is the interaction significant? If it is not, then the Type II sums of squares analysis is valid. What do you say?
 
-* Use the `phia` package to plot the fitted means from this model. What do you see? What is different now? ([hint](http://moderndive.netlify.com/7-multiple-regression.html#model4interactiontable)). 
+* Use the `phia` package to plot the fitted means from this model. What do you see? What is different now? ([hint](http://moderndive.com/6-multiple-regression.html#model4interactiontable)). 
 
 ```{r}
 vitd_int <- lm(vitamin_d ~ season * patient_type, data = or_vitd)

@@ -131,7 +131,7 @@ So the formula for Welch's `\(t'\)`:
 
 Recall the degrees of freedom for the independent groups *t*-test:
 
-`$$\nu=n_1+n_2-1$$`
+`$$\nu=(n_1-1)+(n_2-1)$$`
 
 
 The degrees of freedom are modified for Welch's `\(t'\)`: 
@@ -691,7 +691,7 @@ F-statistic: 7.016 on 1 and 65 DF,  p-value: 0.01013
 ```
 
 ```r
-(t &lt;- coefs_conf$statistic[2]^2)
+(f &lt;- coefs_conf$statistic[2]^2)
 ```
 
 ```

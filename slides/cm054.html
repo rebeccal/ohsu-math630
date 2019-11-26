@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>Math 530/630 CM 5.4</title>
+    <meta charset="utf-8" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/metropolis-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css\ohsu.css" type="text/css" />
+    <link rel="stylesheet" href="css\ohsu-fonts.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Math 530/630 CM 5.4
+## Multiway ANOVA and ANCOVA
+
+---
+
+
+
+
+
+
+
+
+class: center, middle, inverse
+
+# ANOVA: 2-way
+Let's add a second predictor!
+---
+![](images/GiversPaper.png)
+
+.pull-left[
+![](images/sticker1_75.png)]
+
+.pull-left[
+![](images/sticker2_75.png)]
+
+---
+## Being sticker rich
+
+* Children (ages 3–11) 
+  * received a small (12, “sticker poor”) or large (30, “sticker rich”) number of stickers, and
+  * were then given the opportunity to share their windfall with either one or two anonymous recipients (Dictator Game). 
+* Question: Do the number of available resources and/or the number of potential recipients alter the amount a child donates?
+---
+##Approach
+Only “givers” were analyzed:
+
+* Univariate .small[[read: one response/outcome variable]] ANOVA
+* investigate the impact of the between-subjects factors .small[[read: all levels of factors are measured from independent samples]] 
+  * age (4: 3–4 years, 5–6 years, 7–8 years, 9–11 years), 
+  * number of resources (2: 12 or 30 stickers), 
+  * number of recipients (2: 1 or 2 anonymous recipients), and 
+  * gender (2: female, male) on the 
+  * IV = proportion of resources shared.
+
+---
+## Adding a second factor
+
+* In-class lab: One-way ANOVA
+  * Effect of age-group on proportion given
+* Now: Two (or more) _factor_ predictors
+* No interaction term (yet)
+* Including another IV in our model means the estimate of the effect is interpreted holding the value of the original IV fixed 
+
+???
+*Why?? 
+  * We have to account for other known effects
+  * We may be interested in differntial effects
+*You'll see terms like "accounting for" or "adjusted for"
+
+---
+class: center, middle
+&lt;img src="cm054_files/figure-html/unnamed-chunk-1-1.png" height="100%" /&gt;
+
+---
+##Proportions given; by age and number of recipients 
+.left-plot[
+&lt;img src="cm054_files/figure-html/unnamed-chunk-2-1.png" width="100%" /&gt;
+]
+.right-text[
+.small[**NOTE**: These are the "unadjusted" means plus 95% confidence intervals. Eventually, you'll want to plot means "adjusted" for other factors in the model (aka, predicted marginal means or least squares means), and their standard errors (so the bars will be shorter!)
+]]
+
+
+---
+## Two-way Anova in R
+
+```r
+anova(lm(prop_given ~ age_group + num_env, data = givers))
+```
+
+```
+## Analysis of Variance Table
+## 
+## Response: prop_given
+##            Df  Sum Sq Mean Sq F value    Pr(&gt;F)    
+## age_group   3  1.4307 0.47689  11.860 2.161e-07 ***
+## num_env     1  0.6012 0.60122  14.953 0.0001331 ***
+## Residuals 326 13.1080 0.04021                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+.pull-left[![](images/sticker1_75.png)]
+.pull-right[.large[Don't try this at home!!]]
+
+---
+## But why you say? 
+
+```r
+anova(lm(prop_given ~ age_group + num_env, data = givers))
+```
+
+```
+## Analysis of Variance Table
+## 
+## Response: prop_given
+##            Df  Sum Sq Mean Sq F value    Pr(&gt;F)    
+## age_group   3  1.4307 0.47689  11.860 2.161e-07 ***
+## num_env     1  0.6012 0.60122  14.953 0.0001331 ***
+## Residuals 326 13.1080 0.04021                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+```r
+anova(lm(prop_given ~ num_env + age_group, data = givers))
+```
+
+```
+## Analysis of Variance Table
+## 
+## Response: prop_given
+##            Df  Sum Sq Mean Sq F value    Pr(&gt;F)    
+## num_env     1  0.5468 0.54677  13.598 0.0002651 ***
+## age_group   3  1.4851 0.49504  12.312 1.194e-07 ***
+## Residuals 326 13.1080 0.04021                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+---
+## Because order matters!
+
+```r
+anova(lm(prop_given ~ age_group + num_env, data = givers))
+```
+
+```
+## Analysis of Variance Table
+## 
+## Response: prop_given
+##            Df  Sum Sq Mean Sq F value    Pr(&gt;F)    
+## age_group   3  1.4307 0.47689  11.860 2.161e-07 ***
+## num_env     1  0.6012 0.60122  14.953 0.0001331 ***
+## Residuals 326 13.1080 0.04021                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+```r
+anova(lm(prop_given ~ num_env + age_group, data = givers))
+```
+
+```
+## Analysis of Variance Table
+## 
+## Response: prop_given
+##            Df  Sum Sq Mean Sq F value    Pr(&gt;F)    
+## num_env     1  0.5468 0.54677  13.598 0.0002651 ***
+## age_group   3  1.4851 0.49504  12.312 1.194e-07 ***
+## Residuals 326 13.1080 0.04021                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+???
+* on unbalanced designs
+* especially in R
+
+---
+## What is happening here?
+Remember, the anova() command as we used it with linear models compared two nested models. That is, the null hypothesis was that the more complicated model was not better than the less complicated model…
+
+
+```r
+lm_age &lt;- lm(prop_given ~ age_group, data = givers)
+lm_age_env &lt;- lm(prop_given ~ age_group + num_env, data = givers)
+
+anova(lm_age, lm_age_env)
+```
+
+```
+## Analysis of Variance Table
+## 
+## Model 1: prop_given ~ age_group
+## Model 2: prop_given ~ age_group + num_env
+##   Res.Df    RSS Df Sum of Sq      F    Pr(&gt;F)    
+## 1    327 13.709                                  
+## 2    326 13.108  1   0.60122 14.953 0.0001331 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+--
+_Hmmm... This is what we got when we put num_env second!_
+
+???
+Comparing the two models!
+
+Instead of specified model vs null (Intercept only) model, now it’s age_group+num_env vs age_group 
+
+That is, How much “better” is the model with envelopes added?
+
+---
+## Wait - did lm() do this awful thing?
+
+```r
+lm(prop_given ~ num_env + age_group, data = givers)$coefficients
+```
+
+```
+##   (Intercept)      num_env2  age_group5-6  age_group7-8 age_group9-11 
+##    0.35604043    0.08528697    0.02452564    0.11525836    0.17442650
+```
+
+```r
+lm(prop_given ~ age_group + num_env, data = givers)$coefficients
+```
+
+```
+##   (Intercept)  age_group5-6  age_group7-8 age_group9-11      num_env2 
+##    0.35604043    0.02452564    0.11525836    0.17442650    0.08528697
+```
+
+--
+![](images/sticker2_75.png) **_Nope._**
+
+???
+Recall - the intercept represents the un-specified group
+
+
+---
+##Types of sums of squares
+
+**Don’t bring this up on stack overflow ;)**
+* **Type 1**: sequential (order matters) **[this is the default in R!]**
+  * This is rarely what you will be interested in if you are not doing a nested models comparison intentionally
+* **Type II**: 
+  * This type tests for each main effect after the other main effect.
+  * Note that no significant interaction is assumed (in other words, you should test for interaction first) and only if AB is not significant, continue with the analysis for main effects).
+* **Type III**:
+  * This type tests for the presence of a main effect after the other main effect and interaction. 
+  * However, it is often not interesting to interpret a main effect if interactions are present (generally speaking, if a significant interaction is present, the main effects should not be further analysed).
+  * If the interactions are not significant, type II gives a more powerful test.
+  
+
+???
+Computing the SS – where oh where do I put my variance?
+* SPSS and SAS default to Type III (which some REALLY dislike)
+  * SAS defined the Type terms, and they just stuck
+* Doesn’t come up in one-way (orthogonal), because there’s only one way to “bin” the SS
+
+* I think I just said, don't use Type III - defer to liner models
+
+---
+
+##Two-way ANOVA in R - the better way
+
+```r
+library(car)
+# Using treatment coding
+age_1st_mod &lt;- lm(prop_given ~ age_group + num_env, data = givers) 
+env_1st_mod &lt;- lm(prop_given ~ num_env + age_group, data = givers) 
+Anova(age_1st_mod, type = 2)
+```
+
+```
+## Anova Table (Type II tests)
+## 
+## Response: prop_given
+##            Sum Sq  Df F value    Pr(&gt;F)    
+## age_group  1.4851   3  12.312 1.194e-07 ***
+## num_env    0.6012   1  14.953 0.0001331 ***
+## Residuals 13.1080 326                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+```r
+Anova(env_1st_mod, type = 2)
+```
+
+```
+## Anova Table (Type II tests)
+## 
+## Response: prop_given
+##            Sum Sq  Df F value    Pr(&gt;F)    
+## num_env    0.6012   1  14.953 0.0001331 ***
+## age_group  1.4851   3  12.312 1.194e-07 ***
+## Residuals 13.1080 326                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+.large[Order doesn't matter!]
+
+???
+* Package “car”= companion to applied regression
+* Capital A! Anova - can set the Type of SS
+
+* Treatment coding 
+* offsets from base groups (age_group 1 and env_1)
+
+
+---
+
+##Two-way ANOVA in R - Contrast Coding
+
+```r
+# Contrast coding - sum to 0
+sticker_mod &lt;- lm(prop_given ~ age_group + num_env, 
+                  data = givers, 
+		contrasts = list(age_group = contr.sum, 
+		                 num_env = contr.sum))
+Anova(sticker_mod, type = 2)
+```
+
+```
+## Anova Table (Type II tests)
+## 
+## Response: prop_given
+##            Sum Sq  Df F value    Pr(&gt;F)    
+## age_group  1.4851   3  12.312 1.194e-07 ***
+## num_env    0.6012   1  14.953 0.0001331 ***
+## Residuals 13.1080 326                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+```r
+summary(sticker_mod)$coefficients
+```
+
+```
+##                Estimate Std. Error   t value      Pr(&gt;|t|)
+## (Intercept)  0.47723654 0.01112839 42.884593 4.488942e-136
+## age_group1  -0.07855263 0.01937120 -4.055125  6.273450e-05
+## age_group2  -0.05402698 0.01857227 -2.909013  3.874720e-03
+## age_group3   0.03670574 0.01838201  1.996830  4.667476e-02
+## num_env1    -0.04264348 0.01102794 -3.866857  1.330918e-04
+```
+
+???
+Contrasts = contrast coding for unordered factors ( using a “sum to 0” ) 
+	* for ordered factors, use contr.poly
+* Versus the grand mean!
+
+
+---
+##Two-way ANOVA in R - Grand Mean
+.left-code[
+
+```
+## # A tibble: 4 x 2
+##   age_group age_means
+##   &lt;fct&gt;         &lt;dbl&gt;
+## 1 3-4           0.400
+## 2 5-6           0.425
+## 3 7-8           0.512
+## 4 9-11          0.572
+```
+
+```
+## # A tibble: 2 x 2
+##   num_env env_means
+##   &lt;fct&gt;       &lt;dbl&gt;
+## 1 1           0.432
+## 2 2           0.514
+```
+
+```
+## # A tibble: 1 x 1
+##   grand_mean
+##        &lt;dbl&gt;
+## 1      0.478
+```
+]
+
+.right-plot[
+
+```r
+givers %&gt;% 
+  group_by(age_group) %&gt;% 
+  summarize(age_means = mean(prop_given))
+
+givers %&gt;% 
+  group_by(num_env) %&gt;% 
+  summarize(env_means = mean(prop_given))
+
+givers %&gt;% 
+  group_by(age_group,num_env) %&gt;% 
+  summarize(mean_age_env = mean(prop_given)) %&gt;% 
+  summarize(mean_age = mean(mean_age_env)) %&gt;% 
+  summarize(grand_mean = mean(mean_age))
+```
+]
+
+---
+class:center, middle
+# Computing the Grand Mean
+
+`\(GrandMean =\ "mean\ of\ means"\)`
+
+`\(GrandMean = \frac{\sum_1^j\sum_1^k \mu_{jk}}{j*k}\)`
+
+`\(j = Number\ of\ groups\ in\ IV_2\)`
+
+`\(k = Number\ of\ groups\ in\ IV_1\)`
+
+
+---
+##Checking the coefficients
+
+.tiny[ignore the rounding ;)]
+
+```r
+round(coef(sticker_mod),3)
+```
+
+```
+## (Intercept)  age_group1  age_group2  age_group3    num_env1 
+##       0.477      -0.079      -0.054       0.037      -0.043
+```
+.pull-left[
+`\(\beta_0 = GrandMean\)`
+
+`\(\beta_1 = \mu1-\beta_0\)`
+
+`\(\beta_2 = \mu2-\beta_0\)`
+
+`\(\beta_3 = \mu3-\beta_0\)`
+
+`\(\mu_4 = \beta_0 -(\beta_1 + \beta_2 +\beta_3)\)`
+
+`\(num_env1 = \beta_0 + \beta_4\)`
+
+`\(num_env2 = \beta_0 - \beta_4\)`
+
+]
+.pull-right[
+
+```
+## # A tibble: 4 x 2
+##   age_group age_means
+##   &lt;fct&gt;         &lt;dbl&gt;
+## 1 3-4           0.400
+## 2 5-6           0.425
+## 3 7-8           0.512
+## 4 9-11          0.572
+```
+
+```
+## # A tibble: 2 x 2
+##   num_env env_means
+##   &lt;fct&gt;       &lt;dbl&gt;
+## 1 1           0.432
+## 2 2           0.514
+```
+
+```
+## # A tibble: 1 x 1
+##   grand_mean
+##        &lt;dbl&gt;
+## 1      0.478
+```
+]
+
+---
+#PHIA - Adjusted Means
+
+```r
+plot(interactionMeans(sticker_mod))
+```
+
+![](cm054_files/figure-html/phia-2way-1.png)&lt;!-- --&gt;
+
+???
+Post-hoc Inference for ANOVA
+* Bars show SEM
+* Adjusted means (adjusted to account for effect of other group)
+* "fitted" sort of...Plug the mean of the other group into the linear model equation
+* All seem to be increasing
+
+* Upper Left - Main effect of Age
+  * Means by age group after adjusting for number of envelopes
+
+* Lower Right - Main effect of Env
+  * Means by number of envelopes after adjusting for age group
+
+* Upper right and lower left
+  * What the model thinks is happening
+  *!! Parallel by design!!
+
+---
+##Checking for interactions
+
+```r
+sticker_mod2 &lt;- lm(prop_given ~ age_group * num_env, 
+                  data = givers, 
+		contrasts = list(age_group = contr.sum, 
+		                 num_env = contr.sum))
+Anova(sticker_mod2, type = 2)
+```
+
+```
+## Anova Table (Type II tests)
+## 
+## Response: prop_given
+##                    Sum Sq  Df F value    Pr(&gt;F)    
+## age_group          1.4851   3 12.3703 1.114e-07 ***
+## num_env            0.6012   1 15.0236 0.0001286 ***
+## age_group:num_env  0.1820   3  1.5159 0.2102591    
+## Residuals         12.9260 323                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+--
+*Interaction is not significant. That makes it easier!*
+
+???
+Good news! Independent effects of the IV
+How would you interpret it if it were significant?
+
+---
+##Checking for interactions - plot
+
+```r
+plot(interactionMeans(sticker_mod2))
+```
+
+![](cm054_files/figure-html/unnamed-chunk-8-1.png)&lt;!-- --&gt;
+
+???
+* Not signf, just for illustration
+* allowes a different effect of x at avery level of y 
+
+
+---
+## Interaction term and interpretation
+* Including an interaction changes the interpretation of coefficients for main effects
+* The coefficient on the constitutive term X cannot be interpreted as an unconditional marginal effect since it indicates only the effect of a one-unit change in X on Y when the conditioning variable is zero. 
+* If the modifying variable is dichotomous, this simply requires the analyst to present four numbers—the marginal effect of X when Z is 0 and when Z is 1, along with the two corresponding standard errors.
+
+???
+* E.g., you can't interpret it because it keeps changing
+* Isn’t really a “main effect” because it varies based on some other variable.
+* Have to say , “but”, or “depends on”
+^The effect of age on porportion of stickers given depends on (varies with) the value of num_envelopes
+
+
+---
+## Interpretting the results
+
+```r
+sticker_mod2 &lt;- lm(prop_given ~ age_group * num_env, 
+                  data = givers, 
+		contrasts = list(age_group = contr.sum, 
+		                 num_env = contr.sum))
+Anova(sticker_mod2, type = 2)
+```
+
+```
+## Anova Table (Type II tests)
+## 
+## Response: prop_given
+##                    Sum Sq  Df F value    Pr(&gt;F)    
+## age_group          1.4851   3 12.3703 1.114e-07 ***
+## num_env            0.6012   1 15.0236 0.0001286 ***
+## age_group:num_env  0.1820   3  1.5159 0.2102591    
+## Residuals         12.9260 323                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+.small[
+Using the interaction model
+* Type II (only needed when there is more than one DV)
+* Signigicant main effect of age group means that the mean proportion given varied by group
+* Signigicant main effect of number of envelopes means that the mean proportion given differs based on number
+* No interaction means the effect of one DV does not depend on the other
+]
+---
+## Interpretting the effect of number of recipients
+.pull-left[
+![](cm054_files/figure-html/unnamed-chunk-10-1.png)&lt;!-- --&gt;
+]
+.pull-right[
+* No need!
+* Only two levels, so F = 15.02 tells us that that proportion of stickers given was different when there was 1 vs. 2 recipients
+* Plots/adjusted means tell us: 2 recipients &gt; 1 recipient (p = 0.0001)
+* Note: if you did do a t-test, t = √F = 3.87
+]
+
+---
+## Interpretting the effect of age group
+.pull-left[
+![](cm054_files/figure-html/unnamed-chunk-11-1.png)&lt;!-- --&gt;
+]
+.pull-right[
+* F = 12.37 tells us that that proportion of stickers given differed depending on age group
+* But which age groups were different
+* Need post-hoc analysis if you want to know
+]
+
+---
+# Follow-up contrasts: multcomp()?
+library(multcomp)
+
+&gt;The mcp function must be used with care when defining parameters of interest in two-way ANOVA or ANCOVA models. Here, the definition of treatment differences (such as Tukey’s all-pair comparisons or Dunnett’s comparison with a control) might be problem specific. Because it is impossible to determine the parameters of interest automatically in this case, mcp in multcomp version 1.0-0 and higher generates comparisons for the main effects only, ignoring covariates and interactions (older versions automatically averaged over interaction terms). 
+
+*A warning is given. 
+
+???
+Interactions Ignored!!
+
+Goodbye old friend!
+
+
+---
+Follow-up contrasts: phia?
+
+```r
+# library(phia)
+interactionMeans(sticker_mod2, factors = "age_group")
+```
+
+```
+##   age_group adjusted mean std. error
+## 1       3-4     0.3996936 0.02237287
+## 2       5-6     0.4230609 0.02098197
+## 3       7-8     0.5146893 0.02065192
+## 4      9-11     0.5736489 0.02463533
+```
+
+???
+* Adjusted for variable we're not seeing
+* Saw these in the plots
+
+
+---
+Follow-up contrasts: phia?
+
+```r
+# library(phia)
+testInteractions(sticker_mod2, pairwise = "age_group")
+```
+
+```
+## F Test: 
+## P-value adjustment method: holm
+##               Value  Df Sum of Sq       F    Pr(&gt;F)    
+##  3-4-5-6  -0.023367   1    0.0232  0.5804 0.4467113    
+##  3-4-7-8  -0.114996   1    0.5709 14.2647 0.0007561 ***
+## 3-4-9-11  -0.173955   1    1.0935 27.3246 1.857e-06 ***
+##  5-6-7-8  -0.091628   1    0.3876  9.6865 0.0060661 ** 
+## 5-6-9-11  -0.150588   1    0.8666 21.6558 2.384e-05 ***
+## 7-8-9-11  -0.058960   1    0.1346  3.3639 0.1351221    
+## Residuals           323   12.9260                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+???
+* Default adjustment = holms
+* Better than t-tests - DF=323
+
+
+---
+class: center, middle, inverse
+#Let's try 3 predictors!
+
+
+---
+##ANOVA: 3-way
+
+```
+## Anova Table (Type II tests)
+## 
+## Response: prop_given
+##                           Sum Sq  Df F value    Pr(&gt;F)    
+## age_group                 1.5060   3 12.9811 5.166e-08 ***
+## num_env                   0.5856   1 15.1427 0.0001218 ***
+## gender                    0.2186   1  5.6538 0.0180182 *  
+## age_group:num_env         0.1561   3  1.3451 0.2597555    
+## age_group:gender          0.3366   3  2.9015 0.0351192 *  
+## num_env:gender            0.0597   1  1.5425 0.2151780    
+## age_group:num_env:gender  0.1627   3  1.4021 0.2421857    
+## Residuals                12.1044 313                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+???
+* There’s an interaction! End still easy – no interactions.
+ * Thanks for no 3-way interaction. Think about what this might mean before you start the analyses.
+
+
+---
+#Principle of Marginality
+* The separate partial effects, or _main effects_, of age group and gender are _marginal_ to the age group-by-gender interaction. 
+* In general, we neither test nor interpret main effects of explanatory variables that interact.
+  * If we can rule out interaction either on theoretical or empirical grounds, then we can proceed to test, estimate, and interpret main effects. 
+* It does not generally make sense to specify and fit models that include interaction regressors but that delete main effects that are marginal to them.
+  * Such models — which violate the _principle of marginality_ — are interpretable, but they are not broadly applicable. 
+* ?Anova: “Type-II tests are calculated according to the principle of marginality, testing each term after all others, except ignoring the term's higher-order relatives; so-called type-III tests violate marginality, testing each term in the model after all of the others.”
+
+???
+* “Higher order effects” = interactions
+* But, kinda stuck with III, aren’t we?
+
+
+---
+![](cm054_files/figure-html/unnamed-chunk-15-1.png)&lt;!-- --&gt;
+???
+* Seems like age effects boys more than girls
+* The effect of gender on sticker generosity changes with age and vice versa
+
+
+---
+class: center, middle
+PHIA - Adjusted means matrix
+&lt;img src="images/Sticker3Way.png" width="120%" /&gt;
+
+???
+* Lower left and Upper right
+* Appears that there is an effect of gender by age group, but less so for girls
+* Does it matter?
+
+
+---
+#Adjusted interaction means
+
+```r
+interactionMeans(sticker_gender)
+```
+
+```
+##    age_group num_env gender adjusted mean std. error
+## 1        3-4       1 female     0.4004167 0.04014157
+## 2        5-6       1 female     0.3604348 0.04100493
+## 3        7-8       1 female     0.4560714 0.03716387
+## 4       9-11       1 female     0.4777778 0.04635149
+## 5        3-4       2 female     0.4452174 0.04100493
+## 6        5-6       2 female     0.4296296 0.03784584
+## 7        7-8       2 female     0.5076923 0.03856677
+## 8       9-11       2 female     0.5576471 0.04769529
+## 9        3-4       1   male     0.3926667 0.05077552
+## 10       5-6       1   male     0.3928571 0.04291314
+## 11       7-8       1   male     0.4585000 0.04397289
+## 12      9-11       1   male     0.5680000 0.05077552
+## 13       3-4       2   male     0.3466667 0.04635149
+## 14       5-6       2   male     0.5250000 0.04397289
+## 15       7-8       2   male     0.6668421 0.04511523
+## 16      9-11       2   male     0.7206667 0.05077552
+```
+
+???
+
+numbers for previous plot
+
+
+---
+#Simple effects analysis
+* A simple effects analysis looks at the main effect of one factor at a given level of a second factor (“pick a point” analysis)
+* This is our way of breaking down a significant interaction
+* It *can* be frowned upon to do this analysis post-hoc when you do not have a significant interaction effect in your omnibus ANOVA, or did not have a darn good reason to hypothesize one a-priori
+
+![](images/Sticker3.png)
+
+
+???
+NO fishing allowed.
+
+
+---
+##Drilling down - Do the age groups differ across gender?
+
+```r
+# library(phia)
+testInteractions(sticker_gender, 
+                 fixed = "age_group", 
+                 across = "gender", 
+                 adjustment = "bonferroni")
+```
+
+```
+## F Test: 
+## P-value adjustment method: bonferroni
+##               Value  Df Sum of Sq      F  Pr(&gt;F)  
+##  3-4       0.053150   1    0.0545 1.4091 0.94444  
+##  5-6      -0.063896   1    0.0917 2.3706 0.49859  
+##  7-8      -0.080789   1    0.1477 3.8183 0.20635  
+## 9-11      -0.126621   1    0.2589 6.6946 0.04048 *
+## Residuals           313   12.1044                 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+* Boys shared 12.6% more stickers than girls on average, at age 9-11.
+* Where does this come from?
+
+???
+* Fix age group - vary gender, don't cheat!
+* Using subtraction - so negative means more
+* Diff between girls and boys is biggest for the 9-11 year olds
+
+
+---
+## Compute that difference...
+
+```r
+#Save the means
+int_means &lt;- interactionMeans(sticker_gender)
+int_means$means &lt;- int_means$"adjusted mean" #rename "adjusted mean"
+
+# Pull out the values for age group 9-11
+# Average across num_env = 1 and num_env = 2
+# And look at the difference
+int_means %&gt;%
+  filter(age_group == "9-11") %&gt;% 
+  group_by(gender) %&gt;% 
+  summarize(adj_mean = mean(means))
+```
+
+```
+## # A tibble: 2 x 2
+##   gender adj_mean
+##   &lt;fct&gt;     &lt;dbl&gt;
+## 1 female    0.518
+## 2 male      0.644
+```
+
+
+---
+## Drilling down - How about gender across age group?
+
+```r
+# library(phia)
+testInteractions(sticker_gender, 
+                 fixed = "gender", 
+                 across = "age_group", 
+                 adjustment = "bonferroni")
+```
+
+```
+## F Test: 
+## P-value adjustment method: bonferroni
+##           age_group1 age_group2 age_group3  Df Sum of Sq       F    Pr(&gt;F)
+## female     -0.094895   -0.12268  -0.035831   3    0.3999  3.4473   0.03402
+##   male     -0.274667   -0.18540  -0.081662   3    1.3983 12.0528 3.471e-07
+## Residuals                                  313   12.1044                  
+##              
+## female    *  
+##   male    ***
+## Residuals    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+
+* Appears to be an effect of gender independent of age_group
+* Boys more than girls
+
+???
+Details next...
+
+---
+## Compare age groups by gender
+
+```r
+# library(phia)
+testInteractions(sticker_gender, 
+                 pairwise = "age_group", 
+                 fixed = "gender", 
+                 adjustment = "bonferroni")
+```
+
+```
+## F Test: 
+## P-value adjustment method: bonferroni
+##                       Value  Df Sum of Sq       F    Pr(&gt;F)    
+##  3-4-5-6 : female  0.027785   1    0.0186  0.4820 1.0000000    
+##  3-4-7-8 : female -0.059065   1    0.0876  2.2649 1.0000000    
+## 3-4-9-11 : female -0.094895   1    0.1805  4.6683 0.3778020    
+##  5-6-7-8 : female -0.086850   1    0.1950  5.0435 0.3049934    
+## 5-6-9-11 : female -0.122680   1    0.3089  7.9875 0.0601574 .  
+## 7-8-9-11 : female -0.035831   1    0.0272  0.7043 1.0000000    
+##  3-4-5-6 :   male -0.089262   1    0.1450  3.7487 0.6449763    
+##  3-4-7-8 :   male -0.193004   1    0.6627 17.1354 0.0005376 ***
+## 3-4-9-11 :   male -0.274667   1    1.1808 30.5342 8.295e-07 ***
+##  5-6-7-8 :   male -0.103742   1    0.2150  5.5590 0.2280067    
+## 5-6-9-11 :   male -0.185405   1    0.5954 15.3950 0.0012871 ** 
+## 7-8-9-11 :   male -0.081662   1    0.1130  2.9232 1.0000000    
+## Residuals                   313   12.1044                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+???
+There it is! Definitely more attributable to boys
+
+
+---
+#What do we conclude?
+* Overall, model accounted for 11.2% of variance in proportion of stickers donated
+* Main effect: proportion of stickers donated depended on number of envelopes
+* Kids tended to share more proportionally when they thought there were 2 recipients rather than just 1
+* Interaction effect: suggested that…
+  * Boys shared proportionally more than girls, but only in the oldest age group (age_group = 4)
+  * For boys only, increased sharing at older ages, but only between certain age groups: 1 vs 3, 1 vs 4, and 2 vs 4
+
+
+---
+class: center, middle, inverse
+# ANCOVA
+## Add an interval (continuous) variable
+
+---
+##ANCOVA
+* Compare more than two groups along with a _covariate_
+* Assumes homogeneity of regression slopes
+  * Means using a variable as a covariate (+) rather than letting it interact with other variables (*) 
+  * Must be verified that they do NOT interact
+  * If the variable you want to be the covariate interacts with your other predictor(s), 
+    * You cannot do an ANCOVA, by definition. 
+    * But that might be okay.. (use ANOVA or a linear regression model instead)
+
+???
+* Really a linear regression
+* Like when we compared hate_crimes across the two "trump" groups 
+
+
+---
+# Let's try it...
+* Let’s take age as a continuous variable (in months) rather than as a factor with 4 levels
+
+
+```r
+sticker_spot &lt;- lm(prop_given ~ agemonths*gender*num_env, 
+                   data = givers, 
+                   contrasts = list(gender = contr.sum, 
+                                    num_env = contr.sum))
+Anova(sticker_spot, type = 2)
+```
+
+```
+## Anova Table (Type II tests)
+## 
+## Response: prop_given
+##                           Sum Sq  Df F value    Pr(&gt;F)    
+## agemonths                 1.7373   1 46.2509 5.092e-11 ***
+## gender                    0.1903   1  5.0673 0.0250576 *  
+## num_env                   0.5522   1 14.7024 0.0001515 ***
+## agemonths:gender          0.2790   1  7.4273 0.0067764 ** 
+## agemonths:num_env         0.1279   1  3.4039 0.0659623 .  
+## gender:num_env            0.0638   1  1.6997 0.1932668    
+## agemonths:gender:num_env  0.0717   1  1.9092 0.1680123    
+## Residuals                12.0573 321                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+???
+* Interpretation? Kinda rough with the interactions
+* Woah - can't call it an ANCOVA!!
+* Can move on anyway... Just call it an anova 
+
+
+---
+##Spotlight analysis for ANOVA
+* We’ll use a spotlight analysis to better understand the interaction between gender (girls/boys) and age (in months)
+
+```r
+sticker_spot &lt;- lm(prop_given ~ agemonths*gender*num_env, 
+                   data = givers, 
+                   contrasts = list(gender = contr.sum, 
+                                    num_env = contr.sum))
+Anova(sticker_spot, type = 2)
+```
+
+```
+## Anova Table (Type II tests)
+## 
+## Response: prop_given
+##                           Sum Sq  Df F value    Pr(&gt;F)    
+## agemonths                 1.7373   1 46.2509 5.092e-11 ***
+## gender                    0.1903   1  5.0673 0.0250576 *  
+## num_env                   0.5522   1 14.7024 0.0001515 ***
+## agemonths:gender          0.2790   1  7.4273 0.0067764 ** 
+## agemonths:num_env         0.1279   1  3.4039 0.0659623 .  
+## gender:num_env            0.0638   1  1.6997 0.1932668    
+## agemonths:gender:num_env  0.0717   1  1.9092 0.1680123    
+## Residuals                12.0573 321                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+* Need to use dummy/treatment coding for spotlight analysis
+* and tidy() or summary()
+
+---
+#Spotlight analysis to understand interactions
+&gt;“scaling changes do not affect significance tests, slopes, etc. of that variable or of any other variable in the model.”
+
+* Yes, this heuristic is accurate for simple models without interactions, *but not for models with interactions*.
+* Spotlight analysis exploits this fact by re-scaling your continuous covariate (here, age in months)
+* We want to evaluate main effect of gender when age takes on different values- the interaction tells us that the main effect of gender depends on the age we are looking at
+* We can pick any value to re-scale by
+  * First, I’ll center age around the mean age
+  * Can also use ±1 SD around the mean (usually of interest)
+
+
+---
+##Spotlight - mean age
+
+```r
+# center age at mean
+givers &lt;- givers %&gt;%
+  mutate(age_mean = agemonths - mean(agemonths))
+sticker_ctr &lt;- lm(prop_given ~ age_mean*gender*num_env, 
+                  data = givers, 
+                  contrasts = list(gender = contr.treatment, 
+                                   num_env = contr.treatment))
+tidy(sticker_ctr)
+```
+
+```
+## # A tibble: 8 x 5
+##   term                      estimate std.error statistic  p.value
+##   &lt;chr&gt;                        &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1 (Intercept)               0.424     0.0201      21.1   1.83e-62
+## 2 age_mean                  0.00145   0.000731     1.98  4.84e- 2
+## 3 gender2                   0.0205    0.0306       0.669 5.04e- 1
+## 4 num_env2                  0.0567    0.0284       1.99  4.70e- 2
+## 5 age_mean:gender2          0.00106   0.00111      0.954 3.41e- 1
+## 6 age_mean:num_env2         0.000465  0.00105      0.441 6.59e- 1
+## 7 gender2:num_env2          0.0557    0.0431       1.29  1.97e- 1
+## 8 age_mean:gender2:num_env2 0.00217   0.00157      1.38  1.68e- 1
+```
+
+Shine our spotlight in the gender effect:
+  * It is not significant when age = mean age
+  * So sharing in boys is:
+    * 0.02 &gt; girls(ns) @ 81 months (6.7 years) when *num_env = 1*
+
+???
+What's the intercept?? girl, mean age, 1 envelope 
+Using centered(age)
+
+---
+##Spotlight - low age (-1 sd)
+
+```r
+# center at 1 sd below mean
+givers &lt;- givers %&gt;%
+     mutate(age_lowsd = scale(agemonths, scale=FALSE) - sd(agemonths))
+sticker_lowsd &lt;- lm(prop_given ~ age_lowsd*gender*num_env, 
+                    data = givers, 
+                    contrasts = list(gender = contr.treatment, 
+                                     num_env = contr.treatment))
+tidy(sticker_lowsd)
+```
+
+```
+## # A tibble: 8 x 5
+##   term                       estimate std.error statistic  p.value
+##   &lt;chr&gt;                         &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1 (Intercept)                0.463     0.0288      16.1   5.04e-43
+## 2 age_lowsd                  0.00145   0.000731     1.98  4.84e- 2
+## 3 gender2                    0.0495    0.0427       1.16  2.47e- 1
+## 4 num_env2                   0.0694    0.0412       1.69  9.26e- 2
+## 5 age_lowsd:gender2          0.00106   0.00111      0.954 3.41e- 1
+## 6 age_lowsd:num_env2         0.000465  0.00105      0.441 6.59e- 1
+## 7 gender2:num_env2           0.115     0.0607       1.90  5.85e- 2
+## 8 age_lowsd:gender2:num_env2 0.00217   0.00157      1.38  1.68e- 1
+```
+
+Shine our spotlight in the gender effect:
+  * It is significant when age is one sd above mean 
+  * So sharing in boys is:
+    * 0.05 &gt; girls(ns) @ 53 months (4.5 years) when *num_env = 1*
+
+???
+Using centerd age minus 1 sd
+
+
+---
+##Spotlight - high age (+1 sd)
+
+```r
+# center at 1 sd above mean
+givers &lt;- givers %&gt;%
+     mutate(age_hisd = scale(agemonths,scale=FALSE) + sd(agemonths))
+sticker_hisd &lt;- lm(prop_given ~ age_hisd*gender*num_env, 
+                   data = givers, 
+                   contrasts = list(gender = contr.treatment, 
+                                    num_env = contr.treatment))
+tidy(sticker_hisd)
+```
+
+```
+## # A tibble: 8 x 5
+##   term                       estimate std.error statistic  p.value
+##   &lt;chr&gt;                         &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1 (Intercept)                0.384     0.0279     13.7    4.29e-34
+## 2 age_hisd                   0.00145   0.000731    1.98   4.84e- 2
+## 3 gender2                   -0.00856   0.0436     -0.196  8.44e- 1
+## 4 num_env2                   0.0439    0.0399      1.10   2.72e- 1
+## 5 age_hisd:gender2           0.00106   0.00111     0.954  3.41e- 1
+## 6 age_hisd:num_env2          0.000465  0.00105     0.441  6.59e- 1
+## 7 gender2:num_env2          -0.00377   0.0612     -0.0616 9.51e- 1
+## 8 age_hisd:gender2:num_env2  0.00217   0.00157     1.38   1.68e- 1
+```
+
+Shine our spotlight in the gender effect:
+  * It is significant when age is one sd above mean 
+  * So sharing in boys is:
+    * 0.009 &lt; girls(p&lt;.05) @ 108 months (9.0 years) when *num_env = 1*
+
+???
+
+
+---
+#Cautionary note on spotlight analysis
+* Unless you are using them as a classification variable (i.e., they are not being used as actual numbers), dummy codes are only useful if you are planning to spotlight 1 group in an interaction 
+* Otherwise, all of your purported “main effects” are actually the effects of a variable at one level of the other (i.e., when the other is 0). 
+* Caution: if there are other variables in your model, recall that the main effect when dummy coded is just a marginal effect where the other variables are set to lowest level (here, num_env = 1)
+
+
+**They are called dummy codes for a reason. That is, you may not be testing what you think you are testing.**
+
+
+---
+class: center middle
+##What about when num_env = 2? 
+
+The spotlight method works best for a two-way analysis with two factors or one factor and one continuous variable. 
+
+
+What we really want to know is how the interaction between age and gender can be interpreted, averaging across number of envelopes (since that does not contribute to any interactions with other model predictors). 
+
+
+There has to be a better way…
+
+
+---
+## There is!
+Using the model with contr.sum() coding
+
+```r
+interactionMeans(sticker_spot, factors = "gender", covariates = c(agemonths = 53.57))
+```
+
+```
+##   gender adjusted mean std. error
+## 1 female     0.4057605 0.01996118
+## 2   male     0.3952980 0.02321213
+```
+
+```r
+interactionMeans(sticker_spot, factors = "gender", covariates = c(agemonths = 80.98))
+```
+
+```
+##   gender adjusted mean std. error
+## 1 female     0.4518505 0.01421727
+## 2   male     0.5001580 0.01622467
+```
+
+```r
+interactionMeans(sticker_spot, factors = "gender", covariates = c(agemonths = 108.39))
+```
+
+```
+##   gender adjusted mean std. error
+## 1 female     0.4979405 0.02057527
+## 2   male     0.6050181 0.02230924
+```
+
+* Averaged across number of envelopes!
+
+
+---
+
+```r
+testInteractions(sticker_spot, pairwise = "gender", covariates = c(agemonths = 53.57), adjustment = "none") # at -1 sd
+```
+
+```
+## F Test: 
+## P-value adjustment method: none
+##                Value  Df Sum of Sq      F Pr(&gt;F)
+## female-male 0.010463   1    0.0044 0.1168 0.7328
+## Residuals            321   12.0573
+```
+
+```r
+testInteractions(sticker_spot, pairwise = "gender", covariates = c(agemonths = 80.98), adjustment = "none") # at mean
+```
+
+```
+## F Test: 
+## P-value adjustment method: none
+##                 Value  Df Sum of Sq      F  Pr(&gt;F)  
+## female-male -0.048307   1    0.1884 5.0145 0.02582 *
+## Residuals             321   12.0573                 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+```r
+testInteractions(sticker_spot, pairwise = "gender", covariates = c(agemonths = 108.39), adjustment = "none") # at +1 sd
+```
+
+```
+## F Test: 
+## P-value adjustment method: none
+##                Value  Df Sum of Sq      F    Pr(&gt;F)    
+## female-male -0.10708   1    0.4676 12.448 0.0004794 ***
+## Residuals            321   12.0573                     
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+???
+Complete unsurprising
+
+
+---
+##Spotlight analysis summary
+* Great way to understand interactions with continuous covariates; also works for factors
+* Powerful way to see what is happening without subsetting your data
+    * i.e., splitting by above/below mean/median/etc can be weak, unstable, potentially very misleading
+* This is not multiple testing- 
+    * you do not need to worry about multiple comparisons here- 
+    * it is used to interpret an already significant interaction
+* So don’t report them as if you ran different analyses with different results
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="https://platform.twitter.com/widgets.js"></script>
+<script>var slideshow = remark.create({
+"countIncrementalSlides": false,
+"highlightLines": true,
+"highlightStyle": "atelier-lakeside-light"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

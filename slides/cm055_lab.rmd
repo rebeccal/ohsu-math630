@@ -3,11 +3,11 @@ title: "CM 5.5 - Two-Way ANOVA"
 subtitle: Math 530/630
 #author: "Alison Presmanes Hill"
 output:
+  pdf_document: default
   html_document:
     number_sections: yes
     toc: yes
     toc_float: yes
-  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -90,7 +90,7 @@ cadds %>%
   tabyl(eth)
 ```
 
-We have some groups with pretty small *n*'s. Specifically, there are only *n*=4 American Indians, *n*=26 Multi-race, *n*=3 Native Hawaiians, and *n*=2 "Other". We have two choices: lump (with another category) or dump (from the entire analysis). For simplicity, I am going to lump all non-Hispanic and non-White non-Hispanics into an "other" category.
+We have some groups with pretty small *n*'s. Specifically, there are only *n*=4 American Indians, *n*=26 Multi-race, *n*=3 Native Hawaiians, and *n*=2 "Other". We have two choices: lump (with another category) or dump (from the entire analysis). For simplicity, I am going to rename "White not Hispanic" as "WNH", leave "Hispanic" as is, and lump all other designations into an "Other" category.
 
 ```{r}
 cadds <- cadds %>% 
@@ -106,7 +106,7 @@ cadds %>%
   tabyl(eth3)
 ```
 
-OK, that is better. Note that we still have widely varying group sizes, which means that the ANOVA we conduct will be an unbalanced (unequal group sizes), two-way (two IVs), between-groups (each group is an independent sample) ANOVA. Make sure you understand each of these labels thoroughly. Now, let's look at some descriptives for our *j*=3 groups: 
+OK, that is better. Note that we still have widely varying group sizes, which means that the ANOVA we conduct will be an unbalanced (unequal group sizes), two-way (two IVs), between-groups (each group is an independent sample) univariate (one DV) ANOVA. Make sure you understand each of these labels thoroughly. Now, let's look at some descriptives for our *j*=3 groups: 
 
 ```{r}
 cadds %>% 
@@ -121,7 +121,7 @@ As far as data visualizations go, a boxplot and line graph of the means are help
 ```{r}
 ethbox <- ggplot(cadds, aes(eth3, exp,fill=eth3))+
   geom_boxplot()+ 
-  scale_x_discrete(labels=c("Hispanic","Other","White not Hispanic"))+ 
+  scale_x_discrete(labels=c("Hispanic","Other","White, not Hispanic"))+ 
   guides(fill=FALSE)+
   labs(x = "Ethnicity", y = "Mean Expenditures")+
   theme_bw() 
@@ -132,7 +132,7 @@ Let's also plot mean expenditures, and add error bars to reflect the 95% bootstr
 
 ```{r}
 ethline <- ggplot(cadds, aes(eth3, exp))+ 
-  stat_summary(fun.y = mean, geom = "line", size = 1, aes(group=1), colour = "#FF6633") + 
+#  stat_summary(fun.y = mean, geom = "line", size = 1, aes(group=1), colour = "black") + 
   stat_summary(fun.data = mean_cl_boot, geom = "errorbar", width = 0.2, size = 0.75, colour = "#990000") + 
   stat_summary(fun.y = mean, geom = "point", size = 4, colour = "#990000") + 
   stat_summary(fun.y = mean, geom = "point", size = 3, colour = "#FF6633") + 
@@ -169,7 +169,7 @@ Let's also plot mean expenditures, and add error bars to reflect the 95% bootstr
 
 ```{r}
 genline <- ggplot(cadds, aes(sex, exp))+ 
-  stat_summary(fun.y = mean, geom = "line", size = 1, aes(group=1), colour = "#FF6633") + 
+  #stat_summary(fun.y = mean, geom = "line", size = 1, aes(group=1), colour = "#FF6633") + 
   stat_summary(fun.data = mean_cl_boot, geom = "errorbar", width = 0.2, size = 0.75, colour = "#990000") + 
   stat_summary(fun.y = mean, geom = "point", size = 4, colour = "#990000") + 
   stat_summary(fun.y = mean, geom = "point", size = 3, colour = "#FF6633")+
@@ -328,6 +328,7 @@ pairwise.t.test(cadds$exp,cadds$sex, p.adjust.method="BH", pool.sd=F)
 ```
 
 
+\newpage
 # On your own
 
 You will conduct an ANOVA to examine whether ethnicity and age affect expenditures. This ANOVA will be a 2 (2 levels of ethnicity: White non-Hispanic and Hispanic) x 5 (5 levels of age group: under 6, 6-12, 13-17, 18-21, and over 22). So, first, drop the "other" ethnicity category, and create an age group variable as follows:
@@ -337,7 +338,16 @@ ca2 <- subset(cadds, !eth3=="Other")
 ca2$eth3 <- droplevels(ca2$eth3)
 library(Hmisc)
 ca2$agegroup <- cut2(ca2$age, c(6,13,18,22))
-table(ca2$agegroup,ca2$eth3)
+#table(ca2$agegroup,ca2$eth3)
+
+library(ggmosaic)
+p <- ggplot(data = ca2) +
+   geom_mosaic(aes(x = product(agegroup,eth3), fill=agegroup), na.rm=TRUE) +
+  labs( x = "Ethnicity", y = "AgeGroup", title = "Group Counts") +
+   theme(legend.position="none") 
+  
+p + geom_text(data = ggplot_build(p)$data[[1]], aes(x = (xmin+xmax)/2, y = (ymin+ymax)/2, label=.wt), size = 3)
+
 ```
 
 1. Plot age group on the *x*-axis and expenditures on the *y*-axis using boxplots. Needs for disabled individuals typically increase with age, resulting in higher expenditures at older ages. Is this what you observe?
@@ -350,29 +360,30 @@ agebox1
 2. Now, add ethnicity as the "fill" factor, making a separate boxplot for each ethnic group a different color. Do you see anything to confirm what we previously found was the main effect of ethnicity? Remember, we found that *at any level of the factor "gender"*, expenditures were higher among White non-Hispanic versus Hispanic individuals. Do you see the same pattern here with respect to age group rather than gender? Based on our previous analyses, what did you expect to see, and what surprises you?
 
 ```{r include=FALSE}
-agebox2 <- ggplot(data=ca2, aes(factor(agegroup), exp,fill=factor(eth3)))+geom_boxplot()+ guides(fill=FALSE)+labs(x = "Age Group", y = "Mean Expenditures")+theme_bw() 
+agebox2 <- ggplot(data=ca2, aes(agegroup, exp)) +
+  geom_boxplot(aes(fill = eth3)) + 
+  #guides(fill=FALSE) +
+  labs(x = "Age Group", y = "Mean Expenditures") +
+  theme_bw() 
 agebox2
 ```
 
-3. Examine the means, sds, and n's using *tapply(DV, list(IV1,IV2), function)* as I did in the previous example. Look very carefully at each. Do you see any patterns, in particular in the sample sizes? Knowing that Hispanic children tend to be diagnosed later than White non-Hispanic children (and thus should be under-represented at younger ages), do these numbers surprise you?
+3. Examine the means, sds, and n's as I did in the previous example. Look very carefully at each. Do you see any patterns, in particular in the sample sizes? Knowing that Hispanic children tend to be diagnosed later than White non-Hispanic children (and thus should be under-represented at younger ages), do these numbers surprise you?
 
 ```{r comment=NA, include=FALSE}
 #
-tapply(ca2$exp,list(ca2$agegroup,ca2$eth3), mean)
-tapply(ca2$exp,list(ca2$agegroup,ca2$eth3), sd)
-tapply(ca2$exp,list(ca2$agegroup,ca2$eth3), length)
+ca2 %>% 
+  group_by(agegroup, eth3) %>% 
+  summarise(mean = mean(exp, na.rm =TRUE),
+            sd = sd(exp, na.rm = TRUE),
+            n = n())
 ```
 
 4. Create the interaction plot (*x*-axis=ethnicity; *y*-axis=expenditures; color=age group) and interpret. Do you see evidence for systematic bias in expenditures in favor of White non-Hispanics at any age group? That is, is the typical Hispanic receiving fewer funds (expenditures) than the typical White non-Hispanic?
 
 ```{r include=FALSE}
-int <- ggplot(ca2, aes(factor(eth3), exp, colour = factor(agegroup))) + 
-  stat_summary(fun.y = mean, geom = "point") + 
-  stat_summary(fun.y = mean, geom = "line", aes(group= factor(agegroup))) + 
-  stat_summary(fun.data = mean_cl_boot, geom = "errorbar", width = 0.2) + 
-  labs(x = "Ethnicity", y = "Mean Expenditures", colour = "Age Group") +
-  theme_bw() 
-int
+
+
 ```
 
 5. Conduct an ANOVA and interpret. What do you conclude? How do these effects differ from our previous analyses of ethnicity and gender? Do your previous conclusions change based on your analyses? Follow up with any post-hoc tests you think are necessary to validate your conclusions. 
@@ -382,7 +393,7 @@ library(car)
 options(contrasts=c("contr.sum","contr.poly")) #this MUST be specified before aov
 ca_aov3 <- aov(exp~agegroup*eth3,data=ca2)
 Anova(ca_aov3,type=c("II"))
-model.tables(ca_aov3,"means", SE=T) #unbalanced, so SEs are a problem
+model.tables(ca_aov3, "means", SE=T) #unbalanced, so SEs are a problem
 ```
 
 6. Why is the overall average for all individuals significantly different indicating ethnic discrimination of Hispanics? To answer this question, you should consider the *linear structural model parameterization* for the two-way ANOVA:
