@@ -239,7 +239,7 @@ Computing the SS – where oh where do I put my variance?
   * SAS defined the Type terms, and they just stuck
 * Doesn’t come up in one-way (orthogonal), because there’s only one way to “bin” the SS
 
-* I think I just said, don't use Type III - defer to liner models
+* I think I just said, don't use Type III - defer to linear models
 
 ---
 
@@ -267,22 +267,33 @@ Anova(env_1st_mod, type = 2)
 ##Two-way ANOVA in R - Contrast Coding
 ```{r contrast_coding}
 # Contrast coding - sum to 0
-sticker_mod <- lm(prop_given ~ age_group + num_env, 
-                  data = givers, 
-		contrasts = list(age_group = contr.sum, 
-		                 num_env = contr.sum))
+sticker_mod <- lm(prop_given ~ age_group + num_env, data = givers, 
+		contrasts = list(age_group = contr.sum, num_env = contr.sum))
 Anova(sticker_mod, type = 2)
 summary(sticker_mod)$coefficients
 ```
 
 ???
 Contrasts = contrast coding for unordered factors ( using a “sum to 0” ) 
-	* for ordered factors, use contr.poly
+* for ordered factors, use contr.poly
 * Versus the grand mean!
 
 
 ---
-##Two-way ANOVA in R - Grand Mean
+class:center, middle
+# Computing the Grand Mean
+
+$GrandMean =\ "mean\ of\ means"$
+
+$GrandMean = \frac{\sum_1^j\sum_1^k \mu_{jk}}{j*k}$
+
+$j = Number\ of\ groups\ in\ IV_2$
+
+$k = Number\ of\ groups\ in\ IV_1$
+
+
+---
+##In R - Grand Mean
 .left-code[
 ```{r grand_mean_results, echo=FALSE}
 givers %>% 
@@ -321,19 +332,6 @@ givers %>%
 ]
 
 ---
-class:center, middle
-# Computing the Grand Mean
-
-$GrandMean =\ "mean\ of\ means"$
-
-$GrandMean = \frac{\sum_1^j\sum_1^k \mu_{jk}}{j*k}$
-
-$j = Number\ of\ groups\ in\ IV_2$
-
-$k = Number\ of\ groups\ in\ IV_1$
-
-
----
 ##Checking the coefficients
 
 .tiny[ignore the rounding ;)]
@@ -351,9 +349,9 @@ $\beta_3 = \mu3-\beta_0$
 
 $\mu_4 = \beta_0 -(\beta_1 + \beta_2 +\beta_3)$
 
-$num_env1 = \beta_0 + \beta_4$
+$num\_env1 = \beta_0 + \beta_4$
 
-$num_env2 = \beta_0 - \beta_4$
+$num\_env2 = \beta_0 - \beta_4$
 
 ]
 .pull-right[
@@ -396,7 +394,9 @@ Post-hoc Inference for ANOVA
 
 * Upper right and lower left
   * What the model thinks is happening
-  *!! Parallel by design!!
+  
+**!! Parallel by design!!**
+* Need to check for interactions 
 
 ---
 ##Checking for interactions
@@ -412,8 +412,8 @@ Anova(sticker_mod2, type = 2)
 *Interaction is not significant. That makes it easier!*
 
 ???
-Good news! Independent effects of the IV
-How would you interpret it if it were significant?
+* Good news! Independent effects of the IV
+* How would you interpret it if it were significant?
 
 ---
 ##Checking for interactions - plot
@@ -436,11 +436,12 @@ plot(interactionMeans(sticker_mod2))
 * E.g., you can't interpret it because it keeps changing
 * Isn’t really a “main effect” because it varies based on some other variable.
 * Have to say , “but”, or “depends on”
-^The effect of age on porportion of stickers given depends on (varies with) the value of num_envelopes
 
+* **The effect of age on proportion of stickers given depends on (varies with) the value of num_envelopes**
+* Back to the results
 
 ---
-## Interpretting the results
+## Interpreting the results
 ```{r}
 sticker_mod2 <- lm(prop_given ~ age_group * num_env, 
                   data = givers, 
@@ -456,7 +457,7 @@ Using the interaction model
 * No interaction means the effect of one DV does not depend on the other
 ]
 ---
-## Interpretting the effect of number of recipients
+## Interpreting the effect of number of recipients
 .pull-left[
 ```{r, echo=FALSE}
 plot(interactionMeans(sticker_mod2))
@@ -478,7 +479,7 @@ plot(interactionMeans(sticker_mod2))
 ]
 .pull-right[
 * F = 12.37 tells us that that proportion of stickers given differed depending on age group
-* But which age groups were different
+* But which age groups were different?
 * Need post-hoc analysis if you want to know
 ]
 
@@ -497,7 +498,7 @@ Goodbye old friend!
 
 
 ---
-Follow-up contrasts: phia?
+##Follow-up contrasts: phia?
 ```{r}
 # library(phia)
 interactionMeans(sticker_mod2, factors = "age_group")
@@ -509,7 +510,7 @@ interactionMeans(sticker_mod2, factors = "age_group")
 
 
 ---
-Follow-up contrasts: phia?
+##Follow-up contrasts: phia?
 ```{r}
 # library(phia)
 testInteractions(sticker_mod2, pairwise = "age_group")
@@ -544,8 +545,9 @@ Anova(sticker_gender, type = 2)
 ```
 
 ???
-* There’s an interaction! End still easy – no interactions.
- * Thanks for no 3-way interaction. Think about what this might mean before you start the analyses.
+* There’s an interaction! Env still easy – no interactions.
+ * Thanks for no 3-way interaction. 
+ * Think about what this might mean before you start the analyses.
 
 
 ---
@@ -583,7 +585,7 @@ ggplot(givers, aes(x = age_group, y = prop_given, colour = num_env)) +
 
 ---
 class: center, middle
-PHIA - Adjusted means matrix
+##PHIA - Adjusted means matrix
 ```{r  out.width = "120%", echo=FALSE}
 library(knitr)
 include_graphics('images/Sticker3Way.png') 
@@ -706,9 +708,9 @@ class: center, middle, inverse
 * Assumes homogeneity of regression slopes
   * Means using a variable as a covariate (+) rather than letting it interact with other variables (*) 
   * Must be verified that they do NOT interact
-  * If the variable you want to be the covariate interacts with your other predictor(s), 
-    * You cannot do an ANCOVA, by definition. 
-    * But that might be okay.. (use ANOVA or a linear regression model instead)
+* If the variable you want to be the covariate interacts with your other predictor(s), 
+  * You cannot do an ANCOVA, by definition. 
+  * But that might be okay.. (use ANOVA or a linear regression model instead)
 
 ???
 * Really a linear regression
@@ -732,19 +734,6 @@ Anova(sticker_spot, type = 2)
 * Woah - can't call it an ANCOVA!!
 * Can move on anyway... Just call it an anova 
 
-
----
-##Spotlight analysis for ANOVA
-* We’ll use a spotlight analysis to better understand the interaction between gender (girls/boys) and age (in months)
-```{r}
-sticker_spot <- lm(prop_given ~ agemonths*gender*num_env, 
-                   data = givers, 
-                   contrasts = list(gender = contr.sum, 
-                                    num_env = contr.sum))
-Anova(sticker_spot, type = 2)
-```
-* Need to use dummy/treatment coding for spotlight analysis
-* and tidy() or summary()
 
 ---
 #Spotlight analysis to understand interactions
@@ -771,14 +760,17 @@ sticker_ctr <- lm(prop_given ~ age_mean*gender*num_env,
 tidy(sticker_ctr)
 ```
 
-Shine our spotlight in the gender effect:
+Shine our spotlight on the gender effect:
   * It is not significant when age = mean age
-  * So sharing in boys is:
-    * 0.02 > girls(ns) @ 81 months (6.7 years) when *num_env = 1*
+  * So sharing in boys is: 0.02 > girls(ns) @ 81 months (6.7 years) when *num_env = 1*
 
 ???
-What's the intercept?? girl, mean age, 1 envelope 
-Using centered(age)
+* Need to use dummy/treatment coding for spotlight analysis
+* and tidy() or summary()
+* Using centered(age)
+
+* What's the intercept?? girl, mean age, 1 envelope 
+
 
 ---
 ##Spotlight - low age (-1 sd)
@@ -793,10 +785,9 @@ sticker_lowsd <- lm(prop_given ~ age_lowsd*gender*num_env,
 tidy(sticker_lowsd)
 ```
 
-Shine our spotlight in the gender effect:
+Shine our spotlight on the gender effect:
   * It is significant when age is one sd above mean 
-  * So sharing in boys is:
-    * 0.05 > girls(ns) @ 53 months (4.5 years) when *num_env = 1*
+  * So sharing in boys is: 0.05 > girls(ns) @ 53 months (4.5 years) when *num_env = 1*
 
 ???
 Using centerd age minus 1 sd
@@ -815,10 +806,9 @@ sticker_hisd <- lm(prop_given ~ age_hisd*gender*num_env,
 tidy(sticker_hisd)
 ```
 
-Shine our spotlight in the gender effect:
+Shine our spotlight on the gender effect:
   * It is significant when age is one sd above mean 
-  * So sharing in boys is:
-    * 0.009 < girls(p<.05) @ 108 months (9.0 years) when *num_env = 1*
+  * So sharing in boys is: 0.009 < girls(p<.05) @ 108 months (9.0 years) when *num_env = 1*
 
 ???
 
